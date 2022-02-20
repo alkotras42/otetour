@@ -1,5 +1,5 @@
 import React from 'react'
-import { Calendar } from '../../Component'
+import { Calendar, Location } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
 import './Home.css'
 import NorthAmerica from './images/north-america.svg'
@@ -11,6 +11,7 @@ export const Home = () => {
 			<header className='header header-index'>
 				<Header />
 				<Calendar/>
+				<Location/>
 				<div className='container'>
 					<div className='row'>
 						<div className='col-lg-12'>

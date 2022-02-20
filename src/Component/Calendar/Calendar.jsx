@@ -38,7 +38,7 @@ export const Calendar = ({ className, type, ...props }) => {
 				<div className={styles.calendarYear}>
 					<img src={arrowLeft} alt='' className={styles.arrowLeft} onClick={() => setYear(year - 1)} />
 					<span className={styles.calendarCount}>{year}</span>
-					<img src={arrowRight} alt='' onClick={() => setYear(year + 1)} />
+					<img src={arrowRight} alt='' className={styles.arrowRight} onClick={() => setYear(year + 1)} />
 				</div>
 				<div className={styles.calendarItem} onClick={changeDate}>
 					Январь
