@@ -1,0 +1,27 @@
+.registration {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+
+	text-align: center;
+	max-width: 780px;
+	width: 100%;
+	margin: 50px auto;
+	background: #f3f3f6;
+	padding: 50px;
+	border-radius: 5px;
+}
+
+.header {
+	color: #252525;
+	font-size: 36px;
+	font-weight: 600;
+}
+
+.select {
+	height: 47px;
+	padding: 0 45px 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	color: #333;
+}

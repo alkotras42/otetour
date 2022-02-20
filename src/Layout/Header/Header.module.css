@@ -1,0 +1,68 @@
+.header {
+	display: grid;
+	grid-template-columns: 360px auto auto auto auto 35px;
+	background-color: #f3f3f6;
+	height: 80px;
+	align-items: center;
+	justify-items: center;
+	padding-right: 130px;
+	padding-left: 130px;
+	position: relative;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.language {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	font-size: 15px;
+	line-height: 19px;
+	justify-self: end;
+}
+
+.language:hover {
+	color: #000;
+}
+
+.arrow {
+	margin-right: 30px;
+}
+
+.show {
+	transform: rotate(180deg);
+}
+
+.user {
+	opacity: 0.6;
+}
+
+.user:hover {
+	opacity: 0.9;
+}
+
+.dropdown {
+	position: absolute;
+	display: grid;
+	background-color: #000;
+	color: #fff;
+	font-size: 15px;
+	line-height: 19px;
+	top: 60px;
+	padding: 15px 0;
+	border-radius: 5px;
+}
+
+.dropdown span {
+	padding: 10px 30px 5px 15px;
+}
+
+.dropdown span:hover {
+	background-color: #706d6d;
+}
+
+.hide {
+	display: none;
+}

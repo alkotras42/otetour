@@ -1,0 +1,25 @@
+.wrapper {
+	position: relative;
+}
+
+.input {
+	font-size: 16px;
+	width: 100%;
+	border: 1px solid #ccc;
+	background: #fff;
+	border-radius: 5px;
+	padding: 12px 15px 13px;
+	outline: none;
+}
+
+.eye {
+	position: absolute;
+	right: 15px;
+	top: 18px;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.eye:hover {
+	opacity: 1;
+}
