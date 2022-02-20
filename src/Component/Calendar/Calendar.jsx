@@ -4,27 +4,78 @@ import styles from './Calendar.module.css'
 import { Input } from '../Input/Input'
 import arrowLeft from './arrowLeft.svg'
 import arrowRight from './arrowRight.svg'
+import calendarIcon from './calendarIcon.svg'
 
 export const Calendar = ({ className, type, ...props }) => {
+	const [year, setYear] = useState(new Date().getFullYear())
+
+	const [date, setDate] = useState('')
+
+	const [showPicker, setShowPicker] = useState(false)
+
+	const changeDate = (e) => {
+		setDate(e.target.innerText + ' ' + year)
+		setShowPicker(false)
+	}
+
 	return (
 		<div className={styles.calendar}>
-			<Input className={styles.calendarInput} placeholder='Когда'></Input>
-			<div className={styles.calendarPicker}>
-				<img src={arrowLeft} alt='' className={styles.arrowLeft} />
-				<span className={styles.calendarYear}>2022</span>
-				<img src={arrowRight} alt='' />
-				<div className={styles.calendarItem}>Январь</div>
-				<div className={styles.calendarItem}>Февраль</div>
-				<div className={styles.calendarItem}>Март</div>
-				<div className={styles.calendarItem}>Апрель</div>
-				<div className={styles.calendarItem}>Май</div>
-				<div className={styles.calendarItem}>Июнь</div>
-				<div className={styles.calendarItem}>Июль</div>
-				<div className={styles.calendarItem}>Август</div>
-				<div className={styles.calendarItem}>Сентябрь</div>
-				<div className={styles.calendarItem}>Октябрь</div>
-				<div className={styles.calendarItem}>Ноябрь</div>
-				<div className={styles.calendarItem}>Декабрь</div>
+			<div>
+				<img src={calendarIcon} alt='' className={styles.calendarIcon} />
+				<Input
+					className={styles.calendarInput}
+					placeholder='Когда'
+					value={date}
+					onClick={() => setShowPicker(!showPicker)}
+					readOnly
+				></Input>
+			</div>
+			<div
+				className={cn(styles.calendarPicker, {
+					[styles.hide]: !showPicker,
+				})}
+			>
+				<div className={styles.calendarYear}>
+					<img src={arrowLeft} alt='' className={styles.arrowLeft} onClick={() => setYear(year - 1)} />
+					<span className={styles.calendarCount}>{year}</span>
+					<img src={arrowRight} alt='' onClick={() => setYear(year + 1)} />
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Январь
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Февраль
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Март
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Апрель
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Май
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Июнь
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Июль
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Август
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Сентябрь
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Октябрь
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Ноябрь
+				</div>
+				<div className={styles.calendarItem} onClick={changeDate}>
+					Декабрь
+				</div>
 			</div>
 		</div>
 	)

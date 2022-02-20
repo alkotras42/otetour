@@ -3,7 +3,6 @@
 /images
 /css
 /libs
-./index.js
 
 # local env files
 .env.local

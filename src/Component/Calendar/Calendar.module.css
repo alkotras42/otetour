@@ -1,11 +1,12 @@
 .calendar {
 	width: 300px;
+	position: relative;
 }
 
 .calendarPicker {
 	display: grid;
 	gap: 10px 0;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(3, auto);
 	justify-items: center;
 	position: absolute;
 	background-color: #fff;
@@ -14,8 +15,8 @@
 	color: #444;
 	box-shadow: 0px 1px 10px rgb(0 0 0 / 20%);
 	border-radius: 5px;
-	margin-top: 5px;
-	padding: 20px 15px 5px;
+	padding: 20px 10px;
+	margin-top: 10px;
 }
 
 .calendarItem {
@@ -25,9 +26,39 @@
 	border-radius: 3px;
 	height: 35px;
 	width: 80px;
-	text-align: center;
-	padding: 8px 11px;
-	font-size: 12px;
-	line-height: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	line-height: 18px;
 	color: #252525;
+}
+
+.calendarYear {
+	grid-column: 1 / 4;
+	margin-bottom: 20px;
+}
+
+.calendarCount {
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 23px;
+	padding: 0 25px;
+}
+
+.calendarInput {
+	padding-left: 45px;
+}
+
+.calendarIcon {
+	position: absolute;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	top: 15px;
+	left: 10px;
+}
+
+.hide {
+	display: none;
 }
