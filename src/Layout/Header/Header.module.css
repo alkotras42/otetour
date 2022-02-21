@@ -12,6 +12,14 @@
 	line-height: 20px;
 }
 
+.header > span {
+	cursor: pointer;
+}
+
+.header > span:hover {
+	text-decoration: underline;
+}
+
 .language {
 	display: grid;
 	grid-template-columns: repeat(4, auto);

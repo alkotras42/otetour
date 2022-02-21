@@ -1,81 +1,18 @@
 import React from 'react'
-import { Calendar, Location } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
+import { HomeHeader } from './HomeHeader/HomeHeader'
+import styles from './Home.module.css'
+import bgImage from './bgImage.png'
 import './Home.css'
-import NorthAmerica from './images/north-america.svg'
-import UserLogo from './images/user-icon.svg'
 
 export const Home = () => {
 	return (
 		<div className='wrapper'>
-			<header className='header header-index'>
+			<div className={styles.header}>
 				<Header />
-				<Calendar/>
-				<Location/>
-				<div className='container'>
-					<div className='row'>
-						<div className='col-lg-12'>
-							<div className='head-block'>
-								<h1>Авторские туры от тревел-экспертов со всего мира</h1>
-								<h3>
-									Ищите, сравнивайте и заказывайте туры напрямую у организатора <br /> без посредников
-								</h3>
-								<div className='head-search'>
-									<div className='search-in'>
-										<a href='#!' className='head-btn active'>
-											Поиск
-										</a>
-										<a href='#!' className='head-btn'>
-											Быстрый подбор тура
-										</a>
-									</div>
-								</div>
-								<div className='search-block'>
-									<form action='!' method='post' id='search-form'>
-										<div className='form-group in-one'>
-											<input type='text' id='endDate' placeholder='Куда' autoComplete='off' />
-										</div>
-										<div className='form-group in-two'>
-											<input type='text' id='where' name='where' placeholder='Когда' autoComplete='off' />
-
-											<div className='drop-input'>
-												<div className='input-menu'>
-													<a href='#!'>
-														<img src='images/marker-icon.png' alt='' />
-														<div className='input-text'>
-															<p>Петрозаводск</p>
-															<span>Карелия, Россия</span>
-														</div>
-													</a>
-													<a href='#!'>
-														<img src='images/marker-icon.png' alt='' />
-														<div className='input-text'>
-															<p>Петропавловск-Камчатский</p>
-															<span>Камчатка, Россия</span>
-														</div>
-													</a>
-													<a href='#!'>
-														<img src='images/marker-icon.png' alt='' />
-														<div className='input-text'>
-															<p>Петергоф</p>
-															<span>Санкт-Петербург, Россия</span>
-														</div>
-													</a>
-												</div>
-											</div>
-										</div>
-										<div className='search-form-btn'>
-											<button type='submit' id='search-btn'>
-												Поиск
-											</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
+				<img src={bgImage} alt='' className={styles.bgImage} />
+				<HomeHeader />
+			</div>
 
 			<main>
 				<section className='recomendation-sec'>
@@ -92,7 +29,7 @@ export const Home = () => {
 									<a href='#!' className='recom-block'>
 										<div className='recom-head'>
 											<div className='recom-img'>
-												<img src={require('./images/recomendation-img1.png')} alt='' />
+												<img src='' alt='' />
 											</div>
 											<div className='recom-top'>
 												<span className='sale'>Скидка</span>
@@ -725,7 +662,7 @@ export const Home = () => {
 								<div className='selCont'>
 									<div className='w'>
 										<a href='#!' className='w1'>
-											<img src={NorthAmerica} alt='' />
+											<img src='' alt='' />
 											<span>
 												Северная <br /> Америка
 											</span>
