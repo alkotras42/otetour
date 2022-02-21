@@ -4,6 +4,8 @@ import { HomeHeader } from './HomeHeader/HomeHeader'
 import styles from './Home.module.css'
 import bgImage from './bgImage.png'
 import './Home.css'
+import { Card } from '../../Component'
+import { Recomendation } from './Recomendation/Recomendation'
 
 export const Home = () => {
 	return (
@@ -15,137 +17,7 @@ export const Home = () => {
 			</div>
 
 			<main>
-				<section className='recomendation-sec'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Рекомендации для вас</h2>
-							</div>
-						</div>
-
-						<div className='recomendation-slide-content'>
-							<div className='recomendation-slide'>
-								<div className='col-lg-12'>
-									<a href='#!' className='recom-block'>
-										<div className='recom-head'>
-											<div className='recom-img'>
-												<img src='' alt='' />
-											</div>
-											<div className='recom-top'>
-												<span className='sale'>Скидка</span>
-												<span className='favorite'>
-													<img src='./images/favorite-icon.png' alt='' className='default-img' />
-													<img src='./images/favorite-icon-hover.png' alt='' className='hover-img' />
-												</span>
-											</div>
-											<div className='recom-sub'>
-												<span className='rating'>
-													<img src='./images/star-icon.svg' alt='' /> 4.6
-												</span>
-												<span className='comment'>(630 отзывов)</span>
-											</div>
-										</div>
-										<div className='recom-ftr'>
-											<h4>Путешествие по озерам (Карелия, Россия)</h4>
-											<div className='recom-date'>
-												<span className='date'>11 дней</span>
-												<span className='vertical-line'>|</span>
-												<span className='name'>Вело-тур</span>
-												<span className='vertical-line'>|</span>
-												<span className='month'>Июнь 2021</span>
-											</div>
-											<div className='recom-price'>
-												<h3 className='red'>
-													20 000 <span className='currency-symbol'>₽</span>
-												</h3>
-												<del>
-													27 000 <span className='currency-symbol'>₽</span>
-												</del>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div className='col-lg-12'>
-									<a href='#!' className='recom-block'>
-										<div className='recom-head'>
-											<div className='recom-img'>
-												<img src='images/recomendation-img2.png' alt='' />
-											</div>
-											<div className='recom-top'>
-												<span className='favorite'>
-													<img src='images/favorite-icon.png' alt='' className='default-img' />
-													<img src='images/favorite-icon-hover.png' alt='' className='hover-img' />
-												</span>
-											</div>
-											<div className='recom-sub'>
-												<span className='rating'>
-													<img src='images/star-icon.svg' alt='' /> 4.9
-												</span>
-												<span className='comment'>(110 отзывов)</span>
-											</div>
-										</div>
-										<div className='recom-ftr'>
-											<h4>Фитнес-тур на Мальдивах (Мальдивы)</h4>
-											<div className='recom-date'>
-												<span className='date'>10 дней</span>
-												<span className='vertical-line'>|</span>
-												<span className='name'>Фитнес тур</span>
-												<span className='vertical-line'>|</span>
-												<span className='month'>Сентябрь 2021</span>
-											</div>
-											<div className='recom-price'>
-												<h3>
-													66 000 <span className='currency-symbol'>₽</span>
-												</h3>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div className='col-lg-12'>
-									<a href='#!' className='recom-block'>
-										<div className='recom-head'>
-											<div className='recom-img'>
-												<img src='images/recomendation-img3.png' alt='' />
-											</div>
-											<div className='recom-top'>
-												<span className='sale'>Скидка</span>
-												<span className='favorite'>
-													<img src='images/favorite-icon.png' alt='' className='default-img' />
-													<img src='images/favorite-icon-hover.png' alt='' className='hover-img' />
-												</span>
-											</div>
-											<div className='recom-sub'>
-												<span className='rating'>
-													<img src='images/star-icon.svg' alt='' /> 4.7
-												</span>
-												<span className='comment'>(93 отзывов)</span>
-											</div>
-										</div>
-										<div className='recom-ftr'>
-											<h4>Детокс-тур (Ялта)</h4>
-											<div className='recom-date'>
-												<span className='date'>11 дней</span>
-												<span className='vertical-line'>|</span>
-												<span className='name'>Вело-тур</span>
-												<span className='vertical-line'>|</span>
-												<span className='month'>Июль 2021</span>
-											</div>
-											<div className='recom-price'>
-												<h3 className='red'>
-													50 000 <span className='currency-symbol'>₽</span>
-												</h3>
-												<del>
-													75 000 <span className='currency-symbol'>₽</span>
-												</del>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-
+				<Recomendation/>
 				<section className='why-us'>
 					<div className='container'>
 						<div className='row'>

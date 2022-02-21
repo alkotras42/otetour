@@ -1,0 +1,11 @@
+.recomendation {
+	padding-top: 60px;
+	align-items: center;
+	justify-items: center;
+}
+
+.title {
+	font-size: 36px;
+	line-height: 45px;
+	margin-bottom: 40px;
+}
