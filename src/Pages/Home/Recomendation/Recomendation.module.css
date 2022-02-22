@@ -1,15 +1,22 @@
 .recomendation {
 	padding-top: 60px;
-	width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
+	display: grid;
+	grid-template-columns: auto 1200px auto;
+	justify-items: center;
 }
 
 .title {
 	font-weight: 600;
 	font-size: 36px;
 	line-height: 45px;
-	padding-left: 80px;
+	justify-self: start;
+	grid-column: 2;
+}
+
+.carouselWrapper {
+	display: grid;
+	grid-template-columns: 80px 1200px 80px;
+	grid-column: 2;
 }
 
 .carousel {
@@ -20,11 +27,6 @@
 
 .swiper {
 	padding: 6px !important;
-}
-
-.carouselWrapper {
-	display: grid;
-	grid-template-columns: 80px 1200px 80px;
 }
 
 .arrowPrev {
