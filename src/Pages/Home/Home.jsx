@@ -6,6 +6,7 @@ import bgImage from './bgImage.png'
 import './Home.css'
 import { Card } from '../../Component'
 import { Recomendation } from './Recomendation/Recomendation'
+import { AboutUs } from './AboutUs/AboutUs'
 
 export const Home = () => {
 	return (
@@ -16,54 +17,9 @@ export const Home = () => {
 				<HomeHeader />
 			</div>
 
-			<main>
+			<div className={styles.main}>
 				<Recomendation/>
-				<section className='why-us'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Почему именно мы?</h2>
-							</div>
-
-							<div className='col-lg-4 col-md-6 col-sm-6'>
-								<div className='why-block'>
-									<div className='why-img'>
-										<img src='images/why-icon1.svg' alt='' />
-									</div>
-									<div className='why-text'>
-										<h4>Все самое лучшее</h4>
-										<p>
-											Только тщательно продуманные, безопасные и проверенные маршруты от независимых гидов и экспертов по
-											путешествиям.
-										</p>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-4 col-md-6 col-sm-6'>
-								<div className='why-block'>
-									<div className='why-img'>
-										<img src='images/why-icon2.svg' alt='' />
-									</div>
-									<div className='why-text'>
-										<h4>Гарантия цены</h4>
-										<p>Никаких наценок. Цена от организатора тура.</p>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-4 col-md-6 col-sm-6'>
-								<div className='why-block'>
-									<div className='why-img'>
-										<img src='images/why-icon3.svg' alt='' />
-									</div>
-									<div className='why-text'>
-										<h4>Защищенные платежи</h4>
-										<p>Мы используем только безопасные системы оплаты, одобренные во всём мире.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<AboutUs/>
 
 				<section className='prev-tours'>
 					<div className='container'>
@@ -645,7 +601,7 @@ export const Home = () => {
 						</div>
 					</div>
 				</section>
-			</main>
+			</div>
 
 			<footer className='footer'>
 				<div className='container'>
