@@ -101,3 +101,9 @@
 	line-height: 23px;
 	text-decoration-line: line-through;
 }
+
+.price {
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 28px;
+}

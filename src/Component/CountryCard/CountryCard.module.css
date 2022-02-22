@@ -1,0 +1,23 @@
+.card {
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+	position: relative;
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.card:hover .image {
+	transform: scale(1.2);
+}
+
+.title {
+	position: absolute;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 23px;
+	color: #fff;
+	left: 20px;
+	bottom: 15px;
+}

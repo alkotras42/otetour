@@ -1,0 +1,21 @@
+.countyPicker {
+	display: grid;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.countries {
+	display: grid;
+	grid-template-columns: repeat(6, auto);
+	margin-top: 40px;
+	gap: 20px;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 45px;
+	justify-self: start;
+	grid-column: 1;
+}

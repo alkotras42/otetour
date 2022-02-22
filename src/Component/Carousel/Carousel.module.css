@@ -14,6 +14,10 @@
 	padding: 6px !important;
 }
 
+.carouselContainer {
+	grid-column: 2;
+}
+
 .arrowPrev {
 	cursor: pointer;
 	margin-top: auto;

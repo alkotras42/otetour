@@ -8,16 +8,18 @@ import { Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-export const Carousel = ({ className, children, ...props }) => {
+export const Carousel = ({ className, loop = false, children, ...props }) => {
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
+
+	console.log(children)
 
 	return (
 		<div className={cn(className, styles.carousel)} {...props}>
 			<div className={styles.carouselWrapper}>
 				<img src={arrowPrev} alt='' ref={prevRef} className={styles.arrowPrev} />
 				<img src={arrowNext} alt='' ref={nextRef} className={styles.arrowNext} />
-				<div>
+				<div className={styles.carouselContainer}>
 					<Swiper
 						onInit={(swiper) => {
 							swiper.params.navigation.prevEl = prevRef.current
@@ -25,15 +27,13 @@ export const Carousel = ({ className, children, ...props }) => {
 							swiper.navigation.init()
 							swiper.navigation.update()
 						}}
+						loop={loop}
 						slidesPerView={3}
 						spaceBetween={20}
-						loop={true}
 						modules={[Navigation]}
 						className={styles.swiper}
 					>
-						{children && children.map(c => (
-							<SwiperSlide>{c}</SwiperSlide>
-						))}
+						{children && children.map((c) => <SwiperSlide>{c}</SwiperSlide>)}
 					</Swiper>
 				</div>
 			</div>
