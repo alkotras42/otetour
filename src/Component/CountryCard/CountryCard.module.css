@@ -1,15 +1,15 @@
 .card {
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
 	position: relative;
-	width: 180px;
-	height: 180px;
 	overflow: hidden;
 	cursor: pointer;
 	border-radius: 5px;
+	background: #000;
 }
 
 .card:hover .image {
 	transform: scale(1.2);
+	opacity: 0.8;
 }
 
 .title {

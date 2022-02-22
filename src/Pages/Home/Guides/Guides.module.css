@@ -1,0 +1,14 @@
+.guides {
+	padding-top: 60px;
+	display: grid;
+	grid-template-columns: auto 1200px auto;
+	justify-items: center;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 45px;
+	justify-self: start;
+	grid-column: 2;
+}

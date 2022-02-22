@@ -12,6 +12,11 @@
 	gap: 20px;
 }
 
+.countries > div {
+	width: 180px;
+	height: 180px;
+}
+
 .title {
 	font-weight: 600;
 	font-size: 36px;

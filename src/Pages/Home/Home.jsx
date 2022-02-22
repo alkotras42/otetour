@@ -9,6 +9,7 @@ import { Recomendation } from './Recomendation/Recomendation'
 import { AboutUs } from './AboutUs/AboutUs'
 import { Previou } from './Previou/Previou'
 import { CountryPick } from './CountryPick/CountryPick'
+import { Guides } from './Guides/Guides'
 
 export const Home = () => {
 	return (
@@ -24,76 +25,7 @@ export const Home = () => {
 				<AboutUs/>
 				<Previou/>
 				<CountryPick/>
-
-				<section className='our-guides'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Наши гиды</h2>
-							</div>
-						</div>
-						<div className='guides-slide-content'>
-							<div className='guides-slide'>
-								<div className='col-lg-12 guides-col'>
-									<div className='guides-block'>
-										<div className='guides-img'>
-											<img src='images/guid1.png' alt='' />
-										</div>
-										<div className='guides-text'>
-											<h4>Алексей</h4>
-											<div className='guides-country'>
-												<span className='country'>Германия</span>
-												<span className='vertical-line'>|</span>
-												<span className='location'>Вело-туры</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='col-lg-12 guides-col'>
-									<div className='guides-block'>
-										<div className='guides-img'>
-											<img src='images/guid2.png' alt='' />
-										</div>
-										<div className='guides-text'>
-											<h4>Ольга</h4>
-											<div className='guides-country'>
-												<span className='country'>Карелия, Россия</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='col-lg-12 guides-col'>
-									<div className='guides-block'>
-										<div className='guides-img'>
-											<img src='images/guid3.png' alt='' />
-										</div>
-										<div className='guides-text'>
-											<h4>Сергей</h4>
-											<div className='guides-country'>
-												<span className='country'>Флорида, США</span>
-												<span className='vertical-line'>|</span>
-												<span className='location'>Фитнес туры</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='col-lg-12 guides-col'>
-									<div className='guides-block'>
-										<div className='guides-img'>
-											<img src='images/guid4.png' alt='' />
-										</div>
-										<div className='guides-text'>
-											<h4>Алексей</h4>
-											<div className='guides-country'>
-												<span className='country'>Финляндия</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<Guides/>
 
 				<section className='how-it-works'>
 					<div className='container'>
