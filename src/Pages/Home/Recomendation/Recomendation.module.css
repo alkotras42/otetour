@@ -12,37 +12,3 @@
 	justify-self: start;
 	grid-column: 2;
 }
-
-.carouselWrapper {
-	display: grid;
-	grid-template-columns: 80px 1200px 80px;
-	grid-column: 2;
-}
-
-.carousel {
-	margin-top: 40px;
-	margin-bottom: 80px;
-	grid-column: 2 / 3;
-}
-
-.swiper {
-	padding: 6px !important;
-}
-
-.arrowPrev {
-	cursor: pointer;
-	margin-top: auto;
-	margin-bottom: auto;
-	justify-self: start;
-	grid-column: 1;
-	grid-row: 1 / 2;
-}
-
-.arrowNext {
-	cursor: pointer;
-	margin-top: auto;
-	margin-bottom: auto;
-	justify-self: end;
-	grid-column: 3;
-	grid-row: 1 / 2;
-}

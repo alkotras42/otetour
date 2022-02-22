@@ -19,7 +19,7 @@ export const Calendar = ({ className, type, ...props }) => {
 	}
 
 	return (
-		<div className={cn(className, styles.calendar)}>
+		<div className={cn(className, styles.calendar)} {...props}>
 			<div>
 				<img src={calendarIcon} alt='' className={styles.calendarIcon} />
 				<Input

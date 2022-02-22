@@ -16,7 +16,7 @@ export const Location = ({ className, type, ...props }) => {
 	}
 
 	return (
-		<div className={cn(className, styles.location)}>
+		<div className={cn(className, styles.location)} {...props}>
 			<div>
 				<img src={locationIcon} alt='' className={styles.locationIcon} />
 				<Input
