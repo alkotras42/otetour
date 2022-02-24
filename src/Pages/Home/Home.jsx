@@ -11,6 +11,7 @@ import { Previou } from './Previou/Previou'
 import { CountryPick } from './CountryPick/CountryPick'
 import { Guides } from './Guides/Guides'
 import { HowItWork } from './HowItWork/HowItWork'
+import { TourTypes } from './TourTypes/TourTypes'
 
 export const Home = () => {
 
@@ -31,147 +32,7 @@ export const Home = () => {
 				<CountryPick/>
 				<Guides/>
 				<HowItWork/>
-
-				<section className='choose-tour'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Выбирайте тур по своим интересам</h2>
-							</div>
-						</div>
-						<div className='row'>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img1.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Конные туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img2.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Винные туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img3.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Водные туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img4.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Яхт-туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img5.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Горнолыжные туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img6.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Танцевальные туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='images/tour-img7.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Психологические туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-3 col-sm-6 tour-col'>
-								<div className='tour-block'>
-									<div className='tour-img'>
-										<img src='./images/tour-img8.png' alt='' />
-									</div>
-									<div className='tour-text'>
-										<p>Яхт-туры</p>
-									</div>
-									<div className='hover-text'>
-										<p>У нас есть еще больше тематик на любой вкус</p>
-										<a href='#!'>
-											Посмотреть <img src='images/arrow-right.png' alt='' />
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<TourTypes/>
 
 				<section className='choose-country'>
 					<div className='container'>

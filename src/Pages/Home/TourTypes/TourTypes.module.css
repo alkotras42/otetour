@@ -1,0 +1,27 @@
+.tourTypes {
+	display: grid;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+}
+
+.toures {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	margin-top: 45px;
+	gap: 20px;
+}
+
+.toures > div {
+	width: 280px;
+	height: 190px;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 45px;
+	justify-self: start;
+	grid-column: 1;
+}

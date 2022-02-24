@@ -12,12 +12,30 @@
 	opacity: 0.8;
 }
 
-.title {
+.cardText {
 	position: absolute;
-	font-weight: 600;
-	font-size: 18px;
-	line-height: 23px;
 	color: #fff;
 	left: 20px;
 	bottom: 15px;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 23px;
+}
+
+.moreLink {
+	font-size: 16px;
+	line-height: 20px;
+	opacity: 0.8;
+	margin-top: 10px;
+}
+
+.moreArrow {
+	transition: 0.5s all ease;
+}
+
+.card:hover .moreArrow {
+	margin-left: 15px;
 }
