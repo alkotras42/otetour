@@ -10,6 +10,7 @@ import { AboutUs } from './AboutUs/AboutUs'
 import { Previou } from './Previou/Previou'
 import { CountryPick } from './CountryPick/CountryPick'
 import { Guides } from './Guides/Guides'
+import { HowItWork } from './HowItWork/HowItWork'
 
 export const Home = () => {
 	return (
@@ -26,84 +27,7 @@ export const Home = () => {
 				<Previou/>
 				<CountryPick/>
 				<Guides/>
-
-				<section className='how-it-works'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Как это работает?</h2>
-							</div>
-						</div>
-						<div className='row hiw-rov	'>
-							<div className='col-lg-3 col-md-6'>
-								<div className='hiw-block'>
-									<span className='num'>1</span>
-									<h4>Выберите тур</h4>
-									<p>
-										Здесь собрано множество предложений от проверенных экспертов, которые берут всю организацию на себя, чтобы
-										сделать Ваш отдых лучшим.
-									</p>
-								</div>
-							</div>
-							<div className='col-lg-1 d-xl-block d-lg-block d-md-none d-sm-none d-xs-none arrow-col'>
-								<img src='images/big-arrow.svg' alt='' />
-							</div>
-							<div className='col-lg-3 col-md-6'>
-								<div className='hiw-block'>
-									<span className='num'>2</span>
-									<h4>Пообщайтесь с организатором</h4>
-									<p>
-										Все поездки у экспертов по путешествиям тщательно спланированы. Вы можете уточнить всю интересующую информацию
-										напрямую у организатора.
-									</p>
-								</div>
-							</div>
-							<div className='col-lg-1 d-xl-block d-lg-block d-md-none d-sm-none d-xs-none arrow-col'>
-								<img src='images/big-arrow.svg' alt='' />
-							</div>
-							<div className='col-lg-3 col-md-6'>
-								<div className='hiw-block'>
-									<span className='num'>3</span>
-									<h4>Забронируйте тур</h4>
-									<p>С помощью безопасной системы приёма платежей забронируйте понравившийся Вам тур.</p>
-								</div>
-							</div>
-							<div className='col-lg-3 col-md-6 d-xl-none d-lg-none d-md-block'>
-								<div className='hiw-block'>
-									<span className='num'>4</span>
-									<h4>Оставьте свой отзыв</h4>
-									<p>Делитесь своими впечатлениями от поездки, ведь это поможет будущему путешественнику сделать свой выбор.</p>
-								</div>
-							</div>
-						</div>
-
-						<div className='row right-rov d-xl-block d-lg-block d-md-none d-sm-none d-xs-none'>
-							<div className='col-lg-12 right'>
-								<img src='images/big-arrow.svg' alt='' />
-							</div>
-						</div>
-
-						<div className='row justify-content-center'>
-							<div className='col-lg-3 col-md-6'>
-								<div className='hiw-block mb-0'>
-									<span className='num'>5</span>
-									<h4>Возвращайтесь к нам</h4>
-									<p>Возвращайтесь к нам за новыми приключениями и незабываемыми впечатлениями!</p>
-								</div>
-							</div>
-							<div className='col-lg-3 d-xl-block d-lg-block d-md-none d-sm-none d-xs-none arrow-col center'>
-								<img src='images/big-arrow.svg' alt='' />
-							</div>
-							<div className='col-lg-3 col-md-6 d-xl-block d-lg-block d-md-none d-sm-none d-xs-none'>
-								<div className='hiw-block mb-0'>
-									<span className='num'>4</span>
-									<h4>Оставьте свой отзыв</h4>
-									<p>Делитесь своими впечатлениями от поездки, ведь это поможет будущему путешественнику сделать свой выбор.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<HowItWork/>
 
 				<section className='choose-tour'>
 					<div className='container'>
