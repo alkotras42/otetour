@@ -13,6 +13,9 @@ import { Guides } from './Guides/Guides'
 import { HowItWork } from './HowItWork/HowItWork'
 
 export const Home = () => {
+
+	console.log(process.env.REACT_APP_API_DOMAIN)
+
 	return (
 		<div className='wrapper'>
 			<div className={styles.header}>

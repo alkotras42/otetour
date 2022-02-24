@@ -12,8 +12,6 @@ export const Carousel = ({ className, loop = false, itemsCount = 3, children, ..
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
 
-	console.log(children)
-
 	return (
 		<div className={cn(className, styles.carousel)} {...props}>
 			<div className={styles.carouselWrapper}>
@@ -33,7 +31,7 @@ export const Carousel = ({ className, loop = false, itemsCount = 3, children, ..
 						modules={[Navigation]}
 						className={styles.swiper}
 					>
-						{children && children.map((c) => <SwiperSlide>{c}</SwiperSlide>)}
+						{children && children.map((c) =>   <SwiperSlide>{c}</SwiperSlide>)}
 					</Swiper>
 				</div>
 			</div>
