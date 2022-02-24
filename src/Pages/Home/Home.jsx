@@ -12,11 +12,9 @@ import { CountryPick } from './CountryPick/CountryPick'
 import { Guides } from './Guides/Guides'
 import { HowItWork } from './HowItWork/HowItWork'
 import { TourTypes } from './TourTypes/TourTypes'
+import { ContinentPick } from './ContinentPick/ContinentPick'
 
 export const Home = () => {
-
-	console.log(process.env.REACT_APP_API_DOMAIN)
-
 	return (
 		<div className='wrapper'>
 			<div className={styles.header}>
@@ -26,77 +24,15 @@ export const Home = () => {
 			</div>
 
 			<div className={styles.main}>
-				<Recomendation/>
-				<AboutUs/>
-				<Previou/>
-				<CountryPick/>
-				<Guides/>
-				<HowItWork/>
-				<TourTypes/>
-
-				<section className='choose-country'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Выберите континент для путешествия</h2>
-							</div>
-						</div>
-						<div className='row'>
-							<div className='col-lg-12'>
-								<div className='selCont'>
-									<div className='w'>
-										<a href='#!' className='w1'>
-											<img src='' alt='' />
-											<span>
-												Северная <br /> Америка
-											</span>
-										</a>
-										<a href='#!' className='w2'>
-											<img src='images/south-america.svg' alt='' />
-											<span>
-												Южная <br /> Америка
-											</span>
-										</a>
-										<a href='#!' className='w3'>
-											<img src='images/europa.svg' alt='' />
-											<span>Европа</span>
-										</a>
-										<a href='#!' className='w4'>
-											<img src='images/africa.svg' alt='' />
-											<span>Африка</span>
-										</a>
-										<a href='#!' className='w5'>
-											<img src='images/asia.svg' alt='' />
-											<span>Азия</span>
-										</a>
-										<a href='#!' className='w6'>
-											<img src='images/australia.svg' alt='' />
-											<span>Австралия</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className='row'>
-							<div className='col-lg-12 country-form'>
-								<form action='#!' method='post' id='country-form'>
-									<h4>Подпишитесь, чтобы первыми узнавать обо всех новостях и акциях </h4>
-									<div className='form-group'>
-										<input type='email' name='email' id='email' placeholder='Email' />
-										<button type='submit' id='country-btn'>
-											Подписаться
-										</button>
-									</div>
-									<p>
-										Предоставляя свои данные, я соглашаюсь с <a href='#!'>политикой конфиденциальности</a>
-									</p>
-								</form>
-							</div>
-						</div>
-					</div>
-				</section>
-
+				<Recomendation />
+				<AboutUs />
+				<Previou />
+				<CountryPick />
+				<Guides />
+				<HowItWork />
+				<TourTypes />
+				<ContinentPick/>
+				
 				<section className='our-blog'>
 					<div className='container'>
 						<div className='row'>
