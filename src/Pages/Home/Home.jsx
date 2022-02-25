@@ -13,6 +13,7 @@ import { Guides } from './Guides/Guides'
 import { HowItWork } from './HowItWork/HowItWork'
 import { TourTypes } from './TourTypes/TourTypes'
 import { ContinentPick } from './ContinentPick/ContinentPick'
+import { Follow } from './Follow/Follow'
 
 export const Home = () => {
 	return (
@@ -32,7 +33,7 @@ export const Home = () => {
 				<HowItWork />
 				<TourTypes />
 				<ContinentPick/>
-				
+				<Follow/>
 				<section className='our-blog'>
 					<div className='container'>
 						<div className='row'>
