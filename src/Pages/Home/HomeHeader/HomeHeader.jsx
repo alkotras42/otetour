@@ -31,10 +31,11 @@ export const HomeHeader = ({ className, ...props }) => {
 					Быстрый подбор тура
 				</span>
 			</div>
-
-			<Location className={styles.location} />
-			<Calendar className={styles.calendar} />
-			<Button className={styles.searchButton}>Поиск</Button>
+			<div className={styles.form}>
+				<Location className={styles.location} />
+				<Calendar className={styles.calendar} />
+				<Button className={styles.button}>Поиск</Button>
+			</div>
 		</div>
 	)
 }
