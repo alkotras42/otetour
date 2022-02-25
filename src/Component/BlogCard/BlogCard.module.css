@@ -1,0 +1,22 @@
+.card {
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.card:hover .image {
+	filter: brightness(0.8);
+}
+
+.date {
+	margin-top: 10px;
+	font-size: 16px;
+	line-height: 20px;
+	color: #626262;
+}
+
+.title {
+	margin-top: 10px;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 23px;
+}

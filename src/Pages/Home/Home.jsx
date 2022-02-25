@@ -14,6 +14,7 @@ import { HowItWork } from './HowItWork/HowItWork'
 import { TourTypes } from './TourTypes/TourTypes'
 import { ContinentPick } from './ContinentPick/ContinentPick'
 import { Follow } from './Follow/Follow'
+import { Blog } from './Blog/Blog'
 
 export const Home = () => {
 	return (
@@ -34,66 +35,7 @@ export const Home = () => {
 				<TourTypes />
 				<ContinentPick/>
 				<Follow/>
-				<section className='our-blog'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-lg-12 title'>
-								<h2>Наш блог</h2>
-							</div>
-							<div className='col-lg-12 more'>
-								<a href='#!'>
-									Еще больше интересного <img src='images/link-arrow.svg' alt='' />
-								</a>
-							</div>
-						</div>
-						<div className='row'>
-							<div className='col-lg-3 col-md-6 col-sm-6'>
-								<a href='#!' className='blog-block'>
-									<div className='blog-img'>
-										<img src='images/blog-img1.png' alt='' />
-									</div>
-									<div className='blog-text'>
-										<span className='blog-date'>11.05.2021</span>
-										<h5>Самые красивые места России</h5>
-									</div>
-								</a>
-							</div>
-							<div className='col-lg-3 col-md-6 col-sm-6'>
-								<a href='#!' className='blog-block'>
-									<div className='blog-img'>
-										<img src='images/blog-img2.png' alt='' />
-									</div>
-									<div className='blog-text'>
-										<span className='blog-date'>07.05.2021</span>
-										<h5>Какие страны уже открыли границы?</h5>
-									</div>
-								</a>
-							</div>
-							<div className='col-lg-3 col-md-6 col-sm-6'>
-								<a href='#!' className='blog-block'>
-									<div className='blog-img'>
-										<img src='images/blog-img3.png' alt='' />
-									</div>
-									<div className='blog-text'>
-										<span className='blog-date'>29.04.2021</span>
-										<h5>Куда поехать в июле?</h5>
-									</div>
-								</a>
-							</div>
-							<div className='col-lg-3 col-md-6 col-sm-6'>
-								<a href='#!' className='blog-block'>
-									<div className='blog-img'>
-										<img src='images/blog-img4.png' alt='' />
-									</div>
-									<div className='blog-text'>
-										<span className='blog-date'>20.04.2021</span>
-										<h5>Путешествие по Европе</h5>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</section>
+				<Blog/>
 			</div>
 
 			<footer className='footer'>
