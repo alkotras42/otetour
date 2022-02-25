@@ -1,14 +1,12 @@
 import React from 'react'
-import { Header } from '../../Layout/Header/Header'
-import { Footer } from '../../Layout/Footer/Footer'
 import styles from './Home.module.css'
 import bgImage from './bgImage.png'
 import * as Components from './HomeComponents'
+import { withLayout } from '../../Layout/Layout'
 
-export const Home = () => {
+const Home = () => {
 	return (
-		<>
-			<Header />
+		<div>
 			<img src={bgImage} alt='' className={styles.bgImage} />
 			<Components.HomeHeader />
 			<Components.Recomendation />
@@ -21,7 +19,8 @@ export const Home = () => {
 			<Components.ContinentPick />
 			<Components.Follow />
 			<Components.Blog />
-			<Footer />
-		</>
+		</div>
 	)
 }
+
+export default withLayout(Home)
