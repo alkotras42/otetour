@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
-import { CardMini } from '../../../Component'
 import styles from './CountryPick.module.css'
+import { CardMini } from '../../../../Component'
 
 export const CountryPick = ({ className, ...props }) => {
 	const card_data = {

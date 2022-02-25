@@ -1,4 +1,5 @@
 .card {
+	cursor: pointer;
 	display: block;
 	height: 338px;
 	width: 380px;

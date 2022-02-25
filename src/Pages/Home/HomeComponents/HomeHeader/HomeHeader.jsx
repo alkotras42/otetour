@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './HomeHeader.module.css'
 import cn from 'classnames'
-import { Button, Calendar, Location } from '../../../Component'
+import { Button, Calendar, Location } from '../../../../Component'
 
 export const HomeHeader = ({ className, ...props }) => {
 	const [active, setActive] = useState(1)

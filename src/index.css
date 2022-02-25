@@ -16,6 +16,14 @@ button {
 	transition: 0.3s all ease;
 }
 
+p {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
 * {
 	box-sizing: border-box;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { Carousel, GuideCard } from '../../../Component'
+import { Carousel, GuideCard } from '../../../../Component'
 import styles from './Guides.module.css'
 
 export const Guides = ({ className, ...props }) => {

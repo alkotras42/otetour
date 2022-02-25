@@ -1,6 +1,5 @@
 import React from 'react'
 import cn from 'classnames'
-import { CardMini } from '../../../Component'
 import styles from './ContinentPick.module.css'
 import AsiaImg from './images/Asia.png'
 import AfricaImg from './images/Africa.png'

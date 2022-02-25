@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Follow.module.css'
 import cn from 'classnames'
-import { Button, Input } from '../../../Component'
+import { Button, Input } from '../../../../Component'
 
 export const Follow = ({ className, ...props }) => {
 	return (

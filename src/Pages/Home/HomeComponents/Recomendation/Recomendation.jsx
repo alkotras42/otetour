@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { Card, Carousel } from '../../../Component'
+import { Card, Carousel } from '../../../../Component'
 import styles from './Recomendation.module.css'
 
 export const Recomendation = ({ className, ...props }) => {

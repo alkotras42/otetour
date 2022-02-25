@@ -1,8 +1,8 @@
 import React from 'react'
 import cn from 'classnames'
-import { BlogCard } from '../../../Component'
 import styles from './Blog.module.css'
 import Arrow from './arrow.svg'
+import { BlogCard } from '../../../../Component'
 
 export const Blog = ({ className, ...props }) => {
 	const card_data = {
@@ -14,7 +14,7 @@ export const Blog = ({ className, ...props }) => {
 		<div className={cn(className, styles.blog)} {...props}>
 			<span className={styles.title}>Наш блог</span>
 			<p className={styles.more}>
-			Еще больше интересного <img src={Arrow} alt='' className={styles.arrow}/>
+			Еще больше интересного<img src={Arrow} alt='' className={styles.arrow}/>
 			</p>
 			<div className={styles.blogs}>
 				<BlogCard card={card_data} />

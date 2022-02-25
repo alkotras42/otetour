@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { CardMini } from '../../../Component'
+import { CardMini } from '../../../../Component'
 import styles from './TourTypes.module.css'
 
 export const TourTypes = ({ className, ...props }) => {
