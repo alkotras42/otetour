@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { login } from '../../Api/Authorization'
 import { Button, Input } from '../../Component'
+import { withLayout } from '../../Layout/Layout'
 import styles from './Login.module.css'
 
-export const Login = () => {
+const Login = () => {
 	const [user, setUser] = useState({
 		email: '',
 		password: '',
@@ -33,3 +34,5 @@ export const Login = () => {
 		</div>
 	)
 }
+
+export default withLayout(Login)

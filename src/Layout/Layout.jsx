@@ -5,10 +5,10 @@ import { Footer } from './Footer/Footer'
 
 const Layout = ({ children }) => {
 	return (
-		<div>
-			<Header></Header>
+		<div className={styles.wrapper}>
+			<Header className={styles.header}/>
 			<div className={styles.body}>{children}</div>
-			<Footer></Footer>
+			<Footer className={styles.footer}/>
 		</div>
 	)
 }

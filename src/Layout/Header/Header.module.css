@@ -1,7 +1,10 @@
 .header {
+	background-color: #f3f3f6;
+}
+
+.menu {
 	display: grid;
 	grid-template-columns: 360px auto auto auto auto 35px;
-	background-color: #f3f3f6;
 	height: 80px;
 	align-items: center;
 	justify-items: center;
@@ -21,6 +24,7 @@
 }
 
 .language {
+	position: relative;
 	display: grid;
 	grid-template-columns: repeat(4, auto);
 	align-items: center;
@@ -58,7 +62,7 @@
 	color: #fff;
 	font-size: 15px;
 	line-height: 19px;
-	top: 60px;
+	top: 30px;
 	padding: 15px 0;
 	border-radius: 5px;
 }
@@ -73,4 +77,52 @@
 
 .hide {
 	display: none;
+}
+
+.hr {
+	max-height: 1px;
+	padding: 0 !important;
+	margin: 0;
+	width: 100%;
+	border: 1px solid #cccccc;
+}
+
+.burgerMenu {
+	display: none;
+}
+
+.menuLogo {
+	margin-top: 15px;
+	height: 30px;
+}
+
+.menuIcon {
+	height: 15px;
+	margin-bottom: 2px;
+	margin-right: 10px;
+}
+
+@media screen and (max-width: 1160px) {
+	.menu {
+		padding: 0;
+		grid-template-columns: repeat(6, 1fr);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.burgerMenu {
+		display: block;
+	}
+
+	.menu {
+		padding-left: 100px;
+	}
+
+	.menu > div {
+		display: none;
+	}
+
+	.language {
+		justify-self: start;
+	}
 }

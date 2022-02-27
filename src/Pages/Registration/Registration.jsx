@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button, Input } from '../../Component'
+import { withLayout } from '../../Layout/Layout'
 import styles from './Registration.module.css'
 
-export const Registration = () => {
+const Registration = () => {
 	return (
 		<div className={styles.registration}>
 			<p className={styles.header}>Регистрация</p>
@@ -26,3 +27,5 @@ export const Registration = () => {
 		</div>
 	)
 }
+
+export default withLayout(Registration)

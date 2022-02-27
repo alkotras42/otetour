@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Login, Registration } from './Pages'
 import Home from './Pages/Home/Home'
+import Login from './Pages/Login/Login'
+import Registration from './Pages/Registration/Registration'
 
 const App = () => {
 	return (
