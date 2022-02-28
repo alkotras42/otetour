@@ -15,11 +15,11 @@
 	line-height: 20px;
 }
 
-.header > span {
+.menu > div {
 	cursor: pointer;
 }
 
-.header > span:hover {
+.menu > div:hover {
 	text-decoration: underline;
 }
 
