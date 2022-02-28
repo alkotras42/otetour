@@ -35,3 +35,32 @@
 	grid-column: 3;
 	grid-row: 1 / 2;
 }
+
+@media screen and (max-width: 1260px) {
+	.carouselWrapper {
+		grid-template-columns: minmax(680px, 1200px);
+	}
+	.arrowPrev {
+		display: none;
+	}
+
+	.arrowNext {
+		display: none;
+	}
+
+	.carouselContainer {
+		grid-column: auto;
+	}
+
+	.carousel {
+		margin-top: 30px;
+		margin-bottom: 60px;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.carousel {
+		margin-top: 25px;
+		margin-bottom: 40px;
+	}
+}

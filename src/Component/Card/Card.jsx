@@ -1,7 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './Card.module.css'
-import heartIcon from './heart.svg'
 import startIcon from './star.svg'
 import { priceRu } from '../../Helpers/helpers'
 
@@ -11,7 +10,6 @@ export const Card = ({ className, card, ...props }) => {
 			<div className={styles.cardTop}>
 				<img src={`/images/${card.img}`} alt='' className={styles.image} />
 				{card.sale ? <div className={styles.sale}>Скидка</div> : null}
-				<img src={heartIcon} alt='' />
 				<div className={styles.rating}>
 					<img src={startIcon} alt='' className={styles.star} />
 					<span className={styles.ratingCount}>{card.rating}</span>
