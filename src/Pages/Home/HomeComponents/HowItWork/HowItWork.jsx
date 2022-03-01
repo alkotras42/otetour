@@ -5,7 +5,6 @@ import arrow1 from './arrow1.svg'
 import arrow2 from './arrow2.svg'
 import arrow3 from './arrow3.svg'
 
-
 export const HowItWork = ({ className, ...props }) => {
 	return (
 		<div className={cn(styles.about, className)} {...props}>
@@ -45,21 +44,40 @@ export const HowItWork = ({ className, ...props }) => {
 								<img src={arrow2} alt='' className={styles.arrow3} />
 							</div>
 						</div>
-						<div className={cn(styles.item, styles.item5)}>
-							<div>
-								<div className={styles.number}>5</div>
-								<span className={styles.itemTitle}>Возвращайтесь к нам</span>
-								<p className={styles.itemBody}>Возвращайтесь к нам за новыми приключениями и незабываемыми впечатлениями!</p>
-								<img src={arrow3} alt='' className={styles.arrow5} />
+						<div className={styles.secondRow}>
+							<div className={cn(styles.item, styles.item4)}>
+								<div>
+									<div className={styles.number}>4</div>
+									<span className={styles.itemTitle}>Оставьте свой отзыв</span>
+									<p className={styles.itemBody}>
+										Делитесь своими впечатлениями от поездки, ведь это поможет будущему путешественнику сделать свой выбор.
+									</p>
+								</div>
+							</div>
+							<div className={cn(styles.item, styles.item5)}>
+								<div>
+									<div className={styles.number}>5</div>
+									<span className={styles.itemTitle}>Возвращайтесь к нам</span>
+									<p className={styles.itemBody}>Возвращайтесь к нам за новыми приключениями и незабываемыми впечатлениями!</p>
+									<img src={arrow3} alt='' className={styles.arrow4} />
+								</div>
 							</div>
 						</div>
-						<div className={cn(styles.item, styles.item4)}>
+						<div className={cn(styles.item, styles.item4, styles.itemReverse)}>
 							<div>
 								<div className={styles.number}>4</div>
 								<span className={styles.itemTitle}>Оставьте свой отзыв</span>
 								<p className={styles.itemBody}>
 									Делитесь своими впечатлениями от поездки, ведь это поможет будущему путешественнику сделать свой выбор.
 								</p>
+							</div>
+						</div>
+						<div className={cn(styles.item, styles.item5, styles.itemReverse)}>
+							<div>
+								<div className={styles.number}>5</div>
+								<span className={styles.itemTitle}>Возвращайтесь к нам</span>
+								<p className={styles.itemBody}>Возвращайтесь к нам за новыми приключениями и незабываемыми впечатлениями!</p>
+								<img src={arrow3} alt='' className={styles.arrow4} />
 							</div>
 						</div>
 					</div>

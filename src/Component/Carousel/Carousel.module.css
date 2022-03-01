@@ -38,7 +38,7 @@
 
 @media screen and (max-width: 1260px) {
 	.carouselWrapper {
-		grid-template-columns: minmax(680px, 1200px);
+		grid-template-columns: minmax(880px, 1200px);
 	}
 	.arrowPrev {
 		display: none;

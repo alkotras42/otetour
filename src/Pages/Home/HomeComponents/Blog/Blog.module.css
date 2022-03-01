@@ -1,8 +1,6 @@
 .blog {
 	display: grid;
-	width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	margin-top: 70px;
 	margin-bottom: 80px;
 }
@@ -12,10 +10,7 @@
 	grid-template-columns: repeat(4, auto);
 	margin-top: 25px;
 	gap: 20px;
-}
-
-.blogs > div {
-	width: 280px;
+	grid-column: 2;
 }
 
 .title {
@@ -23,7 +18,7 @@
 	font-size: 36px;
 	line-height: 45px;
 	justify-self: start;
-	grid-column: 1;
+	grid-column: 2;
 }
 
 .arrow {
@@ -35,8 +30,43 @@
 	font-size: 16px;
 	line-height: 20px;
 	text-align: right;
+	grid-column: 2;
 }
 
 .more:hover {
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 1260px) {
+	.blog {
+		margin-top: 50px;
+		margin-bottom: 60px;
+		grid-template-columns: 40px 1fr 40px;
+	}
+
+	.blogs {
+		grid-template-columns: repeat(2, auto);
+	}
+
+	.title {
+		font-size: 30px;
+		line-height: 38px;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.blog {
+		margin-top: 40px;
+		margin-bottom: 50px;
+		grid-template-columns: 20px 1fr 20px;
+	}
+
+	.blogs {
+		grid-template-columns: 1fr;
+	}
+
+	.title {
+		font-size: 22px;
+		line-height: 28px;
+	}
 }

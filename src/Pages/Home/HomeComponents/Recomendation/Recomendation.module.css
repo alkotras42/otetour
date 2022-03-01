@@ -16,31 +16,24 @@
 @media screen and (max-width: 1260px) {
 	.recomendation {
 		padding-top: 50px;
-		display: grid;
 		grid-template-columns: 40px 1fr auto;
 	}
 
 	.title {
-		font-weight: 600;
 		font-size: 30px;
 		line-height: 38px;
-		justify-self: start;
-		grid-column: 2;
 	}
 }
 
 @media screen and (max-width: 660px) {
 	.recomendation {
 		padding-top: 40px;
-		display: grid;
+
 		grid-template-columns: 20px 1fr auto;
 	}
 
 	.title {
-		font-weight: 600;
 		font-size: 22px;
 		line-height: 28px;
-		justify-self: start;
-		grid-column: 2;
 	}
 }

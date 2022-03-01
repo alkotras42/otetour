@@ -1,6 +1,6 @@
 .continentPick {
 	display: grid;
-	grid-template-columns: auto 1200px auto;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	justify-items: center;
 	display: grid;
 	margin-top: 80px;
@@ -20,6 +20,10 @@
 	line-height: 45px;
 	justify-self: start;
 	grid-column: 2;
+}
+
+.continentsCarousel {
+	display: none;
 }
 
 .continentItem {
@@ -97,4 +101,109 @@
 
 .continentItem:hover img {
 	filter: brightness(0.7);
+}
+
+@media screen and (max-width: 1260px) {
+	.continentPick {
+		margin-top: 50px;
+		grid-template-columns: 40px 1fr auto;
+	}
+
+	.continents {
+		width: 915px;
+		margin-top: 30px;
+	}
+
+	.title {
+		font-size: 30px;
+		line-height: 38px;
+	}
+
+	.continentTitle {
+		position: absolute;
+		font-size: 12px;
+		line-height: 15px;
+	}
+
+	.asia {
+		width: 300px;
+		top: -3px;
+		right: 184px;
+	}
+
+	.africa {
+		width: 168px;
+		top: 150px;
+		left: 298px;
+	}
+
+	.australia {
+		width: 105px;
+		right: 85px;
+		top: 300px;
+	}
+
+	.europe {
+		width: 177px;
+		top: 0;
+		right: 442px;
+	}
+
+	.northAmerica {
+		width: 330px;
+		left: -111px;
+	}
+
+	.southAmerica {
+		width: 132px;
+		top: 238px;
+		left: 44px;
+	}
+}
+
+@media screen and (max-width: 880px) {
+	.title {
+		font-size: 22px;
+		line-height: 28px;
+	}
+
+	.continents {
+		display: none;
+	}
+
+	.continentsCarousel {
+		display: block;
+		grid-column: 2 / 3;
+	}
+
+	.continentItem,
+	.continentTitle {
+		position: initial;
+	}
+
+	.continentItem {
+		display: grid;
+		gap: 20px;
+	}
+
+	.continentTitle {
+		font-size: 18px;
+		line-height: 20px;
+		justify-self: center;
+	}
+
+	.continentImage {
+		max-height: 160px;
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.continentTitle {
+		font-size: 15px;
+		line-height: 16px;
+	}
+
+	.continentImage {
+		max-height: 140px;
+	}
 }

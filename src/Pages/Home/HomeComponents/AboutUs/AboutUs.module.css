@@ -17,13 +17,15 @@
 .items {
 	grid-column: 2;
 	display: grid;
-	grid-template-columns: repeat(3, 380px);
+	grid-template-columns: repeat(3, minmax(300px, 380px));
 	grid-template-rows: repeat(3, auto);
 	gap: 10px 20px;
 	margin-top: 30px;
 }
 
 .image {
+	width: 70px;
+	height: 70px;
 	grid-row: 1 / 2;
 }
 
@@ -45,4 +47,62 @@
 
 .item {
 	display: block;
+}
+
+@media screen and (max-width: 1260px) {
+	.about {
+		padding: 40px;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.about {
+		padding: 35px 40px;
+	}
+
+	.image {
+		width: 60px;
+		height: 60px;
+	}
+
+	.title {
+		font-weight: 600;
+		font-size: 30px;
+		line-height: 38px;
+		grid-column: 2;
+	}
+
+	.items {
+		grid-template-columns: repeat(2, 380px);
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.about {
+		padding: 25px 20px;
+	}
+
+	.items {
+		grid-template-columns: repeat(1, auto);
+	}
+
+	.image {
+		width: 50px;
+		height: 50px;
+	}
+
+	.title {
+		font-size: 22px;
+		line-height: 28px;
+	}
+
+	.itemTitle {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.itemBody {
+		font-size: 14px;
+		line-height: 18px;
+	}
 }

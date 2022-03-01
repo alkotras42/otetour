@@ -1,6 +1,6 @@
 .tourTypes {
 	display: grid;
-	width: 1200px;
+	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 70px;
@@ -14,8 +14,8 @@
 }
 
 .toures > div {
-	width: 280px;
-	height: 190px;
+	max-width: 280px;
+	max-height: 190px;
 }
 
 .title {
@@ -24,4 +24,46 @@
 	line-height: 45px;
 	justify-self: start;
 	grid-column: 1;
+}
+
+@media screen and (max-width: 1260px) {
+	.tourTypes {
+		padding-left: 40px;
+		padding-right: 40px;
+		margin-top: 60px;
+	}
+
+	.title {
+		font-size: 30px;
+		line-height: 38px;
+	}
+
+	.toures {
+		grid-template-columns: repeat(4, auto);
+		margin-top: 30px;
+		gap: 20px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.tourTypes {
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-top: 50px;
+	}
+
+	.toures > div {
+		max-height: 130px;
+	}
+
+	.title {
+		font-size: 22px;
+		line-height: 28px;
+	}
+
+	.toures {
+		grid-template-columns: repeat(2, auto);
+		margin-top: 25px;
+		gap: 20px;
+	}
 }

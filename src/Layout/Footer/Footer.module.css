@@ -1,6 +1,6 @@
 .footer {
 	display: grid;
-	grid-template-columns: auto 1200px auto;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	background-color: #f3f3f6;
 	padding-bottom: 20px;
 }
@@ -36,14 +36,81 @@
 	align-items: center;
 }
 
+.contact {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+	align-items: center;
+}
+
 .button {
 	width: 250px;
 	height: 50px;
-	margin-left: 30px;
 }
 
 .socials {
 	display: grid;
 	gap: 10px;
+	max-width: 120px;
 	grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 1260px) {
+	.footer {
+		grid-template-columns: 40px auto 40px;
+	}
+	.contacts {
+		margin-top: 20px;
+		align-items: flex-end;
+	}
+
+	.contact {
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+	.links {
+		grid-template-columns: repeat(2, auto);
+		gap: 60px;
+	}
+
+	.button {
+		max-width: 250px;
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.footer {
+		grid-template-columns: 0px 1fr 0px;
+	}
+	.contacts {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 40px;
+		padding: 20px;
+		margin-top: 0;
+	}
+
+	.title {
+		margin-top: 0;
+	}
+
+	.contact {
+		grid-template-columns: 1fr;
+		gap: 15px;
+		grid-column: 1 / 3;
+		grid-row: 1;
+	}
+	.links {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	.links > div {
+		padding: 20px;
+		border-bottom: 1px solid #cccccc;
+	}
+
+	.button {
+		max-width: 250px;
+	}
 }

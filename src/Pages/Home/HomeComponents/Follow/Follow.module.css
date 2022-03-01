@@ -1,9 +1,8 @@
 .follow {
 	display: grid;
-	grid-template-columns: auto 1200px auto;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	justify-content: center;
 	margin-top: 70px;
-	height: 210px;
 }
 
 .followWrapper {
@@ -31,7 +30,8 @@
 }
 
 .button {
-	width: 200px;
+	min-width: 200px;
+	height: 45px;
 }
 
 .text {
@@ -43,4 +43,27 @@
 
 .link {
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 660px) {
+	.follow {
+		margin-top: 25px;
+	}
+
+	.input {
+		min-width: 280px;
+		width: 100%;
+	}
+
+	.title {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.form {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 15px;
+		height: auto;
+	}
 }

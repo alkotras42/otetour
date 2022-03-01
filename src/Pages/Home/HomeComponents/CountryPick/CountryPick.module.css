@@ -1,6 +1,6 @@
 .countyPicker {
 	display: grid;
-	width: 1200px;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -9,12 +9,13 @@
 	display: grid;
 	grid-template-columns: repeat(6, auto);
 	margin-top: 40px;
+	grid-column: 2;
 	gap: 20px;
 }
 
 .countries > div {
-	width: 180px;
-	height: 180px;
+	max-width: 180px;
+	max-height: 180px;
 }
 
 .title {
@@ -22,5 +23,47 @@
 	font-size: 36px;
 	line-height: 45px;
 	justify-self: start;
-	grid-column: 1;
+	grid-column: 2;
+}
+
+@media screen and (max-width: 1260px) {
+	.countyPicker {
+		padding: 40px;
+	}
+
+	.title {
+		font-size: 30px;
+		line-height: 38px;
+	}
+
+	.countries {
+		grid-template-columns: repeat(4, minmax(150px, auto));
+		margin-top: 30px;
+	}
+
+	.countries > div {
+		width: 150px;
+		height: 150px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.countyPicker {
+		padding: 20px;
+	}
+
+	.title {
+		font-size: 22px;
+		line-height: 28px;
+	}
+
+	.countries {
+		grid-template-columns: repeat(2, 130px);
+		margin-top: 25px;
+	}
+
+	.countries > div {
+		width: 130px;
+		height: 130px;
+	}
 }

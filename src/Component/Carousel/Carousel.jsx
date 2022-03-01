@@ -8,7 +8,7 @@ import { Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-export const Carousel = ({ className, loop = false, itemsCount = 3, children, ...props }) => {
+export const Carousel = ({ className, loop = false, responsive, itemsCount = 3, children, ...props }) => {
 	const prevRef = useRef(null)
 	const nextRef = useRef(null)
 
@@ -26,6 +26,7 @@ export const Carousel = ({ className, loop = false, itemsCount = 3, children, ..
 							swiper.navigation.update()
 						}}
 						loop={loop}
+						responsive={responsive}
 						slidesPerView={itemsCount}
 						spaceBetween={20}
 						modules={[Navigation]}

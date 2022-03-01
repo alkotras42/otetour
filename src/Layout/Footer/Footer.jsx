@@ -91,8 +91,8 @@ export const Footer = ({ className, ...props }) => {
 			</div>
 			<div className={styles.contacts}>
 				<p>© 2021 OTE TOUR</p>
-				<div>
-					<span>Остались вопросы?</span>
+				<div className={styles.contact}>
+					<div><span>Остались вопросы?</span></div>
 					<Button className={styles.button}>Связаться с нами</Button>
 				</div>
 				<div className={styles.socials}>
