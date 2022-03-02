@@ -18,6 +18,21 @@ export const Calendar = ({ className, type, ...props }) => {
 		setShowPicker(false)
 	}
 
+	const Months = [
+		'Январь',
+		'Февраль',
+		'Март',
+		'Апрель',
+		'Май',
+		'Июнь',
+		'Июль',
+		'Август',
+		'Сентябрь',
+		'Октябрь',
+		'Ноябрь',
+		'Декабрь',
+	]
+
 	return (
 		<div className={cn(className, styles.calendar)} {...props}>
 			<div>
@@ -36,46 +51,35 @@ export const Calendar = ({ className, type, ...props }) => {
 				})}
 			>
 				<div className={styles.calendarYear}>
-					<img src={arrowLeft} alt='' className={styles.arrowLeft} onClick={() => setYear(year - 1)} />
+					<img
+						src={arrowLeft}
+						alt=''
+						className={cn(styles.arrowLeft, {
+							[styles.arrowDisable]: year <= new Date().getFullYear(),
+						})}
+						onClick={() => setYear(year - 1)}
+					/>
+
 					<span className={styles.calendarCount}>{year}</span>
-					<img src={arrowRight} alt='' className={styles.arrowRight} onClick={() => setYear(year + 1)} />
+					<img
+						src={arrowRight}
+						alt=''
+						className={cn(styles.arrowRight, {
+							[styles.arrowDisable]: year > new Date().getFullYear() + 3,
+						})}
+						onClick={() => setYear(year + 1)}
+					/>
 				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Январь
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Февраль
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Март
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Апрель
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Май
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Июнь
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Июль
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Август
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Сентябрь
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Октябрь
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Ноябрь
-				</div>
-				<div className={styles.calendarItem} onClick={changeDate}>
-					Декабрь
-				</div>
+				{Months.map((month, index) =>
+					// Если номер месяца меньшще чем номер текущего месяца, то отрисовываем его как неактивный
+					index + 1 < new Date().getMonth() && year == new Date().getFullYear() ? (
+						<div className={cn(styles.calendarItem, styles.calendarDisableItem)}>{month}</div>
+					) : (
+						<div className={styles.calendarItem} onClick={changeDate}>
+							{month}
+						</div>
+					)
+				)}
 			</div>
 		</div>
 	)

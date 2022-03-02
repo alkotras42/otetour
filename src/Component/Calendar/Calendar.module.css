@@ -34,17 +34,42 @@
 	color: #252525;
 }
 
-.arrowLeft,
-.arrowRight {
-	cursor: pointer;
-}
-
 .calendarItem:hover {
 	color: white;
 	background-color: #63a583;
 }
 
+.calendarDisableItem {
+	cursor: default;
+	opacity: 0.6;
+}
+
+.calendarDisableItem:hover {
+	background-color: #fff;
+	color: #252525;
+}
+
+.arrowLeft,
+.arrowRight {
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+}
+
+.arrowLeft {
+	left: -40px;
+}
+
+.arrowRight {
+	right: -40px;
+}
+
+.arrowDisable {
+	display: none;
+}
+
 .calendarYear {
+	position: relative;
 	grid-column: 1 / 4;
 	margin-bottom: 20px;
 }
@@ -53,7 +78,6 @@
 	font-weight: 600;
 	font-size: 18px;
 	line-height: 23px;
-	padding: 0 25px;
 }
 
 .calendarInput {
