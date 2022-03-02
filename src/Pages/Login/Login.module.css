@@ -1,19 +1,39 @@
 .login {
+	height: calc(100vh - 120px);
+	align-content: center;
+	display: grid;
+	grid-template-columns: auto minmax(320px, 780px) auto;
+}
+
+.loginWrapper {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
-
+	grid-column: 2;
 	text-align: center;
 	max-width: 780px;
 	width: 100%;
-	margin: 50px auto;
+	margin: auto;
 	background: #f3f3f6;
 	padding: 50px;
 	border-radius: 5px;
 }
 
-.header {
+.title {
 	color: #252525;
 	font-size: 36px;
 	font-weight: 600;
+	padding-bottom: 25px;
+}
+
+.button {
+	height: 50px;
+}
+
+a {
+	color: #3762ae !important;
+}
+
+a:hover {
+	text-decoration: underline !important;
 }

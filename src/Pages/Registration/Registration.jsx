@@ -1,31 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Input } from '../../Component'
+import { Header } from '../../Layout/Header/Header'
 import { withLayout } from '../../Layout/Layout'
+import cn from 'classnames'
 import styles from './Registration.module.css'
 
-const Registration = () => {
-	return (
-		<div className={styles.registration}>
-			<p className={styles.header}>Регистрация</p>
-			<Input placeholder='Имя'/>
-			<Input placeholder='Фамилия'/>
-			<Input placeholder='Email'/>
-			<select className={styles.select}>
-				<option value=''>Физическое лицо</option>
-				<option value=''>Самозанятый</option>
-				<option value=''>Индивидуальный предпрениматель</option>
-				<option value=''>Юридическое лицо</option>
-			</select>
-			<Input type='password' placeholder='Пароль'/>
-			<Input type='password' placeholder='Подтверждение пароля'/>
+export const Registration = () => {
+	const [toggle, setToggle] = useState('Турист')
 
-			<Button>Войти</Button>
-			<span>
-				Еще не зарегистрированы? <a href=''>Регистрация</a>
-			</span>
-			<a href=''>Забыли пароль?</a>
-		</div>
+	const changeToggle = (e) => {
+		setToggle(e.target.getAttribute('name'))
+	}
+
+	return (
+		<>
+			<Header />
+			<div className={styles.registration}>
+				<div className={styles.registrationWrapper}>
+					<p className={styles.title}>Регистрация</p>
+					<div className={styles.toggle}>
+						<div
+							className={cn(styles.toggleButton, {
+								[styles.toggleButtonActive]: toggle == 'Турист',
+							})}
+							name='Турист'
+							onClick={changeToggle}
+						>
+							Турист
+						</div>
+						<div
+							className={cn(styles.toggleButton, {
+								[styles.toggleButtonActive]: toggle == 'Гид',
+							})}
+							name='Гид'
+							onClick={changeToggle}
+						>
+							Гид
+						</div>
+					</div>
+					<Input placeholder='Имя' />
+					<Input placeholder='Фамилия' />
+					<Input placeholder='Email' />
+					<Input type='password' placeholder='Пароль' />
+					<Input type='password' placeholder='Подтверждение пароля' />
+					<span>
+						Регистрируясь, вы соглашаетесь с условиями <a href=''>публичной аферты</a> и
+						<a href=''> политикой конфиденциальности.</a>
+					</span>
+					<Button className={styles.button}>Регистрация</Button>
+					<span>
+						Уже зарегистрированы? <a href='/login'>Вход</a>
+					</span>
+				</div>
+			</div>
+		</>
 	)
 }
-
-export default withLayout(Registration)

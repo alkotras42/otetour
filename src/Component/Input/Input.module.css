@@ -12,6 +12,10 @@
 	outline: none;
 }
 
+.input:focus {
+	border: 1px solid #6e93d6;
+}
+
 .eye {
 	position: absolute;
 	right: 15px;
