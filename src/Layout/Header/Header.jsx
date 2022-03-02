@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './Header.module.css'
-import LogoIcon from './images/logo.svg'
+import LogoIcon from './images/logo.png'
 import UserIcon from './images/user.svg'
 import LanguageIcon from './images/language.svg'
 import ToursIcon from './images/tours.svg'

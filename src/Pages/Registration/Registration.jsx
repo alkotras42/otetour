@@ -44,12 +44,21 @@ export const Registration = () => {
 					<Input type='password' placeholder='Пароль' />
 					<Input type='password' placeholder='Подтверждение пароля' />
 					<span>
-						Регистрируясь, вы соглашаетесь с условиями <a href=''>публичной аферты</a> и
-						<a href=''> политикой конфиденциальности.</a>
+						Регистрируясь, вы соглашаетесь с условиями
+						<a href='' className={styles.link}>
+							публичной аферты
+						</a>
+						и
+						<a href='' className={styles.link}>
+							политикой конфиденциальности.
+						</a>
 					</span>
 					<Button className={styles.button}>Регистрация</Button>
 					<span>
-						Уже зарегистрированы? <a href='/login'>Вход</a>
+						Уже зарегистрированы?
+						<a href='/login' className={styles.link}>
+							Вход
+						</a>
 					</span>
 				</div>
 			</div>

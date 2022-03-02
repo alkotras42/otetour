@@ -32,9 +32,9 @@ export const Login = () => {
 					<Input type='password' placeholder='Password' name='password' value={user.password} onChange={handleChange} />
 					<Button onClick={LoginUser} className={styles.button}>Войти</Button>
 					<span>
-						Еще не зарегистрированы? <a href='/registration'>Регистрация</a>
+						Еще не зарегистрированы? <a href='/registration' className={styles.link}>Регистрация</a>
 					</span>
-					<a href=''>Забыли пароль?</a>
+					<a href='' className={styles.link}>Забыли пароль?</a>
 				</div>
 			</div>
 		</>

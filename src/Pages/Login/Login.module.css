@@ -30,10 +30,10 @@
 	height: 50px;
 }
 
-a {
-	color: #3762ae !important;
+.link {
+	color: #3762ae;
 }
 
-a:hover {
-	text-decoration: underline !important;
+.link:hover {
+	text-decoration: underline;
 }

@@ -1,7 +1,7 @@
 .header {
 	height: 470px;
 	display: grid;
-	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
+	grid-template-columns: 1fr minmax(280px, 1200px) 1fr;
 
 	justify-items: center;
 	gap: 10px;
@@ -72,6 +72,10 @@
 }
 
 @media screen and (max-width: 1160px) {
+	.header {
+		padding: 0 40px;
+	}
+
 	.h1 {
 		font-size: 36px;
 		line-height: 45px;
@@ -95,6 +99,10 @@
 }
 
 @media screen and (max-width: 660px) {
+	.header {
+		padding: 0 20px;
+	}
+
 	.form {
 		grid-template-columns: 1fr;
 	}

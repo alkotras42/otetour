@@ -10,7 +10,6 @@
 	},
 	"keywords": [],
 	"author": "",
-	"homepage": "https://test.otetour.com/",
 	"license": "ISC",
 	"dependencies": {
 		"@react-hook/window-size": "^3.0.7",

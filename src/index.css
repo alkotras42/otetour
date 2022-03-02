@@ -25,6 +25,10 @@ a {
 	color: #252525;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 * {
 	box-sizing: border-box;
 }
