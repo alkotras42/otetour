@@ -73,11 +73,11 @@
 	}
 
 	.items {
-		grid-template-columns: repeat(2, 380px);
+		grid-template-columns: repeat(2, auto);
 	}
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 660px) {
 	.about {
 		padding: 25px 20px;
 	}

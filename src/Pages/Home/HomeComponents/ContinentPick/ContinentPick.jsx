@@ -40,7 +40,7 @@ export const ContinentPick = ({ className, ...props }) => {
 				</div>
 			</div>
 			<div className={styles.continentsCarousel}>
-				<Carousel loop={true}>
+				<Carousel loop={true} itemsCount={3}>
 					<div className={cn(styles.continentItem, styles.asia)}>
 						<img src={AsiaImg} alt='' className={styles.continentImage} />
 						<span className={styles.continentTitle}>Азия</span>

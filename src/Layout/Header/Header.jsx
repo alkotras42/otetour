@@ -23,7 +23,7 @@ export const Header = ({ className, ...props }) => {
 			position: 'absolute',
 			width: '36px',
 			height: '30px',
-			left: '30px',
+			right: '40px',
 			top: '27px',
 		},
 		bmBurgerBars: {

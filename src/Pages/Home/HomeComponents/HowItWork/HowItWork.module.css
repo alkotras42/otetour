@@ -111,7 +111,7 @@
 @media screen and (max-width: 1200px) {
 	.about {
 		padding-top: 35px;
-		grid-template-columns: 40px 1fr auto;
+		grid-template-columns: 40px 1fr 40px;
 	}
 
 	.itemTitle {
@@ -167,7 +167,7 @@
 @media screen and (max-width: 480px) {
 	.about {
 		padding-top: 25px;
-		grid-template-columns: 20px 1fr auto;
+		grid-template-columns: 20px 1fr 20px;
 	}
 
 	.itemTitle {

@@ -45,6 +45,12 @@
 	text-decoration: underline;
 }
 
+@media screen and (max-width: 880px) {
+	.follow {
+		margin-top: 10px;
+	}
+}
+
 @media screen and (max-width: 660px) {
 	.follow {
 		margin-top: 25px;

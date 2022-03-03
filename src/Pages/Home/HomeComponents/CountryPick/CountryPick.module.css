@@ -22,32 +22,40 @@
 }
 
 @media screen and (max-width: 1260px) {
-	.countyPicker {
-		padding: 40px;
-	}
-
 	.title {
+		padding-left: 40px;
 		font-size: 30px;
 		line-height: 38px;
 	}
 
 	.countries {
-		grid-template-columns: repeat(4, minmax(150px, auto));
+		grid-template-columns: repeat(4, auto);
 		margin-top: 30px;
+		padding-left: 60px;
+		padding-right: 60px;
 	}
 }
 
-@media screen and (max-width: 700px) {
-	.countyPicker {
-		padding: 20px;
+@media screen and (max-width: 740px) {
+	.countries {
+		padding-left: 40px;
+		padding-right: 40px;
+		grid-template-columns: repeat(3, auto);
 	}
+}
 
+@media screen and (max-width: 660px) {
 	.title {
 		font-size: 22px;
 		line-height: 28px;
+		padding-left: 20px;
 	}
+}
 
+@media screen and (max-width: 600px) {
 	.countries {
+		padding-left: 20px;
+		padding-right: 20px;
 		grid-template-columns: repeat(2, minmax(120px, auto));
 		margin-top: 25px;
 	}

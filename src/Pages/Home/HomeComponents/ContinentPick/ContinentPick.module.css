@@ -184,6 +184,8 @@
 	.continentItem {
 		display: grid;
 		gap: 20px;
+		justify-content: center;
+		width: auto;
 	}
 
 	.continentTitle {
@@ -193,7 +195,7 @@
 	}
 
 	.continentImage {
-		max-height: 160px;
+		max-height: 200px;
 	}
 }
 
@@ -204,6 +206,6 @@
 	}
 
 	.continentImage {
-		max-height: 140px;
+		max-height: 160px;
 	}
 }
