@@ -26,6 +26,15 @@
 	padding-bottom: 25px;
 }
 
+.error {
+	text-align: center;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+
+	color: #f0493e;
+}
+
 .button {
 	height: 50px;
 }

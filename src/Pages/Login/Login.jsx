@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { login } from '../../Api/Authorization'
 import { Button, Input } from '../../Component'
+import { ValidationSchema } from '../../Helpers/helpers'
 import { Header } from '../../Layout/Header/Header'
 import { withLayout } from '../../Layout/Layout'
 import styles from './Login.module.css'
@@ -11,6 +12,8 @@ export const Login = () => {
 		password: '',
 	})
 
+	const [loginError, setLoginError] = useState()
+
 	const handleChange = (e) => {
 		setUser({
 			...user,
@@ -19,7 +22,12 @@ export const Login = () => {
 	}
 
 	const LoginUser = () => {
-		login(user.email, user.password)
+		ValidationSchema.validate(user)
+			.then((res) => {
+				setLoginError(null)
+				// login(res)
+			})
+			.catch((error) => setLoginError(error.message))
 	}
 
 	return (
@@ -28,13 +36,21 @@ export const Login = () => {
 			<div className={styles.login}>
 				<div className={styles.loginWrapper}>
 					<p className={styles.title}>Вход</p>
+					{loginError && <p className={styles.error}>{loginError}</p>}
 					<Input placeholder='Email' name='email' value={user.email} onChange={handleChange} />
 					<Input type='password' placeholder='Password' name='password' value={user.password} onChange={handleChange} />
-					<Button onClick={LoginUser} className={styles.button}>Войти</Button>
+					<Button onClick={LoginUser} className={styles.button}>
+						Войти
+					</Button>
 					<span>
-						Еще не зарегистрированы? <a href='/registration' className={styles.link}>Регистрация</a>
+						Еще не зарегистрированы?{' '}
+						<a href='/registration' className={styles.link}>
+							Регистрация
+						</a>
 					</span>
-					<a href='' className={styles.link}>Забыли пароль?</a>
+					<a href='' className={styles.link}>
+						Забыли пароль?
+					</a>
 				</div>
 			</div>
 		</>
