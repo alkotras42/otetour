@@ -48,7 +48,7 @@ export const Login = () => {
 							Регистрация
 						</a>
 					</span>
-					<a href='' className={styles.link}>
+					<a href='/passwordChange' className={styles.link}>
 						Забыли пароль?
 					</a>
 				</div>
