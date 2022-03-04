@@ -1,9 +1,18 @@
-<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect opacity="0.7" width="15" height="15" fill="url(#pattern0)"/>
-<defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_706_1457" transform="scale(0.0104167)"/>
-</pattern>
-<image id="image0_706_1457" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAEPklEQVR4nO3dv2sbZxzH8c/3LDTUSY1PRxeLUuHzLVpLf4QMGhJSOiYmCbRjA/kPnK321mz9B7J1aAiFQFvqJSBoYygZCxkeSRAag4ZyDzhdKlP0ZJGCqzrSnZ7v6XlO+r5H6/Fzx/PSSZbw3QGSJEmSJEmSJK1axD1hHMdNIvoKwFUAHwBY595GnojoQCm173IfprXGNVGz2axubGx8S0QPAFwC8B6AKtf8FrWiKKI0Tduud+S8WACazWb19PT0ZyK6DSDgmJM5bxFYAEbP/NsccxWYlwjWAKPX/Afw85k/mXcI1otGRHfA+F5SdMaYr5Mk+cb1fozjeNZeZZhjoRlj9pIk8eIvIw6A9xnmWHi+HAkcABcY5nDS6EhwilCGN85Cc42w8gCAWwQBGOUKQQDO5AJBACZaNIIAnNMiEQTgLS0KQQCmtAgEAZhR0QgCkKEiEQQgY0UhCECOikAQgJxxIwjAHHEiCMCccSEIgEXGmD3bOQTAcQLgOAFwnAA4TgAcJwCOEwDHCYDjBMBxAuA4AXCcADhOABwnAI4TAMcJgOMEwHEC4DgBcFzF9Q5w1+l02K5/sb29fSkIgkMAF7nmnEyOgCn1er2j4XD4GYC/i9qGAMyoaAQByFCRCAKQsaIQBCBHRSAIQM64EQRgjjgRlu5zwKx2dnbMtMezXmOu1+sdJUnyue3+yBEwUZ6rqCilfrPdngCck5wn7EFynrAHyXnCHiTnCXuQnCfsQXKeMFPGmHsWvyvnCdvW7Xbv+4SwcgCAXwjWV7yt1WpeXAB1XBRFT9I0/XPWOK310yiKCEBrzk1d5rgM8tIdAcaYwziOMy2qUmrf8kiwvvjr0gEAWCein7IiuH45WkYAoEQIywoAlARhmQGAEiAsOwDgOcIqAAAeI6wKAOApAgdAYf+2V0DrRPRjkiSXswzudrv3iehg3o0ZY/biON6dNoYDYOanTs+6YIz5JSuCUmp/XgRjzMN6vf542hjrryKiKIoBfGo7z4KrArgVhuGR1vrFrMFpmrbDMPyHiK5k3QARPdra2vqi3W7/O22cNcDm5uZLIrqL8r2fVIloN4qiX7m/OzLGPJxc/FarValUKte11s/PjrUG0Fr/VavVagA+tp3LQVUAN7MipGnanoUwetn5cnLxj4+PvyOig8kv8Fju/9VoNJ4MBoNPAGxzzLfg2BBmLP6t8Y/OIrAA9Pv9YaPR+H4wGLwL4EOU8OUIlggZF//NQ2MEtjvg9fv9odb6MAzDHwAMiOgigHfgxx1VszQ3Qs7FfzMkDMNX7PcTXrXiON6t1+uPcy7+OC0AzOVYfBhj/hAAxvIsPoCTIAiulOYuqGWoUqlcz/ip+QTANaXUMwFgTGv9PMMn5hMA1zqdzu9Aie4DXJa01k+nIPxn8QEBKKS3IPxv8QEBKKwRwqsgCD4yxnTX1tZuKKWeTY57DR53bbO5ie+2AAAAAElFTkSuQmCC"/>
-</defs>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="48.000000pt" height="48.000000pt" viewBox="0 0 48.000000 48.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M92 428 c-17 -17 -17 -359 0 -376 8 -8 52 -12 132 -12 l120 0 -42 43
+c-37 38 -42 48 -42 90 l0 47 47 0 c34 0 53 -6 70 -22 l23 -21 0 69 0 70 -63
+62 -63 62 -85 0 c-53 0 -90 -5 -97 -12z"/>
+<path d="M300 162 c0 -10 24 -41 53 -70 51 -51 54 -52 70 -34 16 17 14 21 -36
+70 -54 53 -87 66 -87 34z"/>
+<path d="M436 41 c-14 -15 -14 -20 -3 -30 11 -8 18 -7 31 8 14 15 14 20 3 30
+-11 8 -18 7 -31 -8z"/>
+</g>
 </svg>

@@ -6,6 +6,7 @@ import LanguageIcon from './images/language.svg'
 import ToursIcon from './images/tours.svg'
 import ThemesIcon from './images/themes.svg'
 import BlogIcon from './images/blog.svg'
+import MenuIcon from './images/menu.svg'
 
 import arrow from './images/arrow.svg'
 import cn from 'classnames'
@@ -22,9 +23,9 @@ export const Header = ({ className, ...props }) => {
 		bmBurgerButton: {
 			position: 'absolute',
 			width: '36px',
-			height: '30px',
+			height: '40px',
 			right: '40px',
-			top: '27px',
+			top: '22px',
 		},
 		bmBurgerBars: {
 			background: '#373a47',
@@ -67,38 +68,38 @@ export const Header = ({ className, ...props }) => {
 	return (
 		<div className={cn(styles.header, className)} {...props}>
 			<div className={styles.burgerMenu}>
-				<Menu styles={MenuStyles}>
+				<Menu styles={MenuStyles} customBurgerIcon={ <img src={MenuIcon} /> }>
 					<div>
 						<img src={LogoIcon} alt='' className={styles.menuLogo} />
 					</div>
 					<div>
-						<a href='/login'>
+						<a href=''>
 							<img src={ToursIcon} alt='' className={styles.menuIcon} />
 							Все туры
 						</a>
 					</div>
 					<div>
-						<a href='/login'>
+						<a href=''>
 							<img src={ThemesIcon} alt='' className={styles.menuIcon} />
 							Туры по тематикам
 						</a>
 					</div>
 					<div>
-						<a href='/login'>
+						<a href=''>
 							<img src={BlogIcon} alt='' className={styles.menuIcon} />
 							Блог
 						</a>
 					</div>
 					<hr className={styles.hr} />
 					<div>
-						<a href='/login'>
+						<a href=''>
 							<img src={UserIcon} alt='' className={styles.menuIcon} />
 							Вход
 						</a>
 					</div>
 					<hr className={styles.hr} />
 					<div className={styles.language} onClick={changeShowDropdown}>
-						<img src={LanguageIcon} alt='' />
+						<img src={LanguageIcon} alt='' className={styles.menuIcon}/>
 						<span>Русский</span>
 						<img
 							src={arrow}
@@ -123,7 +124,9 @@ export const Header = ({ className, ...props }) => {
 				</Menu>
 			</div>
 			<div className={styles.menu}>
-				<img src={LogoIcon} alt='' className={styles.logo} />
+				<a href='/'>
+					<img src={LogoIcon} alt='' className={styles.logo} />
+				</a>
 				<div>
 					<span>Все туры</span>
 				</div>
@@ -134,7 +137,7 @@ export const Header = ({ className, ...props }) => {
 					<span>Блог</span>
 				</div>
 				<div className={styles.language} onClick={changeShowDropdown}>
-					<img src={LanguageIcon} alt='' />
+					<img src={LanguageIcon} alt='' className={styles.languageIcon} />
 					<span>Русский</span>
 					<img
 						src={arrow}

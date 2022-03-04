@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { login } from '../../Api/Authorization'
 import { Button, Input } from '../../Component'
-import { ValidationSchema } from '../../Helpers/helpers'
+import { LoginSchema } from '../../Helpers/helpers'
 import { Header } from '../../Layout/Header/Header'
 import { withLayout } from '../../Layout/Layout'
 import styles from './Login.module.css'
@@ -22,7 +22,7 @@ export const Login = () => {
 	}
 
 	const LoginUser = () => {
-		ValidationSchema.validate(user)
+		LoginSchema.validate(user)
 			.then((res) => {
 				setLoginError(null)
 				// login(res)

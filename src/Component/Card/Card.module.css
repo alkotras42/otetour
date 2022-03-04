@@ -23,6 +23,11 @@
 	height: 100%;
 }
 
+.star {
+	width: 18px;
+	height: 18px;
+}
+
 .sale {
 	position: absolute;
 	background-color: #ff3535;

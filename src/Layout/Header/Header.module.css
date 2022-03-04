@@ -52,8 +52,15 @@
 	transform: rotate(180deg);
 }
 
+.languageIcon {
+	width: 15px;
+	height: 15px;
+}
+
 .user {
 	opacity: 0.6;
+	width: 35px;
+	height: 35px;
 }
 
 .user:hover {
@@ -109,7 +116,7 @@
 
 @media screen and (max-width: 1160px) {
 	.menu {
-		padding: 0;
+		padding-left: 40px;
 		grid-template-columns: repeat(6, 1fr);
 	}
 }
@@ -117,6 +124,10 @@
 @media screen and (max-width: 860px) {
 	.burgerMenu {
 		display: block;
+	}
+
+	.menu {
+		padding-left: 20px;
 	}
 
 	.menu > div {

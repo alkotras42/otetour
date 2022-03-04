@@ -46,3 +46,9 @@
 .link:hover {
 	text-decoration: underline;
 }
+
+@media screen and (max-width: 660px) {
+	.loginWrapper {
+		padding: 30px 20px;
+	}
+}

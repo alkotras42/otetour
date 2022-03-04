@@ -6,17 +6,31 @@
 }
 
 .registrationWrapper {
+	margin: 50px auto;
+	background: #f3f3f6;
+	grid-column: 2;
+	padding: 50px;
+	border-radius: 5px;
+}
+
+.registrationContent {
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 20px;
-	grid-column: 2;
+
 	text-align: center;
 	max-width: 780px;
 	width: 100%;
-	margin: 50px auto;
-	background: #f3f3f6;
-	padding: 50px;
-	border-radius: 5px;
+}
+
+.registrationConfirm {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+
+	text-align: center;
+	max-width: 780px;
+	width: 100%;
 }
 
 .toggle {
@@ -56,6 +70,15 @@
 	color: #333;
 }
 
+.error {
+	text-align: center;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+
+	color: #f0493e;
+}
+
 .select:focus,
 .select:focus-visible {
 	border: 1px solid #6e93d6;
@@ -64,6 +87,7 @@
 
 .button {
 	height: 50px;
+	width: 100%;
 }
 
 .link {
@@ -72,4 +96,14 @@
 
 .link:hover {
 	text-decoration: underline;
+}
+
+.hide {
+	display: none;
+}
+
+@media screen and (max-width: 660px) {
+	.registrationWrapper {
+		padding: 30px 20px;
+	}
 }
