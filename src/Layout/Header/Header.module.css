@@ -88,7 +88,7 @@
 }
 
 .hide {
-	display: none;
+	display: none !important;
 }
 
 .hr {
@@ -112,6 +112,22 @@
 	height: 15px;
 	margin-bottom: 2px;
 	margin-right: 10px;
+}
+
+.userMenu {
+	position: relative;
+}
+
+.userMenuDropdown {
+	left: -45px;
+	top: 40px;
+	padding: 15px 20px;
+	position: absolute;
+	display: grid;
+	background-color: #fff;
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	gap: 15px;
 }
 
 @media screen and (max-width: 1160px) {

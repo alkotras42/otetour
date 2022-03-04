@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Header.module.css'
 import LogoIcon from './images/logo.png'
 import UserIcon from './images/user.svg'
@@ -7,7 +7,7 @@ import ToursIcon from './images/tours.svg'
 import ThemesIcon from './images/themes.svg'
 import BlogIcon from './images/blog.svg'
 import MenuIcon from './images/menu.svg'
-
+import { MenuStyles } from './MenuStyle'
 import arrow from './images/arrow.svg'
 import cn from 'classnames'
 import { slide as Menu } from 'react-burger-menu'
@@ -15,60 +15,40 @@ import { slide as Menu } from 'react-burger-menu'
 export const Header = ({ className, ...props }) => {
 	const [showDropdown, setShowDropdown] = useState(false)
 
-	const changeShowDropdown = () => {
-		setShowDropdown(!showDropdown)
+	const [showUserMenu, setShowUserMenu] = useState(false)
+
+	const userMenuRef = useRef()
+
+	const changeUserMenu = () => {
+		setShowUserMenu((prev) => !prev)
 	}
 
-	const MenuStyles = {
-		bmBurgerButton: {
-			position: 'absolute',
-			width: '36px',
-			height: '40px',
-			right: '40px',
-			top: '22px',
-		},
-		bmBurgerBars: {
-			background: '#373a47',
-		},
-		bmBurgerBarsHover: {
-			background: '#a90000',
-		},
-		bmCrossButton: {
-			height: '24px',
-			width: '24px',
-		},
-		bmCross: {
-			background: '#bdc3c7',
-		},
-		bmMenuWrap: {
-			position: 'fixed',
-		},
-		bmMenu: {
-			background: 'white',
-		},
-		bmMorphShape: {
-			fill: '#373a47',
-		},
-		bmItemList: {
-			display: 'grid',
-			gap: '15px',
-			height: 'auto',
-		},
-		bmItem: {
-			display: 'grid',
-			fontSize: '16px',
-			lineHeight: '20px',
-			paddingLeft: '20px',
-		},
-		bmOverlay: {
-			background: 'rgba(0, 0, 0, 0.3)',
-		},
+	const changeShowDropdown = () => {
+		setShowDropdown((prev) => !prev)
 	}
+
+	// Для закрытия менюшек при нажатии вне их
+	useEffect(() => {
+		const checkIfClickedOutside = (e) => {
+			if (showDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+				setShowDropdown(false)
+			}
+			if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+				setShowUserMenu(false)
+			}
+		}
+
+		document.addEventListener('mousedown', checkIfClickedOutside)
+
+		return () => {
+			document.removeEventListener('mousedown', checkIfClickedOutside)
+		}
+	}, [showUserMenu, showDropdown])
 
 	return (
 		<div className={cn(styles.header, className)} {...props}>
 			<div className={styles.burgerMenu}>
-				<Menu styles={MenuStyles} customBurgerIcon={ <img src={MenuIcon} /> }>
+				<Menu styles={MenuStyles} customBurgerIcon={<img src={MenuIcon} />}>
 					<div>
 						<img src={LogoIcon} alt='' className={styles.menuLogo} />
 					</div>
@@ -99,7 +79,7 @@ export const Header = ({ className, ...props }) => {
 					</div>
 					<hr className={styles.hr} />
 					<div className={styles.language} onClick={changeShowDropdown}>
-						<img src={LanguageIcon} alt='' className={styles.menuIcon}/>
+						<img src={LanguageIcon} alt='' className={styles.menuIcon} />
 						<span>Русский</span>
 						<img
 							src={arrow}
@@ -147,6 +127,7 @@ export const Header = ({ className, ...props }) => {
 						})}
 					/>
 					<div
+						ref={userMenuRef}
 						className={cn(styles.dropdown, {
 							[styles.hide]: !showDropdown,
 						})}
@@ -159,10 +140,21 @@ export const Header = ({ className, ...props }) => {
 						<span>Немецкий</span>
 					</div>
 				</div>
-				<div>
-					<a href='/login'>
-						<img src={UserIcon} alt='' className={styles.user} />
-					</a>
+				<div className={styles.userMenu}>
+					<img src={UserIcon} alt='' className={styles.user} onClick={changeUserMenu} />
+					<div
+						ref={userMenuRef}
+						className={cn(styles.userMenuDropdown, {
+							[styles.hide]: !showUserMenu,
+						})}
+					>
+						<a href='/login'>
+							<span>Логин</span>
+						</a>
+						<a href='/registration'>
+							<span>Регистрация</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
