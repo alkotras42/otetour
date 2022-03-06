@@ -1,13 +1,15 @@
-.carouselWrapper {
-	display: grid;
-	grid-template-columns: 80px 1200px 80px;
-	grid-column: 2;
-}
-
 .carousel {
 	margin-top: 40px;
 	margin-bottom: 80px;
 	grid-column: 2 / 3;
+	display: grid;
+	justify-content: center;
+}
+
+.carouselWrapper {
+	display: grid;
+	grid-template-columns: 80px 1200px 80px;
+	grid-column: 2;
 }
 
 .swiper {

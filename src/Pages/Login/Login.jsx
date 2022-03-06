@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { login } from '../../Api/Authorization'
 import { Button, Input } from '../../Component'
 import { LoginSchema } from '../../Helpers/helpers'
@@ -44,13 +45,13 @@ export const Login = () => {
 					</Button>
 					<span>
 						Еще не зарегистрированы?{' '}
-						<a href='/registration' className={styles.link}>
+						<Link to='/registration' className={styles.link}>
 							Регистрация
-						</a>
+						</Link>
 					</span>
-					<a href='/passwordChange' className={styles.link}>
+					<Link to='/passwordChange' className={styles.link}>
 						Забыли пароль?
-					</a>
+					</Link>
 				</div>
 			</div>
 		</>

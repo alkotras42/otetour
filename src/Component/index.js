@@ -7,3 +7,5 @@ export * from './Carousel/Carousel'
 export * from './CardMini/CardMini'
 export * from './GuideCard/GuideCard'
 export * from './BlogCard/BlogCard'
+export * from './CardDate/CardDate'
+

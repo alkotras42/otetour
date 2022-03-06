@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Header.module.css'
 import LogoIcon from './images/logo.png'
 import UserIcon from './images/user.svg'
@@ -104,9 +105,9 @@ export const Header = ({ className, ...props }) => {
 				</Menu>
 			</div>
 			<div className={styles.menu}>
-				<a href='/'>
+				<Link to='/'>
 					<img src={LogoIcon} alt='' className={styles.logo} />
-				</a>
+				</Link>
 				<div>
 					<span>Все туры</span>
 				</div>
@@ -148,12 +149,12 @@ export const Header = ({ className, ...props }) => {
 							[styles.hide]: !showUserMenu,
 						})}
 					>
-						<a href='/login'>
+						<Link to='/login'>
 							<span>Логин</span>
-						</a>
-						<a href='/registration'>
+						</Link>
+						<Link to='/registration'>
 							<span>Регистрация</span>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

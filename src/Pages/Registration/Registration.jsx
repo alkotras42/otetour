@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Input } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
 import { withLayout } from '../../Layout/Layout'
@@ -96,9 +97,9 @@ export const Registration = () => {
 						</Button>
 						<span>
 							Уже зарегистрированы?{' '}
-							<a href='/login' className={styles.link}>
+							<Link to='/login' className={styles.link}>
 								Вход
-							</a>
+							</Link>
 						</span>
 					</div>
 					<div
@@ -111,9 +112,9 @@ export const Registration = () => {
 							Ссылка для подтвеждения была отправлена на ваш адрес электронной почты. Проверьте вашу почту и перейдите по
 							ссылке для подтверждения и входа в личный кабинет.
 						</p>
-						<a href='/'>
+						<Link to='/'>
 							<Button className={styles.button}>Вернуться на главную</Button>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
