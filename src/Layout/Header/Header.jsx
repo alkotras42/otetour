@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Header.module.css'
 import LogoIcon from './images/logo.png'
@@ -12,27 +12,23 @@ import { MenuStyles } from './MenuStyle'
 import arrow from './images/arrow.svg'
 import cn from 'classnames'
 import { slide as Menu } from 'react-burger-menu'
+import { UserContext } from '../../Context/user.context'
+import { logout } from '../../Api/Authorization'
 
 export const Header = ({ className, ...props }) => {
-	const [showDropdown, setShowDropdown] = useState(false)
+	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
 
 	const [showUserMenu, setShowUserMenu] = useState(false)
 
 	const userMenuRef = useRef()
 
-	const changeUserMenu = () => {
-		setShowUserMenu((prev) => !prev)
-	}
-
-	const changeShowDropdown = () => {
-		setShowDropdown((prev) => !prev)
-	}
+	const {user, setUser} = useContext(UserContext)
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
 		const checkIfClickedOutside = (e) => {
-			if (showDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-				setShowDropdown(false)
+			if (showLanguageDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+				setShowLanguageDropdown(false)
 			}
 			if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
 				setShowUserMenu(false)
@@ -44,7 +40,20 @@ export const Header = ({ className, ...props }) => {
 		return () => {
 			document.removeEventListener('mousedown', checkIfClickedOutside)
 		}
-	}, [showUserMenu, showDropdown])
+	}, [showUserMenu, showLanguageDropdown])
+
+	const changeUserMenu = () => {
+		setShowUserMenu((prev) => !prev)
+	}
+
+	const changeShowDropdown = () => {
+		setShowLanguageDropdown((prev) => !prev)
+	}
+
+	const handleLogout = () => {
+		setUser(null)
+		logout()
+	}
 
 	return (
 		<div className={cn(styles.header, className)} {...props}>
@@ -86,12 +95,12 @@ export const Header = ({ className, ...props }) => {
 							src={arrow}
 							alt=''
 							className={cn(styles.arrow, {
-								[styles.show]: showDropdown,
+								[styles.show]: showLanguageDropdown,
 							})}
 						/>
 						<div
 							className={cn(styles.dropdown, {
-								[styles.hide]: !showDropdown,
+								[styles.hide]: !showLanguageDropdown,
 							})}
 						>
 							<span>Русский</span>
@@ -124,13 +133,13 @@ export const Header = ({ className, ...props }) => {
 						src={arrow}
 						alt=''
 						className={cn(styles.arrow, {
-							[styles.show]: showDropdown,
+							[styles.show]: showLanguageDropdown,
 						})}
 					/>
 					<div
 						ref={userMenuRef}
 						className={cn(styles.dropdown, {
-							[styles.hide]: !showDropdown,
+							[styles.hide]: !showLanguageDropdown,
 						})}
 					>
 						<span>Русский</span>
@@ -149,12 +158,41 @@ export const Header = ({ className, ...props }) => {
 							[styles.hide]: !showUserMenu,
 						})}
 					>
-						<Link to='/login'>
-							<span>Логин</span>
-						</Link>
-						<Link to='/registration'>
-							<span>Регистрация</span>
-						</Link>
+						{user ? (
+							<>
+								<Link to={'/user/' + user}>
+									<span>Личный кабинет</span>
+								</Link>
+								<Link to='/'>
+									<span>Мои туры</span>
+								</Link>
+								<Link to='/'>
+									<span>Мои отзывы</span>
+								</Link>
+								<Link to='/'>
+									<span>Избранные туры</span>
+								</Link>
+								<Link to='/'>
+									<span>Сообщения</span>
+								</Link>
+								<Link to='/'>
+									<span>Споры</span>
+								</Link>
+								<br className={styles.br} />
+								<div onClick={handleLogout}>
+									<span>Выйти</span>
+								</div>
+							</>
+						) : (
+							<>
+								<Link to='/login'>
+									<span>Логин</span>
+								</Link>
+								<Link to='/registration'>
+									<span>Регистрация</span>
+								</Link>
+							</>
+						)}
 					</div>
 				</div>
 			</div>
