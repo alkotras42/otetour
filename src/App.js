@@ -5,7 +5,7 @@ import Home from './Pages/Home/Home'
 import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration } from './Pages/Registration/Registration'
-import { ProfileMain, ProfileTours } from './Pages/UserProfiles'
+import { GuideProfileMain, GuideProfileTours, ProfileMain, ProfileTours } from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
 const App = () => {
 	const [user, setUser] = useState(localStorage.getItem('user'))
@@ -20,7 +20,6 @@ const App = () => {
 					<Route exact path='/login' element={<Login />} />
 					<Route exact path='/registration' element={<Registration />} />
 					<Route exact path='/passwordChange' element={<PasswordChange />} />
-
 					<Route
 						path='/user/:id'
 						element={
@@ -34,6 +33,22 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<ProfileTours />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/guide/:id'
+						element={
+							<PrivateRoute>
+								<GuideProfileMain />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/guide/tours/:id'
+						element={
+							<PrivateRoute>
+								<GuideProfileTours />
 							</PrivateRoute>
 						}
 					/>

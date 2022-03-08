@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getUser } from '../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../Component'
-import { toPhone } from '../../../Helpers/helpers'
-import { withLayout } from '../../../Layout/Layout'
+import { getUser } from '../../../../Api/Authorization'
+import { Button, Card, CardDate, Carousel } from '../../../../Component'
+import { toPhone } from '../../../../Helpers/helpers'
+import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileMain.module.css'
 
 const ProfileMain = () => {
@@ -38,7 +38,7 @@ const ProfileMain = () => {
 		reviewCount: 630,
 		img: 'cardImg1.png',
 	}
-	
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
@@ -66,6 +66,9 @@ const ProfileMain = () => {
 						<Button className={styles.button}>Стать партнером</Button>
 					</div>
 				</div>
+				<Link to={'/guide/' + getUser().id}>
+					<Button className={styles.switch}>Переключиться на кабинет гида</Button>
+				</Link>
 				<div className={styles.counts}>
 					<div>
 						{user.travelCount}
