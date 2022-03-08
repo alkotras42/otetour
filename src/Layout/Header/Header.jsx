@@ -163,7 +163,7 @@ export const Header = ({ className, ...props }) => {
 								<Link to={'/user/' + user}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to='/'>
+								<Link to={'/user/tours/' + user}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>

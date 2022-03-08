@@ -1,11 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Card, CardDate, Carousel } from '../../Component'
-import { toPhone } from '../../Helpers/helpers'
-import { withLayout } from '../../Layout/Layout'
-import styles from './Profile.module.css'
+import { getUser } from '../../../Api/Authorization'
+import { Button, Card, CardDate, Carousel } from '../../../Component'
+import { toPhone } from '../../../Helpers/helpers'
+import { withLayout } from '../../../Layout/Layout'
+import styles from './ProfileMain.module.css'
 
-const Profile = () => {
+const ProfileMain = () => {
 	const user = {
 		name: 'Иван Иванов',
 		email: 'ivanivanov@gmail.com',
@@ -37,7 +38,7 @@ const Profile = () => {
 		reviewCount: 630,
 		img: 'cardImg1.png',
 	}
-
+	
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
@@ -105,4 +106,4 @@ const Profile = () => {
 	)
 }
 
-export default withLayout(Profile)
+export default withLayout(ProfileMain)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
 import { withLayout } from '../../Layout/Layout'
@@ -15,6 +15,8 @@ export const Registration = () => {
 		password: '',
 		passwordConfirm: '',
 	})
+
+	const navigate = useNavigate()
 
 	const [registerError, setRegisterError] = useState()
 
@@ -42,6 +44,12 @@ export const Registration = () => {
 	const changeToggle = (e) => {
 		setToggle(e.target.getAttribute('name'))
 	}
+
+	useEffect(() => {
+		if (user) {
+			navigate('/')
+		}
+	}, [])
 
 	return (
 		<>

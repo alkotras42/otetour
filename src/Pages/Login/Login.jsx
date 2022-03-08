@@ -31,9 +31,14 @@ export const Login = () => {
 		LoginSchema.validate(value)
 			.then((res) => {
 				setLoginError(null)
-				login()
-				setUser(localStorage.getItem('user'))
-				navigate('/')
+				login(value.email, value.password).then((res) => {
+					if (res.code == 200) {
+						setUser(localStorage.getItem('user'))
+						navigate('/')
+					} else {
+						setLoginError('Неправильный логин или пароль.')
+					}
+				})
 			})
 			.catch((error) => setLoginError(error.message))
 	}

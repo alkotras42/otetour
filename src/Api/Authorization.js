@@ -2,11 +2,23 @@ import axios from 'axios'
 
 const URL = process.env.REACT_APP_API_DOMAIN
 
-export const login = (email, password) => {
-	axios.post(`${URL}/user/login`, { email, password }).then((res) => {
-		// console.log(res.data)
-		localStorage.setItem('user', 12345)
-	})
+export const login = async (email, password) => {
+	return await axios
+		.post(
+			`${URL}/user/login`,
+			{ email: email, password: password },
+			{
+				headers: {
+					'content-type': 'application/json',
+				},
+			}
+		)
+		.then((res) => {
+			if (res.data.code == 200) {
+				localStorage.setItem('user', JSON.stringify(res.data))
+			}
+			return res.data
+		})
 }
 
 export const logout = () => {
