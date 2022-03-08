@@ -14,6 +14,12 @@ export const Login = () => {
 		password: '',
 	})
 
+	useEffect(() => {
+		if (user) {
+			navigate('/')
+		}
+	}, [])
+
 	const [loginError, setLoginError] = useState()
 
 	const handleChange = (e) => {
@@ -42,12 +48,6 @@ export const Login = () => {
 			})
 			.catch((error) => setLoginError(error.message))
 	}
-
-	useEffect(() => {
-		if (user) {
-			navigate('/')
-		}
-	}, [])
 
 	return (
 		<>

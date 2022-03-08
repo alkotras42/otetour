@@ -13,7 +13,7 @@ import arrow from './images/arrow.svg'
 import cn from 'classnames'
 import { slide as Menu } from 'react-burger-menu'
 import { UserContext } from '../../Context/user.context'
-import { logout } from '../../Api/Authorization'
+import { getUser, logout } from '../../Api/Authorization'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -160,10 +160,10 @@ export const Header = ({ className, ...props }) => {
 					>
 						{user ? (
 							<>
-								<Link to={'/user/' + user}>
+								<Link to={'/user/' + getUser().id}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + user}>
+								<Link to={'/user/tours/' + getUser().id}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>

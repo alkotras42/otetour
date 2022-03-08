@@ -6,6 +6,7 @@ import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration } from './Pages/Registration/Registration'
 import { ProfileMain, ProfileTours } from './Pages/UserProfiles'
+import { PrivateRoute } from './Servises/PrivateRoute'
 const App = () => {
 	const [user, setUser] = useState(localStorage.getItem('user'))
 
@@ -19,8 +20,23 @@ const App = () => {
 					<Route exact path='/login' element={<Login />} />
 					<Route exact path='/registration' element={<Registration />} />
 					<Route exact path='/passwordChange' element={<PasswordChange />} />
-					<Route path='/user/:id' element={<ProfileMain />} />
-					<Route path='/user/tours/:id' element={<ProfileTours />} />
+
+					<Route
+						path='/user/:id'
+						element={
+							<PrivateRoute>
+								<ProfileMain />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/user/tours/:id'
+						element={
+							<PrivateRoute>
+								<ProfileTours />
+							</PrivateRoute>
+						}
+					/>
 				</Routes>
 			</Router>
 		</UserContext.Provider>

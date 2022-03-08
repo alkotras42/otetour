@@ -26,5 +26,12 @@ export const logout = () => {
 }
 
 export const getUser = () => {
-	axios.get(`${URL}/user/profile`).then((res) => console.log(res))
+	// await axios.get(`${URL}/user/profile`, {
+	// 	headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token },
+	// }).then((res) => {
+	// 	return res.data
+	// })
+
+	return JSON.parse(localStorage.getItem('user')).data.profile
+
 }
