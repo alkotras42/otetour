@@ -4,18 +4,40 @@ import styles from './Input.module.css'
 import EyeIcon from './Eye.svg'
 import CloseEyeIcon from './closeEye.svg'
 
-export const Input = ({ className, type, ...props }) => {
+export const Input = ({ className, type, placeholder, value, icon, ...props }) => {
+	const [showPassword, setShowPassword] = useState(type === 'password' ? false : true)
 
-  const [showPassword, setShowPassword] = useState(type === 'password' ? false : true)
+	const changeType = () => {
+		setShowPassword(!showPassword)
+	}
 
-  const changeType = () => {
-    setShowPassword(!showPassword)
-  }
+	console.log(className)
 
 	return (
-		<div className={styles.wrapper}>
-			<input type={showPassword ? 'text' : 'password'} className={cn(className, styles.input)} {...props} />
-			{type == 'password' && <img src={showPassword ? CloseEyeIcon : EyeIcon} alt='' className={styles.eye} onClick={changeType} />}
+		<div
+			className={cn(className, styles.wrapper, {
+				[styles.filled]: value,
+			})}
+		>
+			{icon && <img src={icon} alt='' className={styles.icon} />}
+			<input
+				value={value}
+				type={showPassword ? 'text' : 'password'}
+				className={cn(styles.input, {
+					[styles.inputWithIcon]: icon,
+				})}
+				{...props}
+			/>
+			{type == 'password' && (
+				<img src={showPassword ? CloseEyeIcon : EyeIcon} alt='' className={styles.eye} onClick={changeType} />
+			)}
+			<label
+				className={cn(styles.label, {
+					[styles.labelWithIcon]: icon,
+				})}
+			>
+				{placeholder}
+			</label>
 		</div>
 	)
 }

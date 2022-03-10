@@ -37,7 +37,7 @@
 	margin-left: 10px;
 }
 
-.locationInput {
+.locationInput .label {
 	padding-left: 45px;
 }
 
@@ -53,13 +53,8 @@
 	color: #676767;
 }
 
-.locationIcon {
-	position: absolute;
-	z-index: 1;
-	width: 20px;
-	height: 20px;
-	top: 15px;
-	left: 10px;
+.filled {
+	box-sizing: border-box;
 }
 
 .hide {

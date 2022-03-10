@@ -80,11 +80,6 @@
 	line-height: 23px;
 }
 
-.calendarInput {
-	padding-left: 45px;
-	cursor: pointer;
-}
-
 .calendarIcon {
 	position: absolute;
 	z-index: 1;

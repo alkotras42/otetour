@@ -1,5 +1,15 @@
 .wrapper {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper:focus-within .label,
+.filled .label {
+	transform: translate(8px, -8px) scale(0.8);
+	padding: 0 3px;
+	background-color: #fff;
+	border-radius: 5px;
 }
 
 .input {
@@ -12,8 +22,37 @@
 	outline: none;
 }
 
+.inputWithIcon {
+	padding-left: 45px;
+}
+
 .input:focus {
 	border: 1px solid #6e93d6;
+}
+
+.label {
+	position: absolute;
+	pointer-events: none;
+	transform: translate(20px, 15px) scale(1);
+	transform-origin: top left;
+	transition: 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	color: #808285;
+}
+
+.labelWithIcon {
+	transform: translate(45px, 15px) scale(1);
+}
+
+.icon {
+	position: absolute;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	top: 15px;
+	left: 10px;
 }
 
 .eye {

@@ -18,9 +18,8 @@ export const Location = ({ className, type, ...props }) => {
 	return (
 		<div className={cn(className, styles.location)} {...props}>
 			<div>
-				<img src={locationIcon} alt='' className={styles.locationIcon} />
 				<Input
-					className={styles.locationInput}
+					icon={locationIcon}
 					placeholder='Куда'
 					value={loc}
 					onClick={() => setShowPicker(!showPicker)}
