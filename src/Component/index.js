@@ -8,4 +8,7 @@ export * from './CardMini/CardMini'
 export * from './GuideCard/GuideCard'
 export * from './BlogCard/BlogCard'
 export * from './CardDate/CardDate'
+export * from './Table/Table'
+export * from './CardGuideProfile/CardGuideProfile'
+export * from './CardUserProfile/CardUserProfile'
 

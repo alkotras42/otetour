@@ -1,7 +1,6 @@
 .card {
 	cursor: pointer;
 	display: block;
-	height: 338px;
 	min-width: 205px;
 	background: #ffffff;
 	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
@@ -68,6 +67,13 @@
 	padding: 15px 0 15px 20px;
 }
 
+.type {
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 19px;
+	color: #3762ae;
+}
+
 .title {
 	font-weight: 600;
 	font-size: 18px;
@@ -76,25 +82,18 @@
 }
 
 .info {
-	font-size: 16px;
-	line-height: 20px;
-	margin: 10px 0;
+	position: relative;
+	display: grid;
+	grid-template-columns: 130px auto;
+	gap: 5px;
+	font-size: 14px;
+	line-height: 18px;
 }
 
 .info span {
-	padding: 0 10px;
-	border-left: 1px solid #252525;
-}
-
-.info span:first-child {
-	padding-left: 0;
-	border-left: none;
-}
-
-.prices {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
+	font-size: 14px;
+	line-height: 18px;
+	color: rgba(37, 37, 37, 0.75);
 }
 
 .salePrice {

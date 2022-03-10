@@ -41,3 +41,17 @@
 	font-weight: bold;
 	border-bottom: 3px solid #6e93d6;
 }
+
+.items {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.toursList {
+	margin-bottom: 80px;
+}
+
+.hide {
+	display: none;
+}

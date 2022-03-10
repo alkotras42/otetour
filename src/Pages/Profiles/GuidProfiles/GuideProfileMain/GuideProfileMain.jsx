@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { Link } from 'react-router-dom'
 import { getUser } from '../../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../../Component'
+import { Button, Card, CardDate, Carousel, Table } from '../../../../Component'
 import { priceRu, toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './GuideProfileMain.module.css'
@@ -50,8 +50,6 @@ const GuideProfileMain = () => {
 		percent: 8405,
 		status: 'Не зачислено',
 	})
-
-	tableData.map((row) => Object.values(row).map((item) => console.log(item)))
 
 	return (
 		<div className={styles.profile}>
@@ -145,25 +143,7 @@ const GuideProfileMain = () => {
 					</div>
 				</div>
 				<div className={styles.table}>
-					<table>
-						<tbody>
-							<tr>
-								<th>Дата</th>
-								<th>Гид</th>
-								<th>Проданный тур</th>
-								<th>Стоимость тура</th>
-								<th>Ваш процент</th>
-								<th>Статус начисления</th>
-							</tr>
-							{tableData.map((row) => (
-								<tr>
-									{Object.values(row).map((cell) => (
-										<td>{cell}</td>
-									))}
-								</tr>
-							))}
-						</tbody>
-					</table>
+					<Table type='guide' data={tableData} />
 				</div>
 			</div>
 		</div>
