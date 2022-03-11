@@ -1,42 +1,52 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getUser } from '../../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../../Component'
-import { toPhone } from '../../../../Helpers/helpers'
+import cameraIcon from './camera.svg'
+import telegramIcon from './telegram.svg'
+import whatsappIcon from './whatsapp.svg'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileEdit.module.css'
+import { Button, Input } from '../../../../Component'
+import { PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
 
 const ProfileEdit = () => {
-	const user = {
-		name: 'Иван Иванов',
-		email: 'ivanivanov@gmail.com',
-		image: '/images/profileImg1.png',
-		phone: '2345678900',
-		travelCount: 33,
-		daysCount: 86,
-		countriesCount: 16,
+	const [value, setValue] = useState({
+		name: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		password: '',
+		passwordConfirm: '',
+	})
+
+	const [error, setError] = useState({
+		personalInfoError: null,
+		passwordError: null,
+	})
+
+	const handleChange = (e) => {
+		setValue({
+			...value,
+			[e.target.name]: e.target.value,
+		})
 	}
 
-	const cardDate = {
-		img: 'cardImg1.png',
-		title: 'Тур по озерам Карелии',
-		dateStart: '20 мая',
-		dateEnd: '27 мая',
-		plasesHold: 16,
-		plasesTotal: 20,
+	const editPersonal = () => {
+		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
+			.then((res) => {
+				setError({ personalInfoError: null })
+				console.log(res)
+			})
+			.catch((e) => setError({ ...error, personalInfoError: e.message }))
 	}
 
-	const card_data = {
-		title: 'Путешествие по озерам (Карелия, Россия)',
-		daysCount: 11,
-		type: 'Вело-тур',
-		date: 'Июнь 2021',
-		price: 20000,
-		sale: true,
-		oldPrice: 27000,
-		rating: 4.6,
-		reviewCount: 630,
-		img: 'cardImg1.png',
+	const editPassword = () => {
+		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
+			.then((res) => {
+				setError({ passwordError: null })
+				console.log(res)
+			})
+			.catch((e) => setError({ ...error, passwordError: e.message }))
 	}
 
 	return (
@@ -45,68 +55,51 @@ const ProfileEdit = () => {
 				<div className={styles.breadcrumbs}>
 					<Link to='/'>Главная</Link> / <Link to={'/user/' + getUser().id}>Личный кабинет</Link> / Редактировать профиль
 				</div>
-				<p className={styles.title}>Личный кабинет</p>
-				<div className={styles.userMain}>
-					<div className={styles.userInfo}>
-						<img src={user.image} alt='' className={styles.profileImg} />
-						<div className={styles.userData}>
-							<div className={styles.name}>{user.name}</div>
-							<div className={styles.email}>{user.email}</div>
-							<div className={styles.phone}>{toPhone(user.phone)}</div>
-							<a href='' className={styles.link}>
-								Редактировать профиль
-							</a>
-						</div>
-					</div>
-					<div className={styles.becomePartner}>
-						<span className={styles.partnerTittle}>Стать партнером</span>
-						<span className={styles.partnerBody}>
-							Вы можете стать партнером и получать 1% от каждого путешествия, совершенного людьми, пришедшими по вашей ссылке.
-						</span>
-						<Button className={styles.button}>Стать партнером</Button>
+				<p className={styles.title}>Редактировать профиль</p>
+				<div className={styles.changeImg}>
+					<img src='/images/profileImg1.png' alt='' className={styles.profileImg} />
+					<div className={styles.chooseImg}>
+						<img src={cameraIcon} alt='' className={styles.cameraImg} />
 					</div>
 				</div>
-				<Link to={'/guide/' + getUser().id}>
-					<Button className={styles.switch}>Переключиться на кабинет гида</Button>
-				</Link>
-				<div className={styles.counts}>
-					<div>
-						{user.travelCount}
-						<p>путешествия вы совершили</p>
-					</div>
-					<div>
-						{user.daysCount}
-						<p>дней вы были в путешествиях</p>
-					</div>
-					<div>
-						{user.countriesCount}
-						<p>стран вы посетили</p>
-					</div>
-				</div>
-				<div className={styles.nearest}>
-					<p className={styles.title}>Ближайшие туры</p>
-					<Carousel className={styles.carousel} itemsCount={4} loop={true}>
-						<CardDate card={cardDate}></CardDate>
-						<CardDate card={cardDate}></CardDate>
-						<CardDate card={cardDate}></CardDate>
-						<CardDate card={cardDate}></CardDate>
-						<CardDate card={cardDate}></CardDate>
-					</Carousel>
-				</div>
+				<div className={styles.editProfile}>
+					<p className={styles.editProfileTitle}>Личная информация</p>
+					<Input onChange={handleChange} value={value.name} name='name' placeholder='Имя' />
+					<Input onChange={handleChange} value={value.lastName} name='lastName' placeholder='Фамилия' />
+					<Input onChange={handleChange} value={value.email} name='email' placeholder='Email' />
+					<Input onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
+					{error.personalInfoError && <p className={styles.error}>{error.personalInfoError}</p>}
+					<Button onClick={editPersonal} className={styles.button}>
+						Сохранить
+					</Button>
+					<p className={styles.editProfileTitle}>Сменить пароль</p>
+					<Input onChange={handleChange} value={value.password} type='password' name='password' placeholder='Новый пароль' />
+					<Input
+						onChange={handleChange}
+						value={value.passwordConfirm}
+						type='password'
+						name='passwordConfirm'
+						placeholder='Подтверждение пароля'
+					/>
+					{error.passwordError && <p className={styles.error}>{error.passwordError}</p>}
 
-				<div className={styles.recommendations}>
-					<p className={styles.title}>Рекомендованные туры</p>
-					<Carousel className={styles.carousel} loop={true}>
-						<Card card={card_data}></Card>
-						<Card card={card_data}></Card>
-						<Card card={card_data}></Card>
-						<Card card={card_data}></Card>
-						<Card card={card_data}></Card>
-					</Carousel>
+					<Button onClick={editPassword} className={styles.button}>
+						Сохранить
+					</Button>
+
+					<p className={styles.editProfileTitle}>Уведомления</p>
+					<p className={styles.editProfileText}>
+						Выберите удобный способ получения уведомлений о новых сообщениях и других событиях.
+					</p>
+					<div className={styles.socials}>
+						<img src={telegramIcon} alt='' className={styles.disable} />
+						<img src={whatsappIcon} alt='' />
+					</div>
+					<Button className={styles.button}>Сохранить</Button>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default withLayout(ProfileMain)
+export default withLayout(ProfileEdit)

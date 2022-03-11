@@ -1,5 +1,8 @@
 import * as Yup from 'yup'
 
+const phoneRegExp =
+	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 export const RegistrationSchema = Yup.object({
 	name: Yup.string().required('Необходимо ввести имя'),
 	lastName: Yup.string().required('Необходимо ввести фамилию'),
@@ -32,6 +35,21 @@ export const ChangePasswordConfirmSchema = Yup.object({
 	passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
 })
 
+export const PersonalInfoSchema = Yup.object({
+	name: Yup.string().required('Необходимо ввести имя'),
+	lastName: Yup.string().required('Необходимо ввести фамилию'),
+	email: Yup.string().email('Неверный email адрес').required('Необходимо ввести email'),
+	phone: Yup.string().required('Введите номер телефона').matches(phoneRegExp, 'Введите подходящий номер телефона'),
+})
+
+export const PersonalPasswordSchema = Yup.object({
+	password: Yup.string()
+		.min(6, 'Пароль должен быть длиннее 6 символов')
+		.max(15, 'Пароль должен быть короче 15 символов')
+		.required('Необходимо ввести пароль'),
+	passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
+})
+
 export const priceRu = (price) =>
 	price
 		.toString()
@@ -39,7 +57,7 @@ export const priceRu = (price) =>
 		.concat(' ₽')
 
 export const toPhone = (number) => {
-	const match = number.match(/^(\d{3})(\d{3})(\d{2})(\d{2})$/);
+	const match = number.match(/^(\d{3})(\d{3})(\d{2})(\d{2})$/)
 	if (match) {
 		return '+7 (' + match[1] + ') ' + match[2] + '-' + match[3] + '-' + match[4]
 	}

@@ -22,93 +22,63 @@
 	line-height: 38px;
 }
 
-.userMain {
-	padding-top: 25px;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-}
-
-.userInfo {
-	display: grid;
-	grid-template-columns: 150px auto;
-	gap: 30px;
-}
-
-.switch {
-	margin-top: 70px;
-	width: 100%;
-	height: 50px;
-}
-
-.userData {
-	display: grid;
-	gap: 15px;
-}
-
-.name {
-	font-weight: 600;
-	font-size: 24px;
-	line-height: 30px;
+.changeImg {
+	border-radius: 50%;
+	margin-top: 30px;
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
 }
 
 .profileImg {
-	border-radius: 50%;
 	height: 150px;
 	width: 150px;
 	object-fit: cover;
 }
 
-.becomePartner {
-	display: grid;
-	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
-	gap: 10px;
-	border-radius: 5px;
-	justify-items: center;
-	padding: 20px;
+.chooseImg {
+	left: 0;
+	top: 0;
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 100;
 }
 
-.partnerTittle {
+.cameraImg {
+	width: 100%;
+	transform: scale(0.5);
+	margin: auto;
+}
+
+.editProfile {
+	display: grid;
+	grid-template-columns: 550px;
+	gap: 20px;
+	margin-bottom: 80px;
+}
+
+.editProfileTitle {
+	margin-top: 20px;
 	font-weight: 600;
 }
 
-.partnerBody {
-	text-align: center;
-	font-size: 16px;
-	line-height: 20px;
-	color: #5c5c5c;
-}
-
-.counts {
-	padding-top: 55px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	font-weight: bold;
-	font-size: 50px;
-	line-height: 63px;
-	text-align: center;
-	color: #6e93d6;
-}
-
-.counts p {
-	font-weight: normal;
-	font-size: 18px;
-	line-height: 23px;
-	color: #252525;
-}
-
-.nearest {
-	padding-top: 70px;
-}
-
 .button {
-	width: 100%;
 	height: 50px;
 }
 
-.link {
-	color: #3762ae;
+.socials {
+	display: grid;
+	grid-template-columns: 40px 40px;
+	gap: 15px;
 }
 
-.link:hover {
-	text-decoration: underline;
+.disable {
+	opacity: 0.5;
+}
+
+.error {
+	color: #ff3535;
 }

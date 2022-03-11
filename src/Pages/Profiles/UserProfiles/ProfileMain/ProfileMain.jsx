@@ -53,9 +53,9 @@ const ProfileMain = () => {
 							<div className={styles.name}>{user.name}</div>
 							<div className={styles.email}>{user.email}</div>
 							<div className={styles.phone}>{toPhone(user.phone)}</div>
-							<a href='' className={styles.link}>
+							<Link to='/edit' className={styles.link}>
 								Редактировать профиль
-							</a>
+							</Link>
 						</div>
 					</div>
 					<div className={styles.becomePartner}>

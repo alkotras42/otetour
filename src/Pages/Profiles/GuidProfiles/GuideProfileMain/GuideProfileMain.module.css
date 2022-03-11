@@ -147,32 +147,3 @@ li {
 	margin-top: 100px;
 	margin-bottom: 80px;
 }
-
-table {
-	width: 100%;
-}
-
-th {
-	font-weight: normal !important;
-	font-size: 18px;
-	line-height: 23px;
-	color: #5c5c5c;
-}
-
-tr {
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	justify-content: center;
-	padding: 15px;
-	font-size: 16px;
-	line-height: 20px;
-	border-top: 1px solid #cccccc;
-}
-
-tr:nth-child(even) {
-	background: #f3f3f6;
-}
-
-tr:nth-child(1) {
-	border: none;
-}

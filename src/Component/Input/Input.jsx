@@ -4,14 +4,12 @@ import styles from './Input.module.css'
 import EyeIcon from './Eye.svg'
 import CloseEyeIcon from './closeEye.svg'
 
-export const Input = ({ className, type, placeholder, value, icon, ...props }) => {
+export const Input = ({ className, children, type, placeholder, value, icon, ...props }) => {
 	const [showPassword, setShowPassword] = useState(type === 'password' ? false : true)
 
 	const changeType = () => {
 		setShowPassword(!showPassword)
 	}
-
-	console.log(className)
 
 	return (
 		<div
