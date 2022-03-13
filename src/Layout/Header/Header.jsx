@@ -175,7 +175,7 @@ export const Header = ({ className, ...props }) => {
 								<Link to='/'>
 									<span>Сообщения</span>
 								</Link>
-								<Link to='/'>
+								<Link to='/disputs'>
 									<span>Споры</span>
 								</Link>
 								<br className={styles.br} />

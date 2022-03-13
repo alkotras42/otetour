@@ -1,0 +1,103 @@
+.profile {
+	display: grid;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
+}
+
+.profileWrapper {
+	padding-top: 30px;
+	grid-column: 2;
+}
+
+.breadcrumbs {
+	font-size: 12px;
+	line-height: 14px;
+	color: #929292;
+}
+
+.title {
+	grid-column: 2;
+	padding-top: 15px;
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 38px;
+}
+
+.disputs {
+	margin-top: 30px;
+	margin-bottom: 70px;
+}
+
+.disputItem {
+	margin-bottom: 40px;
+}
+
+.disputHeader {
+	display: grid;
+	grid-template-columns: 75px auto;
+	gap: 15px;
+	margin-bottom: 10px;
+}
+
+.disputData {
+	display: grid;
+	gap: 5px;
+}
+
+.tourType {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	color: #3762ae;
+}
+
+.tourTitle {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 25px;
+	color: #252525;
+}
+
+.tourDates {
+	color: #929292;
+}
+
+.disputBody,
+.commentBody {
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.commentItem {
+	margin-top: 30px;
+	margin-left: 65px;
+}
+
+.commentInfo {
+	padding-left: 15px;
+	border-left: 1px solid #cccccc;
+}
+
+.comentUser {
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.commentButtons {
+	display: flex;
+	gap: 40px;
+	margin-top: 15px;
+	padding-left: 15px;
+	font-weight: 600;
+}
+
+.accept {
+	cursor: pointer;
+	color: #3762ae;
+}
+
+.decline {
+	cursor: pointer;
+	color: #ff3535;
+}
