@@ -172,7 +172,7 @@ export const Header = ({ className, ...props }) => {
 								<Link to='/'>
 									<span>Избранные туры</span>
 								</Link>
-								<Link to='/'>
+								<Link to='/chats'>
 									<span>Сообщения</span>
 								</Link>
 								<Link to='/disputs'>

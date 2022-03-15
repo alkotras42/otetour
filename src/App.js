@@ -5,7 +5,15 @@ import Home from './Pages/Home/Home'
 import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration } from './Pages/Registration/Registration'
-import { GuideProfileMain, GuideProfileTours, ProfileDispute, ProfileEdit, ProfileMain, ProfileTours } from './Pages/Profiles'
+import {
+	GuideProfileMain,
+	GuideProfileTours,
+	ProfileChats,
+	ProfileDispute,
+	ProfileEdit,
+	ProfileMain,
+	ProfileTours,
+} from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
 const App = () => {
 	const [user, setUser] = useState(localStorage.getItem('user'))
@@ -41,6 +49,14 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<ProfileEdit />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/chats'
+						element={
+							<PrivateRoute>
+								<ProfileChats />
 							</PrivateRoute>
 						}
 					/>

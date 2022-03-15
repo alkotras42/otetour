@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileTours.module.css'
 import { getUser } from '../../../../Api/Authorization'
-import { CardGuideProfile, CardUserProfile } from '../../../../Component'
+import { CardUserProfile } from '../../../../Component'
 
 const ProfileTours = () => {
 	const [value, setValue] = useState(1)

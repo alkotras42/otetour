@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { getUser } from '../../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../../Component'
-import { toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileDispute.module.css'
 
