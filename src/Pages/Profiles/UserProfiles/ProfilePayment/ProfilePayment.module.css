@@ -1,0 +1,57 @@
+.profile {
+	display: grid;
+	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
+	min-height: calc(100vh - 440px);
+}
+
+.profileWrapper {
+	padding-top: 30px;
+	grid-column: 2;
+}
+
+.breadcrumbs {
+	font-size: 12px;
+	line-height: 14px;
+	color: #929292;
+}
+
+.title {
+	grid-column: 2;
+	padding-top: 15px;
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 38px;
+}
+
+.menu {
+	width: fit-content;
+	display: flex;
+	margin-bottom: 35px;
+	gap: 50px;
+	padding-top: 30px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.menuItem {
+	margin-bottom: -2px;
+}
+
+.active {
+	padding-bottom: 10px;
+	font-weight: bold;
+	border-bottom: 3px solid #6e93d6;
+}
+
+.items {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.toursList {
+	margin-bottom: 80px;
+}
+
+.hide {
+	display: none;
+}

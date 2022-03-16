@@ -21,6 +21,22 @@ export const login = async (email, password) => {
 		})
 }
 
+export const registration = async (name, lastName, email, password) => {
+	return await axios
+		.post(
+			`${URL}/user`,
+			{ firstname: name, lastname: lastName, email: email, password: password, phone: 12345678 },
+			{
+				headers: {
+					'content-type': 'application/json',
+				},
+			}
+		)
+		.then((res) => {
+			return res.data
+		})
+}
+
 export const logout = () => {
 	localStorage.removeItem('user')
 }
@@ -32,6 +48,9 @@ export const getUser = () => {
 	// 	return res.data
 	// })
 
-	return JSON.parse(localStorage.getItem('user')).data.profile
-
+	try {
+		return JSON.parse(localStorage.getItem('user')).data.profile
+	} catch {
+		return null
+	}
 }

@@ -6,7 +6,6 @@ import chatIcon from './chat.svg'
 import clipIcon from './clip.svg'
 import sendIcon from './send.svg'
 
-
 const ProfileChats = () => {
 	const [value, setValue] = useState(null)
 
@@ -74,7 +73,12 @@ const ProfileChats = () => {
 				<div className={styles.chatsList}>
 					{chats &&
 						chats.map((chat) => (
-							<div className={styles.chatItem} onClick={() => setValue(chat.chatId)}>
+							<div
+								className={cn(styles.chatItem, {
+									[styles.active]: value == chat.chatId,
+								})}
+								onClick={() => setValue(chat.chatId)}
+							>
 								<img src={`/images/${chat.guideImg}`} alt='' className={styles.chatItemImage} />
 								<div className={styles.chatItemInfo}>
 									<div className={styles.chatItemTitle}>{`${chat.guideName} (${chat.tourTitle})`}</div>
@@ -110,7 +114,7 @@ const ProfileChats = () => {
 								))}
 							</div>
 							<div className={styles.messageInputContainer}>
-								<img src={clipIcon} alt="" className={styles.clipIcon} />
+								<img src={clipIcon} alt='' className={styles.clipIcon} />
 								<img src={sendIcon} alt='' className={styles.sendIcon} />
 								<input type='text' placeholder='Введите сообщение...' className={styles.messageInput} />
 							</div>

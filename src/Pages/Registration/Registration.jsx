@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
-import { withLayout } from '../../Layout/Layout'
+import { registration } from '../../Api/Authorization'
 import cn from 'classnames'
 import styles from './Registration.module.css'
 import { RegistrationSchema } from '../../Helpers/helpers'
+import { getUser } from '../../Api/Authorization'
 
 export const Registration = () => {
 	const [user, setUser] = useState({
@@ -34,9 +35,15 @@ export const Registration = () => {
 	const RegisterUser = () => {
 		RegistrationSchema.validate(user)
 			.then((res) => {
-				setRegisterError(null)
-				setConfirm(true)
-				// registration(res)
+				registration(res.name, res.lastName, res.email, res.password).then((res) => {
+					if (res.code == 200) {
+						setRegisterError(null)
+						setConfirm(true)
+						console.log(res)
+					} else {
+						setRegisterError('При регистрации произошла ошибка')
+					}
+				})
 			})
 			.catch((error) => setRegisterError(error.message))
 	}
@@ -46,7 +53,7 @@ export const Registration = () => {
 	}
 
 	useEffect(() => {
-		if (user) {
+		if (getUser()) {
 			navigate('/')
 		}
 	}, [])
