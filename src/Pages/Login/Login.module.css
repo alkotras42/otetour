@@ -1,5 +1,5 @@
 .login {
-	height: calc(100vh - 120px);
+	min-height: calc(100vh - 80px);
 	align-content: center;
 	display: grid;
 	grid-template-columns: auto minmax(320px, 780px) auto;

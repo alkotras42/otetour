@@ -49,8 +49,34 @@ export const getUser = () => {
 	// })
 
 	try {
-		return JSON.parse(localStorage.getItem('user')).data.profile
+		const user = JSON.parse(localStorage.getItem('user')).data
+		return { user: user.profile, token: user.token }
 	} catch {
 		return null
 	}
+}
+
+export const getUserById = async (id) => {
+	res = await axios.get(`${URL}/user/${id}`)
+	console.log(res)
+}
+
+export const updateUserInfo = async ({ id, token, name, lastName, email, phone }) => {
+	const res = await axios.put(
+		`${URL}/user/${id}`,
+		{
+			firstname: name,
+			lastname: lastName,
+			email: email,
+			phone: phone,
+		},
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'application/json',
+			},
+		}
+	)
+
+	console.log(res)
 }

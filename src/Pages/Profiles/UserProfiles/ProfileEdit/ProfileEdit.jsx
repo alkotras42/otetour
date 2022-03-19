@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { getUser } from '../../../../Api/Authorization'
+import { getUser, updateUserInfo } from '../../../../Api/Authorization'
 import cameraIcon from './camera.svg'
 import telegramIcon from './telegram.svg'
 import whatsappIcon from './whatsapp.svg'
@@ -8,20 +8,38 @@ import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileEdit.module.css'
 import { Button, Input } from '../../../../Component'
 import { PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
+import Modal from 'react-modal'
+import AvatarEditor from 'react-avatar-editor'
+import Dropzone from 'react-dropzone'
 
 const ProfileEdit = () => {
+	const {user, token} = getUser()
+
+	console.log(user)
+
 	const [value, setValue] = useState({
-		name: '',
-		lastName: '',
-		email: '',
-		phone: '',
+		name: user.firstname || '',
+		lastName: user.lastname || '',
+		email: user.email || '',
+		phone: user.phone || '',
 		password: '',
 		passwordConfirm: '',
+		avatar: user.photo || '',
 	})
+
+	const avatarRef = useRef()
+
+	const [avatarEdit, setAvatarEdit] = useState({
+		image: '',
+		scale: 1,
+	})
+
+	const [modalIsOpen, setModalOpen] = useState(false)
 
 	const [error, setError] = useState({
 		personalInfoError: null,
 		passwordError: null,
+		avatarError: null,
 	})
 
 	const handleChange = (e) => {
@@ -31,11 +49,38 @@ const ProfileEdit = () => {
 		})
 	}
 
+	const handleDrop = (dropped) => {
+		if (dropped[0].size > 5e6) {
+			setError({ avatarError: 'Изображение не должно превышать 5Мб' })
+		} else if (dropped[0].type.toString() !== ('image/jpeg' || 'image/png')) {
+			setError({ avatarError: 'Неверный тип файла, выберите изображение формата png, jpg или jpeg' })
+		} else {
+			setAvatarEdit({ ...avatarEdit, image: dropped[0] })
+		}
+	}
+
+	const hanldeScale = (e) => {
+		setAvatarEdit({ ...avatarEdit, scale: Number(e.target.value) })
+	}
+
+	const saveAvatar = () => {
+		const img = avatarRef.current.getImage().toDataURL()
+		setValue({ ...value, avatar: img })
+		setAvatarEdit({ ...avatarEdit, image: null })
+		setModalOpen(false)
+	}
+
+	const closeModal = () => {
+		setModalOpen(false)
+		setError({ ...error, avatarError: null })
+		setAvatarEdit({ ...avatarEdit, image: null })
+	}
+
 	const editPersonal = () => {
 		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
 			.then((res) => {
 				setError({ personalInfoError: null })
-				console.log(res)
+				updateUserInfo({ id: user.id, token: token, name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
 			})
 			.catch((e) => setError({ ...error, personalInfoError: e.message }))
 	}
@@ -57,8 +102,51 @@ const ProfileEdit = () => {
 				</div>
 				<p className={styles.title}>Редактировать профиль</p>
 				<div className={styles.changeImg}>
-					<img src='/images/profileImg1.png' alt='' className={styles.profileImg} />
-					<div className={styles.chooseImg}>
+					<Modal isOpen={modalIsOpen} onRequestClose={closeModal} className={styles.modal}>
+						{avatarEdit.image ? (
+							<div>
+								<AvatarEditor
+									ref={avatarRef}
+									image={avatarEdit.image}
+									width={300}
+									height={300}
+									scale={avatarEdit.scale}
+									borderRadius={300}
+									className={styles.avatarEditor}
+								/>
+								<input
+									type='range'
+									step='0.01'
+									min='1'
+									max='5'
+									value={avatarEdit.scale}
+									name='scale'
+									onChange={hanldeScale}
+									className={styles.range}
+								/>
+								<Button onClick={saveAvatar} className={styles.avatarSubmitButton}>
+									Загрузить
+								</Button>
+							</div>
+						) : (
+							<>
+								{error.avatarError && <p className={styles.error}>{error.avatarError}</p>}
+								<Dropzone onDrop={handleDrop}>
+									{({ getRootProps, getInputProps }) => (
+										<div {...getRootProps({ className: styles.dropzone })}>
+											<div>
+												<input {...getInputProps()} />
+												<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+											</div>
+										</div>
+									)}
+								</Dropzone>
+							</>
+						)}
+					</Modal>
+
+					<img src={value.avatar} alt='' className={styles.profileImg} />
+					<div className={styles.chooseImg} onClick={() => setModalOpen(true)}>
 						<img src={cameraIcon} alt='' className={styles.cameraImg} />
 					</div>
 				</div>

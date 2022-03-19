@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { UserContext } from './Context/user.context'
+import Modal from 'react-modal';
 import Home from './Pages/Home/Home'
 import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
@@ -15,6 +16,9 @@ import {
 	ProfileTours,
 } from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
+
+Modal.setAppElement('#root');
+
 const App = () => {
 	const [user, setUser] = useState(localStorage.getItem('user'))
 

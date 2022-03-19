@@ -10,7 +10,6 @@ const ProfileMain = () => {
 	const user = {
 		name: 'Иван Иванов',
 		email: 'ivanivanov@gmail.com',
-		image: '/images/profileImg1.png',
 		phone: '2345678900',
 		travelCount: 33,
 		daysCount: 86,
@@ -48,7 +47,7 @@ const ProfileMain = () => {
 				<p className={styles.title}>Личный кабинет</p>
 				<div className={styles.userMain}>
 					<div className={styles.userInfo}>
-						<img src={user.image} alt='' className={styles.profileImg} />
+						<img src={user.image || '/images/stockUserImage.png'} alt='/images/stockUserImage.png' className={styles.profileImg} />
 						<div className={styles.userData}>
 							<div className={styles.name}>{user.name}</div>
 							<div className={styles.email}>{user.email}</div>

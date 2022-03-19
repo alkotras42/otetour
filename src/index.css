@@ -36,3 +36,11 @@ a:hover {
 #root {
 	overflow: hidden;
 }
+
+.ReactModal__Overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10000;
+	background-color: rgb(151, 151, 151, 0.5) !important;
+}

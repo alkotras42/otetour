@@ -43,8 +43,8 @@
 	width: 150px;
 	height: 150px;
 	position: absolute;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 100;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 10;
 }
 
 .cameraImg {
@@ -81,4 +81,44 @@
 
 .error {
 	color: #ff3535;
+}
+
+.modal {
+	position: absolute;
+	padding: 30px;
+	background-color: #fff;
+	display: grid;
+	justify-items: center;
+}
+
+.dropzone {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	margin-top: 10px;
+	border-width: 2px;
+	border-radius: 2px;
+	border-color: #eeeeee;
+	border-style: dashed;
+	background-color: #fafafa;
+	color: #bdbdbd;
+	outline: none;
+	transition: border 0.24s ease-in-out;
+}
+
+.avatarEditor {
+	display: grid;
+}
+
+.avatarSubmitButton {
+	width: 100%;
+	height: 35px;
+	margin-top: 10px;
+}
+
+.range {
+	width: 100%;
+	margin-top: 10px;
 }
