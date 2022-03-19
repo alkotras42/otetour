@@ -25,7 +25,7 @@ export const registration = async (name, lastName, email, password) => {
 	return await axios
 		.post(
 			`${URL}/user`,
-			{ firstname: name, lastname: lastName, email: email, password: password, phone: 12345678 },
+			{ firstname: name, lastname: lastName, email: email, password: password },
 			{
 				headers: {
 					'content-type': 'application/json',
@@ -52,31 +52,38 @@ export const getUser = () => {
 		const user = JSON.parse(localStorage.getItem('user')).data
 		return { user: user.profile, token: user.token }
 	} catch {
-		return null
+		return { user: null }
 	}
 }
 
 export const getUserById = async (id) => {
-	res = await axios.get(`${URL}/user/${id}`)
-	console.log(res)
+	return await axios.get(`${URL}/user/${id}`)
 }
 
-export const updateUserInfo = async ({ id, token, name, lastName, email, phone }) => {
-	const res = await axios.put(
-		`${URL}/user/${id}`,
-		{
-			firstname: name,
-			lastname: lastName,
-			email: email,
-			phone: phone,
-		},
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'content-type': 'application/json',
+export const updateUserInfo = async ({ id, token, name, lastName, email, phone, avatar }) => {
+	return await axios
+		.put(
+			`${URL}/user/${id}`,
+			{
+				firstname: name,
+				lastname: lastName,
+				email: email,
+				phone: phone,
+				photo: avatar,
 			},
-		}
-	)
-
-	console.log(res)
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+					'content-type': 'application/json',
+				},
+			}
+		)
+		.then((res) => {
+			if (res.data.code == 200) {
+				let { user, token } = getUser()
+				const userData = { data: { profile: { ...user, ...res.data.data }, token: token } }
+				localStorage.setItem('user', JSON.stringify(userData))
+			}
+			return res.data
+		})
 }

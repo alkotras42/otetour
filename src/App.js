@@ -20,7 +20,7 @@ import { PrivateRoute } from './Servises/PrivateRoute'
 Modal.setAppElement('#root');
 
 const App = () => {
-	const [user, setUser] = useState(localStorage.getItem('user'))
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 

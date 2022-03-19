@@ -22,7 +22,7 @@ export const Header = ({ className, ...props }) => {
 
 	const userMenuRef = useRef()
 
-	const {user, setUser} = useContext(UserContext)
+	const { user } = getUser()
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
@@ -51,7 +51,6 @@ export const Header = ({ className, ...props }) => {
 	}
 
 	const handleLogout = () => {
-		setUser(null)
 		logout()
 	}
 
@@ -160,10 +159,10 @@ export const Header = ({ className, ...props }) => {
 					>
 						{user ? (
 							<>
-								<Link to={'/user/' + getUser().id}>
+								<Link to={'/user/' + user.id}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + getUser().id}>
+								<Link to={'/user/tours/' + user.id}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>

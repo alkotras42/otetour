@@ -13,9 +13,7 @@ import AvatarEditor from 'react-avatar-editor'
 import Dropzone from 'react-dropzone'
 
 const ProfileEdit = () => {
-	const {user, token} = getUser()
-
-	console.log(user)
+	const { user, token } = getUser()
 
 	const [value, setValue] = useState({
 		name: user.firstname || '',
@@ -80,7 +78,19 @@ const ProfileEdit = () => {
 		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
 			.then((res) => {
 				setError({ personalInfoError: null })
-				updateUserInfo({ id: user.id, token: token, name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
+				updateUserInfo({
+					id: user.id,
+					token: token,
+					name: value.name,
+					lastName: value.lastName,
+					email: value.email,
+					phone: value.phone,
+					avatar: value.avatar,
+				}).then((res) => {
+					if (res.code !== 200) {
+						setError({ ...error, personalInfoError: 'Что-то пошло не так' })
+					}
+				})
 			})
 			.catch((e) => setError({ ...error, personalInfoError: e.message }))
 	}
@@ -98,7 +108,7 @@ const ProfileEdit = () => {
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
 				<div className={styles.breadcrumbs}>
-					<Link to='/'>Главная</Link> / <Link to={'/user/' + getUser().id}>Личный кабинет</Link> / Редактировать профиль
+					<Link to='/'>Главная</Link> / <Link to={'/user/' + user.id}>Личный кабинет</Link> / Редактировать профиль
 				</div>
 				<p className={styles.title}>Редактировать профиль</p>
 				<div className={styles.changeImg}>
