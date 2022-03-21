@@ -1,6 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './ContinentPick.module.css'
+import { ReactSVG } from 'react-svg'
 import { ReactComponent as AfricaImg } from './images/Africa.svg'
 import { ReactComponent as AsiaImg } from './images/Asia.svg'
 import { ReactComponent as AustraliaImg } from './images/Australia.svg'
@@ -14,55 +15,55 @@ export const ContinentPick = ({ className, ...props }) => {
 		<div className={cn(className, styles.continentPick)} {...props}>
 			<span className={styles.title}>Выберите континент для путешествия</span>
 			<div className={styles.continents}>
-				<div className={cn(styles.continentItem, styles.africa)}>
-					<AfricaImg className={styles.continentImage} />
-					<span className={styles.continentTitle}>Африка</span>
-				</div>
 				<div className={cn(styles.continentItem, styles.asia)}>
-					<AsiaImg className={styles.continentImage} />
+					<ReactSVG src='/images/Asia.svg' className={styles.continentImage} />
 					<span className={styles.continentTitle}>Азия</span>
 				</div>
+				<div className={cn(styles.continentItem, styles.africa)}>
+					<ReactSVG src='/images/Africa.svg' className={styles.continentImage} />
+					<span className={styles.continentTitle}>Африка</span>
+				</div>
 				<div className={cn(styles.continentItem, styles.australia)}>
-					<AustraliaImg className={styles.continentImage} />
+					<ReactSVG src='/images/Australia.svg' className={styles.continentImage} />
 					<span className={styles.continentTitle}>Австралия</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.europe)}>
-					<EuropeImg className={styles.continentImage} />
+					<ReactSVG src='/images/Europe.svg' className={styles.continentImage} />
 					<span className={styles.continentTitle}>Европа</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.northAmerica)}>
-					<NorthAmericaImg className={styles.continentImage} />
+					<ReactSVG src='/images/NorthAmerica.svg' className={styles.continentImage} />
 					<span className={styles.continentTitle}>Северная Америка</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.southAmerica)}>
-					<SouthAmericaImg className={styles.continentImage} />
+					<ReactSVG src='/images/SouthAmerica.svg' className={styles.continentImage} />
 					<span className={styles.continentTitle}>Южная Америка</span>
 				</div>
 			</div>
 			<div className={styles.continentsCarousel}>
 				<Carousel loop={true} itemsCount={3}>
 					<div className={cn(styles.continentItem, styles.asia)}>
-						<img src={AsiaImg} alt='' className={styles.continentImage} />
+						<AsiaImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Азия</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.africa)}>
-						<img src={AfricaImg} alt='' className={styles.continentImage} />
+						<AfricaImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Африка</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.australia)}>
-						<img src={AustraliaImg} alt='' className={styles.continentImage} />
+						<AustraliaImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Австралия</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.europe)}>
-						<img src={EuropeImg} alt='' className={styles.continentImage} />
+						<EuropeImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Европа</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.northAmerica)}>
-						<img src={NorthAmericaImg} alt='' className={styles.continentImage} />
+						<NorthAmericaImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Северная Америка</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.southAmerica)}>
-						<img src={SouthAmericaImg} alt='' className={styles.continentImage} />
+						<SouthAmericaImg className={styles.continentImage} />
 						<span className={styles.continentTitle}>Южная Америка</span>
 					</div>
 				</Carousel>
