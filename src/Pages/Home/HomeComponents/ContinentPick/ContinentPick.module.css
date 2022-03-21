@@ -31,6 +31,10 @@
 	cursor: pointer;
 }
 
+.continentItem svg {
+	transition: all 0.2s;
+}
+
 .continentTitle {
 	position: absolute;
 	font-size: 14px;
@@ -99,8 +103,8 @@
 	width: 100px;
 }
 
-.continentItem:hover img {
-	filter: brightness(0.7);
+.continentItem:hover svg {
+	fill: #63a583;
 }
 
 @media screen and (max-width: 1260px) {
