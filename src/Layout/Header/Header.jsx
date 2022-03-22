@@ -18,6 +18,8 @@ import { getUser, logout } from '../../Api/Authorization'
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
 
+	const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false)
+
 	const [showUserMenu, setShowUserMenu] = useState(false)
 
 	const userMenuRef = useRef()
@@ -30,6 +32,9 @@ export const Header = ({ className, ...props }) => {
 			if (showLanguageDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
 				setShowLanguageDropdown(false)
 			}
+			if (showCurrencyDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+				setShowCurrencyDropdown(false)
+			}
 			if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
 				setShowUserMenu(false)
 			}
@@ -40,7 +45,7 @@ export const Header = ({ className, ...props }) => {
 		return () => {
 			document.removeEventListener('mousedown', checkIfClickedOutside)
 		}
-	}, [showUserMenu, showLanguageDropdown])
+	}, [showUserMenu, showLanguageDropdown, showCurrencyDropdown])
 
 	const changeUserMenu = () => {
 		setShowUserMenu((prev) => !prev)
@@ -50,6 +55,10 @@ export const Header = ({ className, ...props }) => {
 		setShowLanguageDropdown((prev) => !prev)
 	}
 
+	const changeShowCurrencyDropdown = () => {
+		setShowCurrencyDropdown((prev) => !prev)
+	}
+
 	const handleLogout = () => {
 		logout()
 	}
@@ -57,7 +66,7 @@ export const Header = ({ className, ...props }) => {
 	return (
 		<div className={cn(styles.header, className)} {...props}>
 			<div className={styles.burgerMenu}>
-				<Menu styles={MenuStyles} customBurgerIcon={<img src={MenuIcon} />}>
+				<Menu right={true} styles={MenuStyles} customBurgerIcon={<img src={MenuIcon} />}>
 					<div>
 						<img src={LogoIcon} alt='' className={styles.menuLogo} />
 					</div>
@@ -87,6 +96,26 @@ export const Header = ({ className, ...props }) => {
 						</a>
 					</div>
 					<hr className={styles.hr} />
+					<div className={styles.currency} onClick={changeShowCurrencyDropdown}>
+						<span>₽ Рубль</span>
+						<img
+							src={arrow}
+							alt=''
+							className={cn(styles.arrow, {
+								[styles.show]: showCurrencyDropdown,
+							})}
+						/>
+						<div
+							ref={userMenuRef}
+							className={cn(styles.dropdown, styles.currencyDropdown, {
+								[styles.hide]: !showCurrencyDropdown,
+							})}
+						>
+							<span>₽ Рубль</span>
+							<span>€ Евро</span>
+							<span>$ Доллар</span>
+						</div>
+					</div>
 					<div className={styles.language} onClick={changeShowDropdown}>
 						<img src={LanguageIcon} alt='' className={styles.menuIcon} />
 						<span>Русский</span>
@@ -124,6 +153,26 @@ export const Header = ({ className, ...props }) => {
 				</div>
 				<div>
 					<span>Блог</span>
+				</div>
+				<div className={styles.currency} onClick={changeShowCurrencyDropdown}>
+					<span>₽ Рубль</span>
+					<img
+						src={arrow}
+						alt=''
+						className={cn(styles.arrow, {
+							[styles.show]: showCurrencyDropdown,
+						})}
+					/>
+					<div
+						ref={userMenuRef}
+						className={cn(styles.dropdown, styles.currencyDropdown, {
+							[styles.hide]: !showCurrencyDropdown,
+						})}
+					>
+						<span>₽ Рубль</span>
+						<span>€ Евро</span>
+						<span>$ Доллар</span>
+					</div>
 				</div>
 				<div className={styles.language} onClick={changeShowDropdown}>
 					<img src={LanguageIcon} alt='' className={styles.languageIcon} />

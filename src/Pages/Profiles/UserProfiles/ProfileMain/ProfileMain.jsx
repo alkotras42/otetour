@@ -40,79 +40,76 @@ const ProfileMain = () => {
 	}
 
 	return (
-		<div>
+		<div className={styles.profile}>
 			{!user ? (
 				<div>Loading...</div>
 			) : (
-				<div className={styles.profile}>
-					<div className={styles.profileWrapper}>
-						<div className={styles.breadcrumbs}>
-							<Link to='/'>Главная</Link> / Личный кабинет
-						</div>
-						<p className={styles.title}>Личный кабинет</p>
-						<div className={styles.userMain}>
-							<div className={styles.userInfo}>
-								<img
-									src={user.data.photo || '/images/stockUserImage.png'}
-									alt='/images/stockUserImage.png'
-									className={styles.profileImg}
-								/>
-								<div className={styles.userData}>
-									<div className={styles.name}>{user.data.firstname + ' ' + user.data.lastname}</div>
-									<div className={styles.email}>{user.data.email}</div>
-									<div className={styles.phone}>{toPhone(user.data.phone)}</div>
-									<Link to='/edit' className={styles.link}>
-										Редактировать профиль
-									</Link>
-								</div>
-							</div>
-							<div className={styles.becomePartner}>
-								<span className={styles.partnerTittle}>Стать партнером</span>
-								<span className={styles.partnerBody}>
-									Вы можете стать партнером и получать 1% от каждого путешествия, совершенного людьми, пришедшими по вашей
-									ссылке.
-								</span>
-								<Button className={styles.button}>Стать партнером</Button>
+				<div className={styles.profileWrapper}>
+					<div className={styles.breadcrumbs}>
+						<Link to='/'>Главная</Link> / Личный кабинет
+					</div>
+					<p className={styles.title}>Личный кабинет</p>
+					<div className={styles.userMain}>
+						<div className={styles.userInfo}>
+							<img
+								src={user.data.photo || '/images/stockUserImage.png'}
+								alt='/images/stockUserImage.png'
+								className={styles.profileImg}
+							/>
+							<div className={styles.userData}>
+								<div className={styles.name}>{user.data.firstname + ' ' + user.data.lastname}</div>
+								<div className={styles.email}>{user.data.email}</div>
+								<div className={styles.phone}>{toPhone(user.data.phone)}</div>
+								<Link to='/edit' className={styles.link}>
+									Редактировать профиль
+								</Link>
 							</div>
 						</div>
-						<Link to={'/guide/' + getUser().id}>
-							<Button className={styles.switch}>Переключиться на кабинет гида</Button>
-						</Link>
-						<div className={styles.counts}>
-							<div>
-								50
-								<p>путешествия вы совершили</p>
-							</div>
-							<div>
-								50
-								<p>дней вы были в путешествиях</p>
-							</div>
-							<div>
-								50
-								<p>стран вы посетили</p>
-							</div>
+						<div className={styles.becomePartner}>
+							<span className={styles.partnerTittle}>Стать партнером</span>
+							<span className={styles.partnerBody}>
+								Вы можете стать партнером и получать 1% от каждого путешествия, совершенного людьми, пришедшими по вашей ссылке.
+							</span>
+							<Button className={styles.button}>Стать партнером</Button>
 						</div>
-						<div className={styles.nearest}>
-							<p className={styles.title}>Ближайшие туры</p>
-							<Carousel className={styles.carousel} itemsCount={4} loop={true}>
-								<CardDate card={cardDate}></CardDate>
-								<CardDate card={cardDate}></CardDate>
-								<CardDate card={cardDate}></CardDate>
-								<CardDate card={cardDate}></CardDate>
-								<CardDate card={cardDate}></CardDate>
-							</Carousel>
+					</div>
+					<Link to={'/guide/' + getUser().id}>
+						<Button className={styles.switch}>Переключиться на кабинет гида</Button>
+					</Link>
+					<div className={styles.counts}>
+						<div>
+							50
+							<p>путешествия вы совершили</p>
 						</div>
+						<div>
+							50
+							<p>дней вы были в путешествиях</p>
+						</div>
+						<div>
+							50
+							<p>стран вы посетили</p>
+						</div>
+					</div>
+					<div className={styles.nearest}>
+						<p className={styles.title}>Ближайшие туры</p>
+						<Carousel className={styles.carousel} itemsCount={4} loop={true}>
+							<CardDate card={cardDate}></CardDate>
+							<CardDate card={cardDate}></CardDate>
+							<CardDate card={cardDate}></CardDate>
+							<CardDate card={cardDate}></CardDate>
+							<CardDate card={cardDate}></CardDate>
+						</Carousel>
+					</div>
 
-						<div className={styles.recommendations}>
-							<p className={styles.title}>Рекомендованные туры</p>
-							<Carousel className={styles.carousel} loop={true}>
-								<Card card={card_data}></Card>
-								<Card card={card_data}></Card>
-								<Card card={card_data}></Card>
-								<Card card={card_data}></Card>
-								<Card card={card_data}></Card>
-							</Carousel>
-						</div>
+					<div className={styles.recommendations}>
+						<p className={styles.title}>Рекомендованные туры</p>
+						<Carousel className={styles.carousel} loop={true}>
+							<Card card={card_data}></Card>
+							<Card card={card_data}></Card>
+							<Card card={card_data}></Card>
+							<Card card={card_data}></Card>
+							<Card card={card_data}></Card>
+						</Carousel>
 					</div>
 				</div>
 			)}

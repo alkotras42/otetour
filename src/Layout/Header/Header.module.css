@@ -4,7 +4,7 @@
 
 .menu {
 	display: grid;
-	grid-template-columns: 360px auto auto auto auto 35px;
+	grid-template-columns: auto auto auto auto auto auto 35px;
 	height: 80px;
 	align-items: center;
 	justify-items: center;
@@ -28,6 +28,16 @@
 	text-decoration: underline;
 }
 
+.currency {
+	justify-self: end;
+	position: relative;
+	display: grid;
+	gap: 5px;
+	grid-template-columns: repeat(2, auto);
+	align-items: center;
+	cursor: pointer;
+}
+
 .language {
 	position: relative;
 	display: grid;
@@ -37,16 +47,11 @@
 	cursor: pointer;
 	font-size: 15px;
 	line-height: 19px;
-	justify-self: end;
 	z-index: 15;
 }
 
 .language:hover {
 	color: #000;
-}
-
-.arrow {
-	margin-right: 30px;
 }
 
 .show {
@@ -78,9 +83,11 @@
 	top: 30px;
 	padding: 15px 0;
 	border-radius: 5px;
+	z-index: 30;
 }
 
 .dropdown span {
+	white-space: nowrap;
 	padding: 10px 30px 5px 15px;
 }
 
@@ -154,13 +161,19 @@
 @media screen and (max-width: 1160px) {
 	.menu {
 		padding-left: 40px;
-		grid-template-columns: repeat(6, 1fr);
+		padding-right: 40px;
+
+		grid-template-columns: repeat(7, 1fr);
 	}
 }
 
 @media screen and (max-width: 860px) {
 	.burgerMenu {
 		display: block;
+	}
+
+	.currency {
+		justify-self: start;
 	}
 
 	.menu {

@@ -1,6 +1,7 @@
 .profile {
 	display: grid;
 	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
+	min-height: calc(100vh - 80px);
 }
 
 .profileWrapper {
