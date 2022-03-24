@@ -5,7 +5,6 @@ import { Button, Input } from '../../Component'
 import { UserContext } from '../../Context/user.context'
 import { LoginSchema } from '../../Helpers/helpers'
 import { Header } from '../../Layout/Header/Header'
-import { withLayout } from '../../Layout/Layout'
 import styles from './Login.module.css'
 
 export const Login = () => {
@@ -13,6 +12,8 @@ export const Login = () => {
 		email: '',
 		password: '',
 	})
+
+	const { user, setUser } = useContext(UserContext)
 
 	useEffect(() => {
 		if (user) {
@@ -30,8 +31,6 @@ export const Login = () => {
 	}
 
 	const navigate = useNavigate()
-
-	const { user, setUser } = useContext(UserContext)
 
 	const LoginUser = () => {
 		LoginSchema.validate(value)

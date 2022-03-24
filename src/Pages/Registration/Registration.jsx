@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import cn from 'classnames'
 import { Button, Input } from '../../Component'
 import { Header } from '../../Layout/Header/Header'
 import { registration } from '../../Api/Authorization'
-import cn from 'classnames'
 import styles from './Registration.module.css'
+import { UserContext } from '../../Context/user.context'
 import { RegistrationSchema } from '../../Helpers/helpers'
 import { getUser } from '../../Api/Authorization'
 
 export const Registration = () => {
-	const [user, setUser] = useState({
+	const [value, setValue] = useState({
 		name: '',
 		lastName: '',
 		email: '',
 		password: '',
 		passwordConfirm: '',
 	})
+
+	const { user, setUser } = useContext(UserContext)
 
 	const navigate = useNavigate()
 
@@ -26,14 +29,14 @@ export const Registration = () => {
 	const [toggle, setToggle] = useState('Турист')
 
 	const handleChange = (e) => {
-		setUser({
-			...user,
+		setValue({
+			...value,
 			[e.target.name]: e.target.value,
 		})
 	}
 
 	const RegisterUser = () => {
-		RegistrationSchema.validate(user)
+		RegistrationSchema.validate(value)
 			.then((res) => {
 				registration(res.name, res.lastName, res.email, res.password).then((res) => {
 					if (res.code == 200) {
@@ -53,7 +56,7 @@ export const Registration = () => {
 	}
 
 	useEffect(() => {
-		if (getUser()) {
+		if (user) {
 			navigate('/')
 		}
 	}, [])
@@ -86,15 +89,15 @@ export const Registration = () => {
 							</div>
 						</div>
 						{registerError && <p className={styles.error}>{registerError}</p>}
-						<Input placeholder='Имя' name='name' value={user.name} onChange={handleChange} />
-						<Input placeholder='Фамилия' name='lastName' value={user.lastName} onChange={handleChange} />
-						<Input placeholder='Email' name='email' value={user.email} onChange={handleChange} />
-						<Input type='password' placeholder='Пароль' name='password' value={user.password} onChange={handleChange} />
+						<Input placeholder='Имя' name='name' value={value.name} onChange={handleChange} />
+						<Input placeholder='Фамилия' name='lastName' value={value.lastName} onChange={handleChange} />
+						<Input placeholder='Email' name='email' value={value.email} onChange={handleChange} />
+						<Input type='password' placeholder='Пароль' name='password' value={value.password} onChange={handleChange} />
 						<Input
 							type='password'
 							placeholder='Подтверждение пароля'
 							name='passwordConfirm'
-							value={user.passwordConfirm}
+							value={value.passwordConfirm}
 							onChange={handleChange}
 						/>
 						<span>

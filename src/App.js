@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Modal from 'react-modal'
+import { useJwt } from 'react-jwt'
 import { UserContext } from './Context/user.context'
-import Modal from 'react-modal';
 import Home from './Pages/Home/Home'
 import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
@@ -16,11 +17,18 @@ import {
 	ProfileTours,
 } from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
+import { logout } from './Api/Authorization'
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root')
 
 const App = () => {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
+	const { decodedToken, isExpired } = useJwt(user?.data.token)
+
+	if (isExpired) {
+		logout()
+	}
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
