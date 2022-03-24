@@ -13,7 +13,11 @@ export const Login = () => {
 		password: '',
 	})
 
+	const navigate = useNavigate()
+
 	const { user, setUser } = useContext(UserContext)
+
+	console.log(user)
 
 	useEffect(() => {
 		if (user) {
@@ -29,8 +33,6 @@ export const Login = () => {
 			[e.target.name]: e.target.value,
 		})
 	}
-
-	const navigate = useNavigate()
 
 	const LoginUser = () => {
 		LoginSchema.validate(value)

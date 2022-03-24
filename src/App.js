@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Modal from 'react-modal'
 import { useJwt } from 'react-jwt'
@@ -23,10 +23,19 @@ Modal.setAppElement('#root')
 
 const App = () => {
 	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+	const [token, setToken] = useState({
+		decodedToken: null,
+		isExpired: null,
+	})
 
-	const { decodedToken, isExpired } = useJwt(user?.data.token)
+	const { decodedToken, isExpired } = useJwt(user?.data?.token)
 
-	if (isExpired) {
+	useEffect(() => {
+		setToken({ decodedToken, isExpired })
+		setUser(JSON.parse(localStorage.getItem('user')))
+	}, [])
+
+	if (user && token.isExpired) {
 		logout()
 	}
 
