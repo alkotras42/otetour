@@ -34,6 +34,7 @@ export const MenuStyles = {
 		height: 'auto',
 	},
 	bmItem: {
+		outline: 'none',
 		display: 'grid',
 		fontSize: '16px',
 		lineHeight: '20px',
