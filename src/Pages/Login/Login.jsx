@@ -38,7 +38,7 @@ export const Login = () => {
 				setLoginError(null)
 				login(value.email, value.password).then((res) => {
 					if (res.code == 200) {
-						setUser(localStorage.getItem('user'))
+						setUser(JSON.parse(localStorage.getItem('user')))
 						navigate('/')
 					} else {
 						setLoginError('Неправильный логин или пароль.')

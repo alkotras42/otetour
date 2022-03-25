@@ -29,7 +29,9 @@ export const Header = ({ className, ...props }) => {
 
 	const userMenuBurgerRef = useRef()
 
-	const { user } = getUser()
+	const { user, setUser } = useContext(UserContext)
+
+	console.log(user)
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
@@ -73,6 +75,7 @@ export const Header = ({ className, ...props }) => {
 
 	const handleLogout = () => {
 		logout()
+		setUser(null)
 	}
 
 	return (
@@ -107,7 +110,7 @@ export const Header = ({ className, ...props }) => {
 						<div onClick={changeUserMenuBurger} className={styles.userMenu}>
 							<div>
 								<img src={UserIcon} alt='' className={styles.menuIcon} />
-								{user.email}
+								{user.profile.email}
 							</div>
 							<div
 								ref={userMenuBurgerRef}
@@ -115,10 +118,10 @@ export const Header = ({ className, ...props }) => {
 									[styles.hide]: !showUserMenuBurger,
 								})}
 							>
-								<Link to={'/user/' + user.id}>
+								<Link to={'/user/' + user.profile.id}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + user.id}>
+								<Link to={'/user/tours/' + user.profile.id}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>
@@ -269,10 +272,10 @@ export const Header = ({ className, ...props }) => {
 					>
 						{user ? (
 							<>
-								<Link to={'/user/' + user.id}>
+								<Link to={'/user/' + user.profile.id}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + user.id}>
+								<Link to={'/user/tours/' + user.profile.id}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>

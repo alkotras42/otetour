@@ -15,7 +15,8 @@ export const login = async (email, password) => {
 		)
 		.then((res) => {
 			if (res.data.code == 200) {
-				localStorage.setItem('user', JSON.stringify(res.data))
+				console.log(res.data.data)
+				localStorage.setItem('user', JSON.stringify(res.data.data))
 			}
 			return res.data
 		})
@@ -49,8 +50,8 @@ export const getUser = () => {
 	// })
 
 	try {
-		const user = JSON.parse(localStorage.getItem('user')).data
-		return { user: user.profile, token: user.token }
+		const user = JSON.parse(localStorage.getItem('user'))
+		return { profile: user.profile, token: user.token }
 	} catch {
 		return { user: null }
 	}

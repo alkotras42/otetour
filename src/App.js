@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { useJwt } from 'react-jwt'
 import { UserContext } from './Context/user.context'
 import Home from './Pages/Home/Home'
+import { getUser } from './Api/Authorization'
 import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration } from './Pages/Registration/Registration'
@@ -22,7 +23,7 @@ import { logout } from './Api/Authorization'
 Modal.setAppElement('#root')
 
 const App = () => {
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+	const [user, setUser] = useState()
 	const [token, setToken] = useState({
 		decodedToken: null,
 		isExpired: null,
@@ -33,14 +34,16 @@ const App = () => {
 	useEffect(() => {
 		setToken({ decodedToken, isExpired })
 
-		window.addEventListener('storage', () => {
-			console.log('буп11	')
-		})
+		const { profile, token } = getUser()
+
+		if (profile) {
+			setUser({ profile, token })
+		}
 	}, [])
 
-	if (user && token.isExpired) {
-		logout()
-	}
+	// if (user && token.isExpired) {
+	// 	logout()
+	// }
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
