@@ -15,7 +15,6 @@ export const login = async (email, password) => {
 		)
 		.then((res) => {
 			if (res.data.code == 200) {
-				console.log(res.data.data)
 				localStorage.setItem('user', JSON.stringify(res.data.data))
 			}
 			return res.data

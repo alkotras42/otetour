@@ -31,8 +31,6 @@ export const Header = ({ className, ...props }) => {
 
 	const { user, setUser } = useContext(UserContext)
 
-	console.log(user)
-
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
 		const checkIfClickedOutside = (e) => {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { getUser, updateUserInfo } from '../../../../Api/Authorization'
 import cameraIcon from './camera.svg'
@@ -11,18 +11,33 @@ import { PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/
 import Modal from 'react-modal'
 import AvatarEditor from 'react-avatar-editor'
 import Dropzone from 'react-dropzone'
+import { UserContext } from '../../../../Context/user.context'
 
 const ProfileEdit = () => {
-	const { user, token } = getUser()
+	const { user, setUser } = useContext(UserContext)
 
 	const [value, setValue] = useState({
-		name: user.firstname || '',
-		lastName: user.lastname || '',
-		email: user.email || '',
-		phone: user.phone || '',
+		name: '',
+		lastName: '',
+		email: '',
+		phone: '',
 		password: '',
 		passwordConfirm: '',
-		avatar: user.photo || '',
+		avatar: '',
+	})
+
+	useEffect(() => {
+		if (user) {
+			setValue({
+				name: user.profile.firstname || '',
+				lastName: user.profile.lastname || '',
+				email: user.profile.email || '',
+				phone: user.profile.phone || '',
+				password: '',
+				passwordConfirm: '',
+				avatar: user.profile.photo || '',
+			})
+		}
 	})
 
 	const avatarRef = useRef()
@@ -79,7 +94,7 @@ const ProfileEdit = () => {
 			.then((res) => {
 				setError({ personalInfoError: null })
 				updateUserInfo({
-					id: user.id,
+					id: user.profile.id,
 					token: token,
 					name: value.name,
 					lastName: value.lastName,
@@ -108,7 +123,7 @@ const ProfileEdit = () => {
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
 				<div className={styles.breadcrumbs}>
-					<Link to='/'>Главная</Link> / <Link to={'/user/' + user.id}>Личный кабинет</Link> / Редактировать профиль
+					<Link to='/'>Главная</Link> / <Link to={'/user/' + user?.profile.id}>Личный кабинет</Link> / Редактировать профиль
 				</div>
 				<p className={styles.title}>Редактировать профиль</p>
 				<div className={styles.changeImg}>
