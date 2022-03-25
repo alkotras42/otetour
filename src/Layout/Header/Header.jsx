@@ -8,6 +8,7 @@ import ToursIcon from './images/tours.svg'
 import ThemesIcon from './images/themes.svg'
 import BlogIcon from './images/blog.svg'
 import MenuIcon from './images/menu.svg'
+import LoginIcon from './images/login.svg'
 import { MenuStyles } from './MenuStyle'
 import arrow from './images/arrow.svg'
 import cn from 'classnames'
@@ -22,7 +23,11 @@ export const Header = ({ className, ...props }) => {
 
 	const [showUserMenu, setShowUserMenu] = useState(false)
 
+	const [showUserMenuBurger, setShowUserMenuBurger] = useState(false)
+
 	const userMenuRef = useRef()
+
+	const userMenuBurgerRef = useRef()
 
 	const { user } = getUser()
 
@@ -38,6 +43,9 @@ export const Header = ({ className, ...props }) => {
 			if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
 				setShowUserMenu(false)
 			}
+			if (changeUserMenuBurger && userMenuBurgerRef.current && !userMenuBurgerRef.current.contains(e.target)) {
+				setShowUserMenu(false)
+			}
 		}
 
 		document.addEventListener('mousedown', checkIfClickedOutside)
@@ -49,6 +57,10 @@ export const Header = ({ className, ...props }) => {
 
 	const changeUserMenu = () => {
 		setShowUserMenu((prev) => !prev)
+	}
+
+	const changeUserMenuBurger = () => {
+		setShowUserMenuBurger((prev) => !prev)
 	}
 
 	const changeShowDropdown = () => {
@@ -68,33 +80,82 @@ export const Header = ({ className, ...props }) => {
 			<div className={styles.burgerMenu}>
 				<Menu right={true} styles={MenuStyles} customBurgerIcon={<img src={MenuIcon} />}>
 					<div>
-						<img src={LogoIcon} alt='' className={styles.menuLogo} />
+						<Link to='/'>
+							<img src={LogoIcon} alt='' className={styles.menuLogo} />
+						</Link>
 					</div>
 					<div>
-						<a href=''>
+						<Link to=''>
 							<img src={ToursIcon} alt='' className={styles.menuIcon} />
 							Все туры
-						</a>
+						</Link>
 					</div>
 					<div>
-						<a href=''>
+						<Link to=''>
 							<img src={ThemesIcon} alt='' className={styles.menuIcon} />
 							Туры по тематикам
-						</a>
+						</Link>
 					</div>
 					<div>
-						<a href=''>
+						<Link to=''>
 							<img src={BlogIcon} alt='' className={styles.menuIcon} />
 							Блог
-						</a>
+						</Link>
 					</div>
 					<hr className={styles.hr} />
-					<div>
-						<a href=''>
-							<img src={UserIcon} alt='' className={styles.menuIcon} />
-							Вход
-						</a>
-					</div>
+					{user ? (
+						<div onClick={changeUserMenuBurger} className={styles.userMenu}>
+							<div>
+								<img src={UserIcon} alt='' className={styles.menuIcon} />
+								{user.email}
+							</div>
+							<div
+								ref={userMenuBurgerRef}
+								className={cn(styles.userMenuDropdown, styles.userMenuBurger, {
+									[styles.hide]: !showUserMenuBurger,
+								})}
+							>
+								<Link to={'/user/' + user.id}>
+									<span>Личный кабинет</span>
+								</Link>
+								<Link to={'/user/tours/' + user.id}>
+									<span>Мои туры</span>
+								</Link>
+								<Link to='/'>
+									<span>Мои отзывы</span>
+								</Link>
+								<Link to='/'>
+									<span>Избранные туры</span>
+								</Link>
+								<Link to='/chats'>
+									<span>Сообщения</span>
+								</Link>
+								<Link to='/disputs'>
+									<span>Споры</span>
+								</Link>
+								<br className={styles.br} />
+								<div onClick={handleLogout}>
+									<span>Выйти</span>
+								</div>
+							</div>
+						</div>
+					) : (
+						<div>
+							<div className={styles.login}>
+								<Link to='/login'>
+									<img src={LoginIcon} alt='' className={styles.menuIcon} />
+									Вход
+								</Link>
+							</div>
+							<div>
+								<Link to='/registration'>
+									<img src={UserIcon} alt='' className={styles.menuIcon} />
+									Регистрация
+								</Link>
+							</div>
+						</div>
+					)}
+
 					<hr className={styles.hr} />
 					<div className={styles.currency} onClick={changeShowCurrencyDropdown}>
 						<span>₽ Рубль</span>
