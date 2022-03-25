@@ -44,7 +44,7 @@ export const Header = ({ className, ...props }) => {
 				setShowUserMenu(false)
 			}
 			if (changeUserMenuBurger && userMenuBurgerRef.current && !userMenuBurgerRef.current.contains(e.target)) {
-				setShowUserMenu(false)
+				setShowUserMenuBurger(false)
 			}
 		}
 

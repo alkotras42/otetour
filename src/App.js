@@ -32,7 +32,10 @@ const App = () => {
 
 	useEffect(() => {
 		setToken({ decodedToken, isExpired })
-		setUser(JSON.parse(localStorage.getItem('user')))
+
+		window.addEventListener('storage', () => {
+			console.log('буп11	')
+		})
 	}, [])
 
 	if (user && token.isExpired) {

@@ -17,8 +17,6 @@ export const Login = () => {
 
 	const { user, setUser } = useContext(UserContext)
 
-	console.log(user)
-
 	useEffect(() => {
 		if (user) {
 			navigate('/')
@@ -39,7 +37,6 @@ export const Login = () => {
 			.then((res) => {
 				setLoginError(null)
 				login(value.email, value.password).then((res) => {
-					console.log(res)
 					if (res.code == 200) {
 						setUser(localStorage.getItem('user'))
 						navigate('/')
