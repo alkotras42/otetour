@@ -81,7 +81,7 @@ export const updateUserInfo = async ({ id, token, name, lastName, email, phone, 
 		.then((res) => {
 			if (res.data.code == 200) {
 				let { user, token } = getUser()
-				const userData = { data: { profile: { ...user, ...res.data.data }, token: token } }
+				const userData = { profile: { ...user, ...res.data.data }, token: token }
 				localStorage.setItem('user', JSON.stringify(userData))
 			}
 			return res.data
