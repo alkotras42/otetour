@@ -15,6 +15,7 @@ import cn from 'classnames'
 import { slide as Menu } from 'react-burger-menu'
 import { UserContext } from '../../Context/user.context'
 import { getUser, logout } from '../../Api/Authorization'
+import { hashids } from '../../Helpers/helpers'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -30,6 +31,7 @@ export const Header = ({ className, ...props }) => {
 	const userMenuBurgerRef = useRef()
 
 	const { user, setUser } = useContext(UserContext)
+
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
@@ -116,10 +118,10 @@ export const Header = ({ className, ...props }) => {
 									[styles.hide]: !showUserMenuBurger,
 								})}
 							>
-								<Link to={'/user/' + user.profile.id}>
+								<Link to={'/user/' + hashids.encode(user.profile.id)}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + user.profile.id}>
+								<Link to={'/user/tours/' + hashids.encode(user.profile.id)}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>
@@ -270,10 +272,10 @@ export const Header = ({ className, ...props }) => {
 					>
 						{user ? (
 							<>
-								<Link to={'/user/' + user.profile.id}>
+								<Link to={'/user/' + hashids.encode(user.profile.id)}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + user.profile.id}>
+								<Link to={'/user/tours/' + hashids.encode(user.profile.id)}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/'>

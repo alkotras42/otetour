@@ -1,4 +1,7 @@
 import * as Yup from 'yup'
+import Hashids from 'hashids'
+
+export const hashids = new Hashids(process.env.REACT_APP_HASHIDS_KEY, 11)
 
 const phoneRegExp =
 	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

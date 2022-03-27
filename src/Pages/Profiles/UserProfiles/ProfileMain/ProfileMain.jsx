@@ -5,6 +5,7 @@ import { Button, Card, CardDate, Carousel } from '../../../../Component'
 import { toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileMain.module.css'
+import { hashids } from '../../../../Helpers/helpers'
 
 const ProfileMain = () => {
 	const [user, setUser] = useState(null)
@@ -14,7 +15,7 @@ const ProfileMain = () => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		getUserById(params.id).then((res) => {
+		getUserById(hashids.decode(params.id)).then((res) => {
 			if (res.data.data) {
 				setUser(res.data)
 			} else {
