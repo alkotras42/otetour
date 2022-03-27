@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getUser, getUserById } from '../../../../Api/Authorization'
 import { Button, Card, CardDate, Carousel } from '../../../../Component'
 import { toPhone } from '../../../../Helpers/helpers'
@@ -11,9 +11,15 @@ const ProfileMain = () => {
 
 	const params = useParams()
 
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		getUserById(params.id).then((res) => {
-			setUser(res.data)
+			if (res.data.data) {
+				setUser(res.data)
+			} else {
+				navigate('/404')
+			}
 		})
 	}, [])
 
@@ -73,7 +79,7 @@ const ProfileMain = () => {
 							<Button className={styles.button}>Стать партнером</Button>
 						</div>
 					</div>
-					<Link to={'/guide/' + getUser().id}>
+					<Link to=''>
 						<Button className={styles.switch}>Переключиться на кабинет гида</Button>
 					</Link>
 					<div className={styles.counts}>

@@ -19,6 +19,7 @@ import {
 } from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
+import { NotFound } from './Pages/NotFound/NotFound'
 
 Modal.setAppElement('#root')
 
@@ -111,6 +112,7 @@ const App = () => {
 							</PrivateRoute>
 						}
 					/>
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Router>
 		</UserContext.Provider>
