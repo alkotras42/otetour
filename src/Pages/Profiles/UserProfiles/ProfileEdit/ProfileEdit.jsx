@@ -7,7 +7,7 @@ import whatsappIcon from './whatsapp.svg'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileEdit.module.css'
 import { Button, Input } from '../../../../Component'
-import { PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
+import { hashids, PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
 import Modal from 'react-modal'
 import AvatarEditor from 'react-avatar-editor'
 import Dropzone from 'react-dropzone'
@@ -127,7 +127,8 @@ const ProfileEdit = () => {
 				{user ? (
 					<>
 						<div className={styles.breadcrumbs}>
-							<Link to='/'>Главная</Link> / <Link to={'/user/' + value.id}>Личный кабинет</Link> / Редактировать профиль
+							<Link to='/'>Главная</Link> / <Link to={'/user/' + hashids.encode(value.id)}>Личный кабинет</Link> /
+							Редактировать профиль
 						</div>
 						<p className={styles.title}>Редактировать профиль</p>
 						<div className={styles.changeImg}>

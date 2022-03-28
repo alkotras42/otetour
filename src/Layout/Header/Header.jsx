@@ -32,6 +32,8 @@ export const Header = ({ className, ...props }) => {
 
 	const { user, setUser } = useContext(UserContext)
 
+	console.log(hashids.encode(7))
+
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {

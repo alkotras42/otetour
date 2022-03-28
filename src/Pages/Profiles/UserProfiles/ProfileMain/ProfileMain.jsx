@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getUser, getUserById } from '../../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../../Component'
+import { Button, Card, CardDate, Carousel, Difficulty } from '../../../../Component'
 import { toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileMain.module.css'

@@ -11,4 +11,4 @@ export * from './CardDate/CardDate'
 export * from './Table/Table'
 export * from './CardGuideProfile/CardGuideProfile'
 export * from './CardUserProfile/CardUserProfile'
-
+export * from './Difficulty/Difficulty'
