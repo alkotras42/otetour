@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Modal from 'react-modal'
 import { useJwt } from 'react-jwt'
 import { UserContext } from './Context/user.context'
-import Home from './Pages/Home/Home'
 import { getUser } from './Api/Authorization'
-import { Login } from './Pages/Login/Login'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
-import { Registration } from './Pages/Registration/Registration'
+import { Registration, Login, Tour, Home } from './Pages/'
 import {
 	GuideProfileMain,
 	GuideProfileTours,
@@ -56,6 +54,7 @@ const App = () => {
 					<Route exact path='/login' element={<Login />} />
 					<Route exact path='/registration' element={<Registration />} />
 					<Route exact path='/passwordChange' element={<PasswordChange />} />
+					<Route path='/tour/:id' element={<Tour />} />
 					<Route
 						path='/user/:id'
 						element={
