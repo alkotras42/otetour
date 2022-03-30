@@ -12,6 +12,7 @@ import Modal from 'react-modal'
 import AvatarEditor from 'react-avatar-editor'
 import Dropzone from 'react-dropzone'
 import { UserContext } from '../../../../Context/user.context'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const ProfileEdit = () => {
 	const { user, setUser } = useContext(UserContext)
@@ -63,6 +64,12 @@ const ProfileEdit = () => {
 		avatarSuccess: null,
 	})
 
+	const [loading, setLoading] = useState({
+		personalInfoLoading: false,
+		passwordLoading: false,
+		avatarLoading: false,
+	})
+
 	const handleChange = (e) => {
 		setValue({
 			...value,
@@ -98,6 +105,7 @@ const ProfileEdit = () => {
 	}
 
 	const editPersonal = () => {
+		setLoading({ personalInfoLoading: true })
 		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
 			.then((res) => {
 				setError({ personalInfoError: null })
@@ -115,12 +123,17 @@ const ProfileEdit = () => {
 					} else {
 						setError({ ...error, personalInfoError: 'Что-то пошло не так' })
 					}
+					setLoading({ personalInfoLoading: false })
 				})
 			})
-			.catch((e) => setError({ ...error, personalInfoError: e.message }))
+			.catch((e) => {
+				setError({ ...error, personalInfoError: e.message })
+				setLoading({ personalInfoLoading: false })
+			})
 	}
 
 	const editPassword = () => {
+		setLoading({ passwordLoading: true })
 		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
 			.then((res) => {
 				setError({ passwordError: null })
@@ -130,9 +143,13 @@ const ProfileEdit = () => {
 					} else {
 						setError({ passwordError: 'Что-то пошло не так' })
 					}
+					setLoading({ passwordLoading: false })
 				})
 			})
-			.catch((e) => setError({ ...error, passwordError: e.message }))
+			.catch((e) => {
+				setError({ ...error, passwordError: e.message })
+				setLoading({ passwordLoading: false })
+			})
 	}
 
 	return (
@@ -204,7 +221,7 @@ const ProfileEdit = () => {
 							{success.personalInfoSuccess && <p className={styles.success}>{success.personalInfoSuccess}</p>}
 
 							<Button onClick={editPersonal} className={styles.button}>
-								Сохранить
+								{loading.personalInfoLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
 							<p className={styles.editProfileTitle}>Сменить пароль</p>
 							<Input
@@ -225,7 +242,7 @@ const ProfileEdit = () => {
 							{success.passwordSuccess && <p className={styles.success}>{success.passwordSuccess}</p>}
 
 							<Button onClick={editPassword} className={styles.button}>
-								Сохранить
+								{loading.passwordLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
 
 							<p className={styles.editProfileTitle}>Уведомления</p>
