@@ -57,6 +57,12 @@ const ProfileEdit = () => {
 		avatarError: null,
 	})
 
+	const [success, setSuccess] = useState({
+		personalInfoSuccess: null,
+		passwordSuccess: null,
+		avatarSuccess: null,
+	})
+
 	const handleChange = (e) => {
 		setValue({
 			...value,
@@ -104,7 +110,9 @@ const ProfileEdit = () => {
 					phone: value.phone,
 					avatar: value.avatar,
 				}).then((res) => {
-					if (res.code !== 200) {
+					if (res.code == 200) {
+						setSuccess({ personalInfoSuccess: 'Данные профиля успешно обновлены' })
+					} else {
 						setError({ ...error, personalInfoError: 'Что-то пошло не так' })
 					}
 				})
@@ -116,7 +124,13 @@ const ProfileEdit = () => {
 		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
 			.then((res) => {
 				setError({ passwordError: null })
-				console.log(res)
+				updateUserInfo({ id: value.id, token: user.token, password: res.password }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ passwordSuccess: 'Пароль успешно изменен' })
+					} else {
+						setError({ passwordError: 'Что-то пошло не так' })
+					}
+				})
 			})
 			.catch((e) => setError({ ...error, passwordError: e.message }))
 	}
@@ -187,6 +201,8 @@ const ProfileEdit = () => {
 							<Input onChange={handleChange} value={value.email} name='email' placeholder='Email' />
 							<Input onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
 							{error.personalInfoError && <p className={styles.error}>{error.personalInfoError}</p>}
+							{success.personalInfoSuccess && <p className={styles.success}>{success.personalInfoSuccess}</p>}
+
 							<Button onClick={editPersonal} className={styles.button}>
 								Сохранить
 							</Button>
@@ -206,6 +222,7 @@ const ProfileEdit = () => {
 								placeholder='Подтверждение пароля'
 							/>
 							{error.passwordError && <p className={styles.error}>{error.passwordError}</p>}
+							{success.passwordSuccess && <p className={styles.success}>{success.passwordSuccess}</p>}
 
 							<Button onClick={editPassword} className={styles.button}>
 								Сохранить

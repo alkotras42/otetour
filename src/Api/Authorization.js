@@ -60,7 +60,7 @@ export const getUserById = async (id) => {
 	return await axios.get(`${URL}/user/${id}`)
 }
 
-export const updateUserInfo = async ({ id, token, name, lastName, email, phone, avatar }) => {
+export const updateUserInfo = async ({ id, token, name, lastName, email, phone, avatar, password }) => {
 	return await axios
 		.put(
 			`${URL}/user/${id}`,
@@ -70,6 +70,7 @@ export const updateUserInfo = async ({ id, token, name, lastName, email, phone, 
 				email: email,
 				phone: phone,
 				photo: avatar,
+				password: password,
 			},
 			{
 				headers: {
