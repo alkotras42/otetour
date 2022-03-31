@@ -13,6 +13,7 @@ import {
 	ProfileDispute,
 	ProfileEdit,
 	ProfileMain,
+	ProfileTourPay,
 	ProfileTours,
 } from './Pages/Profiles'
 import { PrivateRoute } from './Servises/PrivateRoute'
@@ -68,6 +69,14 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<ProfileTours />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/tour/tourPay/:id'
+						element={
+							<PrivateRoute>
+								<ProfileTourPay />
 							</PrivateRoute>
 						}
 					/>

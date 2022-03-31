@@ -6,7 +6,7 @@ import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
 
 export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }) => {
-	const UpcomingCard = ({card}) => (
+	const UpcomingCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
 				<img src={`/images/${card.img}`} alt='' className={styles.image} />
@@ -43,7 +43,9 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 					<span className={styles.red}>Необходимо оплатить</span>
 					<div className={styles.red}>{priceRu(card.price)}</div>
 				</div>
-				<Button className={styles.button}>Оплатить</Button>
+				<Link to='/tour/tourPay/1'>
+					<Button className={styles.button}>Оплатить</Button>
+				</Link>
 				<Button color='white' className={styles.button}>
 					Написать гиду
 				</Button>
@@ -82,8 +84,10 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 				<div className={styles.title}>{card.title}</div>
 				<div className={styles.info}>
 					{`${card.dateStart + ' ' + new Date().getFullYear()} — ${card.dateEnd + ' ' + new Date().getFullYear()}`}
-					<div>{' '}</div>
-					<Link to='' className={styles.link}>Оставить отзыв</Link>
+					<div> </div>
+					<Link to='' className={styles.link}>
+						Оставить отзыв
+					</Link>
 				</div>
 				<Button className={styles.button}>Сделка совершена</Button>
 				<Button color='white' className={styles.button}>
