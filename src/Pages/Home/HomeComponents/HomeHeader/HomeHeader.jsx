@@ -2,16 +2,19 @@ import React, { useState } from 'react'
 import styles from './HomeHeader.module.css'
 import cn from 'classnames'
 import { Button, Calendar, Location } from '../../../../Component'
+import { useTranslation } from 'react-i18next'
 
 export const HomeHeader = ({ className, ...props }) => {
 	const [active, setActive] = useState(1)
 
+	const { t } = useTranslation()
+
 	return (
 		// TODO: Добавить функционал быстрого поиска
 		<div className={cn(styles.header, className)} {...props}>
-			<span className={styles.h1}>Авторские туры от тревел-экспертов со всего мира</span>
+			<span className={styles.h1}>{t('Home_header_h1')}</span>
 			<span className={styles.h2}>
-				Ищите, сравнивайте и заказывайте туры напрямую у организатора <br /> без посредников
+				{t('Home_header_h2')}
 			</span>
 			<div className={styles.toggle}>
 				<span
@@ -20,7 +23,7 @@ export const HomeHeader = ({ className, ...props }) => {
 					})}
 					onClick={() => setActive(1)}
 				>
-					Поиск
+					{t('Home_header_search')}
 				</span>
 				<span
 					className={cn(styles.link, styles.fastSearch, {
@@ -28,13 +31,13 @@ export const HomeHeader = ({ className, ...props }) => {
 					})}
 					onClick={() => setActive(2)}
 				>
-					Быстрый подбор тура
+					{t('Home_header_fast_search')}
 				</span>
 			</div>
 			<div className={styles.form}>
-				<Location className={styles.location} />
-				<Calendar className={styles.calendar} />
-				<Button className={styles.button}>Поиск</Button>
+				<Location placeholder={t('Home_header_where')} className={styles.location} />
+				<Calendar placeholder={t('Home_header_when')} className={styles.calendar} />
+				<Button className={styles.button}>{t('Home_header_search')}</Button>
 			</div>
 		</div>
 	)

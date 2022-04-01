@@ -6,7 +6,7 @@ import arrowLeft from './arrowLeft.svg'
 import arrowRight from './arrowRight.svg'
 import calendarIcon from './calendarIcon.svg'
 
-export const Calendar = ({ className, type, ...props }) => {
+export const Calendar = ({ className, placeholder, type, ...props }) => {
 	const [year, setYear] = useState(new Date().getFullYear())
 
 	const [date, setDate] = useState('')
@@ -38,7 +38,7 @@ export const Calendar = ({ className, type, ...props }) => {
 			<div>
 				<Input
 					icon={calendarIcon}
-					placeholder='Когда'
+					placeholder={placeholder}
 					value={date}
 					onClick={() => setShowPicker(!showPicker)}
 					readOnly

@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import HttpApi from 'i18next-http-backend'
+import { i18nInit } from './Controller/LanguageController'
+
+i18n
+	.use(initReactI18next) // passes i18n down to react-i18next
+	.use(LanguageDetector)
+	.use(HttpApi)
+	.init(i18nInit)
+
+ReactDOM.render(
+	<Suspense fallback='Loading...'>
+		<App />
+	</Suspense>,
+	document.getElementById('root')
+)

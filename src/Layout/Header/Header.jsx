@@ -16,6 +16,7 @@ import { slide as Menu } from 'react-burger-menu'
 import { UserContext } from '../../Context/user.context'
 import { getUser, logout } from '../../Api/Authorization'
 import { hashids } from '../../Helpers/helpers'
+import i18next from 'i18next'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -32,12 +33,23 @@ export const Header = ({ className, ...props }) => {
 
 	const { user, setUser } = useContext(UserContext)
 
+	const languages = [
+		{
+			code: 'ru',
+			name: 'Русский',
+		},
+		{
+			code: 'en',
+			name: 'English',
+		},
+	]
+
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
 		const checkIfClickedOutside = (e) => {
-			if (showLanguageDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-				setShowLanguageDropdown(false)
-			}
+			// if (showLanguageDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+			// 	setShowLanguageDropdown(false)
+			// }
 			if (showCurrencyDropdown && userMenuRef.current && !userMenuRef.current.contains(e.target)) {
 				setShowCurrencyDropdown(false)
 			}
@@ -190,16 +202,16 @@ export const Header = ({ className, ...props }) => {
 							})}
 						/>
 						<div
+							ref={userMenuRef}
 							className={cn(styles.dropdown, {
 								[styles.hide]: !showLanguageDropdown,
 							})}
 						>
-							<span>Русский</span>
-							<span>Английский</span>
-							<span>Французский</span>
-							<span>Испанский</span>
-							<span>Итальянский</span>
-							<span>Немецкий</span>
+							{languages.map(({ code, name }) => (
+								<span key={code} onClick={() => i18next.changeLanguage(code)}>
+									{name}
+								</span>
+							))}
 						</div>
 					</div>
 				</Menu>
@@ -253,12 +265,11 @@ export const Header = ({ className, ...props }) => {
 							[styles.hide]: !showLanguageDropdown,
 						})}
 					>
-						<span>Русский</span>
-						<span>Английский</span>
-						<span>Французский</span>
-						<span>Испанский</span>
-						<span>Итальянский</span>
-						<span>Немецкий</span>
+						{languages.map(({ code, name }) => (
+							<span key={code} onClick={() => i18next.changeLanguage(code)}>
+								{name}
+							</span>
+						))}
 					</div>
 				</div>
 				<div className={styles.userMenu}>

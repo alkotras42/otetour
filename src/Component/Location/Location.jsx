@@ -5,7 +5,7 @@ import { Input } from '../Input/Input'
 import locationIcon from './locationIcon.svg'
 import pointIcon from './pointIcon.svg'
 
-export const Location = ({ className, type, ...props }) => {
+export const Location = ({ className, placeholder, type, ...props }) => {
 	const [loc, setLoc] = useState('')
 
 	const [showPicker, setShowPicker] = useState(false)
@@ -20,7 +20,7 @@ export const Location = ({ className, type, ...props }) => {
 			<div>
 				<Input
 					icon={locationIcon}
-					placeholder='Куда'
+					placeholder={placeholder}
 					value={loc}
 					onClick={() => setShowPicker(!showPicker)}
 					readOnly
