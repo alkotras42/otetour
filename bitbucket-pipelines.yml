@@ -11,8 +11,9 @@ pipelines:
         name: 'Deployment to Staging'
         deployment: staging
         script:
-          - apk update && apk add openssh
-          - ssh -o StrictHostKeyChecking=no $USERNAME:$PASSWORD@$SERVER "ls -la /home/admin"
+          - apk update && apk add openssh sshpass
+          - sshpass -p $PASSWORD ssh $USERNAME@$SERVER
+          - ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER "ls -la /home/admin"
           - echo "Your deployment to staging script goes here..."
     - step:
         name: 'Deployment to Production'
