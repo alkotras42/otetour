@@ -12,7 +12,7 @@ pipelines:
         deployment: staging
         script:
           - apk update && apk add openssh
-          - ssh -o StrictHostKeyChecking=no admin@89.108.98.100 "ls -la /home/admin"
+          - ssh -o StrictHostKeyChecking=no $USERNAME:$PASSWORD@$SERVER "ls -la /home/admin"
           - echo "Your deployment to staging script goes here..."
     - step:
         name: 'Deployment to Production'
