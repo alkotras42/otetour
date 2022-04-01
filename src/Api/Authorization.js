@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = process.env.REACT_APP_API_DOMAIN
+const URL = 'https://api.otetour.com/' // process.env.REACT_APP_API_DOMAIN
 
 export const login = async (email, password) => {
 	return await axios
