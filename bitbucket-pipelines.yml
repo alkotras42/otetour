@@ -12,7 +12,6 @@ pipelines:
         deployment: staging
         script:
           - apk update && apk add openssh
-          - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDiCY5N/QNifeUTJi83LtYI2wn7kNHY7xWErwX8VAmPF68222DP3oF+Aur94K9OkWUknxQPjrrliVjfovPjz312VqnrUkgL1UNAx7DVoRBeDuOEHKln1BR4vrrekFejqMrIoeYWJM4b5m3984r23cOYN266CAxd/FemvO1fr9Pue2G4kmIHRAhdjP5cX/OucAHj2hU1OZmDMEtFHo8096FBtsrm5SFhROo8TWl2Poi40nFBu0T7VgTOcbEbXxQ+5t+/XrzNvTkst65ccVIO9e0HxxyeYLeGl2Xat/XXuRDxjazPIIuIMdzFcog8d9vOiSo4stdBzr9fXjBd4E9oi9eI2KLOAYmtfCrOGLAy6kPfqio28Ng6jdJ0wn+2yAx4EYVOU1E+IYP0PbR234EwmrcZgMTBjpwU8L4lNA3i/xa9GaNOEnUrkWWDZgV/SznHOQ6v7LuJcumGXQi93KYXf0Lio7TzFwktq23vOjGL8Tx4lPt63n9SYq02lb/1eVYcRN8= root@89-108-98-100.cloudvps.regruhosting.ru" > ~/.ssh/authorized_keys
           - ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER "ls -la /home/admin"
           - echo "Your deployment to staging script goes here..."
     - step:
