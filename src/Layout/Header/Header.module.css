@@ -86,12 +86,13 @@
 	z-index: 30;
 }
 
-.dropdown span {
+.dropdown a {
 	white-space: nowrap;
 	padding: 10px 30px 5px 15px;
+	color: #fff;
 }
 
-.dropdown span:hover {
+.dropdown a:hover {
 	background-color: #706d6d;
 }
 

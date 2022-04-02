@@ -5,7 +5,7 @@ export const i18nInit = {
 	supportedLngs: ['ru', 'en'],
 	fallbackLng: 'ru',
 	detection: {
-		order: ['cookie', 'localStorage', 'sessionStorage', 'htmlTag', 'path', 'subdomain'],
+		order: ['subdomain', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag', 'path'],
 		caches: ['cookie'],
 	},
 

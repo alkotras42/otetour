@@ -15,6 +15,7 @@ i18n
 	.use(HttpApi)
 	.init(i18nInit)
 
+
 ReactDOM.render(
 	<Suspense fallback='Loading...'>
 		<App />

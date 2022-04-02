@@ -37,10 +37,12 @@ export const Header = ({ className, ...props }) => {
 		{
 			code: 'ru',
 			name: 'Русский',
+			url: '//test.otetour.com',
 		},
 		{
 			code: 'en',
 			name: 'English',
+			url: '//en.test.otetour.com',
 		},
 	]
 
@@ -207,10 +209,10 @@ export const Header = ({ className, ...props }) => {
 								[styles.hide]: !showLanguageDropdown,
 							})}
 						>
-							{languages.map(({ code, name }) => (
-								<span key={code} onClick={() => i18next.changeLanguage(code)}>
-									{name}
-								</span>
+							{languages.map(({ code, name, url }) => (
+								<a href={url}>
+									<span key={code}>{name}</span>
+								</a>
 							))}
 						</div>
 					</div>
@@ -265,10 +267,10 @@ export const Header = ({ className, ...props }) => {
 							[styles.hide]: !showLanguageDropdown,
 						})}
 					>
-						{languages.map(({ code, name }) => (
-							<span key={code} onClick={() => i18next.changeLanguage(code)}>
-								{name}
-							</span>
+						{languages.map(({ code, name, url }) => (
+							<a href={url}>
+								<span key={code}>{name}</span>
+							</a>
 						))}
 					</div>
 				</div>
