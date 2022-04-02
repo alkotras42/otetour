@@ -12,7 +12,7 @@ pipelines:
         deployment: staging
         script:
           - apk update && apk add openssh
-          - ssh -o StrictHostKeyChecking=no $USER@$SERVER "cd /home/otetour/frontend; ./frontup.sh"
+          - ssh -o StrictHostKeyChecking=no $USER@$SERVER "cd ~; ./frontup.sh"
           - echo "DONE!"
     - step:
         name: 'Deployment to Production'
