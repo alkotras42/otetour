@@ -19,6 +19,7 @@ import {
 import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
+import i18next from 'i18next'
 import Cookies from 'js-cookie'
 import { getConfig } from './Api/Config'
 
@@ -49,13 +50,21 @@ const App = () => {
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
-	const language = Cookies.get('i18next') || 'ru'
+	// useEffect(() => {
+	// 	getConfig().then((res) => setLanguage(res.data.languages[Cookies.get('i18next').toUpperCase()]))
+	// }, [])
 
 	useEffect(() => {
-		if (window.location.href !== 'http://localhost:3000/') {
-			getConfig().then((res) => window.location.replace('//' + res.data.languages[language.toUpperCase()].server))
-		}
-	}, [language])
+		i18next.changeLanguage(window.location.host.split('.')[0].toString() || 'ru')
+	}, [])
+
+	// const language = Cookies.get('i18next') || 'ru'
+
+	// useEffect(() => {
+	// 	if (window.location.href !== 'http://localhost:3000/') {
+	// 		getConfig().then((res) => window.location.replace('//' + res.data.languages[language.toUpperCase()].server))
+	// 	}
+	// }, [language])
 
 	return (
 		<UserContext.Provider value={value}>
