@@ -19,6 +19,8 @@ import {
 import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
+import Cookies from 'js-cookie'
+import { getConfig } from './Api/Config'
 
 Modal.setAppElement('#root')
 
@@ -46,6 +48,14 @@ const App = () => {
 	// }
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
+
+	const language = Cookies.get('i18next') || 'ru'
+
+	useEffect(() => {
+		if (window.location.href !== 'http://localhost:3000/') {
+			getConfig().then((res) => window.location.replace('//' + res.data.languages[language.toUpperCase()].server))
+		}
+	}, [])
 
 	return (
 		<UserContext.Provider value={value}>

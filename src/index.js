@@ -9,12 +9,12 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi from 'i18next-http-backend'
 import { i18nInit } from './Controller/LanguageController'
 
+
 i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.use(LanguageDetector)
 	.use(HttpApi)
 	.init(i18nInit)
-
 
 ReactDOM.render(
 	<Suspense fallback='Loading...'>
