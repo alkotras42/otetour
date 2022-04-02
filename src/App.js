@@ -55,7 +55,7 @@ const App = () => {
 		if (window.location.href !== 'http://localhost:3000/') {
 			getConfig().then((res) => window.location.replace('//' + res.data.languages[language.toUpperCase()].server))
 		}
-	}, [])
+	}, [language])
 
 	return (
 		<UserContext.Provider value={value}>
