@@ -12,9 +12,9 @@ export const HomeHeader = ({ className, ...props }) => {
 	return (
 		// TODO: Добавить функционал быстрого поиска
 		<div className={cn(styles.header, className)} {...props}>
-			<span className={styles.h1}>{t('Home_header_h1')}</span>
+			<span className={styles.h1}>{t('Авторские туры от тревел-экспертов со всего мира')}</span>
 			<span className={styles.h2}>
-				{t('Home_header_h2')}
+				{t('Ищите, сравнивайте и заказывайте туры напрямую у организатора без посредников')}
 			</span>
 			<div className={styles.toggle}>
 				<span
@@ -23,7 +23,7 @@ export const HomeHeader = ({ className, ...props }) => {
 					})}
 					onClick={() => setActive(1)}
 				>
-					{t('Home_header_search')}
+					{t('Поиск')}
 				</span>
 				<span
 					className={cn(styles.link, styles.fastSearch, {
@@ -31,13 +31,13 @@ export const HomeHeader = ({ className, ...props }) => {
 					})}
 					onClick={() => setActive(2)}
 				>
-					{t('Home_header_fast_search')}
+					{t('Быстрый подбор тура')}
 				</span>
 			</div>
 			<div className={styles.form}>
-				<Location placeholder={t('Home_header_where')} className={styles.location} />
-				<Calendar placeholder={t('Home_header_when')} className={styles.calendar} />
-				<Button className={styles.button}>{t('Home_header_search')}</Button>
+				<Location placeholder={t('Куда')} className={styles.location} />
+				<Calendar placeholder={t('Когда')} className={styles.calendar} />
+				<Button className={styles.button}>{t('Поиск')}</Button>
 			</div>
 		</div>
 	)

@@ -6,12 +6,15 @@ import { UserContext } from '../../Context/user.context'
 import { LoginSchema } from '../../Helpers/helpers'
 import { Header } from '../../Layout/Header/Header'
 import styles from './Login.module.css'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 export const Login = () => {
 	const [value, setValue] = useState({
 		email: '',
 		password: '',
 	})
+
+	const [loading, setLoading] = useState(false)
 
 	const navigate = useNavigate()
 
@@ -33,6 +36,7 @@ export const Login = () => {
 	}
 
 	const LoginUser = () => {
+		setLoading(true)
 		LoginSchema.validate(value)
 			.then((res) => {
 				setLoginError(null)
@@ -43,9 +47,13 @@ export const Login = () => {
 					} else {
 						setLoginError('Неправильный логин или пароль.')
 					}
+					setLoading(false)
 				})
 			})
-			.catch((error) => setLoginError(error.message))
+			.catch((error) => {
+				setLoginError(error.message)
+				setLoading(false)
+			})
 	}
 
 	return (
@@ -58,7 +66,7 @@ export const Login = () => {
 					<Input placeholder='Email' name='email' value={value.email} onChange={handleChange} />
 					<Input type='password' placeholder='Password' name='password' value={value.password} onChange={handleChange} />
 					<Button onClick={LoginUser} className={styles.button}>
-						Войти
+						{loading ? <ClipLoader /> : 'Войти'}
 					</Button>
 					<span>
 						Еще не зарегистрированы?{' '}

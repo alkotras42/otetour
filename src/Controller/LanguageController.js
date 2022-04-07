@@ -1,3 +1,4 @@
+
 export const i18nInit = {
 	// the translations
 	// (tip move them in a JSON file and import them,
@@ -13,6 +14,6 @@ export const i18nInit = {
 		escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
 	},
 	backend: {
-		loadPath: '/assets/locals/{{lng}}/translate.json',
+		loadPath: 'https://api.otetour.com/translation/?language={{lng}}',
 	},
 }

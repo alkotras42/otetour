@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { CardMini } from '../../../../Component'
 import styles from './TourTypes.module.css'
+import { t } from 'i18next'
 
 export const TourTypes = ({ className, ...props }) => {
 	const card_data = {
@@ -10,7 +11,7 @@ export const TourTypes = ({ className, ...props }) => {
 	}
 	return (
 		<div className={cn(className, styles.tourTypes)} {...props}>
-			<span className={styles.title}>Выбирайте тур по своим интересам</span>
+			<span className={styles.title}>{t('Выбирайте тур по своим интересам')}</span>
 			<div className={styles.toures}>
 				<CardMini card={card_data} />
 				<CardMini card={card_data} />

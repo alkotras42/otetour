@@ -3,6 +3,7 @@ import cn from 'classnames'
 import styles from './Blog.module.css'
 import Arrow from './arrow.svg'
 import { BlogCard } from '../../../../Component'
+import { t } from 'i18next'
 
 export const Blog = ({ className, ...props }) => {
 	const card_data = {
@@ -12,9 +13,9 @@ export const Blog = ({ className, ...props }) => {
 	}
 	return (
 		<div className={cn(className, styles.blog)} {...props}>
-			<span className={styles.title}>Наш блог</span>
+			<span className={styles.title}>{t('Наш блог')}</span>
 			<p className={styles.more}>
-				Еще больше интересного
+				{t('Еще больше интересного')}
 				<img src={Arrow} alt='' className={styles.arrow} />
 			</p>
 			<div className={styles.blogs}>

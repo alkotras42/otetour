@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './CountryPick.module.css'
 import { CardMini } from '../../../../Component'
+import { t } from 'i18next'
 
 export const CountryPick = ({ className, ...props }) => {
 	const card_data = {
@@ -10,7 +11,7 @@ export const CountryPick = ({ className, ...props }) => {
 	}
 	return (
 		<div className={cn(className, styles.countyPicker)} {...props}>
-			<span className={styles.title}>Выберите страну для путешествия своей мечты</span>
+			<span className={styles.title}>{t('Выберите страну для путешествия своей мечты')}</span>
 			<div className={styles.countries}>
 				<CardMini card={card_data} />
 				<CardMini card={card_data} />

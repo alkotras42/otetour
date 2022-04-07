@@ -3,10 +3,10 @@ import cn from 'classnames'
 import { Carousel, GuideCard } from '../../../../Component'
 import styles from './Guides.module.css'
 import { useWindowWidth } from '@react-hook/window-size'
+import { t } from 'i18next'
 
 export const Guides = ({ className, ...props }) => {
 	const Width = useWindowWidth()
-
 
 	const guide_data = {
 		name: 'Алексей',
@@ -17,7 +17,7 @@ export const Guides = ({ className, ...props }) => {
 
 	return (
 		<div className={cn(className, styles.guides)} {...props}>
-			<span className={styles.title}>Наши гиды</span>
+			<span className={styles.title}>{t('Наши гиды')}</span>
 			<Carousel loop={true} itemsCount={Width > 880 ? 4 : 3}>
 				<GuideCard card={guide_data} />
 				<GuideCard card={guide_data} />

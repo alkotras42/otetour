@@ -3,11 +3,12 @@ import cn from 'classnames'
 import styles from './ContinentPick.module.css'
 import { ReactSVG } from 'react-svg'
 import { Carousel } from '../../../../Component'
+import { t } from 'i18next'
 
 export const ContinentPick = ({ className, ...props }) => {
 	return (
 		<div className={cn(className, styles.continentPick)} {...props}>
-			<span className={styles.title}>Выберите континент для путешествия</span>
+			<span className={styles.title}>{t('Выберите континент для путешествия')}</span>
 			<div className={styles.continents}>
 				<div className={cn(styles.continentItem, styles.asia)}>
 					<ReactSVG
@@ -16,7 +17,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/Asia.svg'
 					/>
-					<span className={styles.continentTitle}>Азия</span>
+					<span className={styles.continentTitle}>{t('Азия')}</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.africa)}>
 					<ReactSVG
@@ -25,7 +26,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/Africa.svg'
 					/>
-					<span className={styles.continentTitle}>Африка</span>
+					<span className={styles.continentTitle}>{t('Африка')}</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.australia)}>
 					<ReactSVG
@@ -34,7 +35,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/Australia.svg'
 					/>
-					<span className={styles.continentTitle}>Австралия</span>
+					<span className={styles.continentTitle}>{t('Австралия')}</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.europe)}>
 					<ReactSVG
@@ -43,7 +44,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/Europe.svg'
 					/>
-					<span className={styles.continentTitle}>Европа</span>
+					<span className={styles.continentTitle}>{t('Европа')}</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.northAmerica)}>
 					<ReactSVG
@@ -52,7 +53,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/NorthAmerica.svg'
 					/>
-					<span className={styles.continentTitle}>Северная Америка</span>
+					<span className={styles.continentTitle}>{t('Северная Америка')}</span>
 				</div>
 				<div className={cn(styles.continentItem, styles.southAmerica)}>
 					<ReactSVG
@@ -61,7 +62,7 @@ export const ContinentPick = ({ className, ...props }) => {
 						}}
 						src='/images/SouthAmerica.svg'
 					/>
-					<span className={styles.continentTitle}>Южная Америка</span>
+					<span className={styles.continentTitle}>{t('Южная Америка')}</span>
 				</div>
 			</div>
 			<div className={styles.continentsCarousel}>
@@ -73,7 +74,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/Asia.svg'
 						/>
-						<span className={styles.continentTitle}>Азия</span>
+						<span className={styles.continentTitle}>{t('Азия')}</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.africa)}>
 						<ReactSVG
@@ -82,7 +83,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/Africa.svg'
 						/>
-						<span className={styles.continentTitle}>Африка</span>
+						<span className={styles.continentTitle}>{t('Африка')}</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.australia)}>
 						<ReactSVG
@@ -91,7 +92,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/Australia.svg'
 						/>
-						<span className={styles.continentTitle}>Австралия</span>
+						<span className={styles.continentTitle}>{t('Австралия')}</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.europe)}>
 						<ReactSVG
@@ -100,7 +101,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/Europe.svg'
 						/>
-						<span className={styles.continentTitle}>Европа</span>
+						<span className={styles.continentTitle}>{t('Европа')}</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.northAmerica)}>
 						<ReactSVG
@@ -109,7 +110,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/NorthAmerica.svg'
 						/>
-						<span className={styles.continentTitle}>Северная Америка</span>
+						<span className={styles.continentTitle}>{t('Северная Америка')}</span>
 					</div>
 					<div className={cn(styles.continentItem, styles.southAmerica)}>
 						<ReactSVG
@@ -118,7 +119,7 @@ export const ContinentPick = ({ className, ...props }) => {
 							}}
 							src='/images/SouthAmerica.svg'
 						/>
-						<span className={styles.continentTitle}>Южная Америка</span>
+						<span className={styles.continentTitle}>{t('Южная Америка')}</span>
 					</div>
 				</Carousel>
 			</div>

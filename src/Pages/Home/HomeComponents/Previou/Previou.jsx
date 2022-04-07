@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { Card, Carousel } from '../../../../Component'
 import styles from './Previou.module.css'
 import { useWindowWidth } from '@react-hook/window-size'
+import { t } from 'i18next'
 
 export const Previou = ({ className, ...props }) => {
 	const windowWidth = useWindowWidth()
@@ -22,7 +23,7 @@ export const Previou = ({ className, ...props }) => {
 
 	return (
 		<div className={cn(className, styles.recomendation)} {...props}>
-			<span className={styles.title}>Ранее просмотренные туры</span>
+			<span className={styles.title}>{t('Ранее просмотренные туры')}</span>
 			<Carousel loop={windowWidth < 880}>
 				<Card card={card_data} />
 				<Card card={card_data} />

@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { Card, Carousel } from '../../../../Component'
 import styles from './Recomendation.module.css'
+import { t } from 'i18next'
 
 export const Recomendation = ({ className, ...props }) => {
 	const card_data = {
@@ -18,7 +19,7 @@ export const Recomendation = ({ className, ...props }) => {
 	}
 	return (
 		<div className={cn(className, styles.recomendation)} {...props}>
-			<span className={styles.title}>Рекомендации для вас</span>
+			<span className={styles.title}>{t('Рекомендации для вас')}</span>
 			<Carousel loop={true}>
 				<Card card={card_data} />
 				<Card card={card_data}/>
