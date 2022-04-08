@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileTours.module.css'
 import { getUser } from '../../../../Api/Authorization'
 import { CardUserProfile } from '../../../../Component'
+import ReactPaginate from 'react-paginate'
 
 const ProfileTours = () => {
 	const [value, setValue] = useState(1)
+	const [currentItems, setCurrentItems] = useState([])
+	const [pageCount, setPageCount] = useState(0)
+	const [itemOffset, setItemOffset] = useState(0)
 
 	const changeMenu = (e) => {
 		setValue(e.target.getAttribute('name'))
 	}
+
+	const itemsPerPage = 6
+
+	useEffect(() => {
+		const endOffset = itemOffset + itemsPerPage
+		setCurrentItems(cardsArray.slice(itemOffset, endOffset))
+		setPageCount(Math.ceil(cardsArray.length / itemsPerPage))
+	}, [itemOffset, itemsPerPage])
 
 	const card_data = {
 		title: 'Путешествие по озерам (Карелия, Россия)',
@@ -26,6 +38,13 @@ const ProfileTours = () => {
 		dateEnd: '28 мая',
 		plasesHold: 6,
 		plasesTotal: 20,
+	}
+
+	const cardsArray = Array(10).fill(card_data)
+
+	const handlePageClick = (e) => {
+		const newOffset = (e.selected * itemsPerPage) % cardsArray.length
+		setItemOffset(newOffset)
 	}
 
 	return (
@@ -79,11 +98,28 @@ const ProfileTours = () => {
 					})}
 				>
 					<div className={styles.items}>
-						<CardUserProfile type='upcoming' card={card_data} />
-						<CardUserProfile type='upcoming' card={card_data} />
-						<CardUserProfile type='upcoming' card={card_data} />
-						<CardUserProfile type='upcoming' card={card_data} />
+						{currentItems.map((item, index) => (
+							<CardUserProfile key={index} type='upcoming' card={item} />
+						))}
 					</div>
+					{cardsArray.length > 6 && (
+						<ReactPaginate
+							breakLabel='...'
+							nextLabel='>'
+							onPageChange={handlePageClick}
+							pageRangeDisplayed={5}
+							marginPagesDisplayed={1}
+							pageCount={pageCount}
+							previousLabel='<'
+							renderOnZeroPageCount={null}
+							containerClassName={styles.pagination}
+							pageLinkClassName={styles.pageItem}
+							previousLinkClassName={styles.pageItem}
+							nextLinkClassName={styles.pageItem}
+							disabledLinkClassName={styles.pageDisabled}
+							activeLinkClassName={styles.pageActive}
+						/>
+					)}
 				</div>
 				<div
 					className={cn(styles.toursList, {

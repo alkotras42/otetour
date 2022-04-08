@@ -61,12 +61,12 @@
 	margin-top: 25px;
 }
 
-li::marker {
+.recomendations li::marker {
 	color: #63a583;
 	font-size: 1.3rem;
 }
 
-li {
+.recomendations li {
 	margin-top: 10px;
 }
 
