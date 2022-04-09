@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import { withLayout } from '../../../../Layout/Layout'
@@ -6,12 +6,24 @@ import styles from './ProfileTours.module.css'
 import { getUser } from '../../../../Api/Authorization'
 import { CardUserProfile } from '../../../../Component'
 import ReactPaginate from 'react-paginate'
+import { UserContext } from '../../../../Context/user.context'
+import { hashids } from '../../../../Helpers/helpers'
 
 const ProfileTours = () => {
 	const [value, setValue] = useState(1)
 	const [currentItems, setCurrentItems] = useState([])
 	const [pageCount, setPageCount] = useState(0)
 	const [itemOffset, setItemOffset] = useState(0)
+
+	const { user, setUser } = useContext(UserContext)
+
+	const [userValue, setUserValue] = useState({ id: 1 })
+
+	useEffect(() => {
+		if (user) {
+			setUserValue({ id: user.profile.id })
+		}
+	}, [user])
 
 	const changeMenu = (e) => {
 		setValue(e.target.getAttribute('name'))
@@ -51,7 +63,7 @@ const ProfileTours = () => {
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
 				<div className={styles.breadcrumbs}>
-					<Link to='/'>Главная</Link> / <Link to={'/user/' + getUser().id}>Личный кабинет</Link> / Мои туры
+					<Link to='/'>Главная</Link> / <Link to={'/user/' + hashids.encode(userValue.id)}>Личный кабинет</Link> / Мои туры
 				</div>
 				<p className={styles.title}>Мои туры</p>
 				<div className={styles.menu}>

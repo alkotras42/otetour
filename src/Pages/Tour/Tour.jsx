@@ -270,7 +270,7 @@ const Tour = () => {
 													<span className={styles.reviewDate}>{review.date}</span>
 												</div>
 												<div>
-													<Rating rate={review.raring} />
+													<Rating rating={review.raring} />
 												</div>
 											</div>
 											<p className={styles.reviewBody}>{review.body}</p>

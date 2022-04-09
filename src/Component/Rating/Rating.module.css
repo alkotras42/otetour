@@ -1,14 +1,17 @@
 .raring {
 	display: flex;
-	gap: 5px;
 }
 
 .rateIcon {
-	width: 20px;
-	height: 20px;
+	min-width: 25px;
+	padding-right: 5px;
 }
 
-.transparent svg {
+.transparent {
 	fill: #333333;
 	opacity: 0.2;
+}
+
+.editible {
+	cursor: pointer;
 }
