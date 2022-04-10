@@ -36,24 +36,9 @@ export const Header = ({ className, ...props }) => {
 
 	const { user, setUser } = useContext(UserContext)
 
-	console.log(i18next.language)
-
 	useEffect(() => {
 		getConfig().then((res) => setLanguages(res.data.languages))
-	}, [])
-
-	// const languages = [
-	// 	{
-	// 		code: 'ru',
-	// 		name: 'Русский',
-	// 		url: '//test.otetour.com',
-	// 	},
-	// 	{
-	// 		code: 'en',
-	// 		name: 'English',
-	// 		url: '//en.test.otetour.com',
-	// 	},
-	// ]
+	}, [i18next.language])
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
@@ -219,7 +204,13 @@ export const Header = ({ className, ...props }) => {
 					</div>
 					<div className={styles.language} onClick={changeShowDropdown}>
 						<img src={LanguageIcon} alt='' className={styles.menuIcon} />
-						<span>{languages && languages[i18next.language.toString().toUpperCase()].name}</span>
+						<span>
+							{(languages &&
+								i18next.language &&
+								languages[i18next.language?.toString().toUpperCase()] &&
+								languages[i18next.language?.toString().toUpperCase()].name) ||
+								'Русский'}
+						</span>
 						<img
 							src={arrow}
 							alt=''
@@ -281,7 +272,13 @@ export const Header = ({ className, ...props }) => {
 				</div>
 				<div className={styles.language} onClick={changeShowDropdown}>
 					<img src={LanguageIcon} alt='' className={styles.languageIcon} />
-					<span>{languages && languages[i18next.language.toString().toUpperCase()].name}</span>
+					<span>
+						{(languages &&
+							i18next.language &&
+							languages[i18next.language?.toString().toUpperCase()] &&
+							languages[i18next.language?.toString().toUpperCase()].name) ||
+							'Русский'}
+					</span>
 					<img
 						src={arrow}
 						alt=''
