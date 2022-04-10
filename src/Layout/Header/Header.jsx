@@ -296,8 +296,8 @@ export const Header = ({ className, ...props }) => {
 						{languages &&
 							Object.values(languages).map(({ name, server, image }) => (
 								<div className={styles.languageItem}>
-									<img src={image} alt={name} className={styles.languageItemIcon} />
 									<a href={`//${server}`}>
+										<img src={image} alt={name} className={styles.languageItemIcon} />
 										<span key={name}>{name}</span>
 									</a>
 								</div>
