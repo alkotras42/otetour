@@ -36,6 +36,8 @@ export const Header = ({ className, ...props }) => {
 
 	const { user, setUser } = useContext(UserContext)
 
+	console.log(i18next.language)
+
 	useEffect(() => {
 		getConfig().then((res) => setLanguages(res.data.languages))
 	}, [])
@@ -217,7 +219,7 @@ export const Header = ({ className, ...props }) => {
 					</div>
 					<div className={styles.language} onClick={changeShowDropdown}>
 						<img src={LanguageIcon} alt='' className={styles.menuIcon} />
-						<span>Русский</span>
+						<span>{languages && languages[i18next.language.toString().toUpperCase()].name}</span>
 						<img
 							src={arrow}
 							alt=''
@@ -234,8 +236,8 @@ export const Header = ({ className, ...props }) => {
 							{languages &&
 								Object.values(languages).map(({ name, server, image }) => (
 									<div className={styles.languageItem}>
-										<img src={image} alt={name} className={styles.languageItemIcon} />
 										<a href={`//${server}`}>
+											<img src={image} alt={name} className={styles.languageItemIcon} />
 											<span key={name}>{name}</span>
 										</a>
 									</div>
@@ -279,7 +281,7 @@ export const Header = ({ className, ...props }) => {
 				</div>
 				<div className={styles.language} onClick={changeShowDropdown}>
 					<img src={LanguageIcon} alt='' className={styles.languageIcon} />
-					<span>Русский</span>
+					<span>{languages && languages[i18next.language.toString().toUpperCase()].name}</span>
 					<img
 						src={arrow}
 						alt=''
