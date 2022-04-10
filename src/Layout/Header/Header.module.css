@@ -82,18 +82,33 @@
 	line-height: 19px;
 	top: 30px;
 	padding: 15px 0;
-	border-radius: 5px;
+	border-radius: 10px;
 	z-index: 30;
 }
 
-.dropdown a {
+.languageItem {
 	white-space: nowrap;
-	padding: 10px 30px 5px 15px;
+	padding: 10px 20px 5px 15px;
+	display: flex;
+}
+
+.languageItemIcon {
+	width: 28px;
+	height: 18px;
+	margin-right: 10px;
+}
+
+.languageItem a {
 	color: #fff;
 }
 
-.dropdown a:hover {
+.languageItem:hover {
 	background-color: #706d6d;
+}
+
+.currencyDropdown span {
+	white-space: nowrap;
+	padding: 10px 20px 5px 15px;
 }
 
 .hide {

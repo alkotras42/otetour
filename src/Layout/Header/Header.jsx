@@ -17,6 +17,7 @@ import { UserContext } from '../../Context/user.context'
 import { getUser, logout } from '../../Api/Authorization'
 import { hashids } from '../../Helpers/helpers'
 import i18next from 'i18next'
+import { getConfig } from '../../Api/Config'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -27,24 +28,30 @@ export const Header = ({ className, ...props }) => {
 
 	const [showUserMenuBurger, setShowUserMenuBurger] = useState(false)
 
+	const [languages, setLanguages] = useState(null)
+
 	const userMenuRef = useRef()
 
 	const userMenuBurgerRef = useRef()
 
 	const { user, setUser } = useContext(UserContext)
 
-	const languages = [
-		{
-			code: 'ru',
-			name: 'Русский',
-			url: '//test.otetour.com',
-		},
-		{
-			code: 'en',
-			name: 'English',
-			url: '//en.test.otetour.com',
-		},
-	]
+	useEffect(() => {
+		getConfig().then((res) => setLanguages(res.data.languages))
+	}, [])
+
+	// const languages = [
+	// 	{
+	// 		code: 'ru',
+	// 		name: 'Русский',
+	// 		url: '//test.otetour.com',
+	// 	},
+	// 	{
+	// 		code: 'en',
+	// 		name: 'English',
+	// 		url: '//en.test.otetour.com',
+	// 	},
+	// ]
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
@@ -224,11 +231,15 @@ export const Header = ({ className, ...props }) => {
 								[styles.hide]: !showLanguageDropdown,
 							})}
 						>
-							{languages.map(({ code, name, url }) => (
-								<a href={url}>
-									<span key={code}>{name}</span>
-								</a>
-							))}
+							{languages &&
+								Object.values(languages).map(({ name, server, image }) => (
+									<div className={styles.languageItem}>
+										<img src={image} alt={name} className={styles.languageItemIcon} />
+										<a href={`//${server}`}>
+											<span key={name}>{name}</span>
+										</a>
+									</div>
+								))}
 						</div>
 					</div>
 				</Menu>
@@ -282,11 +293,15 @@ export const Header = ({ className, ...props }) => {
 							[styles.hide]: !showLanguageDropdown,
 						})}
 					>
-						{languages.map(({ code, name, url }) => (
-							<a href={url}>
-								<span key={code}>{name}</span>
-							</a>
-						))}
+						{languages &&
+							Object.values(languages).map(({ name, server, image }) => (
+								<div className={styles.languageItem}>
+									<img src={image} alt={name} className={styles.languageItemIcon} />
+									<a href={`//${server}`}>
+										<span key={name}>{name}</span>
+									</a>
+								</div>
+							))}
 					</div>
 				</div>
 				<div className={styles.userMenu}>

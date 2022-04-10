@@ -44,30 +44,11 @@ const App = () => {
 		}
 	}, [])
 
-	// if (user && token.isExpired) {
-	// 	logout()
-	// }
-
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
-
-	// useEffect(() => {
-	// 	getConfig().then((res) => setLanguage(res.data.languages[Cookies.get('i18next').toUpperCase()]))
-	// }, [])
 
 	useEffect(() => {
 		i18next.changeLanguage(window.location.host.split('.')[0].toString() || 'ru')
 	}, [])
-
-	// const language = Cookies.get('i18next') || 'ru'
-
-	// useEffect(() => {
-	// 	if (window.location.href !== 'http://localhost:3000/') {
-	// 		getConfig().then((res) => window.location.replace('//' + res.data.languages[language.toUpperCase()].server))
-	// 	}
-	// }, [language])
-
-
-
 
 	return (
 		<UserContext.Provider value={value}>
