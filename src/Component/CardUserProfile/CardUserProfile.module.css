@@ -62,6 +62,16 @@
 	line-height: 28px;
 }
 
+.modal {
+	position: absolute;
+	border: 1px solid rgb(204, 204, 204);
+	background: rgb(255, 255, 255);
+	overflow: auto;
+	border-radius: 10px;
+	outline: none;
+	padding: 30px 50px;
+}
+
 .button {
 	margin-top: 15px;
 	width: 100%;

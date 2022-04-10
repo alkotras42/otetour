@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cn from 'classnames'
 import styles from './CardUserProfile.module.css'
 import { priceRu } from '../../Helpers/helpers'
 import { Button } from '../Button/Button'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
+import { TourReview } from '../ModalComponent/TourReview/TourReview'
 
 export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }) => {
+	const [isModalOpen, setIsModalOpen] = useState(false)
+
+	const closeModal = () => {
+		setIsModalOpen(false)
+	}
+
 	const UpcomingCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
@@ -22,7 +30,9 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 					<span>Осталось оплатить</span>
 					<div>{priceRu(card.price)}</div>
 				</div>
-				<Button className={styles.button}>Написать гиду</Button>
+				<Link to='/chats'>
+					<Button className={styles.button}>Написать гиду</Button>
+				</Link>
 			</div>
 		</div>
 	)
@@ -46,9 +56,11 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 				<Link to='/tour/tourPay/1'>
 					<Button className={styles.button}>Оплатить</Button>
 				</Link>
-				<Button color='white' className={styles.button}>
-					Написать гиду
-				</Button>
+				<Link to='/chats'>
+					<Button color='white' className={styles.button}>
+						Написать гиду
+					</Button>
+				</Link>
 			</div>
 		</div>
 	)
@@ -69,7 +81,9 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 					<span>Стоимость</span>
 					<div>{priceRu(card.price)}</div>
 				</div>
-				<Button className={styles.button}>Написать гиду</Button>
+				<Link to='/chats'>
+					<Button className={styles.button}>Написать гиду</Button>
+				</Link>
 			</div>
 		</div>
 	)
@@ -85,7 +99,7 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 				<div className={styles.info}>
 					{`${card.dateStart + ' ' + new Date().getFullYear()} — ${card.dateEnd + ' ' + new Date().getFullYear()}`}
 					<div> </div>
-					<Link to='' className={styles.link}>
+					<Link to='' className={styles.link} onClick={() => setIsModalOpen(true)}>
 						Оставить отзыв
 					</Link>
 				</div>
@@ -94,6 +108,9 @@ export const CardUserProfile = ({ className, type = 'upcoming', card, ...props }
 					Открыть спор
 				</Button>
 			</div>
+			<Modal isOpen={isModalOpen} onRequestClose={closeModal} className={styles.modal}>
+				<TourReview card={card} />
+			</Modal>
 		</div>
 	)
 
