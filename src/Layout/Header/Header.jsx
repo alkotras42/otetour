@@ -38,7 +38,7 @@ export const Header = ({ className, ...props }) => {
 
 	useEffect(() => {
 		getConfig().then((res) => setLanguages(res.data.languages))
-	}, [i18next.language])
+	}, [])
 
 	// Для закрытия менюшек при нажатии вне их
 	useEffect(() => {
