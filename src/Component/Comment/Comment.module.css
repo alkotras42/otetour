@@ -1,0 +1,128 @@
+.disputItem {
+	margin-bottom: 40px;
+}
+
+.disputHeader {
+	display: grid;
+	grid-template-columns: 75px auto;
+	gap: 15px;
+	margin-bottom: 10px;
+}
+
+.disputData {
+	display: grid;
+	gap: 5px;
+}
+
+.tourType {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	color: #3762ae;
+}
+
+.tourTitle {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 25px;
+	color: #252525;
+}
+
+.tourDates {
+	color: #929292;
+}
+
+.disputBody,
+.commentBody {
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.commentItem {
+	margin-top: 30px;
+	margin-left: 65px;
+}
+
+.commentInfo {
+	padding-left: 15px;
+	border-left: 1px solid #cccccc;
+}
+
+.comentUser {
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.commentButtons {
+	display: flex;
+	gap: 40px;
+	margin-top: 15px;
+	padding-left: 15px;
+	font-weight: 600;
+}
+
+.modal {
+	position: absolute;
+	border: 1px solid rgb(204, 204, 204);
+	background: rgb(255, 255, 255);
+	overflow: auto;
+	outline: none;
+	padding: 30px 50px;
+	border-radius: 10px;
+}
+
+.accept {
+	cursor: pointer;
+	color: #3762ae;
+}
+
+.accept:hover {
+	color: #103780;
+}
+
+.decline {
+	cursor: pointer;
+	color: #ff3535;
+}
+
+.decline:hover {
+	color: #c90c0c;
+}
+
+.reviewHeader {
+	display: grid;
+	grid-template-columns: 50px auto;
+	gap: 15px;
+	margin-bottom: 10px;
+}
+
+.reviewImage {
+	height: 50px;
+	width: 50px;
+	object-fit: none;
+	border-radius: 100px;
+}
+
+.reviewInfo {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.commentItem {
+	margin-bottom: 40px;
+}
+
+.reviewImages {
+	display: flex;
+	gap: 10px;
+}
+
+.reviewImageItem {
+	margin-top: 10px;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}

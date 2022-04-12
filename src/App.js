@@ -13,6 +13,7 @@ import {
 	ProfileDispute,
 	ProfileEdit,
 	ProfileMain,
+	ProfileReviews,
 	ProfileTourPay,
 	ProfileTours,
 } from './Pages/Profiles'
@@ -20,8 +21,6 @@ import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
 import i18next from 'i18next'
-import Cookies from 'js-cookie'
-import { getConfig } from './Api/Config'
 
 Modal.setAppElement('#root')
 
@@ -104,6 +103,14 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<ProfileDispute />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/reviews'
+						element={
+							<PrivateRoute>
+								<ProfileReviews />
 							</PrivateRoute>
 						}
 					/>

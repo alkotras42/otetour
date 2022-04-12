@@ -1,0 +1,23 @@
+.disputAccept {
+	max-width: 720px;
+}
+
+.disputAcceptTitle {
+	font-weight: 600;
+	font-size: 30px;
+	line-height: 38px;
+	text-align: center;
+}
+
+.disputAcceptBody {
+	margin-top: 25px;
+	font-size: 20px;
+	line-height: 25px;
+	text-align: center;
+}
+
+.disputAcceptButton {
+	margin-top: 25px;
+	width: 100%;
+	height: 50px;
+}
