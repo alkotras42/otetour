@@ -14,7 +14,11 @@ export const Carousel = ({ className, loop = false, responsive, itemsCount = 3, 
 
 	return (
 		<div className={cn(className, styles.carousel)} {...props}>
-			<div className={styles.carouselWrapper}>
+			<div
+				className={cn(styles.carouselWrapper, {
+					[styles.carouselWrapperSmall]: itemsCount == 4,
+				})}
+			>
 				<img src={arrowPrev} alt='' ref={prevRef} className={styles.arrowPrev} />
 				<img src={arrowNext} alt='' ref={nextRef} className={styles.arrowNext} />
 				<div className={styles.carouselContainer}>
@@ -32,7 +36,7 @@ export const Carousel = ({ className, loop = false, responsive, itemsCount = 3, 
 						modules={[Navigation]}
 						className={styles.swiper}
 					>
-						{children && children.map((c) =>   <SwiperSlide>{c}</SwiperSlide>)}
+						{children && children.map((c) => <SwiperSlide>{c}</SwiperSlide>)}
 					</Swiper>
 				</div>
 			</div>

@@ -42,6 +42,9 @@
 	.carouselWrapper {
 		grid-template-columns: minmax(880px, 1200px);
 	}
+	.carouselWrapperSmall {
+		grid-template-columns: minmax(1060px, 1200px);
+	}
 	.arrowPrev {
 		display: none;
 	}
