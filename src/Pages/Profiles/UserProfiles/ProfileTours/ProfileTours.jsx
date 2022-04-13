@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import { withLayout } from '../../../../Layout/Layout'
@@ -8,6 +8,7 @@ import { CardUserProfile } from '../../../../Component'
 import ReactPaginate from 'react-paginate'
 import { UserContext } from '../../../../Context/user.context'
 import { hashids } from '../../../../Helpers/helpers'
+import ArrowIcon from './arrow.svg'
 
 const ProfileTours = () => {
 	const [value, setValue] = useState(1)
@@ -18,6 +19,25 @@ const ProfileTours = () => {
 	const { user, setUser } = useContext(UserContext)
 
 	const [userValue, setUserValue] = useState({ id: 1 })
+
+	const [showMenuDropdown, setShowMenuDropdown] = useState(false)
+
+	const selectMenuRef = useRef()
+
+	// Для закрытия менюшек при нажатии вне их
+	useEffect(() => {
+		const checkIfClickedOutside = (e) => {
+			if (showMenuDropdown && selectMenuRef.current && !selectMenuRef.current.contains(e.target)) {
+				setShowMenuDropdown(false)
+			}
+		}
+
+		document.addEventListener('mousedown', checkIfClickedOutside)
+
+		return () => {
+			document.removeEventListener('mousedown', checkIfClickedOutside)
+		}
+	}, [showMenuDropdown])
 
 	useEffect(() => {
 		if (user) {
@@ -59,6 +79,8 @@ const ProfileTours = () => {
 		setItemOffset(newOffset)
 	}
 
+	const statuses = ['Предстоящие', 'Ждут оплаты', 'Не подтвержденные', 'Завершенные']
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
@@ -67,41 +89,37 @@ const ProfileTours = () => {
 				</div>
 				<p className={styles.title}>Мои туры</p>
 				<div className={styles.menu}>
+					{statuses.map((status, index) => (
+						<div
+							key={index}
+							className={cn(styles.menuItem, {
+								[styles.active]: value == index + 1,
+							})}
+							onClick={() => setValue(index + 1)}
+						>
+							{status}
+						</div>
+					))}
+				</div>
+				<div onClick={() => setShowMenuDropdown((prev) => !prev)} className={styles.selectMenu}>
+					<div>{statuses[value - 1]} <img src={ArrowIcon} alt="" className={styles.arrowIcon} /> </div>
 					<div
-						name='1'
-						className={cn(styles.menuItem, {
-							[styles.active]: value == 1,
+						className={cn(styles.selectMenuDropdown, {
+							[styles.hide]: !showMenuDropdown,
 						})}
-						onClick={changeMenu}
+						ref={selectMenuRef}
 					>
-						Предстоящие
-					</div>
-					<div
-						name='2'
-						className={cn(styles.menuItem, {
-							[styles.active]: value == 2,
-						})}
-						onClick={changeMenu}
-					>
-						Ждут оплаты
-					</div>
-					<div
-						name='3'
-						className={cn(styles.menuItem, {
-							[styles.active]: value == 3,
-						})}
-						onClick={changeMenu}
-					>
-						Не подтвержденные
-					</div>
-					<div
-						name='4'
-						className={cn(styles.menuItem, {
-							[styles.active]: value == 4,
-						})}
-						onClick={changeMenu}
-					>
-						Завершенные
+						{statuses.map((status, index) => (
+							<div
+								key={index}
+								className={cn(styles.selectMenuItem, {
+									[styles.selectMenuActive]: value == index + 1,
+								})}
+								onClick={() => setValue(index + 1)}
+							>
+								{status}
+							</div>
+						))}
 					</div>
 				</div>
 				<div
