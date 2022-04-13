@@ -1,11 +1,10 @@
 import axios from 'axios'
-
-const URL = 'https://api.otetour.com/' // process.env.REACT_APP_API_DOMAIN
+import { API } from '../Helpers/api'
 
 export const login = async (email, password) => {
 	return await axios
 		.post(
-			`${URL}/user/login`,
+			API.user.login,
 			{ email: email, password: password },
 			{
 				headers: {
@@ -24,7 +23,7 @@ export const login = async (email, password) => {
 export const registration = async (name, lastName, email, password) => {
 	return await axios
 		.post(
-			`${URL}/user`,
+			API.user.registration,
 			{ firstname: name, lastname: lastName, email: email, password: password },
 			{
 				headers: {
@@ -57,13 +56,13 @@ export const getUser = () => {
 }
 
 export const getUserById = async (id) => {
-	return await axios.get(`${URL}/user/${id}`)
+	return await axios.get(`${API.user.byId}/${id}`)
 }
 
 export const updateUserInfo = async ({ id, token, name, lastName, email, phone, avatar, password }) => {
 	return await axios
 		.put(
-			`${URL}/user/${id}`,
+			`${API.user.byId}/${id}`,
 			{
 				firstname: name,
 				lastname: lastName,

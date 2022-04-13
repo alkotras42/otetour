@@ -1,8 +1,7 @@
 import axios from 'axios'
-
-const URL = 'https://api.otetour.com/'
+import { API } from '../Helpers/api'
 
 export const getConfig = async () => {
-	const res = await axios.get(`${URL}config`)
+	const res = await axios.get(API.config.get)
 	return await res.data
 }

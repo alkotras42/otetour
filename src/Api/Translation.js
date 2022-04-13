@@ -1,10 +1,9 @@
 import axios from 'axios'
-
-const URL = 'https://api.otetour.com/'
+import { API } from '../Helpers/api'
 
 export const createTranslation = async (value) => {
 	axios.post(
-		`${URL}translation`,
+		API.transaction.get,
 		{ key: value },
 		{
 			headers: {

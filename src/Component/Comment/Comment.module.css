@@ -26,6 +26,11 @@
 	font-size: 20px;
 	line-height: 25px;
 	color: #252525;
+	cursor: pointer;
+}
+
+.tourTitle:hover {
+	text-decoration: underline;
 }
 
 .tourDates {
