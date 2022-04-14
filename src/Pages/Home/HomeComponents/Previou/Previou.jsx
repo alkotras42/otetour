@@ -3,9 +3,10 @@ import cn from 'classnames'
 import { Card, Carousel } from '../../../../Component'
 import styles from './Previou.module.css'
 import { useWindowWidth } from '@react-hook/window-size'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const Previou = ({ className, ...props }) => {
+	const { t } = useTranslation()
 	const windowWidth = useWindowWidth()
 
 	const card_data = {

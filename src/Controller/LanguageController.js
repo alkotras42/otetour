@@ -1,4 +1,9 @@
+import HttpApi from 'i18next-http-backend'
+import LocalStorageBackend from 'i18next-localstorage-backend'
+import { createTranslation } from '../Api/Translation'
+
 export const i18nInit = {
+	debug: true,
 	// the translations
 	// (tip move them in a JSON file and import them,
 	// or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
@@ -8,12 +13,14 @@ export const i18nInit = {
 		order: ['subdomain', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag', 'path'],
 		caches: ['cookie'],
 	},
-
-	interpolation: {
-		escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
-	},
 	backend: {
 		loadPath: 'https://api.otetour.com/translation/?language={{lng}}',
 		allowMultiLoading: false,
+	},
+
+	saveMissing: true,
+	saveMissingTo: 'current',
+	missingKeyHandler: (lngs, ns, key, fallbackValue) => {
+		createTranslation(fallbackValue)
 	},
 }

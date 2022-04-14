@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import cn from 'classnames'
 import styles from './OpenDispute.module.css'
-import { t } from 'i18next'
 import { TextArea } from '../../TextArea/TextArea'
 import { Button } from '../../Button/Button'
+import { useTranslation } from 'react-i18next'
 
 export const OpenDispute = ({ className, ...props }) => {
+	const { t } = useTranslation(t)
 	const [value, setValue] = useState('')
 
 	const handleChange = (e) => {

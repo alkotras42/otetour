@@ -20,7 +20,7 @@ import {
 import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
-import i18next from 'i18next'
+import { useTranslation } from 'react-i18next';
 
 Modal.setAppElement('#root')
 
@@ -30,6 +30,8 @@ const App = () => {
 		decodedToken: null,
 		isExpired: null,
 	})
+
+	const { t, i18n } = useTranslation();
 
 	const { decodedToken, isExpired } = useJwt(user?.data?.token)
 
@@ -46,7 +48,11 @@ const App = () => {
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
 	useEffect(() => {
-		i18next.changeLanguage(window.location.host.split('.')[0].toString() || 'ru')
+		if (window.location.origin == 'http://localhost:3000') {
+			i18n.changeLanguage('ru')
+		} else {
+			i18n.changeLanguage(window.location.host.split('.')[0].toString())
+		}
 	}, [])
 
 	return (

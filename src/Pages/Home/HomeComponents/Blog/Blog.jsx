@@ -3,9 +3,10 @@ import cn from 'classnames'
 import styles from './Blog.module.css'
 import Arrow from './arrow.svg'
 import { BlogCard } from '../../../../Component'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const Blog = ({ className, ...props }) => {
+	const { t } = useTranslation()
 	const card_data = {
 		title: 'Самые красивые места России',
 		date: '11.05.2021',

@@ -4,9 +4,11 @@ import cn from 'classnames'
 import arrow1 from './arrow1.svg'
 import arrow2 from './arrow2.svg'
 import arrow3 from './arrow3.svg'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const HowItWork = ({ className, ...props }) => {
+	const { t } = useTranslation()
+
 	return (
 		<div className={cn(styles.about, className)} {...props}>
 			<div className={styles.aboutWrapper}>

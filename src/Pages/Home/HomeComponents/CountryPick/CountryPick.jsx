@@ -2,9 +2,11 @@ import React from 'react'
 import cn from 'classnames'
 import styles from './CountryPick.module.css'
 import { CardMini } from '../../../../Component'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const CountryPick = ({ className, ...props }) => {
+	const { t } = useTranslation()
+
 	const card_data = {
 		country: 'Россия',
 		img: 'images/countryImg1.png',

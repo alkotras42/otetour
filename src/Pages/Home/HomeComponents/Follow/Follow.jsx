@@ -2,9 +2,11 @@ import React from 'react'
 import styles from './Follow.module.css'
 import cn from 'classnames'
 import { Button, Input } from '../../../../Component'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const Follow = ({ className, ...props }) => {
+	const { t } = useTranslation()
+
 	return (
 		<div className={cn(styles.follow, className)} {...props}>
 			<div className={styles.followWrapper}>
@@ -14,7 +16,10 @@ export const Follow = ({ className, ...props }) => {
 					<Button className={styles.button}>{t('Подписаться')}</Button>
 				</div>
 				<p className={styles.text}>
-					{t('Предоставляя свои данные, я соглашаюсь с')}  <a href='' className={styles.link}>{t('политикой конфиденциальности')}</a>
+					{t('Предоставляя свои данные, я соглашаюсь с')}{' '}
+					<a href='' className={styles.link}>
+						{t('политикой конфиденциальности')}
+					</a>
 				</p>
 			</div>
 		</div>

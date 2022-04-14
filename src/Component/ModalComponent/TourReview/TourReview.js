@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import cn from 'classnames'
 import styles from './TourReview.module.css'
-import { t } from 'i18next'
 import { Rating } from '../../Rating/Rating'
 import PhotoIcon from './Photo.svg'
 import { TextArea } from '../../TextArea/TextArea'
 import { Button } from '../../Button/Button'
+import { useTranslation } from 'react-i18next'
 
 export const TourReview = ({ className, card, ...props }) => {
+	const { t } = useTranslation(t)
 	const [rating, setRating] = useState(0)
 	const [value, setValue] = useState('')
 

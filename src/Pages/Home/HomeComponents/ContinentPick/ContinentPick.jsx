@@ -3,9 +3,11 @@ import cn from 'classnames'
 import styles from './ContinentPick.module.css'
 import { ReactSVG } from 'react-svg'
 import { Carousel } from '../../../../Component'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const ContinentPick = ({ className, ...props }) => {
+	const { t } = useTranslation()
+
 	return (
 		<div className={cn(className, styles.continentPick)} {...props}>
 			<span className={styles.title}>{t('Выберите континент для путешествия')}</span>

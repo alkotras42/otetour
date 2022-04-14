@@ -3,9 +3,10 @@ import cn from 'classnames'
 import { Carousel, GuideCard } from '../../../../Component'
 import styles from './Guides.module.css'
 import { useWindowWidth } from '@react-hook/window-size'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const Guides = ({ className, ...props }) => {
+	const { t } = useTranslation()
 	const Width = useWindowWidth()
 
 	const guide_data = {

@@ -2,9 +2,10 @@ import React from 'react'
 import cn from 'classnames'
 import { CardMini } from '../../../../Component'
 import styles from './TourTypes.module.css'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const TourTypes = ({ className, ...props }) => {
+	const { t } = useTranslation()
 	const card_data = {
 		country: 'Конные туры',
 		img: 'images/TourImg1.png',

@@ -7,7 +7,6 @@ import { hashids, PersonalInfoSchema, PersonalPasswordSchema, priceRu } from '..
 import { UserContext } from '../../../../Context/user.context'
 import PlusIcon from './plusIcon.svg'
 import CloseIcon from './closeIcon.svg'
-import ClipLoader from 'react-spinners/ClipLoader'
 
 const ProfileTourPay = () => {
 	const { user, setUser } = useContext(UserContext)

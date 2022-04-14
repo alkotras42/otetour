@@ -4,9 +4,11 @@ import cn from 'classnames'
 import aboutImg1 from './aboutImg1.svg'
 import aboutImg2 from './aboutImg2.svg'
 import aboutImg3 from './aboutImg3.svg'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export const AboutUs = ({ className, ...props }) => {
+
+	const { t } = useTranslation()
 	return (
 		<div className={cn(styles.about, className)} {...props}>
 			<div className={styles.aboutWrapper}>

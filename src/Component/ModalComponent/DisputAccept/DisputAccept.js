@@ -1,10 +1,12 @@
 import React from 'react'
 import cn from 'classnames'
 import styles from './DisputAccept.module.css'
-import { t } from 'i18next'
 import { Button } from '../../Button/Button'
+import { useTranslation } from 'react-i18next'
 
 export const DisputAccept = ({ className, ...props }) => {
+
+	const {t} = useTranslation()
 	return (
 		<div className={cn(className, styles.disputAccept)} {...props}>
 			<p className={styles.disputAcceptTitle}>{t('Принять условия')}</p>

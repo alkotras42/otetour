@@ -1,11 +1,12 @@
-import { t } from 'i18next'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Comment } from '../../../../Component'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileReviews.module.css'
 
 const ProfileReviews = () => {
+	const { t } = useTranslation(t)
 	const reviews = [
 		{
 			tourTitle: 'Лучшие достопримечательности Индии',
