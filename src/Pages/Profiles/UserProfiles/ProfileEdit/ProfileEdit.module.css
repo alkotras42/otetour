@@ -126,3 +126,38 @@
 	width: 100%;
 	margin-top: 10px;
 }
+
+@media screen and (max-width: 1260px) {
+	.profile {
+		grid-template-columns: 40px 1fr 40px;
+	}
+
+	.title {
+		font-size: 26px;
+		line-height: 33px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.profile {
+		grid-template-columns: 20px 1fr 20px;
+	}
+	.title {
+		font-size: 20px;
+		line-height: 25px;
+	}
+	.changeImg {
+		margin-top: 20px;
+	}
+	.chooseImg,
+	.profileImg {
+		width: 100px;
+		height: 100px;
+	}
+	.editProfile {
+		display: grid;
+		grid-template-columns: minmax(320px, 550px);
+		gap: 15px;
+		margin-bottom: 50px;
+	}
+}

@@ -2,8 +2,7 @@ import HttpApi from 'i18next-http-backend'
 import LocalStorageBackend from 'i18next-localstorage-backend'
 import { createTranslation } from '../Api/Translation'
 
-export const i18nInit = {
-	// the translations
+export const i18nInit = {	// the translations
 	// (tip move them in a JSON file and import them,
 	// or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
 	supportedLngs: ['ru', 'en', 'es', 'fr', 'it', 'de'],
