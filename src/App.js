@@ -48,7 +48,7 @@ const App = () => {
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
 	useEffect(() => {
-		if (window.location.origin == 'http://localhost:3000') {
+		if (window.location.origin == ('http://localhost:3000' || 'https://test.otetour.com')) {
 			i18n.changeLanguage('ru')
 		} else {
 			i18n.changeLanguage(window.location.host.split('.')[0].toString())
