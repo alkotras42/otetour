@@ -17,7 +17,7 @@ export const Comment = ({ className, type = 'dispute', comment, ...props }) => {
 	const DisputeComment = ({ disput }) => (
 		<div className={styles.disputItem} {...props}>
 			<div className={styles.disputHeader}>
-				<img src={'/images/' + disput.tourImg} alt='' />
+				<img src={'/images/' + disput.tourImg} alt='' className={styles.disputImage} />
 				<div className={styles.disputData}>
 					<div className={styles.tourType}>{disput.tourType}</div>
 					<div className={styles.tourTitle}>{disput.tourTitle}</div>
@@ -28,7 +28,7 @@ export const Comment = ({ className, type = 'dispute', comment, ...props }) => {
 			{disput.disputComments &&
 				disput.disputComments.map((comment) => (
 					<div className={styles.commentItem}>
-						<div className={styles.commentInfo}>
+						<div className={styles.commentContainer}>
 							<div className={styles.comentUser}>{comment.comentUser}</div>
 							<div className={styles.commentBody}>{comment.commentBody}</div>
 						</div>
@@ -72,9 +72,11 @@ export const Comment = ({ className, type = 'dispute', comment, ...props }) => {
 			{review.reviewComments &&
 				review.reviewComments.map((comment) => (
 					<div className={styles.commentItem}>
-						<div className={styles.commentInfo}>
-							<div className={styles.comentUser}>{comment.comentUser}</div>
-							<div className={styles.tourDates}>{comment.commentDate}</div>
+						<div className={styles.commentContainer}>
+							<div className={styles.commentInfo}>
+								<div className={styles.comentUser}>{comment.comentUser}</div>
+								<div className={styles.tourDates}>{comment.commentDate}</div>
+							</div>
 							<div className={styles.commentBody}>{comment.commentBody}</div>
 						</div>
 					</div>

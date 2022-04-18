@@ -6,7 +6,7 @@ import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileReviews.module.css'
 
 const ProfileReviews = () => {
-	const { t } = useTranslation(t)
+	const { t } = useTranslation()
 	const reviews = [
 		{
 			tourTitle: 'Лучшие достопримечательности Индии',

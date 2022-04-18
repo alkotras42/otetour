@@ -1,7 +1,3 @@
-.disputItem {
-	margin-bottom: 40px;
-}
-
 .disputHeader {
 	display: grid;
 	grid-template-columns: 75px auto;
@@ -48,9 +44,14 @@
 	margin-left: 65px;
 }
 
-.commentInfo {
+.commentContainer {
 	padding-left: 15px;
 	border-left: 1px solid #cccccc;
+}
+
+.commentInfo {
+	display: flex;
+	gap: 20px;
 }
 
 .comentUser {
@@ -130,4 +131,75 @@
 	width: 100px;
 	height: 100px;
 	object-fit: cover;
+}
+
+@media screen and (max-width: 1260px) {
+	.disputHeader,
+	.reviewHeader {
+		gap: 10px;
+	}
+	.tourTitle,
+	.tourDates,
+	.disputBody,
+	.commentBody,
+	.comentUser,
+	.accept,
+	.decline {
+		font-size: 17px;
+		line-height: 21px;
+	}
+	.tourType {
+		font-size: 15px;
+		line-height: 19px;
+	}
+	.commentItem {
+		margin-top: 20px;
+		margin-left: 50px;
+		margin-bottom: 30px;
+	}
+	.commentInfo {
+		gap: 15px;
+	}
+	.reviewImageItem {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.disputHeader,
+	.reviewHeader {
+		grid-template-columns: 1fr;
+	}
+	.tourTitle,
+	.tourDates,
+	.disputBody,
+	.commentBody,
+	.comentUser,
+	.accept,
+	.decline {
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.tourType {
+		font-size: 14px;
+		line-height: 18px;
+	}
+	.commentItem {
+		margin-top: 15px;
+		margin-left: 30px;
+		margin-bottom: 20px;
+	}
+	.commentInfo {
+		gap: 10px;
+	}
+	.disputImage {
+		width: 40px;
+		height: 40px;
+	}
+
+	.reviewImageItem {
+		width: 80px;
+		height: 80px;
+	}
 }

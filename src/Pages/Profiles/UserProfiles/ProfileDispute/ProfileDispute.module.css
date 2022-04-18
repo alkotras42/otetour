@@ -26,3 +26,33 @@
 	margin-top: 30px;
 	margin-bottom: 70px;
 }
+
+@media screen and (max-width: 1260px) {
+	.profile {
+		grid-template-columns: 40px 1fr 40px;
+	}
+
+	.title {
+		font-size: 26px;
+		line-height: 33px;
+	}
+
+	.reviews {
+		margin-top: 20px;
+		margin-bottom: 60px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.profile {
+		grid-template-columns: 20px 1fr 20px;
+	}
+	.title {
+		font-size: 20px;
+		line-height: 25px;
+	}
+	.disputs {
+		margin-top: 15px;
+		margin-bottom: 50px;
+	}
+}
