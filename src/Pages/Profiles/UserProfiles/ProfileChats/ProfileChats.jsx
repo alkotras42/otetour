@@ -5,6 +5,7 @@ import cn from 'classnames'
 import chatIcon from './chat.svg'
 import clipIcon from './clip.svg'
 import sendIcon from './send.svg'
+import arrowIcon from './arrow.svg'
 
 const ProfileChats = () => {
 	const [value, setValue] = useState(null)
@@ -70,7 +71,11 @@ const ProfileChats = () => {
 				<div className={cn(styles.chatsHeader, styles.chatsHeaderMessages)}>
 					{value ? chats[value - 1].guideName : null}
 				</div>
-				<div className={styles.chatsList}>
+				<div
+					className={cn(styles.chatsList, {
+						[styles.activeBlock]: value,
+					})}
+				>
 					{chats &&
 						chats.map((chat) => (
 							<div
@@ -99,6 +104,7 @@ const ProfileChats = () => {
 									<div className={styles.messageTourType}>{chats[value - 1].tourType}</div>
 									<div className={styles.messageTourTitle}>{chats[value - 1].tourTitle}</div>
 								</div>
+								<img src={arrowIcon} alt="" className={styles.arrowIcon} onClick={() => setValue(null)} />
 							</div>
 							<div className={styles.messages}>
 								{chats[value - 1].messages.map((message) => (
