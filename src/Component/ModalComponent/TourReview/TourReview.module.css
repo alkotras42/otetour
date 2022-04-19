@@ -10,6 +10,7 @@
 	display: grid;
 	grid-template-columns: 75px auto;
 	gap: 15px;
+	align-items: center;
 }
 
 .tourReviewInfo {
@@ -71,4 +72,73 @@
 	margin-top: 25px;
 	height: 50px;
 	width: 100%;
+}
+
+@media screen and (max-width: 860px) {
+	.tourReviewTitle {
+		font-size: 26px;
+		line-height: 33px;
+	}
+	.tourReviewType {
+		font-size: 15px;
+		line-height: 19px;
+	}
+	.tourReviewName {
+		font-size: 18px;
+		line-height: 23px;
+	}
+	.tourReviewDates {
+		font-size: 15px;
+		line-height: 19px;
+	}
+	.tourReviewRatingTitle,
+	.tourReviewBodyTitle,
+	.tourReviewPhotosTitle {
+		font-size: 17px;
+		line-height: 21px;
+	}
+	.tourReviewInput textarea {
+		width: inherit;
+		min-height: 80px;
+		max-height: 220px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.tourReviewTitle {
+		font-size: 20px;
+		line-height: 25px;
+		margin-bottom: 20px;
+	}
+	.tourReviewRatingTitle,
+	.tourReviewBodyTitle,
+	.tourReviewPhotosTitle {
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.tourReviewHeader {
+		grid-template-columns: 50px auto;
+		gap: 10px;
+	}
+	.tourReviewInput textarea {
+		width: inherit;
+		min-height: 80px;
+		max-height: 220px;
+	}
+	.tourReviewImage {
+		width: 50px;
+		height: 50px;
+	}
+	.tourReviewType {
+		font-size: 14px;
+		line-height: 18px;
+	}
+	.tourReviewName {
+		font-size: 17px;
+		line-height: 21px;
+	}
+	.tourReviewDates {
+		font-size: 14px;
+		line-height: 18px;
+	}
 }

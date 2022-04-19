@@ -104,3 +104,18 @@
 		margin-bottom: 10px;
 	}
 }
+
+@media screen and (max-width: 860px) {
+	.modal {
+		width: auto;
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.modal {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}

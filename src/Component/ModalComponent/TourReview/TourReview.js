@@ -8,7 +8,7 @@ import { Button } from '../../Button/Button'
 import { useTranslation } from 'react-i18next'
 
 export const TourReview = ({ className, card, ...props }) => {
-	const { t } = useTranslation(t)
+	const { t } = useTranslation()
 	const [rating, setRating] = useState(0)
 	const [value, setValue] = useState('')
 

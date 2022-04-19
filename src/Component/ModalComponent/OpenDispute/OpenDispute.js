@@ -6,7 +6,7 @@ import { Button } from '../../Button/Button'
 import { useTranslation } from 'react-i18next'
 
 export const OpenDispute = ({ className, ...props }) => {
-	const { t } = useTranslation(t)
+	const { t } = useTranslation()
 	const [value, setValue] = useState('')
 
 	const handleChange = (e) => {
