@@ -27,7 +27,9 @@
 	margin-top: 30px;
 }
 
-.tourInfoTitle {
+.tourInfoTitle,
+.touristsInfoTitle,
+.paymentChooseTitle {
 	font-weight: 600;
 }
 
@@ -46,10 +48,6 @@
 
 .touristsInfo {
 	margin-top: 40px;
-}
-
-.touristsInfoTitle {
-	font-weight: 600;
 }
 
 .touristsContent {
@@ -85,10 +83,6 @@
 
 .paymentChoose {
 	margin-top: 40px;
-}
-
-.paymentChooseTitle {
-	font-weight: 600;
 }
 
 .paymentChooseBody {
@@ -133,4 +127,67 @@
 	margin-bottom: 80px;
 	height: 50px;
 	width: 100%;
+}
+
+@media screen and (max-width: 1260px) {
+	.tourPay {
+		grid-template-columns: 40px 1fr 40px;
+		font-size: 17px;
+		line-height: 21px;
+	}
+
+	.title {
+		font-size: 26px;
+		line-height: 33px;
+	}
+
+	.tourInfo {
+		margin-top: 25px;
+	}
+
+	.tourInfoBody {
+		white-space: normal;
+	}
+	.touristsInfo,
+	.paymentChoose {
+		margin-top: 35px;
+	}
+	.confirmButton {
+		margin-top: 35px;
+		margin-bottom: 60px;
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.tourPayWrapper {
+		width: 550px;
+		padding-top: 20px;
+	}
+	.tourInfoBody {
+		gap: 10px 70px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.tourPay {
+		grid-template-columns: 20px 1fr 20px;
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.tourPayWrapper {
+		width: inherit;
+		padding-top: 15px;
+	}
+	.touristsInfo,
+	.paymentChoose {
+		margin-top: 30px;
+	}
+	.tourInfoBody {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+	.confirmButton {
+		margin-top: 30px;
+		margin-bottom: 50px;
+	}
 }
