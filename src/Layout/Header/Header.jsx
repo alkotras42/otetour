@@ -149,7 +149,7 @@ export const Header = ({ className, ...props }) => {
 								<Link to='/reviews'>
 									<span>Мои отзывы</span>
 								</Link>
-								<Link to='/'>
+								<Link to={'/user/favoriteTours/' + hashids.encode(user.profile.id)}>
 									<span>Избранные туры</span>
 								</Link>
 								<Link to='/chats'>
@@ -322,7 +322,7 @@ export const Header = ({ className, ...props }) => {
 								<Link to='/reviews'>
 									<span>Мои отзывы</span>
 								</Link>
-								<Link to='/'>
+								<Link to={'/user/favoriteTours/' + hashids.encode(user.profile.id)}>
 									<span>Избранные туры</span>
 								</Link>
 								<Link to='/chats'>

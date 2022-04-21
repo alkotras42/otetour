@@ -12,6 +12,7 @@ import {
 	ProfileChats,
 	ProfileDispute,
 	ProfileEdit,
+	ProfileFavoriteTours,
 	ProfileMain,
 	ProfileReviews,
 	ProfileTourPay,
@@ -77,6 +78,14 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<ProfileTours />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/user/favoriteTours/:id'
+						element={
+							<PrivateRoute>
+								<ProfileFavoriteTours />
 							</PrivateRoute>
 						}
 					/>

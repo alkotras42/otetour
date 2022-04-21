@@ -1,0 +1,193 @@
+.card {
+	cursor: pointer;
+	display: block;
+	min-width: 280px;
+	background: #ffffff;
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	z-index: 10;
+	overflow: hidden;
+	transition: all 0.2s ease;
+}
+
+.card:hover {
+	background: #f3f3f6;
+}
+
+.cardTop {
+	max-height: 230px;
+	min-height: 120px;
+	position: relative;
+}
+
+.image {
+	object-fit: cover;
+	max-height: 230px;
+	min-height: 120px;
+	width: 100%;
+	height: 100%;
+}
+
+.headerIcon {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+.star {
+	width: 18px;
+	height: 18px;
+}
+
+.sale {
+	position: absolute;
+	background-color: #ff3535;
+	color: #fff;
+	padding: 6px 20px;
+	border-radius: 3px;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 18px;
+	top: 15px;
+	left: 15px;
+}
+
+.rating {
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	display: flex;
+	justify-content: center;
+	gap: 6px;
+}
+
+.ratingCount {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
+	color: #f5e027;
+}
+
+.reviewCount {
+	color: #fff;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.cardBottom {
+	padding: 15px 0 15px 0;
+	position: relative;
+}
+
+.type {
+	font-weight: 600;
+	font-size: 15px;
+	margin-left: 20px;
+	line-height: 19px;
+	color: #3762ae;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 18px;
+	margin-left: 20px;
+	line-height: 23px;
+	margin-bottom: 10px;
+}
+
+.daysCount {
+	font-size: 15px;
+	line-height: 19px;
+	margin-left: 20px;
+	padding-bottom: 15px;
+}
+
+.info {
+	border-top: 1px solid rgba(0, 0, 0, 0.2);
+	font-size: 16px;
+	line-height: 20px;
+	padding-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	white-space: nowrap;
+}
+
+.tours {
+	margin-left: 20px;
+	display: grid;
+	gap: 5px;
+}
+
+.prices {
+	align-self: end;
+	margin-right: 20px;
+}
+
+.salePrice {
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 30px;
+	color: #ff3535;
+	padding-right: 10px;
+}
+
+.priceWithSale {
+	display: flex;
+	align-items: center;
+}
+
+.oldPrice {
+	font-size: 18px;
+	line-height: 23px;
+	text-decoration-line: line-through;
+}
+
+.price {
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 30px;
+}
+
+@media screen and (max-width: 1260px) {
+	.type {
+		font-size: 14px;
+		line-height: 18px;
+	}
+	.title {
+		font-size: 17px;
+		line-height: 21px;
+		margin-bottom: 7px;
+	}
+	.daysCount {
+		font-size: 14px;
+		line-height: 18px;
+		padding-bottom: 10px;
+	}
+	.priceWithSale {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+	.info {
+		padding-top: 10px;
+	}
+}
+
+@media screen and (max-width: 620px) {
+	.type {
+		font-size: 13px;
+		line-height: 16px;
+	}
+	.title {
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.daysCount {
+		font-size: 13px;
+		line-height: 16px;
+	}
+	.salePrice,
+	.price {
+		font-size: 22px;
+		line-height: 28px;
+	}
+}
