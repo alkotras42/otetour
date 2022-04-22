@@ -1,6 +1,7 @@
 .wrapper {
 	position: relative;
 	display: flex;
+	flex: auto;
 	flex-direction: column;
 }
 
