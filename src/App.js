@@ -7,6 +7,7 @@ import { getUser } from './Api/Authorization'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration, Login, Tour, Home } from './Pages/'
 import {
+	AddTour,
 	GuideProfileMain,
 	GuideProfileTours,
 	ProfileChats,
@@ -142,6 +143,14 @@ const App = () => {
 						element={
 							<PrivateRoute>
 								<GuideProfileTours />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/guide/addTour'
+						element={
+							<PrivateRoute>
+								<AddTour />
 							</PrivateRoute>
 						}
 					/>
