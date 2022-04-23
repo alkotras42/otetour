@@ -1,8 +1,8 @@
 import React, { forwardRef, useState } from 'react'
-import { Input } from '../../../../../Component'
+import { Button, Input } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
-import { useFieldArray, useWatch, Controller } from 'react-hook-form'
+import { useFieldArray, useWatch, Controller, useFormState } from 'react-hook-form'
 
 const DiffPiker = forwardRef(({ value, setValue }, ref) => {
 	return (
@@ -25,17 +25,27 @@ const DiffPiker = forwardRef(({ value, setValue }, ref) => {
 	)
 })
 
-const FirstStep = ({ className, register, control, ...props }) => {
+const FirstStep = ({ className, register, control, formStep, setFormStep, ...props }) => {
 	const value = useWatch({
 		control,
 	})
 
-	console.log(value)
+	const nextStep = async (e) => {
+		e.preventDefault()
+		// const result = await trigger()
+		// console.log(result)
+		setFormStep((prev) => prev + 1)
+		document.documentElement.scrollTop = 0
+	}
+
+	const { errors } = useFormState({ control })
+
+	console.log(errors)
 
 	return (
 		<div className={className} {...props}>
-			<Input placeholder='Название' {...register('title')} filled={value.title} />
-			<Input placeholder='Тип тура' {...register('type')} filled={value.type} />
+			<Input placeholder='Название' {...register('title', { required: 'Введите название тура' })} filled={value.title} />
+			<Input placeholder='Тип тура' {...register('type', { required: 'Введите тип тура' })} filled={value.type} />
 			<p className={styles.blockTitle}>Краткая информация</p>
 			<p>
 				Оцените сложность тура по системе от 1 до 5, где 1 — очень легко, 5 — очень сложно. Поставьте примерный возраст
@@ -67,6 +77,10 @@ const FirstStep = ({ className, register, control, ...props }) => {
 					<Input placeholder='От' {...register('ageFrom')} filled={value.ageFrom} />
 					<Input placeholder='До' {...register('ageTo')} filled={value.ageTo} />
 				</div>
+			</div>
+			<div className={styles.buttons}>
+				<Button disabled>Предыдущий шаг</Button>
+				<Button onClick={nextStep}>Следующий шаг</Button>
 			</div>
 		</div>
 	)

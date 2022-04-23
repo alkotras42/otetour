@@ -25,13 +25,12 @@ const AddTour = () => {
 		questions: [{}],
 	}
 
-	console.log(defaultValues.dates)
 	const [formStep, setFormStep] = useState(1)
 	const { user, setUser } = useContext(UserContext)
 
 	const [value, setValue] = useState({ id: 1 })
 
-	const { register, control, watch } = useForm({ defaultValues: defaultValues })
+	const { register, control, watch, trigger } = useForm({ defaultValues: defaultValues, mode: 'all' })
 
 	useEffect(() => {
 		if (user) {
@@ -39,9 +38,11 @@ const AddTour = () => {
 		}
 	}, [user])
 
-	const nextStep = () => {
-		setFormStep((prev) => prev + 1)
-		document.documentElement.scrollTop = 0
+	const nextStep = async () => {
+		const result = await trigger()
+		console.log(result)
+		// setFormStep((prev) => prev + 1)
+		// document.documentElement.scrollTop = 0
 	}
 
 	const prevStep = () => {
@@ -61,6 +62,8 @@ const AddTour = () => {
 				<form>
 					<div className={styles.forms}>
 						<FirstStep
+							formStep={formStep}
+							setFormStep={setFormStep}
 							control={control}
 							register={register}
 							className={cn({
@@ -68,6 +71,8 @@ const AddTour = () => {
 							})}
 						/>
 						<SecondStep
+							formStep={formStep}
+							setFormStep={setFormStep}
 							control={control}
 							register={register}
 							className={cn({
@@ -75,6 +80,8 @@ const AddTour = () => {
 							})}
 						/>
 						<ThirdStep
+							formStep={formStep}
+							setFormStep={setFormStep}
 							control={control}
 							register={register}
 							className={cn({
@@ -82,6 +89,8 @@ const AddTour = () => {
 							})}
 						/>
 						<FourthStep
+							formStep={formStep}
+							setFormStep={setFormStep}
 							control={control}
 							register={register}
 							className={cn({
@@ -89,6 +98,8 @@ const AddTour = () => {
 							})}
 						/>
 						<FifthStep
+							formStep={formStep}
+							setFormStep={setFormStep}
 							control={control}
 							register={register}
 							className={cn({
@@ -97,26 +108,6 @@ const AddTour = () => {
 						/>
 					</div>
 				</form>
-				<div>
-					{formStep == 5 ? (
-						<div>
-							<div className={styles.buttons}>
-								<Button disabled={formStep == 1} onClick={prevStep}>
-									Предыдущий шаг
-								</Button>
-								<Button color='white'>Сохранить в черновики</Button>
-							</div>
-							<Button className={styles.submitButton}>Отправить на модерацию</Button>
-						</div>
-					) : (
-						<div className={styles.buttons}>
-							<Button disabled={formStep == 1} onClick={prevStep}>
-								Предыдущий шаг
-							</Button>
-							<Button onClick={nextStep}>Следующий шаг</Button>
-						</div>
-					)}
-				</div>
 			</div>
 		</div>
 	)

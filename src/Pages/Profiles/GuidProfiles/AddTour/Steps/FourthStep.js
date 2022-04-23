@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, TextArea } from '../../../../../Component'
+import { Button, Input, TextArea } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import PlusIcon from '../plusIcon.svg'
@@ -7,7 +7,7 @@ import PhotoIcon from '../photo.svg'
 import { useFieldArray, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
-const FourthStep = ({ className, control, register, ...props }) => {
+const FourthStep = ({ className, control, register, formStep, setFormStep, ...props }) => {
 	const {
 		fields: includeFields,
 		append: includeAppend,
@@ -46,6 +46,20 @@ const FourthStep = ({ className, control, register, ...props }) => {
 	const addServise = () => {
 		servisesAppend({})
 	}
+	const nextStep = async (e) => {
+		e.preventDefault()
+		// const result = await trigger()
+		// console.log(result)
+		setFormStep((prev) => prev + 1)
+		document.documentElement.scrollTop = 0
+	}
+
+	const prevStep = (e) => {
+		e.preventDefault()
+		setFormStep((prev) => prev - 1)
+		document.documentElement.scrollTop = 0
+	}
+
 	return (
 		<div className={className} {...props}>
 			<p className={styles.blockTitle}>Проживание</p>
@@ -105,6 +119,10 @@ const FourthStep = ({ className, control, register, ...props }) => {
 			<div className={styles.addBlock} onClick={addServise}>
 				<img src={PlusIcon} alt='' />
 				<p>Добавить услугу</p>
+			</div>
+			<div className={styles.buttons}>
+				<Button onClick={prevStep}>Предыдущий шаг</Button>
+				<Button onClick={nextStep}>Следующий шаг</Button>
 			</div>
 		</div>
 	)

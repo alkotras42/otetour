@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Input } from '../../../../../Component'
+import { Button, Input } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import PlusIcon from '../plusIcon.svg'
 import { useFieldArray, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
-const SecondStep = ({ className, control, register, ...props }) => {
+const SecondStep = ({ className, control, register, formStep, setFormStep, ...props }) => {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'dates',
@@ -21,6 +21,20 @@ const SecondStep = ({ className, control, register, ...props }) => {
 		append({})
 	}
 
+	const nextStep = async (e) => {
+		e.preventDefault()
+		// const result = await trigger()
+		// console.log(result)
+		setFormStep((prev) => prev + 1)
+		document.documentElement.scrollTop = 0
+	}
+
+	const prevStep = (e) => {
+		e.preventDefault()
+		setFormStep((prev) => prev - 1)
+		document.documentElement.scrollTop = 0
+	}
+
 	return (
 		<div className={className} {...props}>
 			<p className={styles.blockTitle}>Даты тура</p>
@@ -28,7 +42,11 @@ const SecondStep = ({ className, control, register, ...props }) => {
 				<div key={field.id} className={styles.dateItem}>
 					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => remove(index)} />}
 					<div className={styles.twoInputs}>
-						<Input placeholder='С' {...register(`dates.${index}.dateFrom`)} filled={value[index]?.dateFrom} />
+						<Input
+							placeholder='С'
+							{...register(`dates.${index}.dateFrom`, { required: 'Введите дату' })}
+							filled={value[index]?.dateFrom}
+						/>
 						<Input placeholder='До' {...register(`dates.${index}.dateTo`)} filled={value[index]?.dateTo} />
 					</div>
 					<div className={styles.places}>
@@ -78,6 +96,10 @@ const SecondStep = ({ className, control, register, ...props }) => {
 			<div className={styles.addBlock} onClick={addDate}>
 				<img src={PlusIcon} alt='' />
 				<p>Добавить дату</p>
+			</div>
+			<div className={styles.buttons}>
+				<Button onClick={prevStep}>Предыдущий шаг</Button>
+				<Button onClick={nextStep}>Следующий шаг</Button>
 			</div>
 		</div>
 	)
