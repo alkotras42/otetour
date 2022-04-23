@@ -67,3 +67,22 @@
 .eye:hover {
 	opacity: 1;
 }
+
+.inputError {
+	border: 1px solid #f0493e;
+}
+
+.error {
+	margin-top: 8px;
+	margin-left: 5px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	line-height: 20px;
+	color: #f0493e;
+}
+
+input[disabled='disabled'],
+input:disabled,
+input:disabled + .label {
+	opacity: 0.5;
+}

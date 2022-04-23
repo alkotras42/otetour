@@ -38,18 +38,6 @@ const AddTour = () => {
 		}
 	}, [user])
 
-	const nextStep = async () => {
-		const result = await trigger()
-		console.log(result)
-		// setFormStep((prev) => prev + 1)
-		// document.documentElement.scrollTop = 0
-	}
-
-	const prevStep = () => {
-		setFormStep((prev) => prev - 1)
-		document.documentElement.scrollTop = 0
-	}
-
 	const [loading, setLoading] = useState(false)
 
 	return (
@@ -62,6 +50,7 @@ const AddTour = () => {
 				<form>
 					<div className={styles.forms}>
 						<FirstStep
+							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}
@@ -71,6 +60,7 @@ const AddTour = () => {
 							})}
 						/>
 						<SecondStep
+							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}
@@ -80,6 +70,7 @@ const AddTour = () => {
 							})}
 						/>
 						<ThirdStep
+							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}
@@ -89,6 +80,7 @@ const AddTour = () => {
 							})}
 						/>
 						<FourthStep
+							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}
@@ -98,6 +90,7 @@ const AddTour = () => {
 							})}
 						/>
 						<FifthStep
+							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}

@@ -4,10 +4,10 @@ import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import PlusIcon from '../plusIcon.svg'
 import PhotoIcon from '../photo.svg'
-import { useFieldArray, useWatch } from 'react-hook-form'
+import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
-const FourthStep = ({ className, control, register, formStep, setFormStep, ...props }) => {
+const FourthStep = ({ className, control, register, formStep, setFormStep, trigger, ...props }) => {
 	const {
 		fields: includeFields,
 		append: includeAppend,
@@ -37,6 +37,8 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, ...pr
 		control,
 	})
 
+	const { errors } = useFormState({ control })
+
 	const addInclude = () => {
 		includeAppend({})
 	}
@@ -48,10 +50,11 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, ...pr
 	}
 	const nextStep = async (e) => {
 		e.preventDefault()
-		// const result = await trigger()
-		// console.log(result)
-		setFormStep((prev) => prev + 1)
-		document.documentElement.scrollTop = 0
+		const result = await trigger(['residenceType', 'residenceDescription'], { shouldFocus: true })
+		if (result) {
+			setFormStep((prev) => prev + 1)
+			document.documentElement.scrollTop = 0
+		}
 	}
 
 	const prevStep = (e) => {
@@ -63,14 +66,24 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, ...pr
 	return (
 		<div className={className} {...props}>
 			<p className={styles.blockTitle}>Проживание</p>
-			<Input placeholder='Тип проживания' name='residenceType' />
+			<Input
+				placeholder='Тип проживания'
+				{...register('residenceType', { required: 'Введите тип проживания' })}
+				filled={value.residenceType}
+				error={errors.residenceType}
+			/>
 			<div className={styles.residence}>
 				<img className={styles.addPhoto} src={PhotoIcon} alt='' />
-				<TextArea placeholder='Описание проживания' name='residenceDescription' />
+				<TextArea
+					placeholder='Описание проживания'
+					{...register('residenceDescription', { required: 'Введите описание проживания' })}
+					filled={value.residenceDescription}
+					error={errors.residenceDescription}
+				/>
 			</div>
 			<p className={styles.blockTitle}>Сообщение для туристов</p>
 			<p>Вы можете задать приветственное сообщение, которое будет присылаться всем туристам при покупке тура.</p>
-			<TextArea placeholder='Сообщение' name='message' />
+			<TextArea placeholder='Сообщение' {...register('message')} filled={value.message} />
 			<p className={styles.blockTitle}>Условия</p>
 			<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 			{includeFields.map((field, index) => (
