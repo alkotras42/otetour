@@ -92,6 +92,7 @@ const ProfileEdit = () => {
 	}
 
 	const saveAvatar = () => {
+		console.log(avatarRef.current)
 		const img = avatarRef.current.getImage().toDataURL()
 		setValue({ ...value, avatar: img })
 		setAvatarEdit({ ...avatarEdit, image: null })

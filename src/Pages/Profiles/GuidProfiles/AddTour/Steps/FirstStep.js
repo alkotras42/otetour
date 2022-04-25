@@ -36,7 +36,7 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			['title', 'type', 'country', 'tourLength', 'groupSize', 'groupLanguage', 'tourPrice', 'ageFrom', 'ageTo'],
 			{ shouldFocus: true }
 		)
-		if (result) {
+		if (true) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}

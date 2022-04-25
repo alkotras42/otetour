@@ -28,15 +28,17 @@ const AddTour = () => {
 	const [formStep, setFormStep] = useState(1)
 	const { user, setUser } = useContext(UserContext)
 
-	const [value, setValue] = useState({ id: 1 })
+	const [userData, setUserData] = useState({ id: 1 })
 
-	const { register, control, watch, trigger } = useForm({ defaultValues: defaultValues, mode: 'all' })
+	const { register, control, watch, trigger, setValue } = useForm({ defaultValues: defaultValues, mode: 'all' })
 
 	useEffect(() => {
 		if (user) {
-			setValue({ id: user.profile.id })
+			setUserData({ id: user.profile.id })
 		}
 	}, [user])
+
+	// console.log(watch())
 
 	const [loading, setLoading] = useState(false)
 
@@ -44,7 +46,8 @@ const AddTour = () => {
 		<div className={styles.tourPay}>
 			<div className={styles.tourPayWrapper}>
 				<div className={styles.breadcrumbs}>
-					<Link to='/'>Главная</Link> / <Link to={'/user/tours/' + hashids.encode(value.id)}>Мои туры</Link> / Добавить тур
+					<Link to='/'>Главная</Link> / <Link to={'/user/tours/' + hashids.encode(userData.id)}>Мои туры</Link> / Добавить
+					тур
 				</div>
 				<p className={styles.title}>Добавить тур</p>
 				<form>
@@ -70,6 +73,7 @@ const AddTour = () => {
 							})}
 						/>
 						<ThirdStep
+							setValue={setValue}
 							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
@@ -90,7 +94,6 @@ const AddTour = () => {
 							})}
 						/>
 						<FifthStep
-							trigger={trigger}
 							formStep={formStep}
 							setFormStep={setFormStep}
 							control={control}
