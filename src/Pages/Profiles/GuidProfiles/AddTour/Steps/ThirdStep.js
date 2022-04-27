@@ -65,7 +65,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	}
 
 	const removeTourImage = (index) => {
-		setTourImages({ ...tourImages, images: [tourImages.images.filter((_, i) => i !== index)] }) // Убираем из стейта объект по индексу
+		setTourImages({ ...tourImages, images: tourImages.images.filter((_, i) => i !== index) }) // Убираем из стейта объект по индексу
 	}
 
 	const prevStep = (e) => {
@@ -125,12 +125,14 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 								<img src={image} alt='' className={styles.tourImage} />
 							</div>
 						))}
-					<img
-						className={styles.addPhoto}
-						src={PhotoIcon}
-						alt=''
-						onClick={() => setTourImages({ ...tourImages, modal: true })}
-					/>
+					{tourImages.images.length < 10 ? (
+						<img
+							className={styles.addPhoto}
+							src={PhotoIcon}
+							alt=''
+							onClick={() => setTourImages({ ...tourImages, modal: true })}
+						/>
+					) : null}
 				</>
 			</div>
 

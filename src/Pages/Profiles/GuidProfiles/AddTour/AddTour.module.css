@@ -222,6 +222,7 @@
 .tourImages {
 	display: flex;
 	gap: 10px;
+	flex-wrap: wrap;
 }
 
 .tourImageItem {
