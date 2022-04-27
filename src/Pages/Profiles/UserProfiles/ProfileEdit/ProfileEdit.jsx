@@ -7,7 +7,7 @@ import whatsappIcon from './whatsapp.svg'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileEdit.module.css'
 import { Button, Input } from '../../../../Component'
-import { hashids, PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
+import { hashids, imageFilter, PersonalInfoSchema, PersonalPasswordSchema } from '../../../../Helpers/helpers'
 import Modal from 'react-modal'
 import AvatarEditor from 'react-avatar-editor'
 import Dropzone from 'react-dropzone'
@@ -78,12 +78,11 @@ const ProfileEdit = () => {
 	}
 
 	const handleDrop = (dropped) => {
-		if (dropped[0].size > 5e6) {
-			setError({ avatarError: 'Изображение не должно превышать 5Мб' })
-		} else if (dropped[0].type.toString() !== ('image/jpeg' || 'image/png')) {
-			setError({ avatarError: 'Неверный тип файла, выберите изображение формата png, jpg или jpeg' })
-		} else {
+		const response = imageFilter(dropped[0])
+		if (response.ok) {
 			setAvatarEdit({ ...avatarEdit, image: dropped[0] })
+		} else {
+			setError({ avatarError: response.message })
 		}
 	}
 

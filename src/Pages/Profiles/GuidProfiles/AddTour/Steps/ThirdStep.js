@@ -8,6 +8,7 @@ import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 import Modal from 'react-modal'
 import Dropzone from 'react-dropzone'
+import { imageFilter } from '../../../../../Helpers/helpers'
 
 const ThirdStep = ({ className, control, register, formStep, setFormStep, trigger, setValue, ...props }) => {
 	const [days, setDays] = useState([{ modal: false, image: '' }])
@@ -62,11 +63,8 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	}
 
 	const handleDrop = (dropped, index) => {
-		if (dropped[0].size > 5e6) {
-			setImageError('Изображение не должно превышать 5Мб')
-		} else if (dropped[0].type.toString() !== ('image/jpeg' || 'image/png')) {
-			setImageError('Неверный тип файла, выберите изображение формата png, jpg или jpeg')
-		} else {
+		const response = imageFilter(dropped[0])
+		if (response.ok) {
 			setImageError(null)
 			const img = dropped[0]
 			const reader = new FileReader()
@@ -76,7 +74,24 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 				setDays(d)
 			}
 			reader.readAsDataURL(img)
+		} else {
+			setImageError(response.message)
 		}
+		// if (dropped[0].size > 5e6) {
+		// 	setImageError('Изображение не должно превышать 5Мб')
+		// } else if (dropped[0].type.toString() !== ('image/jpeg' || 'image/png')) {
+		// 	setImageError('Неверный тип файла, выберите изображение формата png, jpg или jpeg')
+		// } else {
+		// 	setImageError(null)
+		// 	const img = dropped[0]
+		// 	const reader = new FileReader()
+		// 	reader.onload = (event) => {
+		// 		const d = [...days] // create the copy of state array
+		// 		d[index] = { modal: false, image: event.target.result } //new value
+		// 		setDays(d)
+		// 	}
+		// 	reader.readAsDataURL(img)
+		// }
 	}
 
 	return (
