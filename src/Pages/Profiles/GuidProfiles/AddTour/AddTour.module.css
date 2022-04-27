@@ -219,6 +219,33 @@
 	transition: border 0.24s ease-in-out;
 }
 
+.tourImages {
+	display: flex;
+	gap: 10px;
+}
+
+.tourImageItem {
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+
+.tourImage {
+	width: inherit;
+	height: inherit;
+	object-fit: cover;
+}
+
+.tourImageCloseIcon {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: rgba(255, 255, 255, 0.8);
+	cursor: pointer;
+}
+
 .uploadImage {
 	background: red;
 	position: absolute;
