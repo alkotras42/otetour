@@ -69,7 +69,7 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 					<Button onClick={prevStep}>Предыдущий шаг</Button>
 					<Button color='white'>Сохранить в черновики</Button>
 				</div>
-				<Button className={styles.submitButton}>Отправить на модерацию</Button>
+				<Button type="submit" className={styles.submitButton}>Отправить на модерацию</Button>
 			</div>
 		</div>
 	)

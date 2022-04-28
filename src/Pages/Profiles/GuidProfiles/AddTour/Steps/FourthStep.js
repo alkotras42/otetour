@@ -6,6 +6,9 @@ import PlusIcon from '../plusIcon.svg'
 import PhotoIcon from '../photo.svg'
 import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
+import Modal from 'react-modal'
+import Dropzone from 'react-dropzone'
+import { imageFilter } from '../../../../../Helpers/helpers'
 
 const FourthStep = ({ className, control, register, formStep, setFormStep, trigger, ...props }) => {
 	const {
@@ -38,6 +41,28 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 	})
 
 	const { errors } = useFormState({ control })
+
+	const [residentImage, setResidentImage] = useState({ modal: false, image: null })
+
+	const [imageError, setImageError] = useState(null)
+
+	const handleResidentImageDrop = (dropped) => {
+		const response = imageFilter(dropped[0])
+		if (response.ok) {
+			setImageError(null)
+			const img = dropped[0]
+			const reader = new FileReader()
+			reader.onload = (event) => {
+				// const d = [...days] // create the copy of state array
+				// d[index] = { modal: false, image: event.target.result } //new value
+				// setDays(d)
+				setResidentImage({ modal: false, image: event.target.result })
+			}
+			reader.readAsDataURL(img)
+		} else {
+			setImageError(response.message)
+		}
+	}
 
 	const addInclude = () => {
 		includeAppend({})
@@ -73,13 +98,36 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 				error={errors.residenceType}
 			/>
 			<div className={styles.residence}>
-				<img className={styles.addPhoto} src={PhotoIcon} alt='' />
+				<img
+					className={styles.addPhoto}
+					src={PhotoIcon}
+					alt=''
+					onClick={() => setResidentImage({ ...residentImage, modal: true })}
+				/>
+				{residentImage.image && <img className={styles.residentImage} src={residentImage.image} alt='' />}
 				<TextArea
 					placeholder='Описание проживания'
 					{...register('residenceDescription', { required: 'Введите описание проживания' })}
 					filled={value.residenceDescription}
 					error={errors.residenceDescription}
 				/>
+				<Modal
+					isOpen={residentImage.modal}
+					onRequestClose={() => setResidentImage({ ...residentImage, modal: false })}
+					className={styles.modal}
+				>
+					{imageError && <p className={styles.error}>{imageError}</p>}
+					<Dropzone onDropAccepted={handleResidentImageDrop}>
+						{({ getRootProps, getInputProps }) => (
+							<div {...getRootProps({ className: styles.dropzone })}>
+								<div>
+									<input {...getInputProps()} />
+									<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+								</div>
+							</div>
+						)}
+					</Dropzone>
+				</Modal>
 			</div>
 			<p className={styles.blockTitle}>Сообщение для туристов</p>
 			<p>Вы можете задать приветственное сообщение, которое будет присылаться всем туристам при покупке тура.</p>

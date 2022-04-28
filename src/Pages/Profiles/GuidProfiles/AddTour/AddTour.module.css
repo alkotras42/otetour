@@ -94,6 +94,10 @@
 	color: #3762ae !important;
 }
 
+.diffError {
+	border: 1px solid #ff3535 !important;
+}
+
 .ages {
 	margin-top: 20px;
 	display: grid;
@@ -264,7 +268,8 @@
 	z-index: 5;
 }
 
-.dayImage {
+.dayImage,
+.residentImage {
 	width: 100px;
 	height: 100px;
 	object-fit: cover;

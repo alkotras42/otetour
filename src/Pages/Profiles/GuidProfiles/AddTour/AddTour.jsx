@@ -30,7 +30,10 @@ const AddTour = () => {
 
 	const [userData, setUserData] = useState({ id: 1 })
 
-	const { register, control, watch, trigger, setValue } = useForm({ defaultValues: defaultValues, mode: 'all' })
+	const { register, control, watch, trigger, setValue, handleSubmit } = useForm({
+		defaultValues: defaultValues,
+		mode: 'all',
+	})
 
 	useEffect(() => {
 		if (user) {
@@ -38,7 +41,9 @@ const AddTour = () => {
 		}
 	}, [user])
 
-	// console.log(watch())
+	const onSubmit = (data) => {
+		console.log(data)
+	}
 
 	const [loading, setLoading] = useState(false)
 
@@ -50,7 +55,7 @@ const AddTour = () => {
 					тур
 				</div>
 				<p className={styles.title}>Добавить тур</p>
-				<form>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.forms}>
 						<FirstStep
 							trigger={trigger}

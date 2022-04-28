@@ -40,7 +40,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	const nextStep = async (e) => {
 		e.preventDefault()
 		const result = await trigger(['description', 'days'], { shouldFocus: true })
-		if (true) {
+		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}

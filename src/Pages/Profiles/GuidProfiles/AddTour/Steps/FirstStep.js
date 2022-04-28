@@ -4,16 +4,17 @@ import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import { useFieldArray, useWatch, Controller, useFormState } from 'react-hook-form'
 
-const DiffPiker = forwardRef(({ value, setValue }, ref) => {
+const DiffPiker = forwardRef(({ value, setValue, error }, ref) => {
 	return (
 		<div className={styles.difficulty}>
 			<span>Сложность тура</span>
 			<div ref={ref} className={styles.diffContainer}>
 				{[...Array(5).keys()].map((item, i) => (
 					<div
-						onClick={() => setValue(i + 1)}
+						onClick={() => setValue(i)}
 						className={cn(styles.diffItem, {
 							[styles.activeItem]: value == i,
+							[styles.diffError]: error,
 						})}
 						key={i}
 					>
@@ -21,6 +22,7 @@ const DiffPiker = forwardRef(({ value, setValue }, ref) => {
 					</div>
 				))}
 			</div>
+			{error && <p className={styles.error}>{error.message}</p>}
 		</div>
 	)
 })
@@ -33,10 +35,21 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 	const nextStep = async (e) => {
 		e.preventDefault()
 		const result = await trigger(
-			['title', 'type', 'country', 'tourLength', 'groupSize', 'groupLanguage', 'tourPrice', 'ageFrom', 'ageTo'],
+			[
+				'title',
+				'type',
+				'country',
+				'tourLength',
+				'groupSize',
+				'groupLanguage',
+				'tourPrice',
+				'ageFrom',
+				'ageTo',
+				'difficulty',
+			],
 			{ shouldFocus: true }
 		)
-		if (true) {
+		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}
@@ -102,10 +115,10 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 				купившего этот тур.
 			</p>
 			<Controller
-				render={({ field }) => <DiffPiker value={field.value} setValue={field.onChange} />}
+				render={({ field }) => <DiffPiker value={field.value} setValue={field.onChange} error={errors.difficulty} />}
 				name='difficulty'
 				control={control}
-				defaultValue=''
+				rules={{ required: 'Укажите сложность тура' }}
 			/>
 
 			<div className={styles.ages}>
