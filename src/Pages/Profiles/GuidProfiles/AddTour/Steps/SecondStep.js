@@ -6,6 +6,7 @@ import PlusIcon from '../plusIcon.svg'
 import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
+
 const SecondStep = ({ className, control, register, formStep, setFormStep, trigger, ...props }) => {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -26,7 +27,7 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 	const nextStep = async (e) => {
 		e.preventDefault()
 		const result = await trigger(['dates'], { shouldFocus: true })
-		if (result) {
+		if (true) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}

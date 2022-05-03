@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, TextArea } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
@@ -9,13 +9,17 @@ import CloseIcon from '../closeIcon.svg'
 import Modal from 'react-modal'
 import Dropzone from 'react-dropzone'
 import { imageFilter } from '../../../../../Helpers/helpers'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
 
 const ThirdStep = ({ className, control, register, formStep, setFormStep, trigger, setValue, ...props }) => {
-	const [days, setDays] = useState([{ modal: false, image: '' }])
+	const [days, setDays] = useState([{ modal: false, cropper: '', image: '' }])
 
-	const [tourImages, setTourImages] = useState({ modal: false, images: [] })
+	const [tourImages, setTourImages] = useState({ modal: false, cropper: '', images: [] })
 
 	const [imageError, setImageError] = useState(null)
+
+	const cropperRef = useRef()
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -29,7 +33,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 
 	const addDay = () => {
 		append({})
-		setDays([...days, { modal: false }])
+		setDays([...days, { modal: false, cropper: '', image: '' }])
 	}
 
 	const removeDay = (index) => {
@@ -46,6 +50,12 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 		}
 	}
 
+	const handleTourImageCropp = () => {
+		const img = cropperRef?.current
+		const cropper = img?.cropper
+		setTourImages({ modal: false, cropper: '', images: [...tourImages.images, cropper.getCroppedCanvas().toDataURL()] })
+	}
+
 	const handleTourImageDrop = (dropped) => {
 		const response = imageFilter(dropped[0])
 		if (response.ok) {
@@ -56,7 +66,8 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 				// const d = [...days] // create the copy of state array
 				// d[index] = { modal: false, image: event.target.result } //new value
 				// setDays(d)
-				setTourImages({ modal: false, images: [...tourImages.images, event.target.result] })
+				// setTourImages({ modal: false, images: [...tourImages.images, event.target.result] })
+				setTourImages({ ...tourImages, cropper: event.target.result })
 			}
 			reader.readAsDataURL(img)
 		} else {
@@ -87,6 +98,14 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 		setDays(d)
 	}
 
+	const handleDaysImageCropp = (index) => {
+		const img = cropperRef?.current
+		const cropper = img?.cropper
+		const d = [...days] // create the copy of state array
+		d[index] = { modal: false, cropper: '', image: cropper.getCroppedCanvas().toDataURL() } //new value
+		setDays(d)
+	}
+
 	const handleDayImageDrop = (dropped, index) => {
 		const response = imageFilter(dropped[0])
 		if (response.ok) {
@@ -95,7 +114,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			const reader = new FileReader()
 			reader.onload = (event) => {
 				const d = [...days] // create the copy of state array
-				d[index] = { modal: false, image: event.target.result } //new value
+				d[index] = { modal: true, cropper: event.target.result } //new value
 				setDays(d)
 			}
 			reader.readAsDataURL(img)
@@ -141,17 +160,36 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 				onRequestClose={() => setTourImages({ ...tourImages, modal: false })}
 				className={styles.modal}
 			>
-				{imageError && <p className={styles.error}>{imageError}</p>}
-				<Dropzone onDropAccepted={handleTourImageDrop}>
-					{({ getRootProps, getInputProps }) => (
-						<div {...getRootProps({ className: styles.dropzone })}>
-							<div>
-								<input {...getInputProps()} />
-								<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
-							</div>
-						</div>
-					)}
-				</Dropzone>
+				{tourImages.cropper ? (
+					<>
+						<Cropper
+							style={{ height: 400, width: '100%' }}
+							ref={cropperRef}
+							// background={false}
+							aspectRatio={15 / 9}
+							rotatable={false}
+							src={tourImages.cropper}
+							viewMode={2}
+							zoom={0.7}
+							// crop={onCrop}
+						/>
+						<Button onClick={handleTourImageCropp}>Сохранить</Button>
+					</>
+				) : (
+					<>
+						{imageError && <p className={styles.error}>{imageError}</p>}
+						<Dropzone onDropAccepted={handleTourImageDrop}>
+							{({ getRootProps, getInputProps }) => (
+								<div {...getRootProps({ className: styles.dropzone })}>
+									<div>
+										<input {...getInputProps()} />
+										<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+									</div>
+								</div>
+							)}
+						</Dropzone>
+					</>
+				)}
 			</Modal>
 			<p className={styles.blockTitle}>Программа по дням</p>
 			<p>Распишите подробную программу по дням, добавьте фотографии.</p>
@@ -165,17 +203,36 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 						<img className={styles.addPhoto} src={PhotoIcon} onClick={() => openDayImageModal(index)} alt='' />
 						{days[index].image && <img className={styles.dayImage} src={days[index].image} alt='' />}
 						<Modal isOpen={days[index].modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
-							{imageError && <p className={styles.error}>{imageError}</p>}
-							<Dropzone onDropAccepted={(dropped) => handleDayImageDrop(dropped, index)}>
-								{({ getRootProps, getInputProps }) => (
-									<div {...getRootProps({ className: styles.dropzone })}>
-										<div>
-											<input {...getInputProps()} />
-											<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
-										</div>
-									</div>
-								)}
-							</Dropzone>
+							{days[index].cropper ? (
+								<>
+									<Cropper
+										style={{ height: 400, width: '100%' }}
+										ref={cropperRef}
+										// background={false}
+										aspectRatio={15 / 9}
+										rotatable={false}
+										src={days[index].cropper}
+										viewMode={2}
+										zoom={0.7}
+										// crop={onCrop}
+									/>
+									<Button onClick={() => handleDaysImageCropp(index)}>Сохранить</Button>
+								</>
+							) : (
+								<>
+									{imageError && <p className={styles.error}>{imageError}</p>}
+									<Dropzone onDropAccepted={(dropped) => handleDayImageDrop(dropped, index)}>
+										{({ getRootProps, getInputProps }) => (
+											<div {...getRootProps({ className: styles.dropzone })}>
+												<div>
+													<input {...getInputProps()} />
+													<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+												</div>
+											</div>
+										)}
+									</Dropzone>
+								</>
+							)}
 						</Modal>
 
 						<TextArea

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, Input, TextArea } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
@@ -9,6 +9,8 @@ import CloseIcon from '../closeIcon.svg'
 import Modal from 'react-modal'
 import Dropzone from 'react-dropzone'
 import { imageFilter } from '../../../../../Helpers/helpers'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
 
 const FourthStep = ({ className, control, register, formStep, setFormStep, trigger, ...props }) => {
 	const {
@@ -42,9 +44,17 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 
 	const { errors } = useFormState({ control })
 
-	const [residentImage, setResidentImage] = useState({ modal: false, image: null })
+	const [residentImage, setResidentImage] = useState({ modal: false, cropper: '', image: null })
 
 	const [imageError, setImageError] = useState(null)
+
+	const cropperRef = useRef()
+
+	const handleResidentImageCropp = () => {
+		const img = cropperRef?.current
+		const cropper = img?.cropper
+		setResidentImage({ modal: false, cropper: '', image: cropper.getCroppedCanvas().toDataURL() })
+	}
 
 	const handleResidentImageDrop = (dropped) => {
 		const response = imageFilter(dropped[0])
@@ -56,7 +66,7 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 				// const d = [...days] // create the copy of state array
 				// d[index] = { modal: false, image: event.target.result } //new value
 				// setDays(d)
-				setResidentImage({ modal: false, image: event.target.result })
+				setResidentImage({ ...residentImage, cropper: event.target.result })
 			}
 			reader.readAsDataURL(img)
 		} else {
@@ -116,17 +126,36 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 					onRequestClose={() => setResidentImage({ ...residentImage, modal: false })}
 					className={styles.modal}
 				>
-					{imageError && <p className={styles.error}>{imageError}</p>}
-					<Dropzone onDropAccepted={handleResidentImageDrop}>
-						{({ getRootProps, getInputProps }) => (
-							<div {...getRootProps({ className: styles.dropzone })}>
-								<div>
-									<input {...getInputProps()} />
-									<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
-								</div>
-							</div>
-						)}
-					</Dropzone>
+					{residentImage.cropper ? (
+						<>
+							<Cropper
+								style={{ height: 400, width: '100%' }}
+								ref={cropperRef}
+								// background={false}
+								aspectRatio={15 / 9}
+								rotatable={false}
+								src={residentImage.cropper}
+								viewMode={2}
+								zoom={0.7}
+								// crop={onCrop}
+							/>
+							<Button onClick={handleResidentImageCropp}>Сохранить</Button>
+						</>
+					) : (
+						<>
+							{imageError && <p className={styles.error}>{imageError}</p>}
+							<Dropzone onDropAccepted={handleResidentImageDrop}>
+								{({ getRootProps, getInputProps }) => (
+									<div {...getRootProps({ className: styles.dropzone })}>
+										<div>
+											<input {...getInputProps()} />
+											<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+										</div>
+									</div>
+								)}
+							</Dropzone>
+						</>
+					)}
 				</Modal>
 			</div>
 			<p className={styles.blockTitle}>Сообщение для туристов</p>

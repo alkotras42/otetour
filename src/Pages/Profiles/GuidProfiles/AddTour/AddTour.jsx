@@ -15,6 +15,7 @@ import FourthStep from './Steps/FourthStep'
 import FifthStep from './Steps/FifthStep'
 import { useForm } from 'react-hook-form'
 
+
 const AddTour = () => {
 	const defaultValues = {
 		dates: [{}],
