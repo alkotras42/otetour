@@ -1,8 +1,10 @@
-import React, { forwardRef, useState } from 'react'
-import { Button, Input } from '../../../../../Component'
+import React, { forwardRef, useEffect, useState } from 'react'
+import { Button, Input, Select } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import { useFieldArray, useWatch, Controller, useFormState } from 'react-hook-form'
+import { getCitiesOfCountry, getCitiesOfRegion, getCountries, getRegions } from '../../../../../Api/Locations'
+import { getCategories } from '../../../../../Api/Categories'
 
 const DiffPiker = forwardRef(({ value, setValue, error }, ref) => {
 	return (
@@ -28,9 +30,33 @@ const DiffPiker = forwardRef(({ value, setValue, error }, ref) => {
 })
 
 const FirstStep = ({ className, register, control, formStep, setFormStep, trigger, ...props }) => {
+	const [categories, setCategories] = useState({})
+	const [counties, setCounties] = useState({})
+	const [regions, setRegions] = useState({})
+	const [cities, setCities] = useState({})
+
 	const value = useWatch({
 		control,
 	})
+
+	// Получить регионы и катерогии при изменении страны
+	useEffect(() => {
+		;(async () => {
+			if (value?.country) {
+				setRegions(await getRegions(value.country))
+				setCities(await getCitiesOfCountry(value.country))
+			}
+		})()
+	}, [value?.country])
+
+	// Получить города при изменении региона
+	useEffect(() => {
+		;(async () => {
+			if (value.region) {
+				setCities(await getCitiesOfRegion(value.country, value.region))
+			}
+		})()
+	}, [value.region])
 
 	const nextStep = async (e) => {
 		e.preventDefault()
@@ -55,19 +81,27 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 		}
 	}
 
+	const getCountiesOptions = async () => {
+		if (!counties.length) {
+			setCounties(await getCountries())
+		}
+	}
+
+	const getCategoriesOptions = async () => {
+		if (!categories.length) {
+			setCategories(await getCategories())
+		}
+	}
+
 	const { errors } = useFormState({ control })
 
 	return (
 		<div className={className} {...props}>
-			<Input
-				placeholder='Название'
-				{...register('title', { required: 'Введите название тура' })}
-				filled={value.title}
-				error={errors.title}
-			/>
-			<Input
+			<Select
 				placeholder='Тип тура'
 				{...register('type', { required: 'Введите тип тура' })}
+				options={categories}
+				onClick={getCategoriesOptions}
 				filled={value.type}
 				error={errors.type}
 			/>
@@ -76,14 +110,30 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 				Оцените сложность тура по системе от 1 до 5, где 1 — очень легко, 5 — очень сложно. Поставьте примерный возраст
 				участия, исходя из сложности тура и возрастных ограничений.
 			</p>
-			<Input
+			<Select
 				placeholder='Страна'
 				{...register('country', { required: 'Введите страну' })}
+				onClick={getCountiesOptions}
+				options={counties}
 				filled={value.country}
 				error={errors.country}
 			/>
-			<Input disabled placeholder='Регион' {...register('region')} filled={value.region} error={errors.region} />
-			<Input disabled placeholder='Город' {...register('city')} filled={value.city} error={errors.city} />
+			<Select
+				disabled={!value.country || regions.length == 0}
+				placeholder='Регион'
+				{...register('region')}
+				options={regions}
+				filled={regions?.length !== 0 && value.region}
+				error={errors.region}
+			/>
+			<Select
+				disabled={!value.country || cities.length == 0}
+				placeholder='Город'
+				{...register('city')}
+				options={cities}
+				filled={cities?.length !== 0 && value.city}
+				error={errors.city}
+			/>
 			<div className={styles.twoInputs}>
 				<Input
 					placeholder='Длительность тура'
@@ -124,18 +174,8 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			<div className={styles.ages}>
 				<p>Возраст участия</p>
 				<div className={styles.twoInputs}>
-					<Input
-						placeholder='От'
-						{...register('ageFrom', { required: 'Введите минимальный возраст участия' })}
-						filled={value.ageFrom}
-						error={errors.ageFrom}
-					/>
-					<Input
-						placeholder='До'
-						{...register('ageTo', { required: 'Введите максимальный возраст участия' })}
-						filled={value.ageTo}
-						error={errors.ageTo}
-					/>
+					<Input placeholder='От' {...register('ageFrom')} filled={value.ageFrom} error={errors.ageFrom} />
+					<Input placeholder='До' {...register('ageTo')} filled={value.ageTo} error={errors.ageTo} />
 				</div>
 			</div>
 			<div className={styles.buttons}>

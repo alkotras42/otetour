@@ -43,6 +43,7 @@
 
 .forms > div,
 .dateItem,
+.lngBlock,
 .question {
 	display: grid;
 	gap: 15px;
@@ -64,9 +65,11 @@
 	align-items: center;
 }
 
-.diffContainer {
+.diffContainer,
+.removeLngBlock {
 	display: flex;
 	gap: 10px;
+	align-items: center;
 }
 
 .diffItem {
@@ -274,6 +277,13 @@
 	height: 100px;
 	object-fit: cover;
 	position: absolute;
+}
+
+.croppButton {
+	height: 50px;
+	width: 100%;
+	max-width: 250px;
+	margin-top: 20px;
 }
 
 .hide {

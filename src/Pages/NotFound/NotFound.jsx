@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import styles from './NotFound.module.css'
 
 export const NotFound = () => {
-	const { t } = useTranslation(t)
+	const { t } = useTranslation()
 	return (
 		<div className={styles.notFound}>
 			<div className={styles.notFoundWrapper}>

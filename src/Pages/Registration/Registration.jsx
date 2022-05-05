@@ -42,7 +42,6 @@ export const Registration = () => {
 					if (res.code == 200) {
 						setRegisterError(null)
 						setConfirm(true)
-						console.log(res)
 					} else {
 						setRegisterError('При регистрации произошла ошибка')
 					}

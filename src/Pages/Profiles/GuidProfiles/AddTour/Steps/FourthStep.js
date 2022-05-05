@@ -14,22 +14,6 @@ import 'cropperjs/dist/cropper.css'
 
 const FourthStep = ({ className, control, register, formStep, setFormStep, trigger, ...props }) => {
 	const {
-		fields: includeFields,
-		append: includeAppend,
-		remove: includeRemove,
-	} = useFieldArray({
-		control,
-		name: 'include',
-	})
-	const {
-		fields: excludeFields,
-		append: excludeAppend,
-		remove: excludeRemove,
-	} = useFieldArray({
-		control,
-		name: 'exclude',
-	})
-	const {
 		fields: servisesFields,
 		append: servisesAppend,
 		remove: servisesRemove,
@@ -129,17 +113,18 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 					{residentImage.cropper ? (
 						<>
 							<Cropper
-								style={{ height: 400, width: '100%' }}
+								style={{ height: 400, width: 900 }}
 								ref={cropperRef}
-								// background={false}
 								aspectRatio={15 / 9}
 								rotatable={false}
 								src={residentImage.cropper}
 								viewMode={2}
 								zoom={0.7}
-								// crop={onCrop}
+								minCropBoxWidth={150}
 							/>
-							<Button onClick={handleResidentImageCropp}>Сохранить</Button>
+							<Button className={styles.croppButton} onClick={handleResidentImageCropp}>
+								Сохранить
+							</Button>
 						</>
 					) : (
 						<>
@@ -161,36 +146,6 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 			<p className={styles.blockTitle}>Сообщение для туристов</p>
 			<p>Вы можете задать приветственное сообщение, которое будет присылаться всем туристам при покупке тура.</p>
 			<TextArea placeholder='Сообщение' {...register('message')} filled={value.message} />
-			<p className={styles.blockTitle}>Условия</p>
-			<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
-			{includeFields.map((field, index) => (
-				<div key={field.id} className={styles.flex}>
-					<Input
-						placeholder='Входит в стоимость'
-						{...register(`include.${index}.include`)}
-						filled={value?.include[index]?.include}
-					/>
-					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => includeRemove(index)} />}
-				</div>
-			))}
-			<div className={styles.addBlock} onClick={() => addInclude()}>
-				<img src={PlusIcon} alt='' />
-				<p>Добавить</p>
-			</div>
-			{excludeFields.map((field, index) => (
-				<div key={field.id} className={styles.flex}>
-					<Input
-						placeholder='Не входит в стоимость'
-						{...register(`exclude.${index}.exclude`)}
-						filled={value?.exclude[index]?.exclude}
-					/>
-					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => excludeRemove(index)} />}
-				</div>
-			))}
-			<div className={styles.addBlock} onClick={() => addExclude()}>
-				<img src={PlusIcon} alt='' />
-				<p>Добавить</p>
-			</div>
 
 			<p className={styles.blockTitle}>Дополнительные услуги</p>
 			<p>Обозначьте дополнительные услуги, которые могут быть предоставлены клиентам, укажите их стоимость</p>

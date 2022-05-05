@@ -43,7 +43,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 
 	const nextStep = async (e) => {
 		e.preventDefault()
-		const result = await trigger(['description', 'days'], { shouldFocus: true })
+		const result = await trigger(['days'], { shouldFocus: true })
 		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
@@ -63,10 +63,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			const img = dropped[0]
 			const reader = new FileReader()
 			reader.onload = (event) => {
-				// const d = [...days] // create the copy of state array
-				// d[index] = { modal: false, image: event.target.result } //new value
-				// setDays(d)
-				// setTourImages({ modal: false, images: [...tourImages.images, event.target.result] })
 				setTourImages({ ...tourImages, cropper: event.target.result })
 			}
 			reader.readAsDataURL(img)
@@ -125,14 +121,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 
 	return (
 		<div className={className} {...props}>
-			<p className={styles.blockTitle}>Описание тура</p>
-			<p>Задайте краткое, но понятное описание тура.</p>
-			<TextArea
-				placeholder='Описание тура'
-				{...register('description', { required: 'Введите описание тура' })}
-				filled={value.description}
-				error={errors.description}
-			/>
 			<p className={styles.blockTitle}>Фотографии</p>
 			<p>Добавьте до 10 изображений, показывающих основные впечатления тура.</p>
 			<div className={styles.tourImages}>
@@ -163,17 +151,18 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 				{tourImages.cropper ? (
 					<>
 						<Cropper
-							style={{ height: 400, width: '100%' }}
+							style={{ height: 400, width: 900 }}
 							ref={cropperRef}
-							// background={false}
 							aspectRatio={15 / 9}
 							rotatable={false}
 							src={tourImages.cropper}
 							viewMode={2}
 							zoom={0.7}
-							// crop={onCrop}
+							minCropBoxWidth={150}
 						/>
-						<Button onClick={handleTourImageCropp}>Сохранить</Button>
+						<Button className={styles.croppButton} onClick={handleTourImageCropp}>
+							Сохранить
+						</Button>
 					</>
 				) : (
 					<>
@@ -206,7 +195,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 							{days[index].cropper ? (
 								<>
 									<Cropper
-										style={{ height: 400, width: '100%' }}
+										style={{ height: 400, width: 900 }}
 										ref={cropperRef}
 										// background={false}
 										aspectRatio={15 / 9}
@@ -214,9 +203,12 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 										src={days[index].cropper}
 										viewMode={2}
 										zoom={0.7}
+										minCropBoxWidth={150}
 										// crop={onCrop}
 									/>
-									<Button onClick={() => handleDaysImageCropp(index)}>Сохранить</Button>
+									<Button className={styles.croppButton} onClick={() => handleDaysImageCropp(index)}>
+										Сохранить
+									</Button>
 								</>
 							) : (
 								<>

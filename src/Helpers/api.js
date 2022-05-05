@@ -12,4 +12,15 @@ export const API = {
 	transaction: {
 		get: `${URL}/translation`,
 	},
+	locations: {
+		continent: {
+			get: `${URL}/continent`,
+		},
+		countries: {
+			get: `${URL}/country`,
+		},
+	},
+	categories: {
+		get: `${URL}/categories`,
+	},
 }
