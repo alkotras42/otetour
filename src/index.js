@@ -8,6 +8,7 @@ import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import HttpApi from 'i18next-http-backend'
 import { i18nInit } from './Controller/LanguageController'
+import { Loading } from './Component'
 
 
 i18n
@@ -17,7 +18,7 @@ i18n
 	.init(i18nInit)
 
 ReactDOM.render(
-	<Suspense fallback='Loading...'>
+	<Suspense fallback={<Loading/>}>
 		<App />
 	</Suspense>,
 	document.getElementById('root')

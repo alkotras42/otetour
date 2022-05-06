@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getUserById } from '../../../../Api/Authorization'
-import { Button, Card, CardDate, Carousel } from '../../../../Component'
+import { Button, Card, CardDate, Carousel, Loading } from '../../../../Component'
 import { toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileMain.module.css'
@@ -49,7 +49,7 @@ const ProfileMain = () => {
 	return (
 		<div className={styles.profile}>
 			{!user ? (
-				<div>Loading...</div>
+				<Loading/>
 			) : (
 				<div className={styles.profileWrapper}>
 					<div className={styles.breadcrumbs}>

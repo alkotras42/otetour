@@ -225,8 +225,8 @@ export const Header = ({ className, ...props }) => {
 							})}
 						>
 							{languages &&
-								Object.values(languages).map(({ name, server, image }) => (
-									<div className={styles.languageItem}>
+								Object.values(languages).map(({ name, server, image }, index) => (
+									<div key={index} className={styles.languageItem}>
 										<a href={`//${server}`}>
 											<img src={image} alt={name} className={styles.languageItemIcon} />
 											<span key={name}>{name}</span>
@@ -293,8 +293,8 @@ export const Header = ({ className, ...props }) => {
 						})}
 					>
 						{languages &&
-							Object.values(languages).map(({ name, server, image }) => (
-								<div className={styles.languageItem}>
+							Object.values(languages).map(({ name, server, image }, index) => (
+								<div key={index} className={styles.languageItem}>
 									<a href={`//${server}`}>
 										<img src={image} alt={name} className={styles.languageItemIcon} />
 										<span key={name}>{name}</span>
