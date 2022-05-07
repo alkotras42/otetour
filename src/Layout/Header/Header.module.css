@@ -142,6 +142,9 @@
 
 .userMenu {
 	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 15px;
 }
 
 .userMenuDropdown {
@@ -160,6 +163,14 @@
 
 .userMenuBurger {
 	left: 20px;
+}
+
+.guideIdicator {
+	background: #63a583;
+	color: white;
+	border-radius: 15px;
+	padding: 10px 15px;
+	pointer-events: none;
 }
 
 .login {

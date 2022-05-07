@@ -22,14 +22,14 @@ export const Table = ({ className, type, data, ...props }) => {
 		<table className={className} {...props}>
 			<tbody>
 				<tr>
-					{headers.map((head) => (
-						<th>{head}</th>
+					{headers.map((head, index) => (
+						<th key={index}>{head}</th>
 					))}
 				</tr>
-				{data.map((row) => (
-					<tr>
-						{Object.values(row).map((cell) => (
-							<td>{Number.isInteger(cell) ? priceRu(cell) : cell}</td>
+				{data.map((row, index) => (
+					<tr key={index}>
+						{Object.values(row).map((cell, index) => (
+							<td key={index}>{Number.isInteger(cell) ? priceRu(cell) : cell}</td>
 						))}
 					</tr>
 				))}

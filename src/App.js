@@ -8,6 +8,7 @@ import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
 import { Registration, Login, Tour, Home } from './Pages/'
 import {
 	AddTour,
+	GuideProfileEdit,
 	GuideProfileMain,
 	GuideProfileTours,
 	ProfileChats,
@@ -99,7 +100,7 @@ const App = () => {
 						}
 					/>
 					<Route
-						path='/edit'
+						path='/user/edit'
 						element={
 							<PrivateRoute>
 								<ProfileEdit />
@@ -133,8 +134,16 @@ const App = () => {
 					<Route
 						path='/guide/:id'
 						element={
-							<PrivateRoute>
+							<PrivateRoute guide={true}>
 								<GuideProfileMain />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/guide/edit'
+						element={
+							<PrivateRoute guide={true}>
+								<GuideProfileEdit />
 							</PrivateRoute>
 						}
 					/>

@@ -72,9 +72,9 @@ export const Calendar = ({ className, placeholder, type, ...props }) => {
 				{Months.map((month, index) =>
 					// Если номер месяца меньшще чем номер текущего месяца, то отрисовываем его как неактивный
 					index < new Date().getMonth() && year == new Date().getFullYear() ? (
-						<div className={cn(styles.calendarItem, styles.calendarDisableItem)}>{month}</div>
+						<div key={index} className={cn(styles.calendarItem, styles.calendarDisableItem)}>{month}</div>
 					) : (
-						<div className={styles.calendarItem} onClick={changeDate}>
+						<div key={index} className={styles.calendarItem} onClick={changeDate}>
 							{month}
 						</div>
 					)

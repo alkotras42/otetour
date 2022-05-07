@@ -29,23 +29,7 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 
 	return (
 		<div className={className} {...props}>
-			<p className={styles.blockTitle}>Дополнительная информация</p>
-			<p>
-				Расскажите о том, какие требования предъявляются к туристам при участии в туре и посещении страны. Обозначьте
-				условия отмены — какая сумма вернется к туристу при отмене тура.
-			</p>
-			<TextArea
-				placeholder='Требования к туристам'
-				name='requirements'
-				{...register('requirements')}
-				filled={value.requirements}
-			/>
-			<TextArea
-				placeholder='Условия отмены'
-				name='cancelCondaction'
-				{...register('cancelCondaction')}
-				filled={value.cancelCondaction}
-			/>
+
 			<p className={styles.blockTitle}>Часто задаваемые вопросы</p>
 			<p>Распишите вопросы, которые могут возникнуть у пользователей по поводу тура.</p>
 			{fields.map((field, index) => (

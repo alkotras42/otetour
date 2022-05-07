@@ -8,6 +8,7 @@ import ProfileReviews from './UserProfiles/ProfileReviews/ProfileReviews'
 import ProfileFavoriteTours from './UserProfiles/ProfileFavoriteTours/ProfileFavoriteTours'
 import GuideProfileMain from './GuidProfiles/GuideProfileMain/GuideProfileMain'
 import GuideProfileTours from './GuidProfiles/GuideProfileTours/GuideProfileTours'
+import GuideProfileEdit from './GuidProfiles/GuideProfileEdit/GuideProfileEdit'
 import AddTour from './GuidProfiles/AddTour/AddTour'
 
 export {
@@ -21,5 +22,6 @@ export {
 	ProfileReviews,
 	GuideProfileMain,
 	GuideProfileTours,
+	GuideProfileEdit,
 	AddTour,
 }

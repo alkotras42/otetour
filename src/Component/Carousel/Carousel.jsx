@@ -36,7 +36,7 @@ export const Carousel = ({ className, loop = false, responsive, itemsCount = 3, 
 						modules={[Navigation]}
 						className={styles.swiper}
 					>
-						{children && children.map((c) => <SwiperSlide>{c}</SwiperSlide>)}
+						{children && children.map((c, index) => <SwiperSlide key={index}>{c}</SwiperSlide>)}
 					</Swiper>
 				</div>
 			</div>

@@ -6,9 +6,12 @@ import { toPhone } from '../../../../Helpers/helpers'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './ProfileMain.module.css'
 import { hashids } from '../../../../Helpers/helpers'
+import { useCookies } from 'react-cookie'
 
 const ProfileMain = () => {
 	const [user, setUser] = useState(null)
+
+	const [cookies, setCookie, removeCookie] = useCookies(['role'])
 
 	const params = useParams()
 
@@ -46,10 +49,15 @@ const ProfileMain = () => {
 		img: 'cardImg1.png',
 	}
 
+	const changeToGuide = () => {
+		navigate('/guide/' + params.id)
+		setCookie('role', 'guide')
+	}
+
 	return (
 		<div className={styles.profile}>
 			{!user ? (
-				<Loading/>
+				<Loading />
 			) : (
 				<div className={styles.profileWrapper}>
 					<div className={styles.breadcrumbs}>
@@ -67,7 +75,7 @@ const ProfileMain = () => {
 								<div className={styles.name}>{user.data.firstname + ' ' + user.data.lastname}</div>
 								<div className={styles.email}>{user.data.email}</div>
 								<div className={styles.phone}>{toPhone(user.data.phone)}</div>
-								<Link to='/edit' className={styles.link}>
+								<Link to='/user/edit' className={styles.link}>
 									Редактировать профиль
 								</Link>
 							</div>
@@ -80,9 +88,9 @@ const ProfileMain = () => {
 							<Button className={styles.button}>Стать партнером</Button>
 						</div>
 					</div>
-					<Link to=''>
-						<Button className={styles.switch}>Переключиться на кабинет гида</Button>
-					</Link>
+					<Button className={styles.switch} onClick={changeToGuide}>
+						Переключиться на кабинет гида
+					</Button>
 					<div className={styles.counts}>
 						<div>
 							50

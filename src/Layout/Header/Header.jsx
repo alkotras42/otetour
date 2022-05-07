@@ -18,6 +18,7 @@ import { getUser, logout } from '../../Api/Authorization'
 import { hashids } from '../../Helpers/helpers'
 import i18next from 'i18next'
 import { getConfig } from '../../Api/Config'
+import { useCookies } from 'react-cookie'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -29,6 +30,8 @@ export const Header = ({ className, ...props }) => {
 	const [showUserMenuBurger, setShowUserMenuBurger] = useState(false)
 
 	const [languages, setLanguages] = useState(null)
+
+	const [cookies, setCookie, removeCookie] = useCookies(['role'])
 
 	const userMenuRef = useRef()
 
@@ -85,21 +88,6 @@ export const Header = ({ className, ...props }) => {
 		setUser(null)
 	}
 
-	// useEffect(() => {
-	// 	let array = []
-
-	// 	let elements = document.body.getElementsByTagName('span')
-
-	// 	for (var i = 0; i < elements.length; i++) {
-	// 		var current = elements[i]
-	// 		if (current.children.length === 0 && current.textContent.replace(/[0-9,.₽ ]|\n/g, '') !== '') {
-	// 			// Check the element has no children && that it is not empty
-	// 			array.push(current.textContent)
-	// 		}
-	// 	}
-	// 	console.log(array)
-	// }, [])
-
 	return (
 		<div className={cn(styles.header, className)} {...props}>
 			<div className={styles.burgerMenu}>
@@ -140,10 +128,10 @@ export const Header = ({ className, ...props }) => {
 									[styles.hide]: !showUserMenuBurger,
 								})}
 							>
-								<Link to={'/user/' + hashids.encode(user.profile.id)}>
+								<Link to={(cookies.role ? '/guide/' : '/user/') + hashids.encode(user.profile.id)}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + hashids.encode(user.profile.id)}>
+								<Link to={(cookies.role == 'guide' ? '/guide/tours/' : '/user/tours/') + hashids.encode(user.profile.id)}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/reviews'>
@@ -313,10 +301,10 @@ export const Header = ({ className, ...props }) => {
 					>
 						{user ? (
 							<>
-								<Link to={'/user/' + hashids.encode(user.profile.id)}>
+								<Link to={(cookies.role == 'guide' ? '/guide/' : '/user/') + hashids.encode(user.profile.id)}>
 									<span>Личный кабинет</span>
 								</Link>
-								<Link to={'/user/tours/' + hashids.encode(user.profile.id)}>
+								<Link to={(cookies.role == 'guide' ? '/guide/tours/' : '/user/tours/') + hashids.encode(user.profile.id)}>
 									<span>Мои туры</span>
 								</Link>
 								<Link to='/reviews'>
@@ -347,6 +335,7 @@ export const Header = ({ className, ...props }) => {
 							</>
 						)}
 					</div>
+					{cookies.role == 'guide' && <div className={styles.guideIdicator}>Гид</div>}
 				</div>
 			</div>
 		</div>
