@@ -45,6 +45,23 @@ export const PersonalInfoSchema = Yup.object({
 	phone: Yup.string().required('Введите номер телефона').matches(phoneRegExp, 'Введите подходящий номер телефона'),
 })
 
+export const PersonalDescriptionSchema = Yup.object({
+	description: Yup.string().required('Введите описание'),
+})
+
+export const PersonalPassportInfoSchema = Yup.object({
+	passport: Yup.string()
+		.required('Введите серию и номер паспорта')
+		.matches(/\d{4}\s\d{6}/, 'Серия и номер должны быть в формате 0123 456789'),
+	passportWhen: Yup.string().required('Введите когда был выдан паспорт'),
+	passportWho: Yup.string().required('Введите кем был выдан паспорт'),
+})
+
+export const PersonalRequisitesSchema = Yup.object({
+	requisitesPerson: Yup.string().required('Введите ФИО'),
+	requisitesBill: Yup.number().typeError('Счет должен быть числом').required('Введите номер счета'),
+})
+
 export const PersonalPasswordSchema = Yup.object({
 	password: Yup.string()
 		.min(6, 'Пароль должен быть длиннее 6 символов')
