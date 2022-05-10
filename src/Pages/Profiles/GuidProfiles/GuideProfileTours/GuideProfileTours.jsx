@@ -83,7 +83,7 @@ const GuideProfileTours = () => {
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
 				<div className={styles.breadcrumbs}>
-					<Link to='/'>Главная</Link> / <Link to={'/user/' + hashids.encode(userValue.id)}>Личный кабинет</Link> / Мои туры
+					<Link to='/'>Главная</Link> / <Link to={'/guide/' + hashids.encode(userValue.id)}>Личный кабинет</Link> / Мои туры
 				</div>
 				<p className={styles.title}>Мои туры</p>
 				<div className={styles.profileHeader}>

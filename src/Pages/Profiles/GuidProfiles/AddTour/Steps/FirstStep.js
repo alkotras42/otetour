@@ -134,36 +134,14 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 				filled={cities?.length !== 0 && value.city}
 				error={errors.city}
 			/>
-			<div className={styles.twoInputs}>
-				<Input
-					placeholder='Длительность тура'
-					{...register('tourLength', { required: 'Введите длительность тура' })}
-					filled={value.tourLength}
-					error={errors.tourLength}
-				/>
-				<Input
-					placeholder='Размер группы'
-					{...register('groupSize', { required: 'Введите размер группы' })}
-					filled={value.groupSize}
-					error={errors.groupSize}
-				/>
-			</div>
+
 			<Input
-				placeholder='Язык группы'
-				{...register('groupLanguage', { required: 'Введите язык группы' })}
-				filled={value.groupLanguage}
-				error={errors.groupLanguage}
+				placeholder='Длительность тура'
+				{...register('tourLength', { required: 'Введите длительность тура' })}
+				filled={value.tourLength}
+				error={errors.tourLength}
 			/>
-			<Input
-				placeholder='Стоимость тура'
-				{...register('tourPrice', { required: 'Введите стоимость тура' })}
-				filled={value.tourPrice}
-				error={errors.tourPrice}
-			/>
-			<p>
-				*Комиссия за использование платформы составит <span className={styles.redSpan}>1 250 ₽</span> за каждого туриста,
-				купившего этот тур.
-			</p>
+
 			<Controller
 				render={({ field }) => <DiffPiker value={field.value} setValue={field.onChange} error={errors.difficulty} />}
 				name='difficulty'

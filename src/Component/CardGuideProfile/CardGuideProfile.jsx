@@ -5,6 +5,7 @@ import startIcon from './star.svg'
 import menuIcon from './menu.svg'
 import Modal from 'react-modal'
 import { priceRu } from '../../Helpers/helpers'
+import { Link } from 'react-router-dom'
 
 export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const [showDropdown, setShowDropdown] = useState(false)
@@ -36,7 +37,7 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
-						<p className={styles.addTrip}>Добавить поездку</p>
+						<Link to='/tour/1/addTrip'><p className={styles.addTrip}>Добавить поездку</p></Link>
 						<p>Редактировать</p>
 						<p>Добавить в архив</p>
 						<p onClick={() => setisDeleteTourModalOpen(true)} className={styles.dropdownItemRed}>

@@ -49,3 +49,8 @@
 	height: 50px;
 	margin-top: 20px;
 }
+
+.redSpan {
+	color: #ff3535;
+	font-weight: 600;
+}

@@ -48,7 +48,6 @@ const AddTrip = ({ ...props }) => {
 							placeholder='Количество мест'
 							name='placesRemain'
 							{...register(`placesRemain`, {
-								required: 'Введите количество мест',
 								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
 							})}
 							filled={value.placesRemain}
@@ -67,10 +66,16 @@ const AddTrip = ({ ...props }) => {
 						/>
 					</div>
 					<Input
-						placeholder='Стоимость'
+						placeholder='Язык группы'
+						{...register('groupLanguage', { required: 'Введите язык группы' })}
+						filled={value.groupLanguage}
+						error={errors.groupLanguage}
+					/>
+					<Input
+						placeholder='Стоимость тура'
 						name='price'
 						{...register(`price`, {
-							required: 'Введите цену',
+							required: 'Введите стоимость тура',
 							pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
 						})}
 						filled={value.price}
@@ -80,32 +85,32 @@ const AddTrip = ({ ...props }) => {
 						*Комиссия за использование платформы составит <span className={styles.redSpan}>1 250 ₽</span> за каждого туриста,
 						купившего этот тур.
 					</p>
-					<Input
-						placeholder='Предоплата'
-						name='prepay'
-						{...register(`prepay`, {
-							required: 'Введите сумму предоплаты',
-							pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
-						})}
-						filled={value.prepay}
-						error={errors.prepay}
-					/>
 					<div className={styles.twoInputs}>
 						<Input
+							placeholder='Предоплата'
+							name='prepay'
+							{...register(`prepay`, {
+								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
+							})}
+							filled={value.prepay}
+							error={errors.prepay}
+						/>
+						<Input
+							disabled={!+value.prepay}
 							placeholder='Дата предоплаты'
 							name='prepayday'
-							{...register(`prepayday`, { required: 'Введите дату предоплаты' })}
+							{...register(`prepayday`)}
 							filled={value.prepayday}
 							error={errors.prepayday}
 						/>
-						<Input
-							placeholder='Дата постоплаты'
-							name='payday'
-							{...register(`payday`, { required: 'Введите дату постоплаты' })}
-							filled={value.payday}
-							error={errors.payday}
-						/>
 					</div>
+					<Input
+						placeholder='Дата постоплаты'
+						name='payday'
+						{...register(`payday`)}
+						filled={value.payday}
+						error={errors.payday}
+					/>
 					<Input
 						placeholder='Скидка'
 						name='sale'

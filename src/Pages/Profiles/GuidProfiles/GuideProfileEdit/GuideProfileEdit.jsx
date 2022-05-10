@@ -235,7 +235,7 @@ const GuideProfileEdit = () => {
 				{user ? (
 					<>
 						<div className={styles.breadcrumbs}>
-							<Link to='/'>Главная</Link> / <Link to={'/user/' + hashids.encode(value.id)}>Личный кабинет</Link> /
+							<Link to='/'>Главная</Link> / <Link to={'/guide/' + hashids.encode(value.id)}>Личный кабинет</Link> /
 							Редактировать профиль
 						</div>
 						<p className={styles.title}>Редактировать профиль</p>
