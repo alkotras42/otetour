@@ -179,7 +179,7 @@ const GuideProfileEdit = () => {
 		PersonalDescriptionSchema.validate({ description: value.description })
 			.then((res) => {
 				setError({ ...error, descriptionError: null })
-				// TODO fetch description
+				// TODO: fetch description
 				setTimeout(() => {
 					setSuccess({ descriptionSuccess: 'Пароль успешно изменен' })
 					setLoading({ passwordLoading: false })
@@ -200,7 +200,7 @@ const GuideProfileEdit = () => {
 		})
 			.then((res) => {
 				setError({ ...error, passportDataError: null })
-				// TODO fetch passport data
+				// TODO: fetch passport data
 				setTimeout(() => {
 					setSuccess({ passportDataSuccess: 'Паспортные данные успешно изменены' })
 					setLoading({ passportDataLoading: false })
@@ -217,7 +217,7 @@ const GuideProfileEdit = () => {
 		PersonalRequisitesSchema.validate({ requisitesPerson: value.requisitesPerson, requisitesBill: value.requisitesBill })
 			.then((res) => {
 				setError({ ...error, requisitesError: null })
-				// TODO fetch requisites
+				// TODO: fetch requisites
 				setTimeout(() => {
 					setSuccess({ requisitesSuccess: 'Реквизиты успешно изменены' })
 					setLoading({ requisitesLoading: false })

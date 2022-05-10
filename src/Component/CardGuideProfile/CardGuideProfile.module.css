@@ -147,6 +147,10 @@
 	text-decoration-line: line-through;
 }
 
+.addTrip {
+	font-weight: bold;
+}
+
 .price {
 	font-weight: bold;
 	font-size: 22px;

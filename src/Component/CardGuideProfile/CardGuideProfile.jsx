@@ -36,6 +36,7 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
+						<p className={styles.addTrip}>Добавить поездку</p>
 						<p>Редактировать</p>
 						<p>Добавить в архив</p>
 						<p onClick={() => setisDeleteTourModalOpen(true)} className={styles.dropdownItemRed}>

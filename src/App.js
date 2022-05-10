@@ -5,7 +5,7 @@ import { useJwt } from 'react-jwt'
 import { UserContext } from './Context/user.context'
 import { getUser } from './Api/Authorization'
 import { PasswordChange } from './Pages/PasswordChange/PasswordChange'
-import { Registration, Login, Tour, Home } from './Pages/'
+import { Registration, Login, Tour, Home, AddTrip } from './Pages/'
 import {
 	AddTour,
 	GuideProfileEdit,
@@ -52,7 +52,6 @@ const App = () => {
 
 	useEffect(() => {
 		if (window.location.origin == ('http://localhost:3000' || 'https://test.otetour.com')) {
-			console.log('foo')
 			i18n.changeLanguage('ru')
 		} else {
 			i18n.changeLanguage(window.location.host.split('.')[0].toString())
@@ -145,6 +144,14 @@ const App = () => {
 						element={
 							<PrivateRoute guide={true}>
 								<GuideProfileEdit />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/tour/:id/addTrip'
+						element={
+							<PrivateRoute guide={true}>
+								<AddTrip />
 							</PrivateRoute>
 						}
 					/>

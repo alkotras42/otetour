@@ -42,7 +42,7 @@ export const TourReview = ({ className, card, ...props }) => {
 				/>
 			</div>
 			<div className={styles.tourReviewPhotos}>
-				{/* TODO: Добавить функционал загрузки изображений  */}
+				 {/* TODO: Добавить функционал загрузки изображений */}
 
 				<p className={styles.tourReviewPhotosTitle}>{t('Добавьте фотографии (до 10 изображений)')}</p>
 				<div className={styles.tourReviewPhotosSelect}>
