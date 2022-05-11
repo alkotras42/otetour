@@ -23,4 +23,7 @@ export const API = {
 	categories: {
 		get: `${URL}/categories`,
 	},
+	tours: {
+		get: `${URL}/guide/tour/`,
+	}
 }

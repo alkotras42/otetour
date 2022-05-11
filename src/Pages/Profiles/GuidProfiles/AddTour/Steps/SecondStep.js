@@ -137,9 +137,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`ru.${index}.title`, { required: 'Введите название тура' })}
-									filled={ruValue && ruValue[index]?.title}
-									error={errors.ru && errors.ru[index]?.title}
+									{...register(`ru.${index}.name`, { required: 'Введите название тура' })}
+									filled={ruValue && ruValue[index]?.name}
+									error={errors.ru && errors.ru[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -156,27 +156,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`ru.${index}.requirements`)}
-									filled={ruValue && ruValue[index]?.requirements}
+									{...register(`ru.${index}.terms`)}
+									filled={ruValue && ruValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`ru.${index}.cancelCondaction`)}
-									filled={ruValue && ruValue[index]?.cancelCondaction}
+									{...register(`ru.${index}.cancellation`)}
+									filled={ruValue && ruValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`ru.${index}.include`)}
-									filled={ruValue && ruValue[index]?.include}
+									{...register(`ru.${index}.included`)}
+									filled={ruValue && ruValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`ru.${index}.exclude`)}
-									filled={ruValue && ruValue[index]?.exclude}
+									{...register(`ru.${index}.excluded`)}
+									filled={ruValue && ruValue[index]?.excluded}
 								/>
 							</div>
 						))}
@@ -196,9 +194,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`en.${index}.title`, { required: 'Введите название тура' })}
-									filled={enValue && enValue[index]?.title}
-									error={errors.en && errors.en[index]?.title}
+									{...register(`en.${index}.name`, { required: 'Введите название тура' })}
+									filled={enValue && enValue[index]?.name}
+									error={errors.en && errors.en[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -215,27 +213,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`en.${index}.requirements`)}
-									filled={enValue && enValue[index]?.requirements}
+									{...register(`en.${index}.terms`)}
+									filled={enValue && enValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`en.${index}.cancelCondaction`)}
-									filled={enValue && enValue[index]?.cancelCondaction}
+									{...register(`en.${index}.cancellation`)}
+									filled={enValue && enValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`en.${index}.include`)}
-									filled={enValue && enValue[index]?.include}
+									{...register(`en.${index}.included`)}
+									filled={enValue && enValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`en.${index}.exclude`)}
-									filled={enValue && enValue[index]?.exclude}
+									{...register(`en.${index}.excluded`)}
+									filled={enValue && enValue[index]?.excluded}
 								/>
 							</div>
 						))}
@@ -255,9 +251,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`fr.${index}.title`, { required: 'Введите название тура' })}
-									filled={frValue && frValue[index]?.title}
-									error={errors.fr && errors.fr[index]?.title}
+									{...register(`fr.${index}.name`, { required: 'Введите название тура' })}
+									filled={frValue && frValue[index]?.name}
+									error={errors.fr && errors.fr[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -274,27 +270,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`fr.${index}.requirements`)}
-									filled={frValue && frValue[index]?.requirements}
+									{...register(`fr.${index}.terms`)}
+									filled={frValue && frValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`fr.${index}.cancelCondaction`)}
-									filled={frValue && frValue[index]?.cancelCondaction}
+									{...register(`fr.${index}.cancellation`)}
+									filled={frValue && frValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`fr.${index}.include`)}
-									filled={frValue && frValue[index]?.include}
+									{...register(`fr.${index}.included`)}
+									filled={frValue && frValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`fr.${index}.exclude`)}
-									filled={frValue && frValue[index]?.exclude}
+									{...register(`fr.${index}.excluded`)}
+									filled={frValue && frValue[index]?.excluded}
 								/>
 							</div>
 						))}
@@ -314,9 +308,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`es.${index}.title`, { required: 'Введите название тура' })}
-									filled={esValue && esValue[index]?.title}
-									error={errors.es && errors.es[index]?.title}
+									{...register(`es.${index}.name`, { required: 'Введите название тура' })}
+									filled={esValue && esValue[index]?.name}
+									error={errors.es && errors.es[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -333,27 +327,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`es.${index}.requirements`)}
-									filled={esValue && esValue[index]?.requirements}
+									{...register(`es.${index}.terms`)}
+									filled={esValue && esValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`es.${index}.cancelCondaction`)}
-									filled={esValue && esValue[index]?.cancelCondaction}
+									{...register(`es.${index}.cancellation`)}
+									filled={esValue && esValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`es.${index}.include`)}
-									filled={esValue && esValue[index]?.include}
+									{...register(`es.${index}.included`)}
+									filled={esValue && esValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`es.${index}.exclude`)}
-									filled={esValue && esValue[index]?.exclude}
+									{...register(`es.${index}.excluded`)}
+									filled={esValue && esValue[index]?.excluded}
 								/>
 							</div>
 						))}
@@ -373,9 +365,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`it.${index}.title`, { required: 'Введите название тура' })}
-									filled={itValue && itValue[index]?.title}
-									error={errors.it && errors.it[index]?.title}
+									{...register(`it.${index}.name`, { required: 'Введите название тура' })}
+									filled={itValue && itValue[index]?.name}
+									error={errors.it && errors.it[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -392,27 +384,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`it.${index}.requirements`)}
-									filled={itValue && itValue[index]?.requirements}
+									{...register(`it.${index}.terms`)}
+									filled={itValue && itValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`it.${index}.cancelCondaction`)}
-									filled={itValue && itValue[index]?.cancelCondaction}
+									{...register(`it.${index}.cancellation`)}
+									filled={itValue && itValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`it.${index}.include`)}
-									filled={itValue && itValue[index]?.include}
+									{...register(`it.${index}.included`)}
+									filled={itValue && itValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`it.${index}.exclude`)}
-									filled={itValue && itValue[index]?.exclude}
+									{...register(`it.${index}.excluded`)}
+									filled={itValue && itValue[index]?.excluded}
 								/>
 							</div>
 						))}
@@ -432,9 +422,9 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</div>
 								<Input
 									placeholder='Название'
-									{...register(`de.${index}.title`, { required: 'Введите название тура' })}
-									filled={deValue && deValue[index]?.title}
-									error={errors.de && errors.de[index]?.title}
+									{...register(`de.${index}.name`, { required: 'Введите название тура' })}
+									filled={deValue && deValue[index]?.name}
+									error={errors.de && errors.de[index]?.name}
 								/>
 								<p className={styles.blockTitle}>Описание тура</p>
 								<p>Задайте краткое, но понятное описание тура.</p>
@@ -451,27 +441,25 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 								</p>
 								<TextArea
 									placeholder='Требования к туристам'
-									name='requirements'
-									{...register(`de.${index}.requirements`)}
-									filled={deValue && deValue[index]?.requirements}
+									{...register(`de.${index}.terms`)}
+									filled={deValue && deValue[index]?.terms}
 								/>
 								<TextArea
 									placeholder='Условия отмены'
-									name='cancelCondaction'
-									{...register(`de.${index}.cancelCondaction`)}
-									filled={deValue && deValue[index]?.cancelCondaction}
+									{...register(`de.${index}.cancellation`)}
+									filled={deValue && deValue[index]?.cancellation}
 								/>
 								<p className={styles.blockTitle}>Условия</p>
 								<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 								<TextArea
 									placeholder='Входит в стоимость'
-									{...register(`de.${index}.include`)}
-									filled={deValue && deValue[index]?.include}
+									{...register(`de.${index}.included`)}
+									filled={deValue && deValue[index]?.included}
 								/>
 								<TextArea
 									placeholder='Не входит в стоимость'
-									{...register(`de.${index}.exclude`)}
-									filled={deValue && deValue[index]?.exclude}
+									{...register(`de.${index}.excluded`)}
+									filled={deValue && deValue[index]?.excluded}
 								/>
 							</div>
 						))}

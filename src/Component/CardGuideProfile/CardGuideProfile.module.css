@@ -40,6 +40,7 @@
 	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 	border-radius: 3px;
 	width: 180px;
+	z-index: 150;
 }
 
 .dropdownWrapper p {
@@ -177,6 +178,14 @@
 
 .deleteTourItems p {
 	cursor: pointer;
+}
+
+.error {
+	color: #ff3535;
+}
+
+.success {
+	color: #63a583;
 }
 
 @media screen and (max-width: 1260px) {

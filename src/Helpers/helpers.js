@@ -91,7 +91,7 @@ export const imageFilter = (image) => {
 	const response = { message: '', ok: false }
 	if (image.size > 5e6) {
 		response.message = 'Изображение не должно превышать 5Мб'
-	} else if (image.type.toString() !== ('image/jpeg' || 'image/png')) {
+	} else if (image.type.toString() !== 'image/jpeg' && image.type.toString() !== 'image/png') {
 		response.message = 'Неверный тип файла, выберите изображение формата png, jpg или jpeg'
 	} else {
 		response.ok = true

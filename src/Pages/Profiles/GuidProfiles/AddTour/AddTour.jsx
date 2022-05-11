@@ -14,6 +14,7 @@ import ThirdStep from './Steps/ThirdStep'
 import FourthStep from './Steps/FourthStep'
 import FifthStep from './Steps/FifthStep'
 import { useForm } from 'react-hook-form'
+import { createTour } from '../../../../Api/Tour'
 
 const AddTour = () => {
 	const defaultValues = {
@@ -39,8 +40,13 @@ const AddTour = () => {
 		}
 	}, [user])
 
-	const onSubmit = (data) => {
-		console.log(data)
+	const onSubmit = async (data) => {
+		try {
+			const res = await createTour(data, user.token)
+			console.log(res)
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	const [loading, setLoading] = useState(false)

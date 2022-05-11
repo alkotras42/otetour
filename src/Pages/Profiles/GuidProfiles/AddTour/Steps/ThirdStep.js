@@ -13,31 +13,45 @@ import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
 const ThirdStep = ({ className, control, register, formStep, setFormStep, trigger, setValue, ...props }) => {
-	const [days, setDays] = useState([{ modal: false, cropper: '', image: '' }])
+	const [days, setDays] = useState([{ modal: false, cropper: '' }])
 
-	const [tourImages, setTourImages] = useState({ modal: false, cropper: '', images: [] })
+	const [tourImages, setTourImages] = useState({ modal: false, cropper: '' })
 
 	const [imageError, setImageError] = useState(null)
 
 	const cropperRef = useRef()
 
-	const { fields, append, remove } = useFieldArray({
+	const {
+		fields: daysFields,
+		append: daysAppend,
+		remove: daysRemove,
+	} = useFieldArray({
 		control,
 		name: 'days',
+	})
+
+	const {
+		fields: picturesFields,
+		append: picturesAppend,
+		remove: picturesRemove,
+	} = useFieldArray({
+		control,
+		name: 'pictures',
 	})
 
 	const value = useWatch({
 		control,
 	})
+
 	const { errors } = useFormState({ control })
 
 	const addDay = () => {
-		append({})
-		setDays([...days, { modal: false, cropper: '', image: '' }])
+		daysAppend({})
+		setDays([...days, { modal: false, cropper: '' }])
 	}
 
 	const removeDay = (index) => {
-		remove(index)
+		daysRemove(index)
 		setDays((prev) => prev.filter((_, i) => i !== index)) // Убираем из стейта объект по индексу
 	}
 
@@ -53,7 +67,8 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	const handleTourImageCropp = () => {
 		const img = cropperRef?.current
 		const cropper = img?.cropper
-		setTourImages({ modal: false, cropper: '', images: [...tourImages.images, cropper.getCroppedCanvas().toDataURL()] })
+		setTourImages({ modal: false, cropper: '' })
+		picturesAppend(cropper.getCroppedCanvas().toDataURL())
 	}
 
 	const handleTourImageDrop = (dropped) => {
@@ -72,7 +87,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	}
 
 	const removeTourImage = (index) => {
-		setTourImages({ ...tourImages, images: tourImages.images.filter((_, i) => i !== index) }) // Убираем из стейта объект по индексу
+		picturesRemove(index)
 	}
 
 	const prevStep = (e) => {
@@ -98,8 +113,9 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 		const img = cropperRef?.current
 		const cropper = img?.cropper
 		const d = [...days] // create the copy of state array
-		d[index] = { modal: false, cropper: '', image: cropper.getCroppedCanvas().toDataURL() } //new value
+		d[index] = { modal: false, cropper: '' } //new value
 		setDays(d)
+		setValue(`days[${index}].image`, cropper.getCroppedCanvas().toDataURL())
 	}
 
 	const handleDayImageDrop = (dropped, index) => {
@@ -125,14 +141,14 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			<p>Добавьте до 10 изображений, показывающих основные впечатления тура.</p>
 			<div className={styles.tourImages}>
 				<>
-					{tourImages.images.length !== 0 &&
-						tourImages.images.map((image, index) => (
-							<div key={index} className={styles.tourImageItem}>
+					{picturesFields &&
+						picturesFields.map((field, index) => (
+							<div key={field.id} className={styles.tourImageItem}>
 								<img src={CloseIcon} alt='' className={styles.tourImageCloseIcon} onClick={() => removeTourImage(index)} />
-								<img src={image} alt='' className={styles.tourImage} />
+								<img src={value.pictures[index]} alt='' className={styles.tourImage} />
 							</div>
 						))}
-					{tourImages.images.length < 10 ? (
+					{picturesFields.length < 10 ? (
 						<img
 							className={styles.addPhoto}
 							src={PhotoIcon}
@@ -182,7 +198,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			</Modal>
 			<p className={styles.blockTitle}>Программа по дням</p>
 			<p>Распишите подробную программу по дням, добавьте фотографии.</p>
-			{fields.map((field, index) => (
+			{daysFields.map((field, index) => (
 				<div key={field.id} className={styles.dayItem}>
 					<div className={styles.dayTitle}>
 						<p className={styles.dayNumber}>{`${index + 1} день`}</p>
@@ -190,7 +206,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 					</div>
 					<div className={styles.dayDescription}>
 						<img className={styles.addPhoto} src={PhotoIcon} onClick={() => openDayImageModal(index)} alt='' />
-						{days[index].image && <img className={styles.dayImage} src={days[index].image} alt='' />}
+						{value.days[index].image && <img className={styles.dayImage} src={value.days[index].image} alt='' />}
 						<Modal isOpen={days[index].modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
 							{days[index].cropper ? (
 								<>

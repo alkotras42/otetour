@@ -42,21 +42,21 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 	// Получить регионы и катерогии при изменении страны
 	useEffect(() => {
 		;(async () => {
-			if (value?.country) {
-				setRegions(await getRegions(value.country))
-				setCities(await getCitiesOfCountry(value.country))
+			if (value?.country_id) {
+				setRegions(await getRegions(value.country_id))
+				setCities(await getCitiesOfCountry(value.country_id))
 			}
 		})()
-	}, [value?.country])
+	}, [value?.country_id])
 
 	// Получить города при изменении региона
 	useEffect(() => {
 		;(async () => {
-			if (value.region) {
-				setCities(await getCitiesOfRegion(value.country, value.region))
+			if (value.region_id) {
+				setCities(await getCitiesOfRegion(value.country_id, value.region_id))
 			}
 		})()
-	}, [value.region])
+	}, [value.region_id])
 
 	const nextStep = async (e) => {
 		e.preventDefault()
@@ -99,11 +99,11 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 		<div className={className} {...props}>
 			<Select
 				placeholder='Тип тура'
-				{...register('type', { required: 'Введите тип тура' })}
+				{...register('category_id', { required: 'Введите тип тура' })}
 				options={categories}
 				onClick={getCategoriesOptions}
-				filled={value.type}
-				error={errors.type}
+				filled={value.category_id}
+				error={errors.category_id}
 			/>
 			<p className={styles.blockTitle}>Краткая информация</p>
 			<p>
@@ -112,34 +112,42 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			</p>
 			<Select
 				placeholder='Страна'
-				{...register('country', { required: 'Введите страну' })}
+				{...register('country_id', { required: 'Введите страну' })}
 				onClick={getCountiesOptions}
 				options={counties}
-				filled={value.country}
-				error={errors.country}
+				filled={value.country_id}
+				error={errors.country_id}
 			/>
 			<Select
-				disabled={!value.country || regions.length == 0}
+				disabled={!value.country_id || regions.length == 0}
 				placeholder='Регион'
-				{...register('region')}
+				{...register('region_id')}
 				options={regions}
-				filled={regions?.length !== 0 && value.region}
-				error={errors.region}
+				filled={regions?.length !== 0 && value.region_id}
+				error={errors.region_id}
 			/>
 			<Select
-				disabled={!value.country || cities.length == 0}
+				disabled={!value.country_id || cities.length == 0}
 				placeholder='Город'
-				{...register('city')}
+				{...register('city_id')}
 				options={cities}
-				filled={cities?.length !== 0 && value.city}
-				error={errors.city}
+				filled={cities?.length !== 0 && value.city_id}
+				error={errors.city_id}
 			/>
 
 			<Input
 				placeholder='Длительность тура'
-				{...register('tourLength', { required: 'Введите длительность тура' })}
-				filled={value.tourLength}
-				error={errors.tourLength}
+				{...register('length_days', {
+					required: 'Введите длительность тура',
+					pattern: {
+						value: /^[0-9]+$/,
+						message: 'Значение должно быть числом',
+					},
+					min: {value: 1, message: 'Минимальная длинна тура - 1 день'},
+					max: {value: 30, message: 'Максимальная длинна тура - 30 дней'}
+				})}
+				filled={value.length_days}
+				error={errors.length_days}
 			/>
 
 			<Controller
@@ -152,8 +160,8 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			<div className={styles.ages}>
 				<p>Возраст участия</p>
 				<div className={styles.twoInputs}>
-					<Input placeholder='От' {...register('ageFrom')} filled={value.ageFrom} error={errors.ageFrom} />
-					<Input placeholder='До' {...register('ageTo')} filled={value.ageTo} error={errors.ageTo} />
+					<Input placeholder='От' {...register('age_min')} filled={value.age_min} error={errors.age_min} />
+					<Input placeholder='До' {...register('age_max')} filled={value.age_max} error={errors.age_max} />
 				</div>
 			</div>
 			<div className={styles.buttons}>
