@@ -104,8 +104,8 @@ const SecondStep = ({ className, control, register, formStep, setFormStep, trigg
 
 	const nextStep = async (e) => {
 		e.preventDefault()
-		const result = await trigger(['languages'], { shouldFocus: true })
-		if (true) {
+		const result = await trigger(['ru'], { shouldFocus: true })
+		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}

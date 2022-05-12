@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './AddTour.module.css'
 import cn from 'classnames'
-import { Button, Input } from '../../../../Component'
+import { Button, Input, Loading } from '../../../../Component'
 import { hashids, PersonalInfoSchema, PersonalPasswordSchema, priceRu } from '../../../../Helpers/helpers'
 import { UserContext } from '../../../../Context/user.context'
 import PlusIcon from './plusIcon.svg'
@@ -13,24 +13,26 @@ import SecondStep from './Steps/SecondStep'
 import ThirdStep from './Steps/ThirdStep'
 import FourthStep from './Steps/FourthStep'
 import FifthStep from './Steps/FifthStep'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { createTour } from '../../../../Api/Tour'
 
 const AddTour = () => {
-	const defaultValues = {
+	const [defaultValues, setDefaultValues] = useState({
 		days: [{}],
 		services: [{}],
 		questions: [{}],
 		languages: [{}],
-	}
+	})
+
+	const [submiting, setSubmiting] = useState({ loading: false, error: '', success: '' })
 
 	const [formStep, setFormStep] = useState(1)
 	const { user, setUser } = useContext(UserContext)
 
 	const [userData, setUserData] = useState({ id: 1 })
 
-	const { register, control, watch, trigger, setValue, handleSubmit } = useForm({
-		defaultValues: defaultValues,
+	const { register, control, watch, trigger, reset, setValue, handleSubmit } = useForm({
+		defaultValues,
 		mode: 'all',
 	})
 
@@ -41,15 +43,17 @@ const AddTour = () => {
 	}, [user])
 
 	const onSubmit = async (data) => {
+		setSubmiting({ ...submiting, loading: true })
 		try {
 			const res = await createTour(data, user.token)
+			setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
+			reset({ defaultValues })
 			console.log(res)
 		} catch (e) {
+			setSubmiting({ ...submiting, loading: false, error: e.message })
 			console.log(e.message)
 		}
 	}
-
-	const [loading, setLoading] = useState(false)
 
 	return (
 		<div className={styles.tourPay}>
@@ -113,6 +117,9 @@ const AddTour = () => {
 						/>
 					</div>
 				</form>
+				{submiting.loading && <Loading />}
+				{submiting.error && <p className={styles.error}>{submiting.error}</p>}
+				{submiting.success && <p className={styles.success}>{submiting.success}</p>}
 			</div>
 		</div>
 	)

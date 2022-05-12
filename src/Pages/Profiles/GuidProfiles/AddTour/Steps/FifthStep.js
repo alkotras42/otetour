@@ -4,7 +4,7 @@ import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import PlusIcon from '../plusIcon.svg'
 import PhotoIcon from '../photo.svg'
-import { useFieldArray, useWatch } from 'react-hook-form'
+import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
 const FifthStep = ({ className, control, register, formStep, setFormStep, ...props }) => {
@@ -16,6 +16,8 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 	const value = useWatch({
 		control,
 	})
+
+	const { isValid } = useFormState({ control })
 
 	const addQuestion = () => {
 		append({})
@@ -53,7 +55,7 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 					<Button onClick={prevStep}>Предыдущий шаг</Button>
 					<Button color='white'>Сохранить в черновики</Button>
 				</div>
-				<Button type="submit" className={styles.submitButton}>Отправить на модерацию</Button>
+				<Button disabled={!isValid} type="submit" className={styles.submitButton}>Отправить на модерацию</Button>
 			</div>
 		</div>
 	)

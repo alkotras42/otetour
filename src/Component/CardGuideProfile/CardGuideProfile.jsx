@@ -48,13 +48,12 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 
 	const CurrentCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
-			{console.log(card)}
 			<div className={styles.cardTop}>
-				<img src={card.pictures} alt='' className={styles.image} />
+				<img src={card.pictures[0] || card.pictures} alt='' className={styles.image} />
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
-						<Link to='/tour/1/addTrip'>
+						<Link to={`/tour/${card.id}/addTrip`}>
 							<p className={styles.addTrip}>Добавить поездку</p>
 						</Link>
 						<p>Редактировать</p>

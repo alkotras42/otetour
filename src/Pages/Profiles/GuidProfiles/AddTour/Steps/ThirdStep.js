@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, TextArea } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
@@ -14,6 +14,16 @@ import 'cropperjs/dist/cropper.css'
 
 const ThirdStep = ({ className, control, register, formStep, setFormStep, trigger, setValue, ...props }) => {
 	const [days, setDays] = useState([{ modal: false, cropper: '' }])
+	const value = useWatch({
+		control,
+	})
+
+	useEffect(() => {
+		if (value.length_days && value.length_days > 0 && value.length_days < 6) {
+			setDays(Array(+value.length_days).fill({ modal: false, cropper: '' }))
+			setValue('days', Array(+value.length_days).fill({}))
+		}
+	}, [value.length_days])
 
 	const [tourImages, setTourImages] = useState({ modal: false, cropper: '' })
 
@@ -37,10 +47,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	} = useFieldArray({
 		control,
 		name: 'pictures',
-	})
-
-	const value = useWatch({
-		control,
 	})
 
 	const { errors } = useFormState({ control })
@@ -206,9 +212,11 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 					</div>
 					<div className={styles.dayDescription}>
 						<img className={styles.addPhoto} src={PhotoIcon} onClick={() => openDayImageModal(index)} alt='' />
-						{value.days[index].image && <img className={styles.dayImage} src={value.days[index].image} alt='' />}
-						<Modal isOpen={days[index].modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
-							{days[index].cropper ? (
+						{value.days[index] && value.days[index].image && (
+							<img className={styles.dayImage} src={value.days[index].image} alt='' />
+						)}
+						<Modal isOpen={days[index]?.modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
+							{days[index]?.cropper ? (
 								<>
 									<Cropper
 										style={{ height: 400, width: 900 }}

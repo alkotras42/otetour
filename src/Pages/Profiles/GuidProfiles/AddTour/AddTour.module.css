@@ -202,6 +202,10 @@
 	color: #ff3535;
 }
 
+.success {
+	color: #63a583;
+}
+
 .dropzone {
 	flex: 1;
 	display: flex;

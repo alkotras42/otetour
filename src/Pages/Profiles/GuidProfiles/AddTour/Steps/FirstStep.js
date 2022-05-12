@@ -60,22 +60,8 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 
 	const nextStep = async (e) => {
 		e.preventDefault()
-		const result = await trigger(
-			[
-				'title',
-				'type',
-				'country',
-				'tourLength',
-				'groupSize',
-				'groupLanguage',
-				'tourPrice',
-				'ageFrom',
-				'ageTo',
-				'difficulty',
-			],
-			{ shouldFocus: true }
-		)
-		if (true) {
+		const result = await trigger(['category_id', 'country_id', 'length_days',  'difficulty'], { shouldFocus: true })
+		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
 		}
@@ -99,7 +85,7 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 		<div className={className} {...props}>
 			<Select
 				placeholder='Тип тура'
-				{...register('category_id', { required: 'Введите тип тура' })}
+				{...register('category_id', { required: 'Выберите тип тура' })}
 				options={categories}
 				onClick={getCategoriesOptions}
 				filled={value.category_id}
@@ -112,7 +98,7 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			</p>
 			<Select
 				placeholder='Страна'
-				{...register('country_id', { required: 'Введите страну' })}
+				{...register('country_id', { required: 'Выберите страну' })}
 				onClick={getCountiesOptions}
 				options={counties}
 				filled={value.country_id}
@@ -143,8 +129,8 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 						value: /^[0-9]+$/,
 						message: 'Значение должно быть числом',
 					},
-					min: {value: 1, message: 'Минимальная длинна тура - 1 день'},
-					max: {value: 30, message: 'Максимальная длинна тура - 30 дней'}
+					min: { value: 1, message: 'Минимальная длинна тура - 1 день' },
+					max: { value: 5, message: 'Максимальная длинна тура - 30 дней' },
 				})}
 				filled={value.length_days}
 				error={errors.length_days}
