@@ -39,7 +39,6 @@ export const Table = ({ className, type, data, ...props }) => {
 			break
 	}
 
-	console.log(data.sum_prepayment)
 
 	return (
 		<table className={className} {...props}>
