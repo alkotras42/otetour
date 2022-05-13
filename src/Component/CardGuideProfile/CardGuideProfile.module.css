@@ -16,6 +16,7 @@
 }
 
 .image {
+	background-color: #7d7d7d;
 	object-fit: cover;
 	max-height: 230px;
 	min-height: 120px;

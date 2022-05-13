@@ -48,8 +48,17 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 
 	const CurrentCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
+			{console.log(card)}
 			<div className={styles.cardTop}>
-				<img src={card.pictures[0] || card.pictures} alt='' className={styles.image} />
+				<img
+					src={
+						(card.pictures?.length && card.pictures[0]) ||
+						card.pictures ||
+						'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+					}
+					alt=''
+					className={styles.image}
+				/>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
