@@ -5,7 +5,7 @@ export const login = async (email, password) => {
 	return await axios
 		.post(
 			API.user.login,
-			{ email: email, password: password },
+			{ email: email, password: password, rememberme: true },
 			{
 				headers: {
 					'content-type': 'application/json',

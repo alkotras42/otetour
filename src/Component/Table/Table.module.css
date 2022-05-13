@@ -26,3 +26,67 @@ tr:nth-child(even) {
 tr:nth-child(1) {
 	border: none;
 }
+
+.tripRow {
+	display: flex;
+}
+
+.tripRow {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	justify-content: center;
+	padding: 15px;
+	font-size: 16px;
+	line-height: 20px;
+	border-top: 1px solid #cccccc;
+}
+
+.editTrip,
+.deleteTrip {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.editTrip:hover,
+.deleteTrip:hover {
+	text-decoration: underline;
+}
+
+.modal {
+	position: absolute;
+	border: 1px solid rgb(204, 204, 204);
+	background: rgb(255, 255, 255);
+	overflow: auto;
+	border-radius: 10px;
+	outline: none;
+	text-align: center;
+	padding: 25px;
+}
+
+.deleteTourItems {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 15px;
+	font-weight: 600;
+}
+
+.deleteTourItems p {
+	cursor: pointer;
+}
+
+.dropdownItemRed {
+	color: #ff3535;
+	font-weight: 600;
+}
+
+.dropdownItemRed:hover {
+	color: #ff0e0e !important;
+}
+
+.error {
+	color: #ff3535;
+}
+
+.success {
+	color: #63a583;
+}

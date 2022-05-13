@@ -6,16 +6,18 @@ export const PrivateRoute = ({ children, guide }) => {
 	const [cookies, setCookie, removeCookie] = useCookies(['role'])
 
 	if (guide) {
-		if (cookies.role) {
+		if (cookies.role && localStorage.getItem('user')) {
 			return children
 		} else {
-			return <Navigate to='/' />
+			return <Navigate to='/login' />
 		}
 	}
+
 	if (localStorage.getItem('user')) {
 		return children
 	} else {
 		return <Navigate to='/login' />
 	}
+
 	return localStorage.getItem('user') ? children : <Navigate to='/login' />
 }

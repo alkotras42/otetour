@@ -130,7 +130,7 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 						message: 'Значение должно быть числом',
 					},
 					min: { value: 1, message: 'Минимальная длинна тура - 1 день' },
-					max: { value: 5, message: 'Максимальная длинна тура - 30 дней' },
+					max: { value: 30, message: 'Максимальная длинна тура - 30 дней' },
 				})}
 				filled={value.length_days}
 				error={errors.length_days}

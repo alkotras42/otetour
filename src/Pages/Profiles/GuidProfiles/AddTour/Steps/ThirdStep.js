@@ -19,7 +19,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	})
 
 	useEffect(() => {
-		if (value.length_days && value.length_days > 0 && value.length_days < 6) {
+		if (value.length_days && value.length_days > 0 && value.length_days <= 30) {
 			setDays(Array(+value.length_days).fill({ modal: false, cropper: '' }))
 			setValue('days', Array(+value.length_days).fill({}))
 		}
@@ -260,10 +260,13 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 					</div>
 				</div>
 			))}
-			<div className={styles.addBlock} onClick={addDay}>
-				<img src={PlusIcon} alt='' />
-				<p>Добавить день</p>
-			</div>
+			{days.length < 30 ? (
+				<div className={styles.addBlock} onClick={addDay}>
+					<img src={PlusIcon} alt='' />
+					<p>Добавить день</p>
+				</div>
+			) : null}
+
 			<div className={styles.buttons}>
 				<Button onClick={prevStep}>Предыдущий шаг</Button>
 				<Button onClick={nextStep}>Следующий шаг</Button>

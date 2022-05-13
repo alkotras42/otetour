@@ -54,3 +54,11 @@
 	color: #ff3535;
 	font-weight: 600;
 }
+
+.error {
+	color: #ff3535;
+}
+
+.success {
+	color: #63a583;
+}

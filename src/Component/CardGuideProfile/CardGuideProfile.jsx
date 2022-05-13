@@ -53,8 +53,8 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
-						<Link to={`/tour/${card.id}/addTrip`}>
-							<p className={styles.addTrip}>Добавить поездку</p>
+						<Link to={`/tour/${card.id}/trips`}>
+							<p className={styles.addTrip}>Поездки</p>
 						</Link>
 						<p>Редактировать</p>
 						<p>Добавить в архив</p>

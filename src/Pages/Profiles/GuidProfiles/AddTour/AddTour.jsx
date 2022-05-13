@@ -33,7 +33,7 @@ const AddTour = () => {
 
 	const { register, control, watch, trigger, reset, setValue, handleSubmit } = useForm({
 		defaultValues,
-		mode: 'all',
+		mode: 'onChange',
 	})
 
 	useEffect(() => {
@@ -48,10 +48,8 @@ const AddTour = () => {
 			const res = await createTour(data, user.token)
 			setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
 			reset({ defaultValues })
-			console.log(res)
 		} catch (e) {
 			setSubmiting({ ...submiting, loading: false, error: e.message })
-			console.log(e.message)
 		}
 	}
 
