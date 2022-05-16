@@ -13,9 +13,9 @@ import { ClipLoader } from 'react-spinners'
 
 const AddTrip = ({ ...props }) => {
 	const [defaultValue, setDefaultValue] = useState(null)
-	const { register, control, trigger, setValue, reset, handleSubmit } = useForm({
+	const { register, control, trigger, setValue, reset, handleSubmit, getValues } = useForm({
 		defaultValue: defaultValue,
-		mode: 'all',
+		mode: 'onChange',
 	})
 
 	const [submiting, setSubmiting] = useState({ loading: false, error: '', success: '' })
@@ -23,6 +23,7 @@ const AddTrip = ({ ...props }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	const params = useParams()
+	const navigate = useNavigate()
 	const isAddMode = !params.tripId
 
 	const value = useWatch({
@@ -33,7 +34,12 @@ const AddTrip = ({ ...props }) => {
 		if (!isAddMode) {
 			if (user) {
 				;(async () => {
-					reset(await getTripById(params.id, params.tripId, user.token))
+					const res = await getTripById(params.id, params.tripId, user.token)
+					if (res) {
+						reset(res)
+					} else {
+						navigate('/404')
+					}
 				})()
 			}
 		}
@@ -91,7 +97,11 @@ const AddTrip = ({ ...props }) => {
 							placeholder='Количество мест'
 							{...register(`places_left`, {
 								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
-								validate: (v) => v <= value.places_total || 'Количество оставшихся мест не может превышать полное число мест',
+								validate: (value) => {
+									if (value < getValues()['places_total']) {
+										return 'Test'
+									}
+								},
 							})}
 							filled={value.places_left}
 							error={errors.places_left}
@@ -102,7 +112,6 @@ const AddTrip = ({ ...props }) => {
 							{...register(`places_total`, {
 								required: 'Введите полное число мест',
 								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
-								onChange: (e) => trigger('places_left')
 							})}
 							filled={value.places_total}
 							error={errors.places_total}

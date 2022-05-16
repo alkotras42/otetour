@@ -33,7 +33,7 @@ tr:nth-child(1) {
 
 .tripRow {
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
+	grid-template-columns: repeat(7, 1fr);
 	justify-content: center;
 	padding: 15px;
 	font-size: 16px;
@@ -45,6 +45,11 @@ tr:nth-child(1) {
 .deleteTrip {
 	cursor: pointer;
 	font-weight: bold;
+}
+
+.icon {
+	width: 25px;
+	height: 25px;
 }
 
 .editTrip:hover,

@@ -19,6 +19,7 @@ import { hashids } from '../../Helpers/helpers'
 import i18next from 'i18next'
 import { getConfig } from '../../Api/Config'
 import { useCookies } from 'react-cookie'
+import { ReactSVG } from 'react-svg'
 
 export const Header = ({ className, ...props }) => {
 	const [showLanguageDropdown, setShowLanguageDropdown] = useState(false)
@@ -292,7 +293,17 @@ export const Header = ({ className, ...props }) => {
 					</div>
 				</div>
 				<div className={styles.userMenu}>
-					<img src={UserIcon} alt='' className={styles.user} onClick={changeUserMenu} />
+					<ReactSVG
+						src={UserIcon}
+						alt=''
+						afterInjection={(_err, svg) => {
+							svg.classList.add(styles.user)
+							if (cookies.role == 'guide') {
+								svg.classList.add(styles.guideUser)
+							}
+						}}
+						onClick={changeUserMenu}
+					/>
 					<div
 						ref={userMenuRef}
 						className={cn(styles.userMenuDropdown, {
@@ -335,7 +346,6 @@ export const Header = ({ className, ...props }) => {
 							</>
 						)}
 					</div>
-					{cookies.role == 'guide' && <div className={styles.guideIdicator}>Гид</div>}
 				</div>
 			</div>
 		</div>

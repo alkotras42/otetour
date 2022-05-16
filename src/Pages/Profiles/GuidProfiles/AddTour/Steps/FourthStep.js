@@ -151,11 +151,11 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 			<p>Обозначьте дополнительные услуги, которые могут быть предоставлены клиентам, укажите их стоимость</p>
 			{servisesFields.map((field, index) => (
 				<div key={field.id} className={styles.servises}>
-					<Input placeholder='Услуга' {...register(`services.${index}.service`)} filled={value?.services[index]?.service} />
+					<Input placeholder='Услуга' {...register(`services.${index}.service`)} filled={value.servises?.length && value?.services[index]?.service} />
 					<Input
 						placeholder='Стоимость'
 						{...register(`services.${index}.servicePrice`)}
-						filled={value?.services[index]?.servicePrice}
+						filled={value.servises?.length && value?.services[index]?.servicePrice}
 					/>
 					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => servisesRemove(index)} />}
 				</div>

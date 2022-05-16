@@ -73,6 +73,10 @@
 	opacity: 0.9;
 }
 
+.guideUser {
+	fill: #0b663b;
+}
+
 .dropdown {
 	position: absolute;
 	display: grid;

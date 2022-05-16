@@ -13,15 +13,16 @@ import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
 const ThirdStep = ({ className, control, register, formStep, setFormStep, trigger, setValue, ...props }) => {
-	const [days, setDays] = useState([{ modal: false, cropper: '' }])
+	const [program, setProgram] = useState([{ modal: false, cropper: '' }])
 	const value = useWatch({
 		control,
 	})
 
 	useEffect(() => {
 		if (value.length_days && value.length_days > 0 && value.length_days <= 30) {
-			setDays(Array(+value.length_days).fill({ modal: false, cropper: '' }))
-			setValue('days', Array(+value.length_days).fill({}))
+			setProgram(Array(+value.length_days).fill({ modal: false, cropper: '' }))
+			value.program.length = value.length_days
+			setValue('program', value.program)
 		}
 	}, [value.length_days])
 
@@ -32,12 +33,12 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	const cropperRef = useRef()
 
 	const {
-		fields: daysFields,
-		append: daysAppend,
-		remove: daysRemove,
+		fields: programFields,
+		append: programAppend,
+		remove: programRemove,
 	} = useFieldArray({
 		control,
-		name: 'days',
+		name: 'program',
 	})
 
 	const {
@@ -52,18 +53,18 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	const { errors } = useFormState({ control })
 
 	const addDay = () => {
-		daysAppend({})
-		setDays([...days, { modal: false, cropper: '' }])
+		programAppend({})
+		setProgram([...program, { modal: false, cropper: '' }])
 	}
 
 	const removeDay = (index) => {
-		daysRemove(index)
-		setDays((prev) => prev.filter((_, i) => i !== index)) // Убираем из стейта объект по индексу
+		programRemove(index)
+		setProgram((prev) => prev.filter((_, i) => i !== index)) // Убираем из стейта объект по индексу
 	}
 
 	const nextStep = async (e) => {
 		e.preventDefault()
-		const result = await trigger(['days'], { shouldFocus: true })
+		const result = await trigger(['program'], { shouldFocus: true })
 		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0
@@ -103,25 +104,26 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	}
 
 	const openDayImageModal = (index) => {
-		const d = [...days] // create the copy of state array
+		const d = [...program] // create the copy of state array
 		d[index] = { ...d[index], modal: true } //new value
-		setDays(d)
+		setProgram(d)
 	}
 
 	const closeDayImageModal = (index) => {
 		setImageError(null)
-		const d = [...days] // create the copy of state array
+		const d = [...program] // create the copy of state array
 		d[index] = { ...d[index], modal: false } //new value
-		setDays(d)
+		setProgram(d)
 	}
 
 	const handleDaysImageCropp = (index) => {
 		const img = cropperRef?.current
 		const cropper = img?.cropper
-		const d = [...days] // create the copy of state array
+		const d = [...program] // create the copy of state array
 		d[index] = { modal: false, cropper: '' } //new value
-		setDays(d)
-		setValue(`days[${index}].image`, cropper.getCroppedCanvas().toDataURL())
+		setProgram(d)
+		console.log(d)
+		setValue(`program[${index}].image`, cropper.getCroppedCanvas().toDataURL())
 	}
 
 	const handleDayImageDrop = (dropped, index) => {
@@ -131,15 +133,17 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			const img = dropped[0]
 			const reader = new FileReader()
 			reader.onload = (event) => {
-				const d = [...days] // create the copy of state array
+				const d = [...program] // create the copy of state array
 				d[index] = { modal: true, cropper: event.target.result } //new value
-				setDays(d)
+				setProgram(d)
 			}
 			reader.readAsDataURL(img)
 		} else {
 			setImageError(response.message)
 		}
 	}
+
+	console.log(value.program)
 
 	return (
 		<div className={className} {...props}>
@@ -151,7 +155,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 						picturesFields.map((field, index) => (
 							<div key={field.id} className={styles.tourImageItem}>
 								<img src={CloseIcon} alt='' className={styles.tourImageCloseIcon} onClick={() => removeTourImage(index)} />
-								<img src={value.pictures[index]} alt='' className={styles.tourImage} />
+								<img src={value.pictures?.length && value.pictures[index]} alt='' className={styles.tourImage} />
 							</div>
 						))}
 					{picturesFields.length < 10 ? (
@@ -204,19 +208,19 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			</Modal>
 			<p className={styles.blockTitle}>Программа по дням</p>
 			<p>Распишите подробную программу по дням, добавьте фотографии.</p>
-			{daysFields.map((field, index) => (
+			{programFields.map((field, index) => (
 				<div key={field.id} className={styles.dayItem}>
 					<div className={styles.dayTitle}>
 						<p className={styles.dayNumber}>{`${index + 1} день`}</p>
 						{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => removeDay(index)} />}
 					</div>
-					<div className={styles.dayDescription}>
+					<div className={styles.dayProgram}>
 						<img className={styles.addPhoto} src={PhotoIcon} onClick={() => openDayImageModal(index)} alt='' />
-						{value.days[index] && value.days[index].image && (
-							<img className={styles.dayImage} src={value.days[index].image} alt='' />
+						{value.program?.length && value.program[index]?.image && (
+							<img className={styles.dayImage} src={value.program[index].image} alt='' />
 						)}
-						<Modal isOpen={days[index]?.modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
-							{days[index]?.cropper ? (
+						<Modal isOpen={program[index]?.modal} onRequestClose={() => closeDayImageModal(index)} className={styles.modal}>
+							{program[index]?.cropper ? (
 								<>
 									<Cropper
 										style={{ height: 400, width: 900 }}
@@ -224,7 +228,7 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 										// background={false}
 										aspectRatio={15 / 9}
 										rotatable={false}
-										src={days[index].cropper}
+										src={program[index].cropper}
 										viewMode={2}
 										zoom={0.7}
 										minCropBoxWidth={150}
@@ -253,14 +257,14 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 
 						<TextArea
 							placeholder='Описание дня'
-							{...register(`days.${index}.dayDescription`, { required: 'Введите описание дня' })}
-							filled={value?.days[index]?.dayDescription}
-							error={errors.days && errors.days[index]?.dayDescription}
+							{...register(`program.${index}.dayProgram`, { required: 'Введите описание дня' })}
+							filled={value.program?.length && value?.program[index]?.dayProgram}
+							error={errors.program && errors.program[index]?.dayProgram}
 						/>
 					</div>
 				</div>
 			))}
-			{days.length < 30 ? (
+			{program.length < 30 ? (
 				<div className={styles.addBlock} onClick={addDay}>
 					<img src={PlusIcon} alt='' />
 					<p>Добавить день</p>

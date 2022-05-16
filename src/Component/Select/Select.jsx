@@ -4,24 +4,22 @@ import styles from './Select.module.css'
 import ArrowArrow from './arrow.svg'
 
 export const Select = forwardRef(
-	({ className, children, type, placeholder, options, value, filled, icon, error, ...props }, ref) => {
+	({ className, children, type, placeholder, options, filled, error, ...props }, ref) => {
 		return (
 			<div
 				className={cn(className, styles.wrapper, {
-					[styles.filled]: value || filled,
+					[styles.filled]: filled,
 				})}
 			>
-				{icon && <img src={icon} alt='' className={styles.icon} />}
 				<select
-					defaultValue=''
+					value={filled}
 					ref={ref}
-					value={value}
 					className={cn(styles.input, {
 						[styles.inputError]: error,
 					})}
 					{...props}
 				>
-					<option value='' disabled hidden></option>
+					<option value={''} default hidden></option>
 					{options &&
 						Object.values(options).map((option) => (
 							<option key={option.id} value={option.id}>
@@ -30,13 +28,7 @@ export const Select = forwardRef(
 						))}
 				</select>
 				<img src={ArrowArrow} alt='' className={styles.arrowIcon} />
-				<label
-					className={cn(styles.label, {
-						[styles.labelWithIcon]: icon,
-					})}
-				>
-					{placeholder}
-				</label>
+				<label className={styles.label}>{placeholder}</label>
 				{error && <p className={styles.error}>{error.message}</p>}
 			</div>
 		)

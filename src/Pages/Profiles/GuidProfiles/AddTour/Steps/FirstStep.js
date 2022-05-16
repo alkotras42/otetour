@@ -58,9 +58,17 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 		})()
 	}, [value.region_id])
 
+	useEffect(() => {
+		getCountiesOptions()
+	}, [value.country_id])
+
+	useEffect(() => {
+		getCategoriesOptions()
+	}, [value.category_id])
+
 	const nextStep = async (e) => {
 		e.preventDefault()
-		const result = await trigger(['category_id', 'country_id', 'length_days',  'difficulty'], { shouldFocus: true })
+		const result = await trigger(['category_id', 'country_id', 'length_days', 'difficulty'], { shouldFocus: true })
 		if (result) {
 			setFormStep((prev) => prev + 1)
 			document.documentElement.scrollTop = 0

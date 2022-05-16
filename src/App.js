@@ -183,7 +183,15 @@ const App = () => {
 					<Route
 						path='/guide/addTour'
 						element={
-							<PrivateRoute>
+							<PrivateRoute guide={true}>
+								<AddTour />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='/guide/addTour/:tourId'
+						element={
+							<PrivateRoute guide={true}>
 								<AddTour />
 							</PrivateRoute>
 						}

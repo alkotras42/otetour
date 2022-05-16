@@ -4,6 +4,8 @@ import styles from './Table.module.css'
 import { priceRu } from '../../Helpers/helpers'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import DeleteIcon from './deleteIcon.svg'
+import EditIcon from './editIcon.svg'
 import { deleteTrip } from '../../Api/Trips'
 import { UserContext } from '../../Context/user.context'
 
@@ -35,10 +37,9 @@ export const Table = ({ className, type, data, ...props }) => {
 			headers = ['Дата', 'Гид', 'Проданный тур', 'Стоимость тура', 'Ваш процент', 'Статус начисления']
 			break
 		case 'trip':
-			headers = ['Дата начала', 'Всего мест', 'Осталось мест', 'Цена', 'Предоплата', 'Цена со скидкой', '', '']
+			headers = ['Дата', 'Мест', 'Цена', 'Цена со скидкой', 'Предоплата', 'Изменить', 'Удалить']
 			break
 	}
-
 
 	return (
 		<table className={className} {...props}>
@@ -65,16 +66,17 @@ export const Table = ({ className, type, data, ...props }) => {
 							<>
 								<tr className={styles.tripRow} key={index}>
 									<td>{row.date_start}</td>
-									<td>{row.places_total}</td>
-									<td>{row.places_left}</td>
+									<td>{row.places_left + ' / ' + row.places_total}</td>
 									<td>{priceRu(row.sum_price)}</td>
-									<td>{row?.sum_prepayment && priceRu(row.sum_prepayment)}</td>
 									<td>{row?.sum_price_discount && priceRu(row.sum_price_discount)}</td>
+									<td>{row?.sum_prepayment && priceRu(row.sum_prepayment)}</td>
 									<td className={styles.editTrip}>
-										<Link to={`/tour/${row.tour_id}/addTrip/${row.id}`}>Изменить</Link>{' '}
+										<Link to={`/tour/${row.tour_id}/addTrip/${row.id}`}>
+											<img src={EditIcon} alt='' className={styles.icon} />
+										</Link>
 									</td>
 									<td onClick={() => setIsDeleteTripModalOpen(true)} className={styles.deleteTrip}>
-										Удалить
+										<img src={DeleteIcon} alt='' className={styles.icon} />
 									</td>
 								</tr>
 								<Modal

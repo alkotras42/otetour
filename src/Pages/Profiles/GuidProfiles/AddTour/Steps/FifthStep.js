@@ -40,9 +40,9 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 					<Input
 						placeholder='Вопрос'
 						{...register(`questions.${index}.question`)}
-						filled={value.questions[index]?.question}
+						filled={value.question?.length && value.questions[index]?.question}
 					/>
-					<TextArea placeholder='Ответ' {...register(`questions.${index}.answer`)} filled={value.questions[index]?.answer} />
+					<TextArea placeholder='Ответ' {...register(`questions.${index}.answer`)} filled={value.question?.length && value.questions[index]?.answer} />
 				</div>
 			))}
 

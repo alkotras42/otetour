@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr minmax(320px, 1200px) 1fr;
 	margin-bottom: 60px;
+	min-height: calc(100vh - 500px);
 }
 
 .tourPayWrapper {
@@ -140,7 +141,7 @@
 }
 
 .forms textarea {
-	min-height: 120px;
+	min-height: 50px;
 	max-height: 400px;
 }
 
@@ -155,7 +156,7 @@
 	margin-bottom: 15px;
 }
 
-.dayDescription,
+.dayProgram,
 .residence {
 	display: grid;
 	grid-template-columns: 100px 1fr;

@@ -48,7 +48,6 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 
 	const CurrentCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
-			{console.log(card)}
 			<div className={styles.cardTop}>
 				<img
 					src={
@@ -65,7 +64,9 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 						<Link to={`/tour/${card.id}/trips`}>
 							<p className={styles.addTrip}>Поездки</p>
 						</Link>
-						<p>Редактировать</p>
+						<Link to={`/guide/addTour/${card.id}`}>
+							<p>Редактировать</p>
+						</Link>
 						<p>Добавить в архив</p>
 						<p
 							onClick={() => {

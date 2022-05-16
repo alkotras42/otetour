@@ -332,12 +332,23 @@ const GuideProfileEdit = () => {
 								name='requisitesBill'
 								placeholder='Счет получателя'
 							/>
+							<Input
+								onChange={handleChange}
+								value={value.requisitesBill}
+								name='requisitesBank'
+								placeholder='Банк Получателя (полное название банка)'
+							/>
+							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesINN' placeholder='ИНН' />
+							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesBik' placeholder='БИК' />
+							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesCorr' placeholder='Корр. счет' />
+							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesSwift' placeholder='SWIFT-код' />
 							<Button onClick={editRequisites} className={styles.button}>
 								{loading.requisitesLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
 							{error.requisitesError && <p className={styles.error}>{error.requisitesError}</p>}
 							{success.requisitesSuccess && <p className={styles.success}>{success.requisitesSuccess}</p>}
 							<p className={styles.editProfileTitle}>Лицензия</p>
+							<Input onChange={handleChange} value={value.requisitesBill} name='licenseNumber' placeholder='Номер лецензии' />
 							<p className={styles.pickLicens}>Выбрать файл</p>
 							<Button className={styles.button}>
 								{loading.personalInfoLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
