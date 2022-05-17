@@ -19,26 +19,26 @@ const ProfileEdit = () => {
 
 	const [value, setValue] = useState({
 		id: '',
-		name: '',
-		lastName: '',
+		firstname: '',
+		lastname: '',
 		email: '',
 		phone: '',
 		password: '',
 		passwordConfirm: '',
-		avatar: '',
+		photo: '',
 	})
 
 	useEffect(() => {
 		if (user) {
 			setValue({
 				id: user.profile.id || '',
-				name: user.profile.firstname || '',
-				lastName: user.profile.lastname || '',
+				firstname: user.profile.firstname || '',
+				lastname: user.profile.lastname || '',
 				email: user.profile.email || '',
 				phone: user.profile.phone || '',
 				password: '',
 				passwordConfirm: '',
-				avatar: user.profile.photo || '',
+				photo: user.profile.photo || '',
 			})
 		}
 	}, [user])
@@ -92,7 +92,7 @@ const ProfileEdit = () => {
 
 	const saveAvatar = () => {
 		const img = avatarRef.current.getImage().toDataURL()
-		setValue({ ...value, avatar: img })
+		setValue({ ...value, photo: img })
 		setAvatarEdit({ ...avatarEdit, image: null })
 		setModalOpen(false)
 	}
@@ -105,17 +105,20 @@ const ProfileEdit = () => {
 
 	const editPersonal = () => {
 		setLoading({ personalInfoLoading: true })
-		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
+		PersonalInfoSchema.validate({
+			firstname: value.firstname,
+			lastname: value.lastname,
+			email: value.email,
+			phone: value.phone,
+		})
 			.then((res) => {
 				setError({ personalInfoError: null })
-				updateUserInfo({
-					id: value.id,
-					token: user.token,
-					name: value.name,
-					lastName: value.lastName,
+				updateUserInfo(value.id, user.token, {
+					firstname: value.firstname,
+					lastname: value.lastname,
 					email: value.email,
 					phone: value.phone,
-					avatar: value.avatar,
+					photo: value.photo,
 				}).then((res) => {
 					if (res.code == 200) {
 						setSuccess({ personalInfoSuccess: 'Данные профиля успешно обновлены' })
@@ -136,7 +139,7 @@ const ProfileEdit = () => {
 		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
 			.then((res) => {
 				setError({ passwordError: null })
-				updateUserInfo({ id: value.id, token: user.token, password: res.password }).then((res) => {
+				updateUserInfo(value.id, usser.token, { password: res.password }).then((res) => {
 					if (res.code == 200) {
 						setSuccess({ passwordSuccess: 'Пароль успешно изменен' })
 					} else {
@@ -205,15 +208,15 @@ const ProfileEdit = () => {
 								)}
 							</Modal>
 
-							<img src={value.avatar} alt='' className={styles.profileImg} />
+							<img src={value.photo} alt='' className={styles.profileImg} />
 							<div className={styles.chooseImg} onClick={() => setModalOpen(true)}>
 								<img src={cameraIcon} alt='' className={styles.cameraImg} />
 							</div>
 						</div>
 						<div className={styles.editProfile}>
 							<p className={styles.editProfileTitle}>Личная информация</p>
-							<Input onChange={handleChange} value={value.name} name='name' placeholder='Имя' />
-							<Input onChange={handleChange} value={value.lastName} name='lastName' placeholder='Фамилия' />
+							<Input onChange={handleChange} value={value.firstname} name='firstname' placeholder='Имя' />
+							<Input onChange={handleChange} value={value.lastname} name='lastname' placeholder='Фамилия' />
 							<Input onChange={handleChange} value={value.email} name='email' placeholder='Email' />
 							<Input onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
 							{error.personalInfoError && <p className={styles.error}>{error.personalInfoError}</p>}

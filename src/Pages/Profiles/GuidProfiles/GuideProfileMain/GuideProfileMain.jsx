@@ -114,9 +114,7 @@ const GuideProfileMain = () => {
 					<div className={styles.description}>
 						<p className={cn(styles.title, styles.descriptionTitle)}>Описание для туристов</p>
 						<p className={styles.descriptionBody}>
-							Описание для туристов. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit tortor at massa
-							accumsan, sed faucibus in. Nascetur vitae at nisi feugiat neque, velit eget maecenas consequat. Turpis ut viverra
-							nibh sagittis sed ut gravida pharetra. Ornare quam penatibus pellentesque dignissim tellus tristique arcu ac.
+							{user.guide_about}
 						</p>
 					</div>
 					<div className={styles.nearest}>
@@ -130,7 +128,7 @@ const GuideProfileMain = () => {
 						</Carousel>
 					</div>
 					<div className={styles.recomendations}>
-						<p className={cn(styles.title, styles.recomendationsTitle)}>Описание для туристов</p>
+						<p className={cn(styles.title, styles.recomendationsTitle)}>Рекомендации</p>
 						<p className={styles.recomendationsBody}>
 							Описание для туристов. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit tortor at massa
 							accumsan, sed faucibus in. Nascetur vitae at nisi feugiat neque, velit eget maecenas consequat. Turpis ut viverra

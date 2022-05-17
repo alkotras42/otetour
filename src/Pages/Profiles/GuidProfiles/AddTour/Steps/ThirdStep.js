@@ -21,8 +21,12 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 	useEffect(() => {
 		if (value.length_days && value.length_days > 0 && value.length_days <= 30) {
 			setProgram(Array(+value.length_days).fill({ modal: false, cropper: '' }))
-			value.program.length = value.length_days
-			setValue('program', value.program)
+			// value.program.length = value.length_days
+			// console.log(value.program)
+			setValue(
+				'program',
+				value.program && [...value.program, ...Array(Math.max(value.length_days - value.program.length, 0)).fill({})]
+			)
 		}
 	}, [value.length_days])
 

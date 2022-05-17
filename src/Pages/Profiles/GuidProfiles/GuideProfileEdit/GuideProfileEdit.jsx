@@ -12,6 +12,7 @@ import {
 	imageFilter,
 	PersonalDescriptionSchema,
 	PersonalInfoSchema,
+	PersonalLicensSchema,
 	PersonalPassportInfoSchema,
 	PersonalPasswordSchema,
 	PersonalRequisitesSchema,
@@ -27,33 +28,30 @@ const GuideProfileEdit = () => {
 
 	const [value, setValue] = useState({
 		id: '',
-		name: '',
-		lastName: '',
+		firstname: '',
+		lastname: '',
 		email: '',
 		phone: '',
 		description: '',
 		passport: '',
 		passportWhen: '',
 		passportWho: '',
-		requisitesPerson: '',
-		requisitesBill: '',
+		requisite_name: '',
+		requisite_account: '',
+		requisite_bank: '',
+		requisite_inn: '',
+		requisite_bik: '',
+		requisite_corr: '',
+		requisite_swift: '',
+		license_nr: '',
 		password: '',
 		passwordConfirm: '',
-		avatar: '',
+		photo: '',
 	})
 
 	useEffect(() => {
 		if (user) {
-			setValue({
-				id: user.profile.id || '',
-				name: user.profile.firstname || '',
-				lastName: user.profile.lastname || '',
-				email: user.profile.email || '',
-				phone: user.profile.phone || '',
-				password: '',
-				passwordConfirm: '',
-				avatar: user.profile.photo || '',
-			})
+			setValue({ ...user.profile })
 		}
 	}, [user])
 
@@ -73,6 +71,7 @@ const GuideProfileEdit = () => {
 		descriptionError: null,
 		passportDataError: null,
 		requisitesError: null,
+		licenseError: null,
 	})
 
 	const [success, setSuccess] = useState({
@@ -82,6 +81,7 @@ const GuideProfileEdit = () => {
 		descriptionSuccess: null,
 		passportDataSuccess: null,
 		requisitesSuccess: null,
+		licenseSuccess: null,
 	})
 
 	const [loading, setLoading] = useState({
@@ -91,6 +91,7 @@ const GuideProfileEdit = () => {
 		descriptionLoading: false,
 		passportDataLoading: false,
 		requisitesLoading: false,
+		licenseLoading: false,
 	})
 
 	const handleChange = (e) => {
@@ -115,7 +116,7 @@ const GuideProfileEdit = () => {
 
 	const saveAvatar = () => {
 		const img = avatarRef.current.getImage().toDataURL()
-		setValue({ ...value, avatar: img })
+		setValue({ ...value, photo: img })
 		setAvatarEdit({ ...avatarEdit, image: null })
 		setModalOpen(false)
 	}
@@ -128,17 +129,20 @@ const GuideProfileEdit = () => {
 
 	const editPersonal = () => {
 		setLoading({ personalInfoLoading: true })
-		PersonalInfoSchema.validate({ name: value.name, lastName: value.lastName, email: value.email, phone: value.phone })
+		PersonalInfoSchema.validate({
+			firstname: value.firstname,
+			lastname: value.lastname,
+			email: value.email,
+			phone: value.phone,
+		})
 			.then((res) => {
 				setError({ ...error, personalInfoError: null })
-				updateUserInfo({
-					id: value.id,
-					token: user.token,
-					name: value.name,
-					lastName: value.lastName,
+				updateUserInfo(value.id, user.token, {
+					firstname: value.firstname,
+					lastname: value.lastname,
 					email: value.email,
 					phone: value.phone,
-					avatar: value.avatar,
+					photo: value.photo,
 				}).then((res) => {
 					if (res.code == 200) {
 						setSuccess({ personalInfoSuccess: 'Данные профиля успешно обновлены' })
@@ -159,7 +163,7 @@ const GuideProfileEdit = () => {
 		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
 			.then((res) => {
 				setError({ ...error, passwordError: null })
-				updateUserInfo({ id: value.id, token: user.token, password: res.password }).then((res) => {
+				updateUserInfo(value.id, user.token, { password: res.password }).then((res) => {
 					if (res.code == 200) {
 						setSuccess({ passwordSuccess: 'Пароль успешно изменен' })
 					} else {
@@ -176,14 +180,17 @@ const GuideProfileEdit = () => {
 
 	const editDescription = () => {
 		setLoading({ descriptionLoading: true })
-		PersonalDescriptionSchema.validate({ description: value.description })
+		PersonalDescriptionSchema.validate({ guide_about: value.guide_about })
 			.then((res) => {
 				setError({ ...error, descriptionError: null })
-				// TODO: fetch description
-				setTimeout(() => {
-					setSuccess({ descriptionSuccess: 'Пароль успешно изменен' })
-					setLoading({ passwordLoading: false })
-				}, 1000)
+				updateUserInfo(value.id, user.token, { guide_about: value.guide_about }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ descriptionSuccess: 'Описание успешно изменено' })
+					} else {
+						setError({ descriptionError: 'Что-то пошло не так' })
+					}
+				})
+				setLoading({ descriptionLoading: false })
 			})
 			.catch((e) => {
 				setError({ ...error, descriptionError: e.message })
@@ -214,18 +221,51 @@ const GuideProfileEdit = () => {
 
 	const editRequisites = () => {
 		setLoading({ requisitesLoading: true })
-		PersonalRequisitesSchema.validate({ requisitesPerson: value.requisitesPerson, requisitesBill: value.requisitesBill })
+		PersonalRequisitesSchema.validate({
+			requisite_name: value.requisite_name,
+			requisite_account: value.requisite_account,
+			requisite_bank: value.requisite_bank,
+			requisite_inn: value.requisite_inn,
+			requisite_bik: value.requisite_bik,
+			requisite_corr: value.requisite_corr,
+			requisite_swift: value.requisite_swift,
+		})
 			.then((res) => {
 				setError({ ...error, requisitesError: null })
-				// TODO: fetch requisites
-				setTimeout(() => {
-					setSuccess({ requisitesSuccess: 'Реквизиты успешно изменены' })
-					setLoading({ requisitesLoading: false })
-				}, 1000)
+
+				updateUserInfo(value.id, user.token, { ...res }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ requisitesSuccess: 'Реквизиты успешно изменены' })
+					} else {
+						setError({ requisitesError: 'Что-то пошло не так' })
+					}
+				})
+
+				setLoading({ requisitesLoading: false })
 			})
 			.catch((e) => {
 				setError({ ...error, requisitesError: e.message })
 				setLoading({ requisitesLoading: false })
+			})
+	}
+
+	const editLicense = () => {
+		setLoading({ licenseLoading: true })
+		PersonalLicensSchema.validate({ license_nr: value.license_nr })
+			.then((res) => {
+				setError({ ...error, descriptionError: null })
+				updateUserInfo(value.id, user.token, { ...res }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ licenseSuccess: 'Лицензия успешно изменена' })
+					} else {
+						setError({ licenseError: 'Что-то пошло не так' })
+					}
+				})
+				setLoading({ licenseLoading: false })
+			})
+			.catch((e) => {
+				setError({ ...error, licenseError: e.message })
+				setLoading({ licenseLoading: false })
 			})
 	}
 
@@ -283,15 +323,15 @@ const GuideProfileEdit = () => {
 								)}
 							</Modal>
 
-							<img src={value.avatar} alt='' className={styles.profileImg} />
+							<img src={value.photo} alt='' className={styles.profileImg} />
 							<div className={styles.chooseImg} onClick={() => setModalOpen(true)}>
 								<img src={cameraIcon} alt='' className={styles.cameraImg} />
 							</div>
 						</div>
 						<div className={styles.editProfile}>
 							<p className={styles.editProfileTitle}>Личная информация</p>
-							<Input onChange={handleChange} value={value.name} name='name' placeholder='Имя' />
-							<Input onChange={handleChange} value={value.lastName} name='lastName' placeholder='Фамилия' />
+							<Input onChange={handleChange} value={value.firstname} name='firstname' placeholder='Имя' />
+							<Input onChange={handleChange} value={value.lastname} name='lastname' placeholder='Фамилия' />
 							<Input onChange={handleChange} value={value.email} name='email' placeholder='Email' />
 							<Input onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
 							{error.personalInfoError && <p className={styles.error}>{error.personalInfoError}</p>}
@@ -304,7 +344,7 @@ const GuideProfileEdit = () => {
 							<p>
 								Описание будет отображаться рядом с вашим именем на странице тура. Расскажите подробнее о себе, о своем опыте.
 							</p>
-							<TextArea onChange={handleChange} value={value.description} placeholder='Описание' name='description' />
+							<TextArea onChange={handleChange} value={value.guide_about} placeholder='Описание' name='guide_about' />
 							<Button onClick={editDescription} className={styles.button}>
 								{loading.descriptionLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
@@ -320,39 +360,36 @@ const GuideProfileEdit = () => {
 							{error.passportDataError && <p className={styles.error}>{error.passportDataError}</p>}
 							{success.passportDataSuccess && <p className={styles.success}>{success.passportDataSuccess}</p>}
 							<p className={styles.editProfileTitle}>Реквизиты</p>
+							<Input onChange={handleChange} value={value.requisite_name} name='requisite_name' placeholder='ФИО получателя' />
 							<Input
 								onChange={handleChange}
-								value={value.requisitesPerson}
-								name='requisitesPerson'
-								placeholder='ФИО получателя'
-							/>
-							<Input
-								onChange={handleChange}
-								value={value.requisitesBill}
-								name='requisitesBill'
+								value={value.requisite_account}
+								name='requisite_account'
 								placeholder='Счет получателя'
 							/>
 							<Input
 								onChange={handleChange}
-								value={value.requisitesBill}
-								name='requisitesBank'
+								value={value.requisite_bank}
+								name='requisite_bank'
 								placeholder='Банк Получателя (полное название банка)'
 							/>
-							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesINN' placeholder='ИНН' />
-							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesBik' placeholder='БИК' />
-							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesCorr' placeholder='Корр. счет' />
-							<Input onChange={handleChange} value={value.requisitesBill} name='requisitesSwift' placeholder='SWIFT-код' />
+							<Input onChange={handleChange} value={value.requisite_inn} name='requisite_inn' placeholder='ИНН' />
+							<Input onChange={handleChange} value={value.requisite_bik} name='requisite_bik' placeholder='БИК' />
+							<Input onChange={handleChange} value={value.requisite_corr} name='requisite_corr' placeholder='Корр. счет' />
+							<Input onChange={handleChange} value={value.requisite_swift} name='requisite_swift' placeholder='SWIFT-код' />
 							<Button onClick={editRequisites} className={styles.button}>
 								{loading.requisitesLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
 							{error.requisitesError && <p className={styles.error}>{error.requisitesError}</p>}
 							{success.requisitesSuccess && <p className={styles.success}>{success.requisitesSuccess}</p>}
 							<p className={styles.editProfileTitle}>Лицензия</p>
-							<Input onChange={handleChange} value={value.requisitesBill} name='licenseNumber' placeholder='Номер лецензии' />
+							<Input onChange={handleChange} value={value.license_nr} name='license_nr' placeholder='Номер лецензии' />
 							<p className={styles.pickLicens}>Выбрать файл</p>
-							<Button className={styles.button}>
-								{loading.personalInfoLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
+							<Button onClick={editLicense} className={styles.button}>
+								{loading.licenseLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>
+							{error.licenseError && <p className={styles.error}>{error.licenseError}</p>}
+							{success.licenseSuccess && <p className={styles.success}>{success.licenseSuccess}</p>}
 							<p className={styles.editProfileTitle}>Сменить пароль</p>
 							<Input
 								onChange={handleChange}

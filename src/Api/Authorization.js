@@ -59,18 +59,11 @@ export const getUserById = async (id) => {
 	return await axios.get(`${API.user.byId}/${id}`)
 }
 
-export const updateUserInfo = async ({ id, token, name, lastName, email, phone, avatar, password }) => {
+export const updateUserInfo = async (id, token, data) => {
 	return await axios
 		.put(
 			`${API.user.byId}/${id}`,
-			{
-				firstname: name,
-				lastname: lastName,
-				email: email,
-				phone: phone,
-				photo: avatar,
-				password: password,
-			},
+			{ ...data },
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,

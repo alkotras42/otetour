@@ -39,14 +39,14 @@ export const ChangePasswordConfirmSchema = Yup.object({
 })
 
 export const PersonalInfoSchema = Yup.object({
-	name: Yup.string().required('Необходимо ввести имя'),
-	lastName: Yup.string().required('Необходимо ввести фамилию'),
+	firstname: Yup.string().required('Необходимо ввести имя'),
+	lastname: Yup.string().required('Необходимо ввести фамилию'),
 	email: Yup.string().email('Неверный email адрес').required('Необходимо ввести email'),
 	phone: Yup.string().required('Введите номер телефона').matches(phoneRegExp, 'Введите подходящий номер телефона'),
 })
 
 export const PersonalDescriptionSchema = Yup.object({
-	description: Yup.string().required('Введите описание'),
+	guide_about: Yup.string().required('Введите описание'),
 })
 
 export const PersonalPassportInfoSchema = Yup.object({
@@ -58,8 +58,17 @@ export const PersonalPassportInfoSchema = Yup.object({
 })
 
 export const PersonalRequisitesSchema = Yup.object({
-	requisitesPerson: Yup.string().required('Введите ФИО'),
-	requisitesBill: Yup.number().typeError('Счет должен быть числом').required('Введите номер счета'),
+	requisite_name: Yup.string().required('Введите ФИО'),
+	requisite_account: Yup.number().typeError('Счет должен быть числом').required('Введите номер счета'),
+	requisite_bank: Yup.string().required('Введите название банка'),
+	requisite_inn: Yup.string().required('Введите ИНН'),
+	requisite_bik: Yup.string().required('Введите БИК'),
+	requisite_corr: Yup.string().required('Введите корр. счет'),
+	requisite_swift: Yup.string().required('Введите SWIFT-код'),
+})
+
+export const PersonalLicensSchema = Yup.object({
+	license_nr: Yup.string().required('Введите номер лицензии'),
 })
 
 export const PersonalPasswordSchema = Yup.object({
