@@ -33,9 +33,9 @@ const GuideProfileEdit = () => {
 		email: '',
 		phone: '',
 		description: '',
-		passport: '',
-		passportWhen: '',
-		passportWho: '',
+		pass_nr: '',
+		pass_date: '',
+		pass_issuer: '',
 		requisite_name: '',
 		requisite_account: '',
 		requisite_bank: '',
@@ -201,17 +201,20 @@ const GuideProfileEdit = () => {
 	const editPassportData = () => {
 		setLoading({ passportDataLoading: true })
 		PersonalPassportInfoSchema.validate({
-			passport: value.passport,
-			passportWhen: value.passportWhen,
-			passportWho: value.passportWho,
+			pass_nr: value.pass_nr,
+			pass_date: value.pass_date,
+			pass_issuer: value.pass_issuer,
 		})
 			.then((res) => {
 				setError({ ...error, passportDataError: null })
-				// TODO: fetch passport data
-				setTimeout(() => {
-					setSuccess({ passportDataSuccess: 'Паспортные данные успешно изменены' })
-					setLoading({ passportDataLoading: false })
-				}, 1000)
+				updateUserInfo(value.id, user.token, { ...res }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ passportDataSuccess: 'Паспортные данные успешно изменены' })
+					} else {
+						setError({ passportDataError: 'Что-то пошло не так' })
+					}
+				})
+				setLoading({ passportDataLoading: false })
 			})
 			.catch((e) => {
 				setError({ ...error, passportDataError: e.message })
@@ -351,9 +354,9 @@ const GuideProfileEdit = () => {
 							{error.descriptionError && <p className={styles.error}>{error.descriptionError}</p>}
 							{success.descriptionSuccess && <p className={styles.success}>{success.descriptionSuccess}</p>}
 							<p className={styles.editProfileTitle}>Паспортные данные</p>
-							<Input onChange={handleChange} value={value.passport} name='passport' placeholder='Серия и номер паспорта' />
-							<Input onChange={handleChange} value={value.passportWhen} name='passportWhen' placeholder='Когда выдан' />
-							<Input onChange={handleChange} value={value.passportWho} name='passportWho' placeholder='Кем выдан' />
+							<Input onChange={handleChange} value={value.pass_nr} name='pass_nr' placeholder='Серия и номер паспорта' />
+							<Input onChange={handleChange} value={value.pass_date} name='pass_date' placeholder='Когда выдан' />
+							<Input onChange={handleChange} value={value.pass_issuer} name='pass_issuer' placeholder='Кем выдан' />
 							<Button onClick={editPassportData} className={styles.button}>
 								{loading.passportDataLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
 							</Button>

@@ -50,11 +50,11 @@ export const PersonalDescriptionSchema = Yup.object({
 })
 
 export const PersonalPassportInfoSchema = Yup.object({
-	passport: Yup.string()
+	pass_nr: Yup.string()
 		.required('Введите серию и номер паспорта')
 		.matches(/\d{4}\s\d{6}/, 'Серия и номер должны быть в формате 0123 456789'),
-	passportWhen: Yup.string().required('Введите когда был выдан паспорт'),
-	passportWho: Yup.string().required('Введите кем был выдан паспорт'),
+	pass_date: Yup.string().required('Введите когда был выдан паспорт'),
+	pass_issuer: Yup.string().required('Введите кем был выдан паспорт'),
 })
 
 export const PersonalRequisitesSchema = Yup.object({

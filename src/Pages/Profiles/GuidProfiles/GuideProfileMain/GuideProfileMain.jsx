@@ -88,7 +88,7 @@ const GuideProfileMain = () => {
 							<span>Реквизиты</span>
 							{user?.cardNumber ? '**** **** **** ' + user?.cardNumber?.substr(-4) : '---- ---- ---- ----'}
 							<span>Паспорт</span>
-							{user?.passport ? user?.passport.substr(4) + ' ****' + user?.passport?.substr(-2) : '---- ------'}
+							{user?.pass_nr ? user?.pass_nr.substr(0, 4) + ' ****' + user?.pass_nr?.substr(-2) : '---- ------'}
 							<span>Лицензия</span>
 							<Link to='' className={styles.link}>
 								Открыть
