@@ -139,7 +139,7 @@ const ProfileEdit = () => {
 		PersonalPasswordSchema.validate({ password: value.password, passwordConfirm: value.passwordConfirm })
 			.then((res) => {
 				setError({ passwordError: null })
-				updateUserInfo(value.id, usser.token, { password: res.password }).then((res) => {
+				updateUserInfo(value.id, user.token, { password: res.password }).then((res) => {
 					if (res.code == 200) {
 						setSuccess({ passwordSuccess: 'Пароль успешно изменен' })
 					} else {

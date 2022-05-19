@@ -41,7 +41,9 @@ export const Header = ({ className, ...props }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	useEffect(() => {
-		getConfig().then((res) => setLanguages(res.data.languages))
+		if (!languages) {
+			getConfig().then((res) => setLanguages(res.data.languages))
+		}
 	}, [])
 
 	// Для закрытия менюшек при нажатии вне их

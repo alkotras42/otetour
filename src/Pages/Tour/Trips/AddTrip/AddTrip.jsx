@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { Button, Difficulty, Input, Rating } from '../../../../Component'
+import { Button, DatePikerInput, Difficulty, Input, Rating } from '../../../../Component'
 import { withLayout } from '../../../../Layout/Layout'
 import cn from 'classnames'
 import styles from './AddTrip.module.css'
-import ArrowIcon from './arrow.svg'
-import { priceRu } from '../../../../Helpers/helpers'
-import { useForm, useFormState, useWatch } from 'react-hook-form'
+import { useForm, useFormState, useWatch, Controller } from 'react-hook-form'
 import { createTrip, getTripById, updateTrip } from '../../../../Api/Trips'
 import { UserContext } from '../../../../Context/user.context'
 import { ClipLoader } from 'react-spinners'
+import { hashids } from '../../../../Helpers/helpers'
 
 const AddTrip = ({ ...props }) => {
 	const [defaultValue, setDefaultValue] = useState(null)
-	const { register, control, trigger, setValue, reset, handleSubmit, getValues } = useForm({
+	const { register, control, setError, clearErrors, reset, handleSubmit } = useForm({
 		defaultValue: defaultValue,
 		mode: 'onChange',
 	})
@@ -51,8 +50,12 @@ const AddTrip = ({ ...props }) => {
 		if (isAddMode) {
 			setSubmiting({ ...submiting, loading: true })
 			try {
-				await createTrip(data, params.id, user.token)
-				setSubmiting({ ...submiting, loading: false, success: 'Поездка успешно добавлена' })
+				const res = await createTrip(data, params.id, user.token)
+				if (res.code == 200) {
+					setSubmiting({ ...submiting, loading: false, success: 'Поездка успешно добавлена' })
+				} else {
+					setSubmiting({ ...submiting, loading: false, error: res.error })
+				}
 			} catch (e) {
 				setSubmiting({ ...submiting, loading: false, error: e.message })
 			}
@@ -67,12 +70,30 @@ const AddTrip = ({ ...props }) => {
 		}
 	}
 
+	useEffect(() => {
+		if (value.places_total && value.places_left && +value.places_total < +value.places_left) {
+			setError('places_left', {
+				type: 'custom',
+				message: 'Количество оставшихся мест не должно превышать полное число мест',
+			})
+		} else {
+			clearErrors('places_left')
+		}
+	}, [value.places_total, value.places_left])
+
+	console.log(user)
+
 	return (
 		<div className={styles.addTrip} {...props}>
 			<div className={styles.addTripWrapper}>
+				<div className={styles.breadcrumbs}>
+					<Link to='/'>Главная</Link> / <Link to={'/guide/tours/' + hashids.encode(user?.profile.id)}>Мои туры</Link> /{' '}
+					<Link to={'/tour/' + params.id + '/trips'}>Поездки</Link> / Добавить поездку
+				</div>
 				<p className={styles.title}>Добавить поездку</p>
+
 				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-					<Input
+					{/* <DatePikerInput
 						placeholder='С'
 						{...register(`date_start`, {
 							required: 'Введите дату начала поездки',
@@ -83,7 +104,28 @@ const AddTrip = ({ ...props }) => {
 						})}
 						filled={value.date_start}
 						error={errors.date_start}
+					/> */}
+					<Controller
+						control={control}
+						name='date_start'
+						render={({ field }) => (
+							<DatePikerInput
+								placeholderText='Дата начала'
+								readOnly={true}
+								onChange={(date) => field.onChange(date)}
+								selected={field.value}
+								error={errors.date_start}
+							/>
+						)}
+						rules={{
+							required: 'Введите дату начала поездки',
+							pattern: {
+								value: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/,
+								message: 'Введите дату в формате ГГГГ-ММ-ДД',
+							},
+						}}
 					/>
+
 					{/* <Input
 							placeholder='До'
 							{...register(`dateTo`, { required: 'Введите дату конца поездки' })}
@@ -97,11 +139,7 @@ const AddTrip = ({ ...props }) => {
 							placeholder='Количество мест'
 							{...register(`places_left`, {
 								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
-								validate: (value) => {
-									if (value < getValues()['places_total']) {
-										return 'Test'
-									}
-								},
+								max: { value: value.places_total, message: 'Количество оставшихся мест не должно превышать полное число мест' },
 							})}
 							filled={value.places_left}
 							error={errors.places_left}

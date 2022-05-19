@@ -24,7 +24,7 @@ export const Input = forwardRef(
 					type={showPassword ? 'text' : 'password'}
 					className={cn(styles.input, {
 						[styles.inputWithIcon]: icon,
-						[styles.inputError]: error
+						[styles.inputError]: error,
 					})}
 					{...props}
 				/>

@@ -5,7 +5,7 @@ import { withLayout } from '../../../Layout/Layout'
 import cn from 'classnames'
 import styles from './Trips.module.css'
 import ArrowIcon from './arrow.svg'
-import { priceRu } from '../../../Helpers/helpers'
+import { hashids, priceRu } from '../../../Helpers/helpers'
 import { useForm, useFormState, useWatch } from 'react-hook-form'
 import { getTrips } from '../../../Api/Trips'
 import { UserContext } from '../../../Context/user.context'
@@ -28,6 +28,10 @@ const Trips = ({ ...props }) => {
 	return (
 		<div className={styles.trips} {...props}>
 			<div className={styles.tripsWrapper}>
+				<div className={styles.breadcrumbs}>
+					<Link to='/'>Главная</Link> / <Link to={'/guide/tours/' + hashids.encode(user?.profile.id)}>Мои туры</Link> /
+					Поездки
+				</div>
 				<p className={styles.title}>Поездки</p>
 				{!trips ? <Loading /> : <Table type='trip' data={trips} />}
 				<Link to={`/tour/${params.id}/addTrip`}>
