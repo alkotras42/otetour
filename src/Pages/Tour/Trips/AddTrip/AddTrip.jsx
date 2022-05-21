@@ -81,7 +81,6 @@ const AddTrip = ({ ...props }) => {
 		}
 	}, [value.places_total, value.places_left])
 
-	console.log(user)
 
 	return (
 		<div className={styles.addTrip} {...props}>

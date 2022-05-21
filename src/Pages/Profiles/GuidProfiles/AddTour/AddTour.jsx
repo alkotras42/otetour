@@ -57,7 +57,6 @@ const AddTour = () => {
 						IT: tourData.descriptions.IT ? [tourData.descriptions.IT] : undefined,
 						de: tourData.descriptions.DE ? [tourData.descriptions.DE] : undefined,
 					}
-					console.log(tourData.ru)
 					reset(tourData)
 					setTourLoading(false)
 				})()

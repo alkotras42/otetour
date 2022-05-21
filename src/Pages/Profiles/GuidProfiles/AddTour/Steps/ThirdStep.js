@@ -79,7 +79,14 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 		const img = cropperRef?.current
 		const cropper = img?.cropper
 		setTourImages({ modal: false, cropper: '' })
-		picturesAppend(cropper.getCroppedCanvas().toDataURL())
+		picturesAppend(
+			cropper
+				.getCroppedCanvas({
+					maxWidth: 1280,
+					maxHeight: 720,
+				})
+				.toDataURL()
+		)
 	}
 
 	const handleTourImageDrop = (dropped) => {
@@ -126,8 +133,15 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 		const d = [...program] // create the copy of state array
 		d[index] = { modal: false, cropper: '' } //new value
 		setProgram(d)
-		console.log(d)
-		setValue(`program[${index}].image`, cropper.getCroppedCanvas().toDataURL())
+		setValue(
+			`program[${index}].image`,
+			cropper
+				.getCroppedCanvas({
+					maxWidth: 1280,
+					maxHeight: 720,
+				})
+				.toDataURL()
+		)
 	}
 
 	const handleDayImageDrop = (dropped, index) => {
@@ -146,8 +160,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			setImageError(response.message)
 		}
 	}
-
-	console.log(value.program)
 
 	return (
 		<div className={className} {...props}>
