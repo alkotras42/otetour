@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { Loading } from '../Loading/Loading'
 import { deleteTour } from '../../Api/Tour'
 import { UserContext } from '../../Context/user.context'
+import { Button } from '../Button/Button'
 
 export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const [showDropdown, setShowDropdown] = useState(false)
@@ -61,9 +62,6 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
-						<Link to={`/tour/${card.id}/trips`}>
-							<p className={styles.addTrip}>Поездки</p>
-						</Link>
 						<Link to={`/guide/addTour/${card.id}`}>
 							<p>Редактировать</p>
 						</Link>
@@ -121,6 +119,9 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 						</div>
 					)}
 				</div>
+				<Link to={`/tour/${card.id}/trips`}>
+					<Button className={styles.button}>Даты</Button>
+				</Link>
 			</div>
 		</div>
 	)

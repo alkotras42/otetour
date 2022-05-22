@@ -29,29 +29,31 @@ Modal.setAppElement('#root')
 
 const App = () => {
 	const [user, setUser] = useState()
-	const [token, setToken] = useState({
-		decodedToken: null,
-		isExpired: null,
+	const [currentToken, setCurrentToken] = useState({
+		token: null,
 	})
 
 	const { t, i18n } = useTranslation()
 
-	const { decodedToken, isExpired } = useJwt(user?.data?.token)
+	const { decodedToken, isExpired } = useJwt(currentToken.token)
+
+	if (decodedToken && isExpired) {
+		logout()
+	}
 
 	useEffect(() => {
-		setToken({ decodedToken, isExpired })
-
-		const { profile, token } = getUser()
+		const { profile, token: userToken } = getUser()
+		setCurrentToken({ ...currentToken, token: userToken })
 
 		if (profile) {
-			setUser({ profile, token })
+			setUser({ profile, token: userToken })
 		}
 	}, [])
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
 	useEffect(() => {
-		if (window.location.origin == ('http://localhost:3000' || 'https://test.otetour.com')) {
+		if (window.location.origin == 'http://localhost:3000' || window.location.origin == 'https://test.otetour.com') {
 			i18n.changeLanguage('ru')
 		} else {
 			i18n.changeLanguage(window.location.host.split('.')[0].toString())
