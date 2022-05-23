@@ -19,6 +19,8 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 
 	const { isValid } = useFormState({ control })
 
+	console.log(isValid)
+
 	const addQuestion = () => {
 		append({})
 	}

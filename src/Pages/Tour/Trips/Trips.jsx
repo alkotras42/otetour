@@ -32,10 +32,10 @@ const Trips = ({ ...props }) => {
 					<Link to='/'>Главная</Link> / <Link to={'/guide/tours/' + hashids.encode(user?.profile.id)}>Мои туры</Link> /
 					Поездки
 				</div>
-				<p className={styles.title}>Поездки</p>
+				<p className={styles.title}>Даты</p>
 				{!trips ? <Loading /> : <Table type='trip' data={trips} />}
 				<Link to={`/tour/${params.id}/addTrip`}>
-					<Button className={styles.button}>Добавить поездку</Button>
+					<Button className={styles.button}>Добавить дату</Button>
 				</Link>
 			</div>
 		</div>

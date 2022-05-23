@@ -89,6 +89,8 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 
 	const { errors } = useFormState({ control })
 
+	console.log(errors)
+
 	return (
 		<div className={className} {...props}>
 			<Select
@@ -154,8 +156,44 @@ const FirstStep = ({ className, register, control, formStep, setFormStep, trigge
 			<div className={styles.ages}>
 				<p>Возраст участия</p>
 				<div className={styles.twoInputs}>
-					<Input placeholder='От' {...register('age_min')} filled={value.age_min} error={errors.age_min} />
-					<Input placeholder='До' {...register('age_max')} filled={value.age_max} error={errors.age_max} />
+					<Input
+						placeholder='От'
+						{...register('age_min', {
+							min: {
+								value: 18,
+								message: 'Минимальный допустимый возраст - 18 лет',
+							},
+							max: {
+								value: 99,
+								message: 'Максимальный допустимый возраст - 99 лет',
+							},
+							max: {
+								value: value.age_max,
+								message: 'Не может быть больше максимального введеного возраста',
+							},
+						})}
+						filled={value.age_min}
+						error={errors.age_min}
+					/>
+					<Input
+						placeholder='До'
+						{...register('age_max', {
+							min: {
+								value: 18,
+								message: 'Минимальный допустимый возраст - 18 лет',
+							},
+							max: {
+								value: 99,
+								message: 'Максимальный допустимый возраст - 99 лет',
+							},
+							min: {
+								value: value.age_min,
+								message: 'Не может быть меньшь минимального введеного возраста',
+							},
+						})}
+						filled={value.age_max}
+						error={errors.age_max}
+					/>
 				</div>
 			</div>
 			<div className={styles.buttons}>

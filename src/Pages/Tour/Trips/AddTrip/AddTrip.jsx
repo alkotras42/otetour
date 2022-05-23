@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { Button, DatePikerInput, Difficulty, Input, Rating } from '../../../../Component'
+import { Button, DatePikerInput, Difficulty, Input, InputWithMask, Rating } from '../../../../Component'
 import { withLayout } from '../../../../Layout/Layout'
 import cn from 'classnames'
 import styles from './AddTrip.module.css'
@@ -81,29 +81,16 @@ const AddTrip = ({ ...props }) => {
 		}
 	}, [value.places_total, value.places_left])
 
-
 	return (
 		<div className={styles.addTrip} {...props}>
 			<div className={styles.addTripWrapper}>
 				<div className={styles.breadcrumbs}>
 					<Link to='/'>Главная</Link> / <Link to={'/guide/tours/' + hashids.encode(user?.profile.id)}>Мои туры</Link> /{' '}
-					<Link to={'/tour/' + params.id + '/trips'}>Поездки</Link> / Добавить поездку
+					<Link to={'/tour/' + params.id + '/trips'}>Даты</Link> / Добавить дату
 				</div>
-				<p className={styles.title}>Добавить поездку</p>
+				<p className={styles.title}>Добавить дату</p>
 
 				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-					{/* <DatePikerInput
-						placeholder='С'
-						{...register(`date_start`, {
-							required: 'Введите дату начала поездки',
-							pattern: {
-								value: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/,
-								message: 'Введите дату в формате ГГГГ-ММ-ДД',
-							},
-						})}
-						filled={value.date_start}
-						error={errors.date_start}
-					/> */}
 					<Controller
 						control={control}
 						name='date_start'
@@ -125,18 +112,12 @@ const AddTrip = ({ ...props }) => {
 						}}
 					/>
 
-					{/* <Input
-							placeholder='До'
-							{...register(`dateTo`, { required: 'Введите дату конца поездки' })}
-							filled={value.dateTo}
-							error={errors.dateTo}
-						/> */}
-
 					<div className={styles.places}>
 						<span>Осталось мест</span>
 						<Input
 							placeholder='Количество мест'
 							{...register(`places_left`, {
+								required: 'Введите количество свободных мест',
 								pattern: { value: /^[0-9]+$/, message: 'Значение должно быть числом' },
 								max: { value: value.places_total, message: 'Количество оставшихся мест не должно превышать полное число мест' },
 							})}
@@ -160,27 +141,48 @@ const AddTrip = ({ ...props }) => {
 						filled={value.language}
 						error={errors.language}
 					/>
-					<Input
-						placeholder='Стоимость тура'
-						{...register(`sum_price`, {
+					<Controller
+						control={control}
+						name='sum_price'
+						render={({ field }) => (
+							<InputWithMask
+								placeholder='Стоимость тура'
+								onValueChange={(v) => field.onChange(v.value)}
+								thousandSeparator={true}
+								suffix={' ₽'}
+								filled={value.sum_price}
+								error={errors.sum_price}
+							/>
+						)}
+						rules={{
 							required: 'Введите стоимость тура',
-							pattern: { value: /[+-]?([0-9]*[.])?[0-9]+/, message: 'Значение должно быть числом' },
-						})}
-						filled={value.sum_price}
-						error={errors.sum_price}
+						}}
 					/>
+
 					<p>
 						*Комиссия за использование платформы составит <span className={styles.redSpan}>1 250 ₽</span> за каждого туриста,
 						купившего этот тур.
 					</p>
 					<div className={styles.twoInputs}>
-						<Input
-							placeholder='Предоплата'
-							{...register(`sum_prepayment`, {
-								pattern: { value: /[+-]?([0-9]*[.])?[0-9]+/, message: 'Значение должно быть числом' },
-							})}
-							filled={value.sum_prepayment}
-							error={errors.sum_prepayment}
+						<Controller
+							control={control}
+							name='sum_prepayment'
+							render={({ field }) => (
+								<InputWithMask
+									placeholder='Предоплата'
+									onValueChange={(v) => field.onChange(v.value)}
+									thousandSeparator={true}
+									suffix={' ₽'}
+									filled={value.sum_prepayment}
+									error={errors.sum_prepayment}
+								/>
+							)}
+							rules={{
+								max: {
+									value: value.sum_price,
+									message: 'Размер предоплаты не может превышать полную цену',
+								},
+							}}
 						/>
 						<Input
 							disabled={!+value.sum_prepayment}
@@ -191,20 +193,30 @@ const AddTrip = ({ ...props }) => {
 						/>
 					</div>
 					{/* <Input placeholder='Дата постоплаты' {...register(`payday`)} filled={value.payday} error={errors.payday} /> */}
-					<Input
-						placeholder='Цена со скидкой'
-						{...register(`sum_price_discount`, {
-							pattern: {
-								value: /[+-]?([0-9]*[.])?[0-9]+/,
-								message: 'Значение должно быть числом',
+					<Controller
+						control={control}
+						name='sum_price_discount'
+						render={({ field }) => (
+							<InputWithMask
+								placeholder='Цена со скидкой'
+								onValueChange={(v) => field.onChange(v.value)}
+								thousandSeparator={true}
+								suffix={' ₽'}
+								filled={value.sum_price_discount}
+								error={errors.sum_price_discount}
+							/>
+						)}
+						rules={{
+							max: {
+								value: value.sum_price,
+								message: 'Цена со скидкой не может превышать цену без скидки',
 							},
-						})}
-						filled={value.sum_price_discount}
-						error={errors.sum_price_discount}
+						}}
 					/>
+
 					<div>
 						<Button type='submit' className={styles.submitButton}>
-							{submiting.loading ? <ClipLoader color='#fff' /> : 'Сохранить поездку'}
+							{submiting.loading ? <ClipLoader color='#fff' /> : 'Сохранить дату'}
 						</Button>
 						{submiting.error && <p className={styles.error}>{submiting.error}</p>}
 						{submiting.success && <p className={styles.success}>{submiting.success}</p>}

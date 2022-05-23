@@ -50,12 +50,12 @@ const AddTour = () => {
 					tourData = {
 						...tourData,
 						languages: [{}],
-						ru: tourData.descriptions.RU ? [tourData.descriptions.RU] : undefined,
-						en: tourData.descriptions.EN ? [tourData.descriptions.EN] : undefined,
-						es: tourData.descriptions.ES ? [tourData.descriptions.ES] : undefined,
-						FR: tourData.descriptions.FR ? [tourData.descriptions.FR] : undefined,
-						IT: tourData.descriptions.IT ? [tourData.descriptions.IT] : undefined,
-						de: tourData.descriptions.DE ? [tourData.descriptions.DE] : undefined,
+						ru: tourData.descriptions.RU?.is_active == 1 ? [tourData.descriptions.RU] : undefined,
+						en: tourData.descriptions.EN?.is_active == 1 ? [tourData.descriptions.EN] : undefined,
+						es: tourData.descriptions.ES?.is_active == 1 ? [tourData.descriptions.ES] : undefined,
+						FR: tourData.descriptions.FR?.is_active == 1 ? [tourData.descriptions.FR] : undefined,
+						IT: tourData.descriptions.IT?.is_active == 1 ? [tourData.descriptions.IT] : undefined,
+						de: tourData.descriptions.DE?.is_active == 1 ? [tourData.descriptions.DE] : undefined,
 					}
 					reset(tourData)
 					setTourLoading(false)
@@ -79,7 +79,6 @@ const AddTour = () => {
 			try {
 				const res = await updateTour(data, params.tourId, user.token)
 				setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отредактирован!' })
-				reset({ defaultValues })
 			} catch (e) {
 				setSubmiting({ ...submiting, loading: false, error: e.message })
 			}

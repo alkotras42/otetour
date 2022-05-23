@@ -23,10 +23,15 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 			setProgram(Array(+value.length_days).fill({ modal: false, cropper: '' }))
 			// value.program.length = value.length_days
 			// console.log(value.program)
-			setValue(
-				'program',
-				value.program && [...value.program, ...Array(Math.max(value.length_days - value.program.length, 0)).fill({})]
-			)
+			if (!value.program) {
+				setValue('program', [{}])
+			} else if (!value.program.length) {
+				setValue('program', [{}])
+			} else if (value.program.length < value.length_days) {
+				setValue('program', [...value.program, ...Array(Math.max(value.length_days - value.program.length, 0)).fill({})])
+			} else if (value.program.length > value.length_days) {
+				setValue('program', value.program?.slice(0, value.length_days))
+			}
 		}
 	}, [value.length_days])
 
@@ -228,7 +233,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 				<div key={field.id} className={styles.dayItem}>
 					<div className={styles.dayTitle}>
 						<p className={styles.dayNumber}>{`${index + 1} день`}</p>
-						{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => removeDay(index)} />}
 					</div>
 					<div className={styles.dayProgram}>
 						<img className={styles.addPhoto} src={PhotoIcon} onClick={() => openDayImageModal(index)} alt='' />
@@ -280,12 +284,6 @@ const ThirdStep = ({ className, control, register, formStep, setFormStep, trigge
 					</div>
 				</div>
 			))}
-			{program.length < 30 ? (
-				<div className={styles.addBlock} onClick={addDay}>
-					<img src={PlusIcon} alt='' />
-					<p>Добавить день</p>
-				</div>
-			) : null}
 
 			<div className={styles.buttons}>
 				<Button onClick={prevStep}>Предыдущий шаг</Button>

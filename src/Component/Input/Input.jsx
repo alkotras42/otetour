@@ -11,6 +11,7 @@ export const Input = forwardRef(
 		const changeType = () => {
 			setShowPassword(!showPassword)
 		}
+
 		return (
 			<div
 				className={cn(className, styles.wrapper, {

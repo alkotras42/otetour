@@ -24,6 +24,7 @@ import { PrivateRoute } from './Servises/PrivateRoute'
 import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
 import { useTranslation } from 'react-i18next'
+import { ErrorBoundary } from './Component'
 
 Modal.setAppElement('#root')
 
@@ -61,147 +62,149 @@ const App = () => {
 	}, [])
 
 	return (
-		<UserContext.Provider value={value}>
-			<Router>
-				<Routes>
-					<Route exact index path='/' element={<Home />} />
-					<Route exact path='/login' element={<Login />} />
-					<Route exact path='/registration' element={<Registration />} />
-					<Route exact path='/passwordChange' element={<PasswordChange />} />
-					<Route path='/tour/:id' element={<Tour />} />
-					<Route
-						path='/user/:id'
-						element={
-							<PrivateRoute>
-								<ProfileMain />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/user/tours/:id'
-						element={
-							<PrivateRoute>
-								<ProfileTours />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/user/favoriteTours/:id'
-						element={
-							<PrivateRoute>
-								<ProfileFavoriteTours />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/tour/tourPay/:id'
-						element={
-							<PrivateRoute>
-								<ProfileTourPay />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/user/edit'
-						element={
-							<PrivateRoute>
-								<ProfileEdit />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/chats'
-						element={
-							<PrivateRoute>
-								<ProfileChats />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/disputs'
-						element={
-							<PrivateRoute>
-								<ProfileDispute />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/reviews'
-						element={
-							<PrivateRoute>
-								<ProfileReviews />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/guide/:id'
-						element={
-							<PrivateRoute guide={true}>
-								<GuideProfileMain />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/guide/edit'
-						element={
-							<PrivateRoute guide={true}>
-								<GuideProfileEdit />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/tour/:id/trips'
-						element={
-							<PrivateRoute guide={true}>
-								<Trips />
-							</PrivateRoute>
-						}
-					/>
+		<ErrorBoundary>
+			<UserContext.Provider value={value}>
+				<Router>
+					<Routes>
+						<Route exact index path='/' element={<Home />} />
+						<Route exact path='/login' element={<Login />} />
+						<Route exact path='/registration' element={<Registration />} />
+						<Route exact path='/passwordChange' element={<PasswordChange />} />
+						<Route path='/tour/:id' element={<Tour />} />
+						<Route
+							path='/user/:id'
+							element={
+								<PrivateRoute>
+									<ProfileMain />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/user/tours/:id'
+							element={
+								<PrivateRoute>
+									<ProfileTours />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/user/favoriteTours/:id'
+							element={
+								<PrivateRoute>
+									<ProfileFavoriteTours />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/tour/tourPay/:id'
+							element={
+								<PrivateRoute>
+									<ProfileTourPay />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/user/edit'
+							element={
+								<PrivateRoute>
+									<ProfileEdit />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/chats'
+							element={
+								<PrivateRoute>
+									<ProfileChats />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/disputs'
+							element={
+								<PrivateRoute>
+									<ProfileDispute />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/reviews'
+							element={
+								<PrivateRoute>
+									<ProfileReviews />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/guide/:id'
+							element={
+								<PrivateRoute guide={true}>
+									<GuideProfileMain />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/guide/edit'
+							element={
+								<PrivateRoute guide={true}>
+									<GuideProfileEdit />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/tour/:id/trips'
+							element={
+								<PrivateRoute guide={true}>
+									<Trips />
+								</PrivateRoute>
+							}
+						/>
 
-					<Route
-						path='/tour/:id/addTrip'
-						element={
-							<PrivateRoute guide={true}>
-								<AddTrip />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/tour/:id/addTrip/:tripId'
-						element={
-							<PrivateRoute guide={true}>
-								<AddTrip />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/guide/tours/:id'
-						element={
-							<PrivateRoute>
-								<GuideProfileTours />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/guide/addTour'
-						element={
-							<PrivateRoute guide={true}>
-								<AddTour />
-							</PrivateRoute>
-						}
-					/>
-					<Route
-						path='/guide/addTour/:tourId'
-						element={
-							<PrivateRoute guide={true}>
-								<AddTour />
-							</PrivateRoute>
-						}
-					/>
-					<Route path='*' element={<NotFound />} />
-				</Routes>
-			</Router>
-		</UserContext.Provider>
+						<Route
+							path='/tour/:id/addTrip'
+							element={
+								<PrivateRoute guide={true}>
+									<AddTrip />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/tour/:id/addTrip/:tripId'
+							element={
+								<PrivateRoute guide={true}>
+									<AddTrip />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/guide/tours/:id'
+							element={
+								<PrivateRoute>
+									<GuideProfileTours />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/guide/addTour'
+							element={
+								<PrivateRoute guide={true}>
+									<AddTour />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/guide/addTour/:tourId'
+							element={
+								<PrivateRoute guide={true}>
+									<AddTour />
+								</PrivateRoute>
+							}
+						/>
+						<Route path='*' element={<NotFound />} />
+					</Routes>
+				</Router>
+			</UserContext.Provider>
+		</ErrorBoundary>
 	)
 }
 
