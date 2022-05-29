@@ -8,21 +8,11 @@ import { useFieldArray, useFormState, useWatch } from 'react-hook-form'
 import CloseIcon from '../closeIcon.svg'
 
 const FifthStep = ({ className, control, register, formStep, setFormStep, ...props }) => {
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name: 'questions',
-	})
 
-	const value = useWatch({
-		control,
-	})
 
-	const { isValid } = useFormState({ control })
-
-	console.log(isValid)
 
 	const addQuestion = () => {
-		append({})
+		questionsAppend({})
 	}
 
 	const prevStep = (e) => {
@@ -34,30 +24,8 @@ const FifthStep = ({ className, control, register, formStep, setFormStep, ...pro
 	return (
 		<div className={className} {...props}>
 
-			<p className={styles.blockTitle}>Часто задаваемые вопросы</p>
-			<p>Распишите вопросы, которые могут возникнуть у пользователей по поводу тура.</p>
-			{fields.map((field, index) => (
-				<div key={field.id} className={styles.question}>
-					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => remove(index)} />}
-					<Input
-						placeholder='Вопрос'
-						{...register(`questions.${index}.question`)}
-						filled={value.question?.length && value.questions[index]?.question}
-					/>
-					<TextArea placeholder='Ответ' {...register(`questions.${index}.answer`)} filled={value.question?.length && value.questions[index]?.answer} />
-				</div>
-			))}
-
-			<div className={styles.addBlock} onClick={addQuestion}>
-				<img src={PlusIcon} alt='' />
-				<p>Добавить вопрос</p>
-			</div>
 			<div>
-				<div className={styles.buttons}>
-					<Button onClick={prevStep}>Предыдущий шаг</Button>
-					<Button color='white'>Сохранить в черновики</Button>
-				</div>
-				<Button disabled={!isValid} type="submit" className={styles.submitButton}>Отправить на модерацию</Button>
+				
 			</div>
 		</div>
 	)

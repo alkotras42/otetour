@@ -129,7 +129,15 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const OnReviewCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
-				<img src={`/images/${card.img}`} alt='' className={styles.image} />
+				<img
+					src={
+						(card.pictures?.length && card.pictures[0]) ||
+						card.pictures ||
+						'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+					}
+					alt=''
+					className={styles.image}
+				/>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
@@ -152,13 +160,13 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				</Modal>
 			</div>
 			<div className={styles.cardBottom}>
-				<div className={styles.type}>{card.type}</div>
-				<div className={styles.title}>{card.title}</div>
+				<div className={styles.type}>{card.category_name}</div>
+				<div className={styles.title}>{card.name}</div>
 				<div className={styles.info}>
 					<span>Длительность</span>
-					{card.daysCount + ' дней'}
+					{card.length_days + ' дней'}
 					<span>Ближашие даты</span>
-					{`${card.closesDate} — ${card.plasesHold} из ${card.plasesTotal} мест `}
+					{`${card.closesDate || '?'} — ${card.plasesHold || '?'} из ${card.plasesTotal || '?'} мест `}
 					<span>Стоимость</span>
 					{card.sale ? (
 						<div className={styles.prices}>

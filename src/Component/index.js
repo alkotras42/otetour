@@ -1,5 +1,6 @@
 export * from './Input/Input'
-export * from './Select/Select'
+export * from './CustomSelect/CustomSelect'
+export * from './CustomSelectWithSearch/CustomSelectWithSearch'
 export * from './Button/Button'
 export * from './Calendar/Calendar'
 export * from './Location/Location'

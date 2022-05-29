@@ -9,6 +9,7 @@ export const createTour = async (data, token) => {
 				country_id: data.country_id,
 				region_id: data.region_id,
 				city_id: data.city_id,
+				accommodation_id: data.accommodation_id,
 				category_id: data.category_id,
 				length_days: data.length_days,
 				difficulty: data.difficulty,

@@ -32,7 +32,7 @@ const AddTour = () => {
 
 	const [userData, setUserData] = useState({ id: 1 })
 
-	const { register, control, watch, trigger, reset, setValue, getValues, handleSubmit } = useForm({
+	const { register, control, watch, trigger, reset, setValue, getValues, setError, clearErrors, handleSubmit } = useForm({
 		defaultValues,
 		mode: 'onChange',
 	})
@@ -70,7 +70,7 @@ const AddTour = () => {
 			try {
 				const res = await createTour(data, user.token)
 				setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
-				reset({ defaultValues })
+				reset()
 			} catch (e) {
 				setSubmiting({ ...submiting, loading: false, error: e.message })
 			}
@@ -100,11 +100,14 @@ const AddTour = () => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className={styles.forms}>
 							<FirstStep
+								setValue={setValue}
 								trigger={trigger}
 								formStep={formStep}
 								setFormStep={setFormStep}
 								control={control}
 								register={register}
+								setError={setError}
+								clearErrors={clearErrors}
 								className={cn({
 									[styles.hide]: formStep != 1,
 								})}

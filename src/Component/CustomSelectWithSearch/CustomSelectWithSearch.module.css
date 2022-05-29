@@ -1,0 +1,95 @@
+.wrapper {
+	position: relative;
+	display: flex;
+	flex: auto;
+	flex-direction: column;
+}
+
+.wrapper:focus-within .label,
+.filled .label {
+	transform: translate(8px, -8px) scale(0.8);
+	padding: 0 3px;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.input {
+	font-size: 16px;
+	width: 100%;
+	/* border: 1px solid #ccc; */
+	background: #fff;
+	border-radius: 5px;
+	outline: none;
+}
+
+.inputWithIcon {
+	padding-left: 45px;
+}
+
+/* .input:focus {
+	border: 1px solid #6e93d6;
+} */
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: '';
+}
+
+.label {
+	position: absolute;
+	pointer-events: none;
+	transform: translate(20px, 15px) scale(1);
+	transform-origin: top left;
+	transition: 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	color: #808285;
+}
+
+.labelWithIcon {
+	transform: translate(45px, 15px) scale(1);
+}
+
+.arrowIcon {
+	position: absolute;
+	right: 15px;
+	top: 18px;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+.input:focus + .arrowIcon,
+.arrowIcon:hover {
+	opacity: 1;
+}
+
+.input:focus {
+	color: red;
+}
+
+.input:focus + .arrowIcon {
+	transform: rotate(180deg);
+}
+
+.inputError {
+	border: 1px solid #f0493e;
+}
+
+.error {
+	margin-top: 8px;
+	margin-left: 5px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	line-height: 20px;
+	color: #f0493e;
+}
+
+.input[disabled='disabled'],
+.input:disabled,
+.disabled,
+.input:disabled ~ .label {
+	opacity: 0.5;
+}

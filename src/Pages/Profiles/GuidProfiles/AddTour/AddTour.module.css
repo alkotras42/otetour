@@ -31,6 +31,12 @@
 	font-weight: 600;
 }
 
+.languageTitle {
+	margin-top: 25px;
+	font-weight: 600;
+	color: #3762ae;
+}
+
 .redSpan {
 	color: #ff3535;
 	font-weight: 600;
@@ -205,6 +211,15 @@
 
 .success {
 	color: #63a583;
+}
+
+.checkBoxContainer {
+	display: grid;
+	gap: 15px;
+}
+
+.checkBoxItem input {
+	margin-right: 5px;
 }
 
 .dropzone {

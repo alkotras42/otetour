@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react'
 import cn from 'classnames'
-import styles from './Select.module.css'
+import styles from './CustomSelect.module.css'
 import ArrowArrow from './arrow.svg'
 
-export const Select = forwardRef(
+export const CustomSelect = forwardRef(
 	({ className, children, type, placeholder, options, filled, error, ...props }, ref) => {
 		return (
 			<div

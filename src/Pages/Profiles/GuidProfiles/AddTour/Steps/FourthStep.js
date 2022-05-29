@@ -22,11 +22,20 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 		name: 'services',
 	})
 
+	const {
+		fields: questionsFields,
+		append: questionsAppend,
+		remove: questionsRemove,
+	} = useFieldArray({
+		control,
+		name: 'questions',
+	})
+
 	const value = useWatch({
 		control,
 	})
 
-	const { errors } = useFormState({ control })
+	const { errors, isValid } = useFormState({ control })
 
 	const [residentImage, setResidentImage] = useState({ modal: false, cropper: '', image: null })
 
@@ -58,14 +67,12 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 		}
 	}
 
-	const addInclude = () => {
-		includeAppend({})
-	}
-	const addExclude = () => {
-		excludeAppend({})
-	}
 	const addServise = () => {
 		servisesAppend({})
+	}
+
+	const addQuestion = () => {
+		questionsAppend({})
 	}
 	const nextStep = async (e) => {
 		e.preventDefault()
@@ -84,15 +91,8 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 
 	return (
 		<div className={className} {...props}>
-			<p className={styles.blockTitle}>Проживание</p>
-			<Input
-				placeholder='Тип проживания'
-				{...register('residenceType', { required: 'Введите тип проживания' })}
-				filled={value.residenceType}
-				error={errors.residenceType}
-			/>
 			<div className={styles.residence}>
-				<img
+				{/* <img
 					className={styles.addPhoto}
 					src={PhotoIcon}
 					alt=''
@@ -104,8 +104,8 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 					{...register('residenceDescription', { required: 'Введите описание проживания' })}
 					filled={value.residenceDescription}
 					error={errors.residenceDescription}
-				/>
-				<Modal
+				/> */}
+				{/* <Modal
 					isOpen={residentImage.modal}
 					onRequestClose={() => setResidentImage({ ...residentImage, modal: false })}
 					className={styles.modal}
@@ -141,17 +141,18 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 							</Dropzone>
 						</>
 					)}
-				</Modal>
+				</Modal> */}
 			</div>
-			<p className={styles.blockTitle}>Сообщение для туристов</p>
-			<p>Вы можете задать приветственное сообщение, которое будет присылаться всем туристам при покупке тура.</p>
-			<TextArea placeholder='Сообщение' {...register('message')} filled={value.message} />
 
 			<p className={styles.blockTitle}>Дополнительные услуги</p>
 			<p>Обозначьте дополнительные услуги, которые могут быть предоставлены клиентам, укажите их стоимость</p>
 			{servisesFields.map((field, index) => (
 				<div key={field.id} className={styles.servises}>
-					<Input placeholder='Услуга' {...register(`services.${index}.service`)} filled={value.servises?.length && value?.services[index]?.service} />
+					<Input
+						placeholder='Услуга'
+						{...register(`services.${index}.service`)}
+						filled={value.servises?.length && value?.services[index]?.service}
+					/>
 					<Input
 						placeholder='Стоимость'
 						{...register(`services.${index}.servicePrice`)}
@@ -165,10 +166,36 @@ const FourthStep = ({ className, control, register, formStep, setFormStep, trigg
 				<img src={PlusIcon} alt='' />
 				<p>Добавить услугу</p>
 			</div>
+
+			<p className={styles.blockTitle}>Часто задаваемые вопросы</p>
+			<p>Распишите вопросы, которые могут возникнуть у пользователей по поводу тура.</p>
+			{questionsFields.map((field, index) => (
+				<div key={field.id} className={styles.question}>
+					{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => questionsRemove(index)} />}
+					<Input
+						placeholder='Вопрос'
+						{...register(`questions.${index}.question`)}
+						filled={value.question?.length && value.questions[index]?.question}
+					/>
+					<TextArea
+						placeholder='Ответ'
+						{...register(`questions.${index}.answer`)}
+						filled={value.question?.length && value.questions[index]?.answer}
+					/>
+				</div>
+			))}
+
+			<div className={styles.addBlock} onClick={addQuestion}>
+				<img src={PlusIcon} alt='' />
+				<p>Добавить вопрос</p>
+			</div>
 			<div className={styles.buttons}>
 				<Button onClick={prevStep}>Предыдущий шаг</Button>
-				<Button onClick={nextStep}>Следующий шаг</Button>
+				<Button color='white'>Сохранить в черновики</Button>
 			</div>
+			<Button disabled={!isValid} type='submit' className={styles.submitButton}>
+				Отправить на модерацию
+			</Button>
 		</div>
 	)
 }

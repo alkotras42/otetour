@@ -25,6 +25,7 @@ import { logout } from './Api/Authorization'
 import { NotFound } from './Pages/NotFound/NotFound'
 import { useTranslation } from 'react-i18next'
 import { ErrorBoundary } from './Component'
+import { getConfig } from './Api/Config'
 
 Modal.setAppElement('#root')
 
@@ -49,6 +50,8 @@ const App = () => {
 		if (profile) {
 			setUser({ profile, token: userToken })
 		}
+
+		getConfig().then((res) => localStorage.setItem('config', JSON.stringify(res.data)))
 	}, [])
 
 	const value = useMemo(() => ({ user, setUser }), [user, setUser])

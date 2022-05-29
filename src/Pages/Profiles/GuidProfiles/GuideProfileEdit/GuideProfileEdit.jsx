@@ -6,10 +6,11 @@ import telegramIcon from './telegram.svg'
 import whatsappIcon from './whatsapp.svg'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './GuideProfileEdit.module.css'
-import { Button, Input, TextArea } from '../../../../Component'
+import { Button, CustomSelect, Input, TextArea } from '../../../../Component'
 import {
 	hashids,
 	imageFilter,
+	PersonalCompanySchema,
 	PersonalDescriptionSchema,
 	PersonalInfoSchema,
 	PersonalLicensSchema,
@@ -43,11 +44,20 @@ const GuideProfileEdit = () => {
 		requisite_bik: '',
 		requisite_corr: '',
 		requisite_swift: '',
+		company_name: '',
+		company_nr: '',
+		company_type_id: '',
 		license_nr: '',
 		password: '',
 		passwordConfirm: '',
 		photo: '',
 	})
+
+	const [companyTypes, setCompanyTypes] = useState(null)
+
+	useEffect(() => {
+		setCompanyTypes(JSON.parse(localStorage.getItem('config')).company_types)
+	}, [])
 
 	useEffect(() => {
 		if (user) {
@@ -72,6 +82,7 @@ const GuideProfileEdit = () => {
 		passportDataError: null,
 		requisitesError: null,
 		licenseError: null,
+		companyError: null,
 	})
 
 	const [success, setSuccess] = useState({
@@ -82,6 +93,7 @@ const GuideProfileEdit = () => {
 		passportDataSuccess: null,
 		requisitesSuccess: null,
 		licenseSuccess: null,
+		companySuccess: null,
 	})
 
 	const [loading, setLoading] = useState({
@@ -92,6 +104,7 @@ const GuideProfileEdit = () => {
 		passportDataLoading: false,
 		requisitesLoading: false,
 		licenseLoading: false,
+		companyLoading: false,
 	})
 
 	const handleChange = (e) => {
@@ -272,6 +285,31 @@ const GuideProfileEdit = () => {
 			})
 	}
 
+	const editCompany = () => {
+		setLoading({ companyLoading: true })
+		PersonalCompanySchema.validate({
+			company_name: value.company_name,
+			company_nr: value.company_nr,
+			company_type_id: value.company_type_id,
+		})
+			.then((res) => {
+				setError({ ...error, descriptionError: null })
+				updateUserInfo(value.id, user.token, { ...res }).then((res) => {
+					if (res.code == 200) {
+						setSuccess({ companySuccess: 'Данные компании успешно изменены' })
+						setError({ companyError: null })
+					} else {
+						setError({ companyError: 'Что-то пошло не так' })
+					}
+				})
+				setLoading({ companyLoading: false })
+			})
+			.catch((e) => {
+				setError({ ...error, companyError: e.message })
+				setLoading({ companyLoading: false })
+			})
+	}
+
 	return (
 		<div className={styles.profile}>
 			<div className={styles.profileWrapper}>
@@ -385,6 +423,27 @@ const GuideProfileEdit = () => {
 							</Button>
 							{error.requisitesError && <p className={styles.error}>{error.requisitesError}</p>}
 							{success.requisitesSuccess && <p className={styles.success}>{success.requisitesSuccess}</p>}
+							<p className={styles.editProfileTitle}>Компания</p>
+							<Input onChange={handleChange} value={value.company_name} name='company_name' placeholder='Название компании' />
+							<Input
+								onChange={handleChange}
+								value={value.company_nr}
+								name='company_nr'
+								placeholder='Регистрационный номер компании'
+							/>
+							<CustomSelect
+								onChange={handleChange}
+								value={value.company_type_id}
+								filled={value.company_type_id}
+								options={companyTypes}
+								name='company_type_id'
+								placeholder='Тип компании'
+							/>
+							<Button onClick={editCompany} className={styles.button}>
+								{loading.companyLoading ? <ClipLoader color='#fff' /> : 'Сохранить'}
+							</Button>
+							{error.companyError && <p className={styles.error}>{error.companyError}</p>}
+							{success.companySuccess && <p className={styles.success}>{success.companySuccess}</p>}
 							<p className={styles.editProfileTitle}>Лицензия</p>
 							<Input onChange={handleChange} value={value.license_nr} name='license_nr' placeholder='Номер лецензии' />
 							<p className={styles.pickLicens}>Выбрать файл</p>

@@ -7,8 +7,8 @@ const phoneRegExp =
 	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 export const RegistrationSchema = Yup.object({
-	name: Yup.string().required('Необходимо ввести имя'),
-	lastName: Yup.string().required('Необходимо ввести фамилию'),
+	name: Yup.string().required('Необходимо ввести имя').max(50, 'Имя не должно быть длинее 50 символов'),
+	lastName: Yup.string().required('Необходимо ввести фамилию').max(50, 'Фамилия не должна быть длинее 50 символов'),
 	email: Yup.string().email('Неверный email адрес').required('Необходимо ввести email'),
 	password: Yup.string()
 		.min(6, 'Пароль должен быть длиннее 6 символов')
@@ -39,8 +39,8 @@ export const ChangePasswordConfirmSchema = Yup.object({
 })
 
 export const PersonalInfoSchema = Yup.object({
-	firstname: Yup.string().required('Необходимо ввести имя'),
-	lastname: Yup.string().required('Необходимо ввести фамилию'),
+	firstname: Yup.string().required('Необходимо ввести имя').max(50, 'Имя не должно быть длинее 50 символов'),
+	lastname: Yup.string().required('Необходимо ввести фамилию').max(50, 'Фамилия не должна быть длинее 50 символов'),
 	email: Yup.string().email('Неверный email адрес').required('Необходимо ввести email'),
 	phone: Yup.string().required('Введите номер телефона').matches(phoneRegExp, 'Введите подходящий номер телефона'),
 })
@@ -60,7 +60,7 @@ export const PersonalPassportInfoSchema = Yup.object({
 export const PersonalRequisitesSchema = Yup.object({
 	requisite_name: Yup.string().required('Введите ФИО'),
 	requisite_account: Yup.number().typeError('Счет должен быть числом').required('Введите номер счета'),
-	requisite_bank: Yup.string().required('Введите название банка'),
+	requisite_bank: Yup.string().required('Введите название банка'), 
 	requisite_inn: Yup.string().required('Введите ИНН'),
 	requisite_bik: Yup.string().required('Введите БИК'),
 	requisite_corr: Yup.string().required('Введите корр. счет'),
@@ -69,6 +69,12 @@ export const PersonalRequisitesSchema = Yup.object({
 
 export const PersonalLicensSchema = Yup.object({
 	license_nr: Yup.string().required('Введите номер лицензии'),
+})
+
+export const PersonalCompanySchema = Yup.object({
+	company_name: Yup.string().required('Введите название компании').max(200, 'Название компании не должно превышать 200 символов'),
+	company_nr: Yup.string().required('Введите номер компании').max(200, 'Номер компании не должен превышать 200 символов'),
+	company_type_id: Yup.string().required('Введите тип компании'),
 })
 
 export const PersonalPasswordSchema = Yup.object({

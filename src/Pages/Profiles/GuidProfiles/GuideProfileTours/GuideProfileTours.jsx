@@ -63,12 +63,25 @@ const GuideProfileTours = () => {
 		}
 	}, [itemOffset, itemsPerPage, tours])
 
+	useEffect(() => {
+		if (tours) {
+			if (value == 1) {
+				setCurrentItems(tours.filter((tour) => tour.status == 0))
+			}
+			if (value == 2) {
+				setCurrentItems(tours.filter((tour) => tour.status == 1))
+			}
+		}
+	}, [tours, value])
+
 	const handlePageClick = (e) => {
 		const newOffset = (e.selected * itemsPerPage) % tours.length
 		setItemOffset(newOffset)
 	}
 
 	const statuses = ['Действующие', 'На проверке', 'Отклоненные', 'Черновики', 'Архив']
+
+	console.log(currentItems)
 
 	return (
 		<div className={styles.profile}>
@@ -121,38 +134,69 @@ const GuideProfileTours = () => {
 							))}
 						</div>
 					</div>
-					{!tours ? (
+					{!currentItems ? (
 						<Loading />
 					) : (
-						<div
-							className={cn(styles.toursList, {
-								[styles.hide]: value != 1,
-							})}
-						>
-							<div className={styles.items}>
-								{tours.map((tour, index) => (
-									<CardGuideProfile key={index} type='current' card={tour} />
-								))}
+						<>
+							<div
+								className={cn(styles.toursList, {
+									[styles.hide]: value != 1,
+								})}
+							>
+								<div className={styles.items}>
+									{currentItems.map((tour, index) => (
+										<CardGuideProfile key={index} type='current' card={tour} />
+									))}
+								</div>
+								{currentItems.length > 6 && (
+									<ReactPaginate
+										breakLabel='...'
+										nextLabel='>'
+										onPageChange={handlePageClick}
+										pageRangeDisplayed={5}
+										marginPagesDisplayed={1}
+										pageCount={pageCount}
+										previousLabel='<'
+										renderOnZeroPageCount={null}
+										containerClassName={styles.pagination}
+										pageLinkClassName={styles.pageItem}
+										previousLinkClassName={styles.pageItem}
+										nextLinkClassName={styles.pageItem}
+										disabledLinkClassName={styles.pageDisabled}
+										activeLinkClassName={styles.pasgeActive}
+									/>
+								)}
 							</div>
-							{tours.length > 6 && (
-								<ReactPaginate
-									breakLabel='...'
-									nextLabel='>'
-									onPageChange={handlePageClick}
-									pageRangeDisplayed={5}
-									marginPagesDisplayed={1}
-									pageCount={pageCount}
-									previousLabel='<'
-									renderOnZeroPageCount={null}
-									containerClassName={styles.pagination}
-									pageLinkClassName={styles.pageItem}
-									previousLinkClassName={styles.pageItem}
-									nextLinkClassName={styles.pageItem}
-									disabledLinkClassName={styles.pageDisabled}
-									activeLinkClassName={styles.pasgeActive}
-								/>
-							)}
-						</div>
+							<div
+								className={cn(styles.toursList, {
+									[styles.hide]: value != 2,
+								})}
+							>
+								<div className={styles.items}>
+									{currentItems.map((tour, index) => (
+										<CardGuideProfile key={index} type='onReview' card={tour} />
+									))}
+								</div>
+								{currentItems.length > 6 && (
+									<ReactPaginate
+										breakLabel='...'
+										nextLabel='>'
+										onPageChange={handlePageClick}
+										pageRangeDisplayed={5}
+										marginPagesDisplayed={1}
+										pageCount={pageCount}
+										previousLabel='<'
+										renderOnZeroPageCount={null}
+										containerClassName={styles.pagination}
+										pageLinkClassName={styles.pageItem}
+										previousLinkClassName={styles.pageItem}
+										nextLinkClassName={styles.pageItem}
+										disabledLinkClassName={styles.pageDisabled}
+										activeLinkClassName={styles.pasgeActive}
+									/>
+								)}
+							</div>
+						</>
 					)}
 
 					<div

@@ -25,5 +25,8 @@ export const API = {
 	},
 	tours: {
 		get: `${URL}/guide/tour/`,
+	},
+	accomodation: {
+		get: `${URL}/accomodation`,
 	}
 }
