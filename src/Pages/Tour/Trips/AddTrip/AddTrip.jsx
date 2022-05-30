@@ -148,7 +148,7 @@ const AddTrip = ({ ...props }) => {
 							<InputWithMask
 								placeholder='Стоимость тура'
 								onValueChange={(v) => field.onChange(v.value)}
-								thousandSeparator={true}
+								thousandSeparator={' '}
 								suffix={' ₽'}
 								filled={value.sum_price}
 								error={errors.sum_price}
@@ -171,7 +171,7 @@ const AddTrip = ({ ...props }) => {
 								<InputWithMask
 									placeholder='Предоплата'
 									onValueChange={(v) => field.onChange(v.value)}
-									thousandSeparator={true}
+									thousandSeparator={' '}
 									suffix={' ₽'}
 									filled={value.sum_prepayment}
 									error={errors.sum_prepayment}
@@ -200,7 +200,7 @@ const AddTrip = ({ ...props }) => {
 							<InputWithMask
 								placeholder='Цена со скидкой'
 								onValueChange={(v) => field.onChange(v.value)}
-								thousandSeparator={true}
+								thousandSeparator={' '}
 								suffix={' ₽'}
 								filled={value.sum_price_discount}
 								error={errors.sum_price_discount}

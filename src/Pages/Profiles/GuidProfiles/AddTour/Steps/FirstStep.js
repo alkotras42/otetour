@@ -103,7 +103,7 @@ const FirstStep = ({
 	}
 
 	useEffect(() => {
-		if (value.age_min && value.age_max && +value.age_max < +value.age_min) {
+		if (+value.age_min && +value.age_max && +value.age_max < +value.age_min) {
 			setError('age_min', {
 				type: 'custom',
 				message: 'Не может быть больше максимального введеного возраста',
@@ -111,7 +111,7 @@ const FirstStep = ({
 		} else {
 			clearErrors('age_min')
 		}
-		if (value.age_min < 18) {
+		if (+value.age_min && +value.age_min < 18) {
 			setError('age_min', {
 				type: 'min',
 				message: 'Минимальный допустимый возраст - 18 лет',
@@ -207,35 +207,51 @@ const FirstStep = ({
 					required: 'Выберите страну',
 				}}
 			/>
-			<Controller
-				control={control}
-				name='region_id'
-				render={({ field }) => (
-					<CustomSelectWithSearch
-						placeholder='Регион'
-						onChange={(v) => field.onChange(v.id)}
-						disabled={!value.country_id || regions.length == 0}
-						options={regions}
-						value={regions?.length !== 0 && value.region_id}
-						error={errors.region_id}
-					/>
-				)}
-			/>
+			<div className={styles.twoInputs}>
+				<Controller
+					control={control}
+					name='region_id'
+					render={({ field }) => (
+						<CustomSelectWithSearch
+							placeholder='Регион'
+							onChange={(v) => field.onChange(v.id)}
+							disabled={!value.country_id || regions.length == 0}
+							options={regions}
+							value={regions?.length !== 0 && value.region_id}
+							error={errors.region_id}
+						/>
+					)}
+				/>
+				<Input
+					placeholder='Регион (если в списке нет нужного)'
+					{...register('region_name')}
+					filled={value.region_name}
+					error={errors.region_name}
+				/>
+			</div>
 
-			<Controller
-				control={control}
-				name='city_id'
-				render={({ field }) => (
-					<CustomSelectWithSearch
-						placeholder='Город'
-						onChange={(v) => field.onChange(v.id)}
-						disabled={!value.country_id || cities.length == 0}
-						options={cities}
-						value={cities?.length !== 0 && value.city_id}
-						error={errors.city_id}
-					/>
-				)}
-			/>
+			<div className={styles.twoInputs}>
+				<Controller
+					control={control}
+					name='city_id'
+					render={({ field }) => (
+						<CustomSelectWithSearch
+							placeholder='Город'
+							onChange={(v) => field.onChange(v.id)}
+							disabled={!value.country_id || cities.length == 0}
+							options={cities}
+							value={cities?.length !== 0 && value.city_id}
+							error={errors.city_id}
+						/>
+					)}
+				/>
+				<Input
+					placeholder='Город (если в списке нет нужного)'
+					{...register('city_name')}
+					filled={value.city_name}
+					error={errors.city_name}
+				/>
+			</div>
 
 			<Input
 				placeholder='Длительность тура'

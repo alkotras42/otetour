@@ -3,7 +3,7 @@ import cn from 'classnames'
 import styles from './CustomSelectWithSearch.module.css'
 import ArrowArrow from './arrow.svg'
 import CreatableSelect from 'react-select/creatable'
-import { CustomSelect } from '../CustomSelect/CustomSelect'
+import Select from 'react-select'
 import { Input } from '../Input/Input'
 
 export const CustomSelectWithSearch = forwardRef(
@@ -41,25 +41,21 @@ export const CustomSelectWithSearch = forwardRef(
 					[styles.filled]: filled || value,
 				})}
 			>
-				<CreatableSelect
+				<Select
 					defaultValue=''
 					className={cn(styles.input, {
 						[styles.inputError]: error,
 					})}
 					styles={customStyles}
-					// components={{ CustomSelect }}
 					options={options}
-					// components={{ SelectContainer, Control }}
 					getOptionLabel={(option) => option.name}
 					getOptionValue={(option) => option.id}
 					placeholder=''
 					value={options.length && options.find((option) => option.id === value)}
-					// setValue={() => filled}
 					isDisabled={props.disabled}
 					{...props}
 					ref={ref}
 				/>
-				{/* <img src={ArrowArrow} alt='' className={styles.arrowIcon} /> */}
 				<label
 					className={cn(styles.label, {
 						[styles.disabled]: props.disabled,

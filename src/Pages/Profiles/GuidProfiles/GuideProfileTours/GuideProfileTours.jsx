@@ -81,8 +81,6 @@ const GuideProfileTours = () => {
 
 	const statuses = ['Действующие', 'На проверке', 'Отклоненные', 'Черновики', 'Архив']
 
-	console.log(currentItems)
-
 	return (
 		<div className={styles.profile}>
 			{!user ? (
