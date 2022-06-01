@@ -15,13 +15,22 @@ import FourthStep from './Steps/FourthStep'
 import FifthStep from './Steps/FifthStep'
 import { useForm, useWatch } from 'react-hook-form'
 import { createTour, getTourById, updateTour } from '../../../../Api/Tour'
+import SixthStep from './Steps/SixthStep'
+import SeventhStep from './Steps/SeventhStep'
 
 const AddTour = () => {
 	const [defaultValues, setDefaultValues] = useState({
 		program: [{}],
-		services: [{}],
-		questions: [{}],
 		languages: [{}],
+	})
+
+	const [activeLanguages, setActiveLanguages] = useState({
+		ru: false,
+		en: false,
+		fr: false,
+		es: false,
+		it: false,
+		de: false,
 	})
 
 	const [submiting, setSubmiting] = useState({ loading: false, error: '', success: '' })
@@ -32,10 +41,33 @@ const AddTour = () => {
 
 	const [userData, setUserData] = useState({ id: 1 })
 
-	const { register, control, watch, trigger, reset, setValue, getValues, setError, clearErrors, handleSubmit } = useForm({
-		defaultValues,
-		mode: 'onChange',
+	const { register, control, watch, trigger, reset, setValue, getValues, setError, clearErrors, handleSubmit } = useForm(
+		{
+			defaultValues,
+			mode: 'onChange',
+		}
+	)
+
+	const value = useWatch({
+		control,
 	})
+
+	useEffect(() => {
+		if (value.length_days && value.length_days > 0 && value.length_days <= 30) {
+			// setProgram(Array(+value.length_days).fill({ modal: false, cropper: '' }))
+			// value.program.length = value.length_days
+			// console.log(value.program)
+			if (!value.program) {
+				setValue('program', [{}])
+			} else if (!value.program.length) {
+				setValue('program', [{}])
+			} else if (value.program.length < value.length_days) {
+				setValue('program', [...value.program, ...Array(Math.max(value.length_days - value.program.length, 0)).fill({})])
+			} else if (value.program.length > value.length_days) {
+				setValue('program', value.program?.slice(0, value.length_days))
+			}
+		}
+	}, [value.length_days])
 
 	const params = useParams()
 	const isAddMode = !params.tourId
@@ -65,22 +97,25 @@ const AddTour = () => {
 	}, [user])
 
 	const onSubmit = async (data) => {
-		if (isAddMode) {
-			setSubmiting({ ...submiting, loading: true })
-			try {
-				const res = await createTour(data, user.token)
-				setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
-				reset()
-			} catch (e) {
-				setSubmiting({ ...submiting, loading: false, error: e.message })
-			}
-		} else {
-			setSubmiting({ ...submiting, loading: true })
-			try {
-				const res = await updateTour(data, params.tourId, user.token)
-				setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отредактирован!' })
-			} catch (e) {
-				setSubmiting({ ...submiting, loading: false, error: e.message })
+		const result = await trigger({ shouldFocus: true })
+		if (result) {
+			if (isAddMode) {
+				setSubmiting({ ...submiting, loading: true })
+				try {
+					const res = await createTour(data, user.token)
+					setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
+					reset()
+				} catch (e) {
+					setSubmiting({ ...submiting, loading: false, error: e.message })
+				}
+			} else {
+				setSubmiting({ ...submiting, loading: true })
+				try {
+					const res = await updateTour(data, params.tourId, user.token)
+					setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отредактирован!' })
+				} catch (e) {
+					setSubmiting({ ...submiting, loading: false, error: e.message })
+				}
 			}
 		}
 	}
@@ -100,6 +135,8 @@ const AddTour = () => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className={styles.forms}>
 							<FirstStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
 								setValue={setValue}
 								trigger={trigger}
 								formStep={formStep}
@@ -113,6 +150,9 @@ const AddTour = () => {
 								})}
 							/>
 							<SecondStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
+								setValue={setValue}
 								trigger={trigger}
 								formStep={formStep}
 								setFormStep={setFormStep}
@@ -123,6 +163,8 @@ const AddTour = () => {
 								})}
 							/>
 							<ThirdStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
 								setValue={setValue}
 								trigger={trigger}
 								formStep={formStep}
@@ -134,6 +176,9 @@ const AddTour = () => {
 								})}
 							/>
 							<FourthStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
+								setValue={setValue}
 								trigger={trigger}
 								formStep={formStep}
 								setFormStep={setFormStep}
@@ -144,12 +189,42 @@ const AddTour = () => {
 								})}
 							/>
 							<FifthStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
+								setValue={setValue}
+								trigger={trigger}
 								formStep={formStep}
 								setFormStep={setFormStep}
 								control={control}
 								register={register}
 								className={cn({
 									[styles.hide]: formStep != 5,
+								})}
+							/>
+							<SixthStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
+								setValue={setValue}
+								trigger={trigger}
+								formStep={formStep}
+								setFormStep={setFormStep}
+								control={control}
+								register={register}
+								className={cn({
+									[styles.hide]: formStep != 6,
+								})}
+							/>
+							<SeventhStep
+								activeLanguages={activeLanguages}
+								setActiveLanguages={setActiveLanguages}
+								setValue={setValue}
+								trigger={trigger}
+								formStep={formStep}
+								setFormStep={setFormStep}
+								control={control}
+								register={register}
+								className={cn({
+									[styles.hide]: formStep != 7,
 								})}
 							/>
 						</div>

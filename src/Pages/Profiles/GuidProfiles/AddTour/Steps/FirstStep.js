@@ -6,6 +6,14 @@ import { useFieldArray, useWatch, Controller, useFormState } from 'react-hook-fo
 import { getCitiesOfCountry, getCitiesOfRegion, getCountries, getRegions } from '../../../../../Api/Locations'
 import { getCategories } from '../../../../../Api/Categories'
 import { getAccomodations } from '../../../../../Api/Accomodation'
+import PhotoIcon from '../photo.svg'
+import CloseIcon from '../closeIcon.svg'
+import Modal from 'react-modal'
+import Dropzone from 'react-dropzone'
+import { imageFilter } from '../../../../../Helpers/helpers'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
+import { useRef } from 'react'
 
 const DiffPiker = forwardRef(({ value, setValue, error }, ref) => {
 	return (
@@ -40,6 +48,8 @@ const FirstStep = ({
 	clearErrors,
 	setValue,
 	trigger,
+	activeLanguages,
+	setActiveLanguages,
 	...props
 }) => {
 	const [categories, setCategories] = useState({})
@@ -47,14 +57,13 @@ const FirstStep = ({
 	const [counties, setCounties] = useState({})
 	const [regions, setRegions] = useState({})
 	const [cities, setCities] = useState({})
-	const [activeLanguages, setActiveLanguages] = useState({
-		ru: false,
-		en: false,
-		fr: false,
-		es: false,
-		it: false,
-		de: false,
-	})
+	const [languageError, setLanguageError] = useState(null)
+
+	const [tourImages, setTourImages] = useState({ modal: false, cropper: '' })
+
+	const [imageError, setImageError] = useState(null)
+
+	const cropperRef = useRef()
 
 	const value = useWatch({
 		control,
@@ -90,17 +99,6 @@ const FirstStep = ({
 	useEffect(() => {
 		getAccomodationsOptions()
 	}, [value.accommodation_id])
-
-	const nextStep = async (e) => {
-		e.preventDefault()
-		const result = await trigger(['category_id', 'accommodation_id', 'country_id', 'length_days', 'difficulty'], {
-			shouldFocus: true,
-		})
-		if (result) {
-			setFormStep((prev) => prev + 1)
-			document.documentElement.scrollTop = 0
-		}
-	}
 
 	useEffect(() => {
 		if (+value.age_min && +value.age_max && +value.age_max < +value.age_min) {
@@ -148,6 +146,76 @@ const FirstStep = ({
 		setActiveLanguages(tmp)
 		tmp[language] ? setValue(language, [{}]) : setValue(language, undefined) // Если язык поменялся на true, то он добавляется в форму
 	}
+
+	const {
+		fields: picturesFields,
+		append: picturesAppend,
+		remove: picturesRemove,
+	} = useFieldArray({
+		control,
+		name: 'pictures',
+	})
+
+	const handleTourImageCropp = () => {
+		const img = cropperRef?.current
+		const cropper = img?.cropper
+		setTourImages({ modal: false, cropper: '' })
+		picturesAppend(
+			cropper
+				.getCroppedCanvas({
+					maxWidth: 1280,
+					maxHeight: 720,
+				})
+				.toDataURL()
+		)
+	}
+
+	const handleTourImageDrop = (dropped) => {
+		const response = imageFilter(dropped[0])
+		if (response.ok) {
+			setImageError(null)
+			const img = dropped[0]
+			const reader = new FileReader()
+			reader.onload = (event) => {
+				setTourImages({ ...tourImages, cropper: event.target.result })
+			}
+			reader.readAsDataURL(img)
+		} else {
+			setImageError(response.message)
+		}
+	}
+
+	const removeTourImage = (index) => {
+		picturesRemove(index)
+	}
+
+	const nextStep = async (e) => {
+		e.preventDefault()
+		const result = await trigger(['category_id', 'accommodation_id', 'country_id', 'length_days', 'difficulty'], {
+			shouldFocus: true,
+		})
+		if (result) {
+			if (Object.values(activeLanguages).some((value) => value)) {
+				setLanguageError(null)
+				let count = 0
+				// Если язык не активен увеличиваем счетчик, иначе переключаемся на страницу активного языка
+				Object.values(activeLanguages).some((value) => {
+					if (!value) {
+						count++
+					}
+					if (value) {
+						setFormStep((prev) => prev + 1 + count)
+						document.documentElement.scrollTop = 0
+						return true
+					}
+				})
+			} else {
+				setLanguageError('Выберите как минимум один язык')
+			}
+		}
+	}
+
+	console.log(value)
 
 	return (
 		<div className={className} {...props}>
@@ -318,6 +386,65 @@ const FirstStep = ({
 					/>
 				</div>
 			</div>
+			<p className={styles.blockTitle}>Фотографии</p>
+			<p>Добавьте до 10 изображений, показывающих основные впечатления тура.</p>
+			<div className={styles.tourImages}>
+				<>
+					{picturesFields &&
+						picturesFields.map((field, index) => (
+							<div key={field.id} className={styles.tourImageItem}>
+								<img src={CloseIcon} alt='' className={styles.tourImageCloseIcon} onClick={() => removeTourImage(index)} />
+								<img src={value.pictures?.length && value.pictures[index]} alt='' className={styles.tourImage} />
+							</div>
+						))}
+					{picturesFields.length < 10 ? (
+						<img
+							className={styles.addPhoto}
+							src={PhotoIcon}
+							alt=''
+							onClick={() => setTourImages({ ...tourImages, modal: true })}
+						/>
+					) : null}
+				</>
+			</div>
+
+			<Modal
+				isOpen={tourImages.modal}
+				onRequestClose={() => setTourImages({ ...tourImages, modal: false })}
+				className={styles.modal}
+			>
+				{tourImages.cropper ? (
+					<>
+						<Cropper
+							style={{ height: 400, width: 900 }}
+							ref={cropperRef}
+							aspectRatio={15 / 9}
+							rotatable={false}
+							src={tourImages.cropper}
+							viewMode={2}
+							zoom={0.7}
+							minCropBoxWidth={150}
+						/>
+						<Button className={styles.croppButton} onClick={handleTourImageCropp}>
+							Сохранить
+						</Button>
+					</>
+				) : (
+					<>
+						{imageError && <p className={styles.error}>{imageError}</p>}
+						<Dropzone onDropAccepted={handleTourImageDrop}>
+							{({ getRootProps, getInputProps }) => (
+								<div {...getRootProps({ className: styles.dropzone })}>
+									<div>
+										<input {...getInputProps()} />
+										<p>Перетащите изобращение сюда или нажмите чтобы выбрать.</p>
+									</div>
+								</div>
+							)}
+						</Dropzone>
+					</>
+				)}
+			</Modal>
 			<p className={styles.blockTitle}>Языки тура</p>
 			<div className={styles.checkBoxContainer}>
 				<label className={styles.checkBoxItem}>
@@ -345,6 +472,7 @@ const FirstStep = ({
 					Немецкий
 				</label>
 			</div>
+			{languageError && <p className={styles.error}>{languageError}</p>}
 			<div className={styles.buttons}>
 				<Button disabled>Предыдущий шаг</Button>
 				<Button onClick={nextStep}>Следующий шаг</Button>

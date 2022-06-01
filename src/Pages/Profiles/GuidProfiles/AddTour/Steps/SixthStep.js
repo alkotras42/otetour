@@ -12,7 +12,7 @@ import { imageFilter } from '../../../../../Helpers/helpers'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
-const FifthStep = ({
+const SixthStep = ({
 	className,
 	control,
 	register,
@@ -26,17 +26,17 @@ const FifthStep = ({
 }) => {
 	const [program, setProgram] = useState([{ modal: false, cropper: '' }])
 	const {
-		fields: esFields,
-		append: esAppend,
-		remove: esRemove,
+		fields: itFields,
+		append: itAppend,
+		remove: itRemove,
 	} = useFieldArray({
 		control,
-		name: 'es',
+		name: 'it',
 	})
 
-	const esValue = useWatch({
+	const itValue = useWatch({
 		control,
-		name: `es`,
+		name: `it`,
 	})
 
 	const {
@@ -45,7 +45,7 @@ const FifthStep = ({
 		remove: servisesRemove,
 	} = useFieldArray({
 		control,
-		name: 'es.services',
+		name: 'it.services',
 	})
 
 	const addServise = () => {
@@ -58,7 +58,7 @@ const FifthStep = ({
 		remove: questionsRemove,
 	} = useFieldArray({
 		control,
-		name: 'es.questions',
+		name: 'it.questions',
 	})
 	const addQuestion = () => {
 		questionsAppend({})
@@ -151,7 +151,7 @@ const FifthStep = ({
 			let count = 0
 			// Если язык не активен увеличиваем счетчик, иначе переключаемся на страницу активного языка
 			Object.values(activeLanguages)
-				.slice(formStep - 1)
+				.slice(formStep - 2)
 				.some((value) => {
 					if (!value) {
 						count++
@@ -168,22 +168,22 @@ const FifthStep = ({
 	return (
 		<div className={className} {...props}>
 			<div>
-				{esFields.map((field, index) => (
+				{itFields.map((field, index) => (
 					<div key={field.id} className={styles.lngBlock}>
-						<p className={styles.languageTitle}>Испанский язык</p>
+						<p className={styles.languageTitle}>Итальянский язык</p>
 						<Input
 							placeholder='Название'
-							{...register(`es.${index}.name`, { required: 'Введите название тура' })}
-							filled={esValue && esValue[index]?.name}
-							error={errors.es && errors.es[index]?.name}
+							{...register(`it.${index}.name`, { required: 'Введите название тура' })}
+							filled={itValue && itValue[index]?.name}
+							error={errors.it && errors.it[index]?.name}
 						/>
 						<p className={styles.blockTitle}>Описание тура</p>
 						<p>Задайте краткое, но понятное описание тура.</p>
 						<TextArea
 							placeholder='Описание тура'
-							{...register(`es.${index}.description`, { required: 'Введите описание тура' })}
-							filled={esValue && esValue[index]?.description}
-							error={errors.es && errors.es[index]?.description}
+							{...register(`it.${index}.description`, { required: 'Введите описание тура' })}
+							filled={itValue && itValue[index]?.description}
+							error={errors.it && errors.it[index]?.description}
 						/>
 						<p className={styles.blockTitle}>Дополнительная информация</p>
 						<p>
@@ -192,44 +192,44 @@ const FifthStep = ({
 						</p>
 						<TextArea
 							placeholder='Требования к туристам'
-							{...register(`es.${index}.terms`, { required: 'Укажите требования к туристам' })}
-							filled={esValue && esValue[index]?.terms}
-							error={errors.es && errors.es[index]?.terms}
+							{...register(`it.${index}.terms`, { required: 'Укажите требования к туристам' })}
+							filled={itValue && itValue[index]?.terms}
+							error={errors.it && errors.it[index]?.terms}
 						/>
 						<TextArea
 							placeholder='Условия отмены'
-							{...register(`es.${index}.cancellation`, { required: 'Укажите условия отмены' })}
-							filled={esValue && esValue[index]?.cancellation}
-							error={errors.es && errors.es[index]?.cancellation}
+							{...register(`it.${index}.cancellation`, { required: 'Укажите условия отмены' })}
+							filled={itValue && itValue[index]?.cancellation}
+							error={errors.it && errors.it[index]?.cancellation}
 						/>
 						<p className={styles.blockTitle}>Условия</p>
 						<p>Распишите по пунктам, что включено в стоимость тура, а что нет.</p>
 						<TextArea
 							placeholder='Входит в стоимость'
-							{...register(`es.${index}.included`, { required: 'Укажите что входит в стоимость' })}
-							filled={esValue && esValue[index]?.included}
-							error={errors.es && errors.es[index]?.included}
+							{...register(`it.${index}.included`, { required: 'Укажите что входит в стоимость' })}
+							filled={itValue && itValue[index]?.included}
+							error={errors.it && errors.it[index]?.included}
 						/>
 						<TextArea
 							placeholder='Не входит в стоимость'
-							{...register(`es.${index}.excluded`, { required: 'Укажите что не входит в стоимость' })}
-							filled={esValue && esValue[index]?.excluded}
-							error={errors.es && errors.es[index]?.excluded}
+							{...register(`it.${index}.excluded`, { required: 'Укажите что не входит в стоимость' })}
+							filled={itValue && itValue[index]?.excluded}
+							error={errors.it && errors.it[index]?.excluded}
 						/>
 						<p className={styles.blockTitle}>Проживание</p>
 						<TextArea
 							placeholder='Описание проживания'
-							{...register(`es.${index}.accommodation`, { required: 'Введите описание проживания' })}
-							filled={esValue && esValue[index]?.accommodation}
-							error={errors.es && errors.es[index]?.accommodation}
+							{...register(`it.${index}.accommodation`, { required: 'Введите описание проживания' })}
+							filled={itValue && itValue[index]?.accommodation}
+							error={errors.it && errors.it[index]?.accommodation}
 						/>
 						<p className={styles.blockTitle}>Сообщение для туристов</p>
 						<p>Вы можете задать приветственное сообщение, которое будет присылаться всем туристам при покупке тура.</p>
 						<TextArea
 							placeholder='Сообщение'
-							{...register(`es.${index}.message`, { required: 'Введите сообщение для туристов' })}
-							filled={esValue && esValue[index]?.message}
-							error={errors.es && errors.es[index]?.message}
+							{...register(`it.${index}.message`, { required: 'Введите сообщение для туристов' })}
+							filled={itValue && itValue[index]?.message}
+							error={errors.it && errors.it[index]?.message}
 						/>
 						{programFields.map((field, index) => (
 							<div key={field.id} className={styles.dayItem}>
@@ -283,9 +283,9 @@ const FifthStep = ({
 
 									<TextArea
 										placeholder='Описание дня'
-										{...register(`es[0].program[${index}].dayProgram`, { required: 'Введите описание дня' })}
-										filled={value.es && value.es[0].program?.length && value?.es[0].program[index]?.dayProgram}
-										error={errors.es && errors.es[0]?.program && errors.es[0].program[index]?.dayProgram}
+										{...register(`it[0].program[${index}].dayProgram`, { required: 'Введите описание дня' })}
+										filled={value.it && value.it[0].program?.length && value?.it[0].program[index]?.dayProgram}
+										error={errors.it && errors.it[0]?.program && errors.it[0].program[index]?.dayProgram}
 									/>
 								</div>
 							</div>
@@ -296,13 +296,13 @@ const FifthStep = ({
 							<div key={field.id} className={styles.servises}>
 								<Input
 									placeholder='Услуга'
-									{...register(`es[0].services.${index}.service`)}
-									filled={value.es && value.es[0].servises?.length !== 0 && value?.es[0].services[index].service}
+									{...register(`it[0].services.${index}.service`)}
+									filled={value.it && value.it[0].servises?.length !== 0 && value?.it[0].services[index].service}
 								/>
 								<Input
 									placeholder='Стоимость'
-									{...register(`es[0].services.${index}.servicePrice`)}
-									filled={value.es && value.es[0].servises?.length !== 0 && value?.es[0].services[index]?.servicePrice}
+									{...register(`it[0].services.${index}.servicePrice`)}
+									filled={value.it && value.it[0].servises?.length !== 0 && value?.it[0].services[index]?.servicePrice}
 								/>
 								{index > 0 && <img className={styles.closeIcon} src={CloseIcon} alt='' onClick={() => servisesRemove(index)} />}
 							</div>
@@ -320,13 +320,13 @@ const FifthStep = ({
 								)}
 								<Input
 									placeholder='Вопрос'
-									{...register(`es[0].questions.${index}.question`)}
-									filled={value.es && value.es[0].question?.length !== 0 && value.es[0].questions[index]?.question}
+									{...register(`it[0].questions.${index}.question`)}
+									filled={value.it && value.it[0].question?.length !== 0 && value.it[0].questions[index]?.question}
 								/>
 								<TextArea
 									placeholder='Ответ'
-									{...register(`es[0].questions.${index}.answer`)}
-									filled={value.es && value.es[0].question?.length !== 0 && value.es[0].questions[index]?.answer}
+									{...register(`it[0].questions.${index}.answer`)}
+									filled={value.it && value.it[0].question?.length !== 0 && value.it[0].questions[index]?.answer}
 								/>
 							</div>
 						))}
@@ -361,4 +361,4 @@ const FifthStep = ({
 	)
 }
 
-export default FifthStep
+export default SixthStep

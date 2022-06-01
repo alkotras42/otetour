@@ -151,6 +151,10 @@
 	max-height: 400px;
 }
 
+.forms {
+	margin-bottom: 10px;
+}
+
 .dayTitle {
 	display: flex;
 	justify-content: space-between;

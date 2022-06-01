@@ -6,7 +6,7 @@ import telegramIcon from './telegram.svg'
 import whatsappIcon from './whatsapp.svg'
 import { withLayout } from '../../../../Layout/Layout'
 import styles from './GuideProfileEdit.module.css'
-import { Button, CustomSelect, Input, TextArea } from '../../../../Component'
+import { Button, CustomSelect, Input, InputWithMask, TextArea } from '../../../../Component'
 import {
 	hashids,
 	imageFilter,
@@ -374,7 +374,7 @@ const GuideProfileEdit = () => {
 							<Input onChange={handleChange} value={value.firstname} name='firstname' placeholder='Имя' />
 							<Input onChange={handleChange} value={value.lastname} name='lastname' placeholder='Фамилия' />
 							<Input onChange={handleChange} value={value.email} name='email' placeholder='Email' />
-							<Input onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
+							<InputWithMask format="+7 (###) ###-####" mask="_" onChange={handleChange} value={value.phone} name='phone' placeholder='Телефон' />
 							{error.personalInfoError && <p className={styles.error}>{error.personalInfoError}</p>}
 							{success.personalInfoSuccess && <p className={styles.success}>{success.personalInfoSuccess}</p>}
 
@@ -392,7 +392,7 @@ const GuideProfileEdit = () => {
 							{error.descriptionError && <p className={styles.error}>{error.descriptionError}</p>}
 							{success.descriptionSuccess && <p className={styles.success}>{success.descriptionSuccess}</p>}
 							<p className={styles.editProfileTitle}>Паспортные данные</p>
-							<Input onChange={handleChange} value={value.pass_nr} name='pass_nr' placeholder='Серия и номер паспорта' />
+							<InputWithMask format="#### ######" mask="_" onChange={handleChange} value={value.pass_nr} name='pass_nr' placeholder='Серия и номер паспорта' />
 							<Input onChange={handleChange} value={value.pass_date} name='pass_date' placeholder='Когда выдан' />
 							<Input onChange={handleChange} value={value.pass_issuer} name='pass_issuer' placeholder='Кем выдан' />
 							<Button onClick={editPassportData} className={styles.button}>
