@@ -109,10 +109,10 @@ const FirstStep = ({
 		} else {
 			clearErrors('age_min')
 		}
-		if (+value.age_min && +value.age_min < 18) {
+		if (+value.age_min && +value.age_min < 0) {
 			setError('age_min', {
-				type: 'min',
-				message: 'Минимальный допустимый возраст - 18 лет',
+				type: 'custom',
+				message: 'Минимальный допустимый возраст - 0 лет',
 			})
 		} else {
 			clearErrors('age_min')
@@ -214,8 +214,6 @@ const FirstStep = ({
 			}
 		}
 	}
-
-	console.log(value)
 
 	return (
 		<div className={className} {...props}>
@@ -350,8 +348,8 @@ const FirstStep = ({
 						placeholder='От'
 						{...register('age_min', {
 							min: {
-								value: 18,
-								message: 'Минимальный допустимый возраст - 18 лет',
+								value: 0,
+								message: 'Минимальный допустимый возраст - 0 лет',
 							},
 							max: {
 								value: 99,
@@ -369,8 +367,8 @@ const FirstStep = ({
 						placeholder='До'
 						{...register('age_max', {
 							min: {
-								value: 18,
-								message: 'Минимальный допустимый возраст - 18 лет',
+								value: 0,
+								message: 'Минимальный допустимый возраст - 0 лет',
 							},
 							max: {
 								value: 99,

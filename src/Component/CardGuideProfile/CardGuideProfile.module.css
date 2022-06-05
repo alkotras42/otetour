@@ -24,6 +24,22 @@
 	height: 100%;
 }
 
+.cardLanguages {
+	position: absolute;
+	display: flex;
+	gap: 5px;
+	top: 15px;
+	left: 15px;
+}
+
+.cardLanguageItem {
+	background-color: #63a583;
+	color: white;
+	border-radius: 5px;
+	border: rgba(0, 0, 0, 0.4) 1px solid;
+	padding: 5px 10px;
+}
+
 .menuIcon {
 	position: absolute;
 	top: 15px;

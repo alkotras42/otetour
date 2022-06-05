@@ -59,6 +59,12 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					alt=''
 					className={styles.image}
 				/>
+				<div className={styles.cardLanguages}>
+					{card.descriptions &&
+						Object.values(card.descriptions).map((description) => (
+							<div className={styles.cardLanguageItem}>{description.language}</div>
+						))}
+				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
@@ -138,6 +144,12 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					alt=''
 					className={styles.image}
 				/>
+				<div className={styles.cardLanguages}>
+					{card.descriptions &&
+						Object.values(card.descriptions).map((description) => (
+							<div className={styles.cardLanguageItem}>{description.language}</div>
+						))}
+				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
@@ -186,7 +198,21 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const RejectedCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
-				<img src={`/images/${card.img}`} alt='' className={styles.image} />
+				<img
+					src={
+						(card.pictures?.length && card.pictures[0]) ||
+						card.pictures ||
+						'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+					}
+					alt=''
+					className={styles.image}
+				/>
+				<div className={styles.cardLanguages}>
+					{card.descriptions &&
+						Object.values(card.descriptions).map((description) => (
+							<div className={styles.cardLanguageItem}>{description.language}</div>
+						))}
+				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
@@ -236,7 +262,21 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const DraftCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
-				<img src={`/images/${card.img}`} alt='' className={styles.image} />
+				<img
+					src={
+						(card.pictures?.length && card.pictures[0]) ||
+						card.pictures ||
+						'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+					}
+					alt=''
+					className={styles.image}
+				/>
+				<div className={styles.cardLanguages}>
+					{card.descriptions &&
+						Object.values(card.descriptions).map((description) => (
+							<div className={styles.cardLanguageItem}>{description.language}</div>
+						))}
+				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
@@ -285,7 +325,15 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 	const ArchiveCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
-				<img src={`/images/${card.img}`} alt='' className={styles.image} />
+				<img
+					src={
+						(card.pictures?.length && card.pictures[0]) ||
+						card.pictures ||
+						'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA='
+					}
+					alt=''
+					className={styles.image}
+				/>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>

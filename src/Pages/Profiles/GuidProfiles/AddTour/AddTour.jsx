@@ -97,14 +97,15 @@ const AddTour = () => {
 	}, [user])
 
 	const onSubmit = async (data) => {
-		const result = await trigger({ shouldFocus: true })
+		const result = await trigger()
+
 		if (result) {
 			if (isAddMode) {
 				setSubmiting({ ...submiting, loading: true })
 				try {
 					const res = await createTour(data, user.token)
 					setSubmiting({ ...submiting, loading: false, success: 'Тур успешно отправлен на модерацию!' })
-					reset()
+					// reset()
 				} catch (e) {
 					setSubmiting({ ...submiting, loading: false, error: e.message })
 				}

@@ -66,9 +66,15 @@ const GuideProfileTours = () => {
 	useEffect(() => {
 		if (tours) {
 			if (value == 1) {
-				setCurrentItems(tours.filter((tour) => tour.status == 0))
+				setCurrentItems(tours.filter((tour) => tour.status == 4))
 			}
 			if (value == 2) {
+				setCurrentItems(tours.filter((tour) => tour.status == 2))
+			}
+			if (value == 3) {
+				setCurrentItems(tours.filter((tour) => tour.status == 3))
+			}
+			if (value == 4) {
 				setCurrentItems(tours.filter((tour) => tour.status == 1))
 			}
 		}

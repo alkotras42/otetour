@@ -147,20 +147,22 @@ const ThirdStep = ({
 		e.preventDefault()
 		const result = await trigger(['en'], { shouldFocus: true })
 		if (result) {
-			let count = 0
-			// Если язык не активен увеличиваем счетчик, иначе переключаемся на страницу активного языка
-			Object.values(activeLanguages)
-				.slice(formStep - 1)
-				.some((value) => {
-					if (!value) {
-						count++
-					}
-					if (value) {
-						setFormStep((prev) => prev + 1 + count)
-						document.documentElement.scrollTop = 0
-						return true
-					}
-				})
+			if (activeLanguages) {
+				let count = 0
+				// Если язык не активен увеличиваем счетчик, иначе переключаемся на страницу активного языка
+				Object.values(activeLanguages)
+					.slice(formStep - 1)
+					.some((value) => {
+						if (!value) {
+							count++
+						}
+						if (value) {
+							setFormStep((prev) => prev + 1 + count)
+							document.documentElement.scrollTop = 0
+							return true
+						}
+					})
+			}
 		}
 	}
 
