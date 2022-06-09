@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Button, Input, CustomSelect, CustomSelectWithSearch } from '../../../../../Component'
+import { Button, Input, CustomSelect, CustomSelectWithSearch, InputWithMask } from '../../../../../Component'
 import styles from '../AddTour.module.css'
 import cn from 'classnames'
 import { useFieldArray, useWatch, Controller, useFormState } from 'react-hook-form'
@@ -10,7 +10,7 @@ import PhotoIcon from '../photo.svg'
 import CloseIcon from '../closeIcon.svg'
 import Modal from 'react-modal'
 import Dropzone from 'react-dropzone'
-import { imageFilter } from '../../../../../Helpers/helpers'
+import { imageFilter, priceRu } from '../../../../../Helpers/helpers'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import { useRef } from 'react'
@@ -57,6 +57,7 @@ const FirstStep = ({
 	const [counties, setCounties] = useState({})
 	const [regions, setRegions] = useState({})
 	const [cities, setCities] = useState({})
+	const [currency, setCurrency] = useState('₽')
 	const [languageError, setLanguageError] = useState(null)
 
 	const [tourImages, setTourImages] = useState({ modal: false, cropper: '' })
@@ -118,6 +119,20 @@ const FirstStep = ({
 			clearErrors('age_min')
 		}
 	}, [value.age_min, value.age_max])
+
+	useEffect(() => {
+		if (value.currency_id) {
+			if (value.currency_id == 1) {
+				setCurrency('₽')
+			}
+			if (value.currency_id == 2) {
+				setCurrency('€')
+			}
+			if (value.currency_id == 3) {
+				setCurrency('$')
+			}
+		}
+	}, [value.currency_id])
 
 	const getCountiesOptions = async () => {
 		if (!counties.length) {
@@ -279,6 +294,7 @@ const FirstStep = ({
 					name='region_id'
 					render={({ field }) => (
 						<CustomSelectWithSearch
+							isClearable
 							placeholder='Регион'
 							onChange={(v) => field.onChange(v.id)}
 							disabled={!value.country_id || regions.length == 0}
@@ -302,6 +318,7 @@ const FirstStep = ({
 					name='city_id'
 					render={({ field }) => (
 						<CustomSelectWithSearch
+							isClearable
 							placeholder='Город'
 							onChange={(v) => field.onChange(v.id)}
 							disabled={!value.country_id || cities.length == 0}
@@ -384,6 +401,100 @@ const FirstStep = ({
 					/>
 				</div>
 			</div>
+			<p className={styles.blockTitle}>Стоимость</p>
+			<Controller
+				control={control}
+				name='currency_id'
+				render={({ field }) => (
+					<CustomSelectWithSearch
+						placeholder='Валюта'
+						onChange={(v) => field.onChange(v.id)}
+						options={JSON.parse(localStorage.getItem('config')).currencies}
+						// onClick={getCurrenciesOptions}
+						value={field.value}
+						error={errors.currency_id}
+					/>
+				)}
+				rules={{
+					required: 'Выберите валюту',
+				}}
+			/>
+			<Controller
+				control={control}
+				name='price'
+				render={({ field }) => (
+					<InputWithMask
+						placeholder='Стоимость тура'
+						onValueChange={(v) => field.onChange(v.value)}
+						thousandSeparator={' '}
+						suffix={' ' + currency}
+						filled={value.price}
+						error={errors.price}
+					/>
+				)}
+				rules={{
+					required: 'Введите стоимость тура',
+				}}
+			/>
+
+			<p>
+				*Комиссия за использование платформы составит{' '}
+				<span className={styles.redSpan}>{value.price ? priceRu((value.price * 17) / 100, currency) : '-'}</span> за каждого
+				туриста, купившего этот тур.
+			</p>
+			<div className={styles.twoInputs}>
+				<Controller
+					control={control}
+					name='sum_prepayment'
+					render={({ field }) => (
+						<InputWithMask
+							placeholder='Предоплата'
+							onValueChange={(v) => field.onChange(v.value)}
+							thousandSeparator={' '}
+							suffix={' ' + currency}
+							filled={value.sum_prepayment}
+							error={errors.sum_prepayment}
+						/>
+					)}
+					rules={{
+						max: {
+							value: value.price,
+							message: 'Размер предоплаты не может превышать полную цену',
+						},
+						min: {
+							value: (value.price * 17) / 100,
+							message: 'Предоплата не может быть меньше комиcсии',
+						},
+					}}
+				/>
+				<Input
+					disabled={!+value.sum_prepayment}
+					placeholder='Дата предоплаты'
+					{...register(`prepayday`)}
+					filled={value.prepayday}
+					error={errors.prepayday}
+				/>
+			</div>
+			<Controller
+				control={control}
+				name='price_discount'
+				render={({ field }) => (
+					<InputWithMask
+						placeholder='Цена со скидкой'
+						onValueChange={(v) => field.onChange(v.value)}
+						thousandSeparator={' '}
+						suffix={' ' + currency}
+						filled={value.price_discount}
+						error={errors.price_discount}
+					/>
+				)}
+				rules={{
+					max: {
+						value: value.price,
+						message: 'Цена со скидкой не может превышать цену без скидки',
+					},
+				}}
+			/>
 			<p className={styles.blockTitle}>Фотографии</p>
 			<p>Добавьте до 10 изображений, показывающих основные впечатления тура.</p>
 			<div className={styles.tourImages}>

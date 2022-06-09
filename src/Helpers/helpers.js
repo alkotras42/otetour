@@ -85,11 +85,11 @@ export const PersonalPasswordSchema = Yup.object({
 	passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
 })
 
-export const priceRu = (price) =>
+export const priceRu = (price, suffix = '₽') =>
 	price
 		.toString()
 		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-		.concat(' ₽')
+		.concat(' ' + suffix)
 
 export const toPhone = (number) => {
 	if (number) {

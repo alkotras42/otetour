@@ -141,78 +141,7 @@ const AddTrip = ({ ...props }) => {
 						filled={value.language}
 						error={errors.language}
 					/>
-					<Controller
-						control={control}
-						name='sum_price'
-						render={({ field }) => (
-							<InputWithMask
-								placeholder='Стоимость тура'
-								onValueChange={(v) => field.onChange(v.value)}
-								thousandSeparator={' '}
-								suffix={' ₽'}
-								filled={value.sum_price}
-								error={errors.sum_price}
-							/>
-						)}
-						rules={{
-							required: 'Введите стоимость тура',
-						}}
-					/>
 
-					<p>
-						*Комиссия за использование платформы составит <span className={styles.redSpan}>1 250 ₽</span> за каждого туриста,
-						купившего этот тур.
-					</p>
-					<div className={styles.twoInputs}>
-						<Controller
-							control={control}
-							name='sum_prepayment'
-							render={({ field }) => (
-								<InputWithMask
-									placeholder='Предоплата'
-									onValueChange={(v) => field.onChange(v.value)}
-									thousandSeparator={' '}
-									suffix={' ₽'}
-									filled={value.sum_prepayment}
-									error={errors.sum_prepayment}
-								/>
-							)}
-							rules={{
-								max: {
-									value: value.sum_price,
-									message: 'Размер предоплаты не может превышать полную цену',
-								},
-							}}
-						/>
-						<Input
-							disabled={!+value.sum_prepayment}
-							placeholder='Дата предоплаты'
-							{...register(`prepayday`)}
-							filled={value.prepayday}
-							error={errors.prepayday}
-						/>
-					</div>
-					{/* <Input placeholder='Дата постоплаты' {...register(`payday`)} filled={value.payday} error={errors.payday} /> */}
-					<Controller
-						control={control}
-						name='sum_price_discount'
-						render={({ field }) => (
-							<InputWithMask
-								placeholder='Цена со скидкой'
-								onValueChange={(v) => field.onChange(v.value)}
-								thousandSeparator={' '}
-								suffix={' ₽'}
-								filled={value.sum_price_discount}
-								error={errors.sum_price_discount}
-							/>
-						)}
-						rules={{
-							max: {
-								value: value.sum_price,
-								message: 'Цена со скидкой не может превышать цену без скидки',
-							},
-						}}
-					/>
 
 					<div>
 						<Button type='submit' className={styles.submitButton}>

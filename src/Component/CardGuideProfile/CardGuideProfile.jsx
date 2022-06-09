@@ -191,7 +191,10 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 						</div>
 					)}
 				</div>
-			</div>
+				<Link to={`/tour/${card.id}/trips`}>
+					<Button className={styles.button}>Даты</Button>
+				</Link>
+		ы	</div>
 		</div>
 	)
 
