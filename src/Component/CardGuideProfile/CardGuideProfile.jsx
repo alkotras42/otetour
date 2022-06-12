@@ -198,8 +198,6 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 		</div>
 	)
 
-	con
-
 	const RejectedCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
 			<div className={styles.cardTop}>
