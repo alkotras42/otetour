@@ -230,6 +230,8 @@ const FirstStep = ({
 		}
 	}
 
+	console.log(value.country_id)
+
 	return (
 		<div className={className} {...props}>
 			<Controller
@@ -445,15 +447,15 @@ const FirstStep = ({
 			<div className={styles.twoInputs}>
 				<Controller
 					control={control}
-					name='sum_prepayment'
+					name='price_prepayment'
 					render={({ field }) => (
 						<InputWithMask
 							placeholder='Предоплата'
 							onValueChange={(v) => field.onChange(v.value)}
 							thousandSeparator={' '}
 							suffix={' ' + currency}
-							filled={value.sum_prepayment}
-							error={errors.sum_prepayment}
+							filled={value.price_prepayment}
+							error={errors.price_prepayment}
 						/>
 					)}
 					rules={{

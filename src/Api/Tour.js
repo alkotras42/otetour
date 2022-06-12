@@ -6,6 +6,10 @@ export const createTour = async (data, token) => {
 		.post(
 			'https://api.otetour.com/guide/tour/',
 			{
+				currency_id: data.currency_id,
+				price: data.price,
+				price_discount: data.price_discount,
+				price_prepayment: data.price_prepayment,
 				country_id: data.country_id,
 				region_id: data.region_id,
 				city_id: data.city_id,
