@@ -194,9 +194,11 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 				<Link to={`/tour/${card.id}/trips`}>
 					<Button className={styles.button}>Даты</Button>
 				</Link>
-		ы	</div>
+			</div>
 		</div>
 	)
+
+	con
 
 	const RejectedCard = ({ card }) => (
 		<div className={cn(className, styles.card)} {...props}>
@@ -211,9 +213,9 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					className={styles.image}
 				/>
 				<div className={styles.cardLanguages}>
-					{card.descriptions &&
-						Object.values(card.descriptions).map((description) => (
-							<div className={styles.cardLanguageItem}>{description.language}</div>
+					{card.language &&
+						Object.values(card.language).map((lng) => (
+							<div className={styles.cardLanguageItem}>{lng}</div>
 						))}
 				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
@@ -250,7 +252,7 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					{card.sale ? (
 						<div className={styles.prices}>
 							<span className={styles.salePrice}>{priceRu(card.price)}</span>
-							<span className={styles.oldPrice}>{priceRu(card.oldPrice)}</span>
+							<span className={styles.oldPrice}>{priceRu(card.price_discount)}</span>
 						</div>
 					) : (
 						<div className={styles.prices}>

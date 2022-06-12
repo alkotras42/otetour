@@ -58,7 +58,7 @@ const ThirdStep = ({
 		remove: servisesRemove,
 	} = useFieldArray({
 		control,
-		name: 'en[0].services',
+		name: 'services',
 	})
 
 	const addServise = () => {
@@ -71,7 +71,7 @@ const ThirdStep = ({
 		remove: questionsRemove,
 	} = useFieldArray({
 		control,
-		name: 'en[0].questions',
+		name: 'questions',
 	})
 	const addQuestion = () => {
 		questionsAppend({})

@@ -200,6 +200,35 @@ const GuideProfileTours = () => {
 									/>
 								)}
 							</div>
+							<div
+								className={cn(styles.toursList, {
+									[styles.hide]: value != 3,
+								})}
+							>
+								<div className={styles.items}>
+									{currentItems.map((tour, index) => (
+										<CardGuideProfile key={index} type='rejected' card={tour} />
+									))}
+								</div>
+								{currentItems.length > 6 && (
+									<ReactPaginate
+										breakLabel='...'
+										nextLabel='>'
+										onPageChange={handlePageClick}
+										pageRangeDisplayed={5}
+										marginPagesDisplayed={1}
+										pageCount={pageCount}
+										previousLabel='<'
+										renderOnZeroPageCount={null}
+										containerClassName={styles.pagination}
+										pageLinkClassName={styles.pageItem}
+										previousLinkClassName={styles.pageItem}
+										nextLinkClassName={styles.pageItem}
+										disabledLinkClassName={styles.pageDisabled}
+										activeLinkClassName={styles.pasgeActive}
+									/>
+								)}
+							</div>
 						</>
 					)}
 
