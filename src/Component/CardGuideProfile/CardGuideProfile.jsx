@@ -60,17 +60,19 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					className={styles.image}
 				/>
 				<div className={styles.cardLanguages}>
-					{card.descriptions &&
-						Object.values(card.descriptions).map((description) => (
-							<div className={styles.cardLanguageItem}>{description.language}</div>
+					{card.languages &&
+						Object.values(card.languages).map((lng, index) => (
+							<div key={index} className={styles.cardLanguageItem}>
+								{lng}
+							</div>
 						))}
 				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
 				{showDropdown && (
 					<div className={styles.dropdownWrapper} ref={dropdownMenuRef}>
-						<Link to={`/guide/addTour/${card.id}`}>
+						{/* <Link to={`/guide/addTour/${card.id}`}>
 							<p>Редактировать</p>
-						</Link>
+						</Link> */}
 						<p>Добавить в архив</p>
 						<p
 							onClick={() => {
@@ -145,9 +147,11 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					className={styles.image}
 				/>
 				<div className={styles.cardLanguages}>
-					{card.descriptions &&
-						Object.values(card.descriptions).map((description) => (
-							<div className={styles.cardLanguageItem}>{description.language}</div>
+					{card.languages &&
+						Object.values(card.languages).map((lng, index) => (
+							<div key={index} className={styles.cardLanguageItem}>
+								{lng}
+							</div>
 						))}
 				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />
@@ -211,9 +215,11 @@ export const CardGuideProfile = ({ className, card, type, ...props }) => {
 					className={styles.image}
 				/>
 				<div className={styles.cardLanguages}>
-					{card.language &&
-						Object.values(card.language).map((lng) => (
-							<div className={styles.cardLanguageItem}>{lng}</div>
+					{card.languages &&
+						Object.values(card.languages).map((lng, index) => (
+							<div key={index} className={styles.cardLanguageItem}>
+								{lng}
+							</div>
 						))}
 				</div>
 				<img src={menuIcon} alt='' className={styles.menuIcon} onClick={changeDropdown} />

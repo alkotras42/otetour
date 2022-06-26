@@ -42,7 +42,7 @@ export const Header = ({ className, ...props }) => {
 
 	useEffect(() => {
 		if (!languages) {
-			setLanguages(JSON.parse(localStorage.getItem('config')).languages)
+			setLanguages(JSON.parse(localStorage.getItem('config'))?.languages)
 		}
 	}, [])
 
